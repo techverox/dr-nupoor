@@ -1,0 +1,168 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // In Phase 1 / early Phase 2, admin access is verified via authenticated user
+      // or custom claims in Phase 2 Step 6.
+      return isAuthenticated();
+    }
+
+    // Default rule: Lock down all unspecified documents
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Public read-only collections (Website content)
+    match /services/{serviceId} {
+      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /portfolio/{portfolioId} {
+      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /blogs/{blogId} {
+      allow read: if resource == null || resource.data.status == 'published' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /blogCategories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /blogTags/{tagId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /testimonials/{testimonialId} {
+      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /faqs/{faqId} {
+      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /team/{memberId} {
+      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /pages/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /navigation/{navId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Lead Capture & Form Submissions
+    // Public visitors can SUBMIT (create) a lead with required fields, but CANNOT read, update or delete leads.
+    match /leads/{leadId} {
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 100
+                    && request.resource.data.email is string
+                    && request.resource.data.email.size() > 3
+                    && request.resource.data.email.size() <= 150;
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /formSubmissions/{submissionId} {
+      allow create: if request.resource.data.formId is string;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // First-Party Analytics Events (Phase 3 Step 15)
+    match /analyticsEvents/{eventId} {
+      allow create: if request.resource.data.eventName is string
+                    && request.resource.data.path is string;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Dynamic Forms (Phase 3 Step 14)
+    match /forms/{formId} {
+      allow read: if resource == null || resource.data.status == 'active' || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Newsletter Subscribers
+    match /newsletterSubscribers/{subscriberId} {
+      allow create: if request.resource.data.email is string
+                    && request.resource.data.email.size() > 3;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Landing Pages, Reusable Components & Templates (Phase 3)
+    match /landingPages/{pageId} {
+      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /reusableComponents/{componentId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /landingTemplates/{templateId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Offers & Redirects
+    match /offers/{offerId} {
+      allow read: if resource == null || resource.data.isActive == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /redirects/{redirectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // SEO Settings (Global & Page-level)
+    match /seoSettings/{seoId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // RBAC & Access Control (Phase 4 Step 18)
+    match /adminUsers/{userId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /roles/{roleId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Activity & Audit Logs (Phase 4 Step 19: Strict Append-Only)
+    match /auditLogs/{logId} {
+      allow read, create: if isAdmin();
+      allow update, delete: if false;
+    }
+
+    // Content Revisions (Phase 4 Step 19: Strict Append-Only)
+    match /contentRevisions/{revisionId} {
+      allow read, create: if isAdmin();
+      allow update, delete: if false;
+    }
+  }
+}
+
+
