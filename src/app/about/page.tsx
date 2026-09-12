@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
 import AboutClientView from "@/components/about/AboutClientView";
-import { getCmsTeamMembers, getCmsSiteSettings, getCmsPageContent } from "@/lib/services/cmsService";
+import { getCmsTeamMembers, getCmsSiteSettings, getCmsPageContent, DEFAULT_ABOUT_PAGE_CONTENT } from "@/lib/services/cmsService";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 import { TEAM_MEMBERS_DATA } from "@/data/team";
 
@@ -31,10 +31,19 @@ export async function generateMetadata() {
 }
 
 export default async function AboutPage() {
-  const [cmsMembers, aboutContent] = await Promise.all([
-    getCmsTeamMembers().catch(() => TEAM_MEMBERS_DATA),
-    getCmsPageContent("about"),
-  ]);
+  let cmsMembers: typeof TEAM_MEMBERS_DATA = TEAM_MEMBERS_DATA;
+  let aboutContent = DEFAULT_ABOUT_PAGE_CONTENT;
+
+  try {
+    const [fetchedMembers, fetchedContent] = await Promise.all([
+      getCmsTeamMembers().catch(() => TEAM_MEMBERS_DATA),
+      getCmsPageContent("about").catch(() => DEFAULT_ABOUT_PAGE_CONTENT),
+    ]);
+    if (fetchedMembers && fetchedMembers.length > 0) cmsMembers = fetchedMembers;
+    if (fetchedContent) aboutContent = fetchedContent;
+  } catch (err) {
+    console.warn("[AboutPage:Hydration] Fallback:", err);
+  }
 
   const teamMembers = cmsMembers && cmsMembers.length > 0 ? cmsMembers : TEAM_MEMBERS_DATA;
 

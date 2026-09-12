@@ -5,6 +5,7 @@ import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
 import FinalCta from "@/components/FinalCta";
 import ServicesClientView from "@/components/services/ServicesClientView";
 import { getCmsServices } from "@/lib/services/cmsService";
+import { SERVICES_DATA } from "@/data/services";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 
 export const dynamic = "force-dynamic";
@@ -30,7 +31,13 @@ export async function generateMetadata() {
 }
 
 export default async function ServicesArchivePage() {
-  const services = await getCmsServices();
+  let services = SERVICES_DATA;
+  try {
+    const fetched = await getCmsServices().catch(() => SERVICES_DATA);
+    if (fetched && fetched.length > 0) services = fetched;
+  } catch (err) {
+    console.warn("[ServicesPage:Hydration] Fallback:", err);
+  }
   const publishedServices = services.filter((s) => s.isPublished !== false);
 
   // Schema.org ItemList of Services for Enterprise SEO

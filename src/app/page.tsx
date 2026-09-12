@@ -18,19 +18,55 @@ import {
   getCmsTestimonials,
   getCmsFaqs,
   getCmsPageContent,
+  DEFAULT_HOME_PAGE_CONTENT,
 } from "@/lib/services/cmsService";
+import { SERVICES_DATA } from "@/data/services";
+import { PORTFOLIO_DATA } from "@/data/portfolio";
+import { TESTIMONIALS_DATA } from "@/data/testimonials";
+import { FAQS_DATA } from "@/data/faqs";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
-  const [services, portfolio, testimonials, faqs, homeContent] = await Promise.all([
-    getCmsServices(),
-    getCmsPortfolio(),
-    getCmsTestimonials(),
-    getCmsFaqs(),
-    getCmsPageContent("home"),
-  ]);
+  let services = SERVICES_DATA;
+  let portfolio = PORTFOLIO_DATA;
+  let testimonials = TESTIMONIALS_DATA;
+  let faqs = FAQS_DATA;
+  let homeContent = DEFAULT_HOME_PAGE_CONTENT;
+
+  try {
+    const [cmsServices, cmsPortfolio, cmsTestimonials, cmsFaqs, cmsHomeContent] = await Promise.all([
+      getCmsServices().catch((err) => {
+        console.warn("[Home:services] Fallback:", err);
+        return SERVICES_DATA;
+      }),
+      getCmsPortfolio().catch((err) => {
+        console.warn("[Home:portfolio] Fallback:", err);
+        return PORTFOLIO_DATA;
+      }),
+      getCmsTestimonials().catch((err) => {
+        console.warn("[Home:testimonials] Fallback:", err);
+        return TESTIMONIALS_DATA;
+      }),
+      getCmsFaqs().catch((err) => {
+        console.warn("[Home:faqs] Fallback:", err);
+        return FAQS_DATA;
+      }),
+      getCmsPageContent("home").catch((err) => {
+        console.warn("[Home:homeContent] Fallback:", err);
+        return DEFAULT_HOME_PAGE_CONTENT;
+      }),
+    ]);
+
+    if (cmsServices && cmsServices.length > 0) services = cmsServices;
+    if (cmsPortfolio && cmsPortfolio.length > 0) portfolio = cmsPortfolio;
+    if (cmsTestimonials && cmsTestimonials.length > 0) testimonials = cmsTestimonials;
+    if (cmsFaqs && cmsFaqs.length > 0) faqs = cmsFaqs;
+    if (cmsHomeContent) homeContent = cmsHomeContent;
+  } catch (err) {
+    console.warn("[Home:Hydration] Graceful fallback to default data:", err);
+  }
 
   return (
     <div className="relative min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-emerald-500/20 selection:text-emerald-900">

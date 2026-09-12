@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
-import { getCmsSiteSettings, getCmsPageContent } from "@/lib/services/cmsService";
 import { SITE_CONFIG } from "@/config/site";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 
@@ -12,30 +11,30 @@ import ContactTelemetryStrip from "@/components/contact/ContactTelemetryStrip";
 import ContactUnifiedHub from "@/components/contact/ContactUnifiedHub";
 import ContactProcessRoadmap from "@/components/contact/ContactProcessRoadmap";
 import ContactFaqSection from "@/components/contact/ContactFaqSection";
+import { getCmsSiteSettings, getCmsPageContent, DEFAULT_SITE_SETTINGS, DEFAULT_CONTACT_PAGE_CONTENT } from "@/lib/services/cmsService";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/contact", {
-    title: "Contact Growth Pods & 24/7 Strategy Consultation | DigiVigee",
+    title: "Contact DigiVigee | Strategy Consultation & Global Office Pods",
     description:
-      "Connect with DigiVigee's senior strategy directors and product architects. 24/7 priority line: +91 90811 45178. Request an ad audit, RestroMitra demo, or Maru Gujarat listing.",
+      "Schedule a strategy consultation call with our senior agency architects. Reach out via WhatsApp, direct line, email, or schedule a 1-on-1 discovery session.",
     path: "/contact",
     keywords: [
       "contact DigiVigee",
-      "digital marketing consultation Gujarat",
-      "RestroMitra demo booking",
-      "Maru Gujarat merchant listing",
-      "Meta Business Partner consultation",
+      "digital marketing consultation",
+      "hire digital agency",
+      "agency discovery call",
       "DigiVigee phone number",
-      "DigiVigee Chhapi address",
+      "DigiVigee Gujarat office",
     ],
   });
 }
 
 interface PageProps {
-  searchParams?: Promise<{ product?: string; service?: string; type?: string }>;
+  searchParams?: Promise<{ product?: string; service?: string }>;
 }
 
 export default async function ContactPage({ searchParams }: PageProps) {
@@ -43,10 +42,19 @@ export default async function ContactPage({ searchParams }: PageProps) {
   const product = resolvedParams?.product;
   const service = resolvedParams?.service;
 
-  const [settings, contactContent] = await Promise.all([
-    getCmsSiteSettings(),
-    getCmsPageContent("contact"),
-  ]);
+  let settings = DEFAULT_SITE_SETTINGS;
+  let contactContent = DEFAULT_CONTACT_PAGE_CONTENT;
+
+  try {
+    const [fetchedSettings, fetchedContent] = await Promise.all([
+      getCmsSiteSettings().catch(() => DEFAULT_SITE_SETTINGS),
+      getCmsPageContent("contact").catch(() => DEFAULT_CONTACT_PAGE_CONTENT),
+    ]);
+    if (fetchedSettings) settings = fetchedSettings;
+    if (fetchedContent) contactContent = fetchedContent;
+  } catch (err) {
+    console.warn("[ContactPage:Hydration] Fallback:", err);
+  }
 
   const phone = contactContent?.phone || SITE_CONFIG.contact.phone;
   const email = contactContent?.email || SITE_CONFIG.contact.email;
