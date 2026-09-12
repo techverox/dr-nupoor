@@ -6,7 +6,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   Check,
-  Smartphone,
   Phone,
   Mail,
   MapPin,
@@ -473,17 +472,6 @@ export default function Footer() {
             ================================================================ */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-5 text-xs text-slate-500">
           
-          {/* Left: App store pills */}
-          <div className="flex flex-wrap items-center gap-2.5">
-            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/80 hover:bg-white text-slate-700 text-[11px] transition-colors cursor-pointer shadow-2xs">
-              <Smartphone className="w-3.5 h-3.5 text-[#008744]" />
-              <span>Download iOS / Mac App</span>
-            </button>
-            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/80 hover:bg-white text-slate-700 text-[11px] transition-colors cursor-pointer shadow-2xs">
-              <Smartphone className="w-3.5 h-3.5 text-teal-600" />
-              <span>Download Android / Windows</span>
-            </button>
-          </div>
 
           {/* Center: Security & SLA Badge */}
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-mono">

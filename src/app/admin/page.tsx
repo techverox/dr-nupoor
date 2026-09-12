@@ -2,12 +2,15 @@ import React from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { verifyAdminSessionCookie, AUTH_CONFIG } from "@/lib/auth";
-import { getDashboardSummary } from "@/lib/services/dashboardService";
+import { getDashboardSummary, DashboardSummary } from "@/lib/services/dashboardService";
 import { StatCard } from "@/components/admin/StatCard";
 import { RecentLeadsTable } from "@/components/admin/RecentLeadsTable";
 import { ContentOverviewGrid } from "@/components/admin/ContentOverviewGrid";
 import { QuickActionsCard } from "@/components/admin/QuickActionsCard";
 import { SystemStatusCard } from "@/components/admin/SystemStatusCard";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata = {
   title: "Dashboard | DigiVigee Admin",
@@ -21,14 +24,64 @@ export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value;
 
-  const { authenticated, user } = await verifyAdminSessionCookie(sessionCookie);
+  if (!sessionCookie || sessionCookie.trim().length === 0) {
+    redirect(AUTH_CONFIG.LOGIN_ROUTE);
+  }
+
+  let authenticated = false;
+  let user = null;
+
+  try {
+    const verification = await verifyAdminSessionCookie(sessionCookie);
+    authenticated = verification.authenticated;
+    user = verification.user || null;
+  } catch (err) {
+    console.error("[AdminDashboardPage] Auth verification error:", err);
+    redirect(AUTH_CONFIG.LOGIN_ROUTE);
+  }
 
   if (!authenticated || !user) {
     redirect(AUTH_CONFIG.LOGIN_ROUTE);
   }
 
-  // Fetch real-time dashboard data
-  const summary = await getDashboardSummary();
+  // Fetch real-time dashboard data safely with robust fallback
+  let summary: DashboardSummary = {
+    metrics: {
+      totalLeads: 0,
+      newLeads: 0,
+      publishedBlogs: 0,
+      totalServices: 0,
+      portfolioProjects: 0,
+      totalFaqs: 0,
+      totalTestimonials: 0,
+      totalTeamMembers: 0,
+      totalMedia: 0,
+      totalDrafts: 0,
+      totalSubscribers: 0,
+      activeOffers: 0,
+      activeRedirects: 0,
+      seoHealthScore: 100,
+      totalLandingPages: 0,
+      totalPageViews: 0,
+      uniqueVisitors: 0,
+    },
+    recentLeads: [],
+    systemStatus: {
+      authStatus: "connected" as const,
+      firestoreStatus: "local_fallback" as const,
+      sessionSecurity: "active" as const,
+      nodeEnv: process.env.NODE_ENV || "production",
+    },
+  };
+
+  try {
+    const fetched = await getDashboardSummary();
+    if (fetched) {
+      summary = fetched;
+    }
+  } catch (err) {
+    console.error("[AdminDashboardPage] Error loading dashboard summary:", err);
+  }
 
   const currentDate = new Date().toLocaleDateString("en-IN", {
     weekday: "long",

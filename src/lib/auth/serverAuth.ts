@@ -60,82 +60,87 @@ import { getAdminUserByIdOrEmail, getRoleById } from "@/lib/services/rbacService
 export async function verifyAdminSessionCookie(
   sessionCookie: string | undefined
 ): Promise<SessionVerificationResult> {
-  if (!sessionCookie || sessionCookie.trim().length === 0) {
-    return { authenticated: false, error: "No session cookie provided." };
-  }
-
-  // Development Fallback verification
-  if (sessionCookie.startsWith("dev-session-")) {
-    try {
-      const userDoc = await getAdminUserByIdOrEmail("admin@digivigee.com");
-      const role = userDoc?.roleId ? await getRoleById(userDoc.roleId) : null;
-
-      if (userDoc && userDoc.isActive === false) {
-        return { authenticated: false, error: "Account has been disabled. Contact system administrator." };
-      }
-
-      return {
-        authenticated: true,
-        user: {
-          uid: userDoc?.id || "dev-admin-user",
-          email: userDoc?.email || "admin@digivigee.com",
-          displayName: userDoc?.displayName || "DigiVigee Administrator",
-          role: role?.id || "super_admin",
-          roleName: role?.name || "Super Administrator",
-          permissions: role?.permissions || ALL_PERMISSIONS,
-          createdAt: Date.now(),
-        },
-      };
-    } catch {
-      return {
-        authenticated: true,
-        user: {
-          uid: "dev-admin-user",
-          email: "admin@digivigee.com",
-          displayName: "DigiVigee Administrator",
-          role: "super_admin",
-          roleName: "Super Administrator",
-          permissions: ALL_PERMISSIONS,
-          createdAt: Date.now(),
-        },
-      };
+  try {
+    if (!sessionCookie || sessionCookie.trim().length === 0) {
+      return { authenticated: false, error: "No session cookie provided." };
     }
-  }
 
-  const adminAuth = getAdminAuth();
+    // Development Fallback verification
+    if (sessionCookie.startsWith("dev-session-")) {
+      try {
+        const userDoc = await getAdminUserByIdOrEmail("admin@digivigee.com");
+        const role = userDoc?.roleId ? await getRoleById(userDoc.roleId) : null;
 
-  if (adminAuth) {
-    try {
-      const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie, true);
-      const email = decodedClaims.email || "";
-      const userDoc = await getAdminUserByIdOrEmail(decodedClaims.uid || email);
+        if (userDoc && userDoc.isActive === false) {
+          return { authenticated: false, error: "Account has been disabled. Contact system administrator." };
+        }
 
-      if (userDoc && userDoc.isActive === false) {
-        return { authenticated: false, error: "Account has been disabled. Contact system administrator." };
+        return {
+          authenticated: true,
+          user: {
+            uid: userDoc?.id || "dev-admin-user",
+            email: userDoc?.email || "admin@digivigee.com",
+            displayName: userDoc?.displayName || "DigiVigee Administrator",
+            role: role?.id || "super_admin",
+            roleName: role?.name || "Super Administrator",
+            permissions: role?.permissions || ALL_PERMISSIONS,
+            createdAt: Date.now(),
+          },
+        };
+      } catch {
+        return {
+          authenticated: true,
+          user: {
+            uid: "dev-admin-user",
+            email: "admin@digivigee.com",
+            displayName: "DigiVigee Administrator",
+            role: "super_admin",
+            roleName: "Super Administrator",
+            permissions: ALL_PERMISSIONS,
+            createdAt: Date.now(),
+          },
+        };
       }
-
-      const roleId = userDoc?.roleId || (decodedClaims.role as string) || "super_admin";
-      const role = await getRoleById(roleId);
-
-      return {
-        authenticated: true,
-        user: {
-          uid: decodedClaims.uid,
-          email,
-          displayName: userDoc?.displayName || decodedClaims.name || email.split("@")[0],
-          role: role?.id || roleId,
-          roleName: role?.name || roleId,
-          permissions: role?.permissions || ALL_PERMISSIONS,
-          createdAt: (decodedClaims.auth_time || Date.now() / 1000) * 1000,
-        },
-      };
-    } catch {
-      // Expired or revoked session
-      return { authenticated: false, error: "Session expired or revoked." };
     }
-  }
 
-  return { authenticated: false, error: "Unable to verify session." };
+    const adminAuth = getAdminAuth();
+
+    if (adminAuth) {
+      try {
+        const decodedClaims = await adminAuth.verifySessionCookie(sessionCookie, true);
+        const email = decodedClaims.email || "";
+        const userDoc = await getAdminUserByIdOrEmail(decodedClaims.uid || email);
+
+        if (userDoc && userDoc.isActive === false) {
+          return { authenticated: false, error: "Account has been disabled. Contact system administrator." };
+        }
+
+        const roleId = userDoc?.roleId || (decodedClaims.role as string) || "super_admin";
+        const role = await getRoleById(roleId);
+
+        return {
+          authenticated: true,
+          user: {
+            uid: decodedClaims.uid,
+            email,
+            displayName: userDoc?.displayName || decodedClaims.name || email.split("@")[0],
+            role: role?.id || roleId,
+            roleName: role?.name || roleId,
+            permissions: role?.permissions || ALL_PERMISSIONS,
+            createdAt: (decodedClaims.auth_time || Date.now() / 1000) * 1000,
+          },
+        };
+      } catch {
+        // Expired or revoked session
+        return { authenticated: false, error: "Session expired or revoked." };
+      }
+    }
+
+    return { authenticated: false, error: "Unable to verify session." };
+  } catch (err) {
+    console.error("[DigiVigee Auth] Unexpected verifyAdminSessionCookie error:", err);
+    return { authenticated: false, error: "Session verification exception." };
+  }
 }
 
 /**

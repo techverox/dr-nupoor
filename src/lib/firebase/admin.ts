@@ -37,8 +37,8 @@ export function getFirebaseAdminApp(): App | null {
 
     return initializeApp({
       credential: cert({
-        projectId: env.FIREBASE_PROJECT_ID,
-        clientEmail: env.FIREBASE_CLIENT_EMAIL,
+        projectId: env.FIREBASE_PROJECT_ID.trim(),
+        clientEmail: env.FIREBASE_CLIENT_EMAIL.trim(),
         privateKey: formattedPrivateKey,
       }),
     });
