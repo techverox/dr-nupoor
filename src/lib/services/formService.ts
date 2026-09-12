@@ -1,5 +1,4 @@
-import { FieldValue, Query } from "firebase-admin/firestore";
-import { getAdminFirestore } from "@/lib/firebase/admin";
+import { getAdminFirestore, FieldValue, type Query } from "@/lib/firebase/admin";
 import { COLLECTIONS } from "@/config/firebase";
 import {
   FormDefinition,

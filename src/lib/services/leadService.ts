@@ -1,6 +1,5 @@
-import { FieldValue, Query } from "firebase-admin/firestore";
 import { collection, addDoc, serverTimestamp as clientServerTimestamp } from "firebase/firestore";
-import { getAdminFirestore } from "@/lib/firebase/admin";
+import { getAdminFirestore, FieldValue, type Query } from "@/lib/firebase/admin";
 import { getFirebaseFirestore } from "@/lib/firebase/client";
 import { COLLECTIONS } from "@/config/firebase";
 import { LeadSubmissionPayload, NewsletterSubscriberPayload } from "@/lib/validation/lead";

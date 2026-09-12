@@ -1,8 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
-import { FieldValue } from "firebase-admin/firestore";
-import { getStorage } from "firebase-admin/storage";
-import { getAdminFirestore, getFirebaseAdminApp } from "@/lib/firebase/admin";
+import { getAdminFirestore, getFirebaseAdminApp, getAdminStorage, FieldValue } from "@/lib/firebase/admin";
 import { COLLECTIONS } from "@/config/firebase";
 import { MediaItem, MediaUsageCheckResult, MediaUsageReference } from "@/types";
 import { getAllCmsBlogPostsAdmin, getAllCmsServicesAdmin, getAllCmsPortfolioAdmin, getAllCmsTeamMembersAdmin, getAllCmsTestimonialsAdmin, getCmsSiteSettings } from "./cmsService";
@@ -1050,7 +1048,9 @@ export async function uploadMediaFile({
   const adminApp = getFirebaseAdminApp();
   if (adminApp && process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET) {
     try {
-      const bucket = getStorage(adminApp).bucket(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET);
+      const storage = getAdminStorage();
+      if (!storage) throw new Error("Firebase Storage unavailable");
+      const bucket = storage.bucket(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET);
       const file = bucket.file(`media/${safeFileName}`);
       await file.save(finalBuffer, {
         metadata: { contentType: normalizedMime },

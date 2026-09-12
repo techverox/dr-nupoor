@@ -1,7 +1,10 @@
-import { getApps, initializeApp, cert, App } from "firebase-admin/app";
-import { getAuth, Auth } from "firebase-admin/auth";
-import { getFirestore, Firestore } from "firebase-admin/firestore";
+import type { App } from "firebase-admin/app";
+import type { Auth } from "firebase-admin/auth";
+import type { Firestore, Query, DocumentData } from "firebase-admin/firestore";
+import type { Storage } from "firebase-admin/storage";
 import { getServerEnv } from "../env";
+
+export type { App, Auth, Firestore, Storage, Query, DocumentData };
 
 if (typeof process !== "undefined" && process.env) {
   process.env.FIRESTORE_PREFER_REST = "true";
@@ -9,10 +12,30 @@ if (typeof process !== "undefined" && process.env) {
 
 let hasWarnedCredentials = false;
 
+/**
+ * Robust CJS dynamic loader for Firebase Admin submodules.
+ * Using eval("require") prevents Next.js / Turbopack from statically bundling or
+ * resolving the module to ESM subpath exports (which triggers ERR_REQUIRE_ESM on Vercel Node runtime).
+ */
+function safeNodeRequire(moduleName: string): any {
+  try {
+    const nodeReq = typeof require !== "undefined" ? require : eval("require");
+    return nodeReq(moduleName);
+  } catch (err) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn(`[DigiVigee Firebase Admin] Failed to load "${moduleName}" via CJS:`, err);
+    }
+    return null;
+  }
+}
+
 export function getFirebaseAdminApp(): App | null {
   try {
-    const apps = getApps();
-    if (apps.length > 0) {
+    const appModule = safeNodeRequire("firebase-admin/app");
+    if (!appModule) return null;
+
+    const apps = appModule.getApps();
+    if (apps && apps.length > 0) {
       return apps[0] as App;
     }
 
@@ -35,8 +58,8 @@ export function getFirebaseAdminApp(): App | null {
     }
     const formattedPrivateKey = rawKey.replace(/\\n/g, "\n").replace(/\r/g, "");
 
-    return initializeApp({
-      credential: cert({
+    return appModule.initializeApp({
+      credential: appModule.cert({
         projectId: env.FIREBASE_PROJECT_ID.trim(),
         clientEmail: env.FIREBASE_CLIENT_EMAIL.trim(),
         privateKey: formattedPrivateKey,
@@ -52,7 +75,10 @@ export function getAdminFirestore(): Firestore | null {
   try {
     const app = getFirebaseAdminApp();
     if (!app) return null;
-    const db = getFirestore(app);
+    const firestoreModule = safeNodeRequire("firebase-admin/firestore");
+    if (!firestoreModule) return null;
+
+    const db = firestoreModule.getFirestore(app);
     try {
       db.settings({ ignoreUndefinedProperties: true, preferRest: true });
     } catch {
@@ -69,10 +95,78 @@ export function getAdminAuth(): Auth | null {
   try {
     const app = getFirebaseAdminApp();
     if (!app) return null;
-    return getAuth(app);
+    const authModule = safeNodeRequire("firebase-admin/auth");
+    if (!authModule) return null;
+
+    return authModule.getAuth(app);
   } catch (err) {
     console.error("[DigiVigee Firebase Admin] Auth init error:", err);
     return null;
   }
 }
 
+export function getAdminStorage(): Storage | null {
+  try {
+    const app = getFirebaseAdminApp();
+    if (!app) return null;
+    const storageModule = safeNodeRequire("firebase-admin/storage");
+    if (!storageModule) return null;
+
+    return storageModule.getStorage(app);
+  } catch (err) {
+    console.error("[DigiVigee Firebase Admin] Storage init error:", err);
+    return null;
+  }
+}
+
+/**
+ * Universal safe FieldValue proxy that delegates to real Firestore FieldValue if available,
+ * or gracefully returns safe fallbacks so no runtime crash can ever occur.
+ */
+export const FieldValue = {
+  serverTimestamp: (): any => {
+    try {
+      const mod = safeNodeRequire("firebase-admin/firestore");
+      if (mod?.FieldValue?.serverTimestamp) {
+        return mod.FieldValue.serverTimestamp();
+      }
+    } catch {}
+    return new Date().toISOString();
+  },
+  increment: (n: number): any => {
+    try {
+      const mod = safeNodeRequire("firebase-admin/firestore");
+      if (mod?.FieldValue?.increment) {
+        return mod.FieldValue.increment(n);
+      }
+    } catch {}
+    return n;
+  },
+  arrayUnion: (...elements: any[]): any => {
+    try {
+      const mod = safeNodeRequire("firebase-admin/firestore");
+      if (mod?.FieldValue?.arrayUnion) {
+        return mod.FieldValue.arrayUnion(...elements);
+      }
+    } catch {}
+    return elements;
+  },
+  arrayRemove: (...elements: any[]): any => {
+    try {
+      const mod = safeNodeRequire("firebase-admin/firestore");
+      if (mod?.FieldValue?.arrayRemove) {
+        return mod.FieldValue.arrayRemove(...elements);
+      }
+    } catch {}
+    return elements;
+  },
+  delete: (): any => {
+    try {
+      const mod = safeNodeRequire("firebase-admin/firestore");
+      if (mod?.FieldValue?.delete) {
+        return mod.FieldValue.delete();
+      }
+    } catch {}
+    return undefined;
+  },
+};

@@ -1,5 +1,4 @@
-import { FieldValue } from "firebase-admin/firestore";
-import { getAdminFirestore } from "@/lib/firebase/admin";
+import { getAdminFirestore, FieldValue } from "@/lib/firebase/admin";
 import { COLLECTIONS } from "@/config/firebase";
 import { SITE_CONFIG } from "@/config/site";
 import { GlobalSeoSettings, PageSeoSummary, CustomPageSeo, SeoHealthReport, SeoAuditIssue } from "@/types";
