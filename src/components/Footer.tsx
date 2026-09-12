@@ -178,7 +178,7 @@ export default function Footer() {
             </div>
             <ul className="space-y-2 text-slate-500">
               <li><Link href="/platform" className="hover:text-[#008744] transition-colors">Product Tour</Link></li>
-              <li><Link href="/pricing" className="hover:text-[#008744] transition-colors">Agency Pricing</Link></li>
+              <li><Link href="/contact" className="hover:text-[#008744] transition-colors">Consultation Desk</Link></li>
               <li><Link href="#features" className="hover:text-[#008744] transition-colors">Digivigee AI</Link></li>
               <li><Link href="/solutions/scaling-agencies" className="hover:text-[#008744] transition-colors">Retainer Templates</Link></li>
               <li><Link href="#integrations" className="hover:text-[#008744] transition-colors">120+ Integrations</Link></li>
@@ -200,7 +200,7 @@ export default function Footer() {
               <li><Link href="/solutions/scaling-agencies" className="hover:text-[#008744] transition-colors">Scaling Agencies</Link></li>
               <li><Link href="/services/seo-and-local-seo" className="hover:text-[#008744] transition-colors">SEO & Content</Link></li>
               <li><Link href="/portfolio" className="hover:text-[#008744] transition-colors">Case Studies</Link></li>
-              <li><Link href="/pricing" className="hover:text-[#008744] transition-colors">High-Ticket Retainers</Link></li>
+              <li><Link href="/contact" className="hover:text-[#008744] transition-colors">Custom Retainers</Link></li>
             </ul>
           </div>
 
@@ -241,7 +241,7 @@ export default function Footer() {
               Agency Guides
             </div>
             <ul className="space-y-2 text-slate-500">
-              <li><Link href="/blog" className="hover:text-[#008744] transition-colors">Retainer Pricing Guide</Link></li>
+              <li><Link href="/blog" className="hover:text-[#008744] transition-colors">Growth Playbook Guide</Link></li>
               <li><Link href="/blog" className="hover:text-[#008744] transition-colors">Client Onboarding SOP</Link></li>
               <li><Link href="/blog" className="hover:text-[#008744] transition-colors">Blended ROAS Handbook</Link></li>
               <li><Link href="/blog" className="hover:text-[#008744] transition-colors">Agency Management</Link></li>

@@ -34,7 +34,6 @@ export function revalidateWebsitePages() {
     revalidatePath("/contact");
     revalidatePath("/services");
     revalidatePath("/portfolio");
-    revalidatePath("/pricing");
   } catch {
     // Gracefully ignore outside Next.js request context
   }

@@ -997,7 +997,6 @@ export default function AdminSettingsPage() {
                     <span className="hover:text-white cursor-pointer">Services</span>
                     <span className="hover:text-white cursor-pointer">Case Studies</span>
                     <span className="hover:text-white cursor-pointer">About</span>
-                    <span className="hover:text-white cursor-pointer">Pricing</span>
                     <span className="hover:text-white cursor-pointer">Blog</span>
                     <span className="hover:text-white cursor-pointer">Contact</span>
                   </div>

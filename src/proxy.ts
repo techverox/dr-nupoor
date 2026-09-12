@@ -7,6 +7,7 @@ const STATIC_REDIRECTS: Record<string, { dest: string; status: number }> = {
   "/audit": { dest: "/contact", status: 301 },
   "/whatsapp": { dest: "https://wa.me/919081145178", status: 302 },
   "/blueprint": { dest: "/landing/performance-marketing-blueprint", status: 301 },
+  "/pricing": { dest: "/contact", status: 301 },
 };
 
 export function proxy(request: NextRequest) {

@@ -498,14 +498,6 @@ export default function Navbar() {
               </div>
             )}
           </div>
-
-          {/* 6. Pricing (Direct Link) */}
-          <Link
-            href="/pricing"
-            className="py-1 text-[13.5px] font-semibold text-slate-600 hover:text-slate-950 transition-colors duration-150"
-          >
-            Pricing
-          </Link>
         </nav>
 
         {/* Right Side: Electric Green/Blue Gradient CTA (Shifted slightly left) */}
@@ -669,15 +661,6 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-
-            {/* 6. Mobile Pricing (Direct Link) */}
-            <Link
-              href="/pricing"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block py-2.5 text-sm font-bold text-slate-900 hover:text-emerald-600"
-            >
-              6. Pricing
-            </Link>
           </div>
 
           <div className="pt-4 border-t border-slate-100">
