@@ -27,12 +27,12 @@ import { cachedFirestoreRead, invalidateFirestoreCache } from "@/lib/utils/fires
 export function revalidateWebsitePages() {
   invalidateFirestoreCache();
   try {
+    revalidatePath("/", "page");
     revalidatePath("/", "layout");
-    revalidatePath("/");
-    revalidatePath("/about");
-    revalidatePath("/contact");
-    revalidatePath("/services");
-    revalidatePath("/portfolio");
+    revalidatePath("/about", "page");
+    revalidatePath("/contact", "page");
+    revalidatePath("/services", "page");
+    revalidatePath("/portfolio", "page");
   } catch {
     // Gracefully ignore outside Next.js request context
   }
@@ -1050,7 +1050,10 @@ export async function saveCmsItem(
       await adminDb.collection(collectionName).doc(targetId).set(firestorePayload, { merge: true });
     } catch (error) {
       console.error(`[saveCmsItem:${collectionName}] Firestore Error:`, error);
+      return { success: false, error: "Database error while saving changes." };
     }
+  } else {
+    console.warn(`[saveCmsItem:${collectionName}] Running without Firestore connection.`);
   }
 
   revalidateWebsitePages();

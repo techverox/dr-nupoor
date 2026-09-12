@@ -90,7 +90,7 @@ export async function cachedFirestoreRead<T>(
   try {
     let timeoutId: NodeJS.Timeout | undefined;
     const timeoutPromise = new Promise<never>((_, reject) => {
-      timeoutId = setTimeout(() => reject(new Error(`Firestore timeout for key: ${key}`)), 2500);
+      timeoutId = setTimeout(() => reject(new Error(`Firestore timeout for key: ${key}`)), 7000);
     });
 
     const data = await Promise.race([

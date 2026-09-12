@@ -19,14 +19,22 @@ let hasWarnedCredentials = false;
  */
 function safeNodeRequire(moduleName: string): any {
   try {
-    const nodeReq = typeof require !== "undefined" ? require : eval("require");
-    return nodeReq(moduleName);
-  } catch (err) {
-    if (process.env.NODE_ENV !== "production") {
-      console.warn(`[DigiVigee Firebase Admin] Failed to load "${moduleName}" via CJS:`, err);
+    if (moduleName === "firebase-admin/app") return require("firebase-admin/app");
+    if (moduleName === "firebase-admin/firestore") return require("firebase-admin/firestore");
+    if (moduleName === "firebase-admin/auth") return require("firebase-admin/auth");
+    if (moduleName === "firebase-admin/storage") return require("firebase-admin/storage");
+  } catch (directErr) {
+    try {
+      // Secondary fallback via Node.js native createRequire
+      const mod = typeof require !== "undefined" ? require("module") : eval("require")("module");
+      const req = mod.createRequire(process.cwd() + "/package.json");
+      return req(moduleName);
+    } catch (err) {
+      console.error(`[DigiVigee Firebase Admin] Failed to load "${moduleName}":`, directErr, err);
+      return null;
     }
-    return null;
   }
+  return null;
 }
 
 export function getFirebaseAdminApp(): App | null {

@@ -272,7 +272,9 @@ export default function Hero({ content }: HeroProps) {
               </span>
               <span className="text-[#0A2248] font-bold">DIGIVIGEE</span>
               <span className="text-slate-300">•</span>
-              <span className="text-slate-600 font-medium">Digital Agency & AI Platform</span>
+              <span className="text-slate-600 font-medium">
+                {content?.heroBadge || "Digital Agency & AI Platform"}
+              </span>
               <ArrowRight className="w-3 h-3 text-[#00C853] ml-0.5" />
             </div>
 
