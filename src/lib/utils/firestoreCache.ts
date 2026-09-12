@@ -86,9 +86,20 @@ export async function cachedFirestoreRead<T>(
     return cached ? cached.data : fallback();
   }
 
-  // 3. Fetch from Firestore
+  // 3. Fetch from Firestore with timeout protection
   try {
-    const data = await fetcher();
+    let timeoutId: NodeJS.Timeout | undefined;
+    const timeoutPromise = new Promise<never>((_, reject) => {
+      timeoutId = setTimeout(() => reject(new Error(`Firestore timeout for key: ${key}`)), 2500);
+    });
+
+    const data = await Promise.race([
+      fetcher().finally(() => {
+        if (timeoutId) clearTimeout(timeoutId);
+      }),
+      timeoutPromise,
+    ]);
+
     memoryCache.set(key, {
       data,
       timestamp: now,

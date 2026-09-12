@@ -1,4 +1,3 @@
-import * as admin from "firebase-admin";
 import { FieldValue } from "firebase-admin/firestore";
 import { getAdminFirestore } from "@/lib/firebase/admin";
 import { COLLECTIONS } from "@/config/firebase";

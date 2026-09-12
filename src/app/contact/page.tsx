@@ -13,8 +13,7 @@ import ContactProcessRoadmap from "@/components/contact/ContactProcessRoadmap";
 import ContactFaqSection from "@/components/contact/ContactFaqSection";
 import { getCmsSiteSettings, getCmsPageContent, DEFAULT_SITE_SETTINGS, DEFAULT_CONTACT_PAGE_CONTENT } from "@/lib/services/cmsService";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/contact", {

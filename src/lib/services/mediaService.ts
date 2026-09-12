@@ -1,6 +1,5 @@
 import path from "path";
 import fs from "fs/promises";
-import * as admin from "firebase-admin";
 import { FieldValue } from "firebase-admin/firestore";
 import { getStorage } from "firebase-admin/storage";
 import { getAdminFirestore, getFirebaseAdminApp } from "@/lib/firebase/admin";

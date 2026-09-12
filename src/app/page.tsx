@@ -25,8 +25,7 @@ import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { TESTIMONIALS_DATA } from "@/data/testimonials";
 import { FAQS_DATA } from "@/data/faqs";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 export default async function Home() {
   let services = SERVICES_DATA;

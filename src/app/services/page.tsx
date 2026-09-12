@@ -8,8 +8,7 @@ import { getCmsServices } from "@/lib/services/cmsService";
 import { SERVICES_DATA } from "@/data/services";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/services", {

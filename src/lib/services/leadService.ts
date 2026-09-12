@@ -1,4 +1,3 @@
-import * as admin from "firebase-admin";
 import { FieldValue, Query } from "firebase-admin/firestore";
 import { collection, addDoc, serverTimestamp as clientServerTimestamp } from "firebase/firestore";
 import { getAdminFirestore } from "@/lib/firebase/admin";

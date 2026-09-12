@@ -7,8 +7,7 @@ import { getCmsTeamMembers, getCmsSiteSettings, getCmsPageContent, DEFAULT_ABOUT
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 import { TEAM_MEMBERS_DATA } from "@/data/team";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/about", {

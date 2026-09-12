@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAdminFirestore } from "@/lib/firebase/admin";
 import { COLLECTIONS } from "@/config/firebase";
-import * as admin from "firebase-admin";
 import { FieldValue } from "firebase-admin/firestore";
 
 // In-memory sliding-window rate limiter (60 events per minute per IP)
