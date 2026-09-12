@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    let body: { idToken?: string };
+    let body: { idToken?: string; email?: string };
     try {
       body = await request.json();
     } catch {
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { idToken } = body;
+    const { idToken, email } = body;
 
     if (!idToken || typeof idToken !== "string") {
       return NextResponse.json(
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = await createAdminSessionCookie(idToken);
+    const result = await createAdminSessionCookie(idToken, email);
 
     if (!result.success || !result.sessionCookie) {
       // Record failed login audit attempt
