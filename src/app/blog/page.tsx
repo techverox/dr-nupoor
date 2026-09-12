@@ -7,7 +7,7 @@ import BlogArchiveClientView from "@/components/blog/BlogArchiveClientView";
 import { getCmsBlogPosts } from "@/lib/services/cmsService";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   return await resolveDynamicPageMetadata("/blog", {

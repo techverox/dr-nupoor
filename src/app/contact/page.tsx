@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
@@ -32,15 +32,7 @@ export async function generateMetadata() {
   });
 }
 
-interface PageProps {
-  searchParams?: Promise<{ product?: string; service?: string }>;
-}
-
-export default async function ContactPage({ searchParams }: PageProps) {
-  const resolvedParams = searchParams ? await searchParams : {};
-  const product = resolvedParams?.product;
-  const service = resolvedParams?.service;
-
+export default async function ContactPage() {
   let settings = DEFAULT_SITE_SETTINGS;
   let contactContent = DEFAULT_CONTACT_PAGE_CONTENT;
 
@@ -113,20 +105,22 @@ export default async function ContactPage({ searchParams }: PageProps) {
       <Navbar />
 
       {/* 1. Atmospheric Light-First Minimalist Hero with Live Status */}
-      <ContactHero product={product} service={service} content={contactContent} />
+      <Suspense fallback={null}>
+        <ContactHero content={contactContent} />
+      </Suspense>
 
       {/* 2. Real-Time Telemetry & SLA Strip */}
       <ContactTelemetryStrip />
 
       {/* 3. The Unified Command Center (Direct Channels + Integrated Google Map + Form) */}
-      <ContactUnifiedHub
-        phone={phone}
-        email={email}
-        address={address}
-        workingHours={workingHours}
-        initialProduct={product}
-        initialService={service}
-      />
+      <Suspense fallback={null}>
+        <ContactUnifiedHub
+          phone={phone}
+          email={email}
+          address={address}
+          workingHours={workingHours}
+        />
+      </Suspense>
 
       {/* 4. 3-Step Execution Transparency Roadmap */}
       <ContactProcessRoadmap />

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { getAttributionContext } from "@/lib/tracking/attribution";
 import { trackEvent } from "@/lib/tracking/events";
@@ -61,13 +62,17 @@ const BUDGET_OPTIONS = [
 ];
 
 export default function ContactUnifiedHub({
-  initialService,
-  initialProduct,
+  initialService: propService,
+  initialProduct: propProduct,
   phone = "+91 90811 45178",
   email = "Contact@digivigee.com",
   address = "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Banaskantha, Gujarat - 385210",
   workingHours = "24/7 Priority Support & Strategy Pods",
 }: ContactUnifiedHubProps) {
+  const searchParams = useSearchParams();
+  const initialProduct = propProduct || searchParams.get("product") || undefined;
+  const initialService = propService || searchParams.get("service") || undefined;
+
   const determineInitialService = () => {
     if (initialProduct === "restromitra") return "restromitra-saas";
     if (initialProduct === "marugujarat") return "maru-gujarat-listing";

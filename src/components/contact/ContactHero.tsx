@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, UtensilsCrossed, Smartphone, Share2 } from "lucide-react";
 import { ContactPageContent } from "@/types";
 
@@ -11,7 +12,10 @@ export interface ContactHeroProps {
   content?: ContactPageContent;
 }
 
-export default function ContactHero({ product, service, content }: ContactHeroProps) {
+export default function ContactHero({ product: propProduct, service: propService, content }: ContactHeroProps) {
+  const searchParams = useSearchParams();
+  const product = propProduct || searchParams.get("product") || undefined;
+  const service = propService || searchParams.get("service") || undefined;
   /** Contextual headline variation based on searchParams */
   const getHeadline = () => {
     if (product === "restromitra") {

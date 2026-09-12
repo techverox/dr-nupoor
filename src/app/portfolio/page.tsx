@@ -6,8 +6,7 @@ import { getCmsPortfolio } from "@/lib/services/cmsService";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 import PortfolioClientView from "@/components/portfolio/PortfolioClientView";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export const revalidate = 60;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/portfolio", {
