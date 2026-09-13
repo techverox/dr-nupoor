@@ -181,6 +181,7 @@ export type AuditAction =
   | "USER_INVITE"
   | "USER_UPDATE"
   | "USER_DELETE"
+  | "PASSWORD_CHANGE"
   | "ROLE_CREATE"
   | "ROLE_UPDATE"
   | "ROLE_DELETE";

@@ -32,7 +32,9 @@ import {
   CheckCheck,
   ShieldCheck,
   Megaphone,
+  KeyRound,
 } from "lucide-react";
+import { ChangePasswordModal } from "@/components/admin/ChangePasswordModal";
 
 interface SettingsFormState {
   siteName: string;
@@ -92,6 +94,7 @@ export default function AdminSettingsPage() {
   const [isSyncing, setIsSyncing] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
 
   const [feedback, setFeedback] = useState<{ message: string; type: "success" | "error" } | null>(null);
@@ -1101,6 +1104,29 @@ export default function AdminSettingsPage() {
               </div>
             </div>
 
+            {/* Admin Security & Password Management Card */}
+            <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-6 sm:p-7 rounded-2xl border border-indigo-200/80 dark:border-indigo-900/40 shadow-sm">
+              <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
+                <div>
+                  <h3 className="text-base font-bold text-indigo-950 dark:text-indigo-300 flex items-center gap-2 mb-1">
+                    <KeyRound className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                    Admin Account & Password Security
+                  </h3>
+                  <p className="text-xs text-indigo-800/80 dark:text-indigo-300/80 leading-relaxed max-w-xl">
+                    Apna admin password change karein. New password instant scrypt encryption ke sath secure Cloud Firestore aur Firebase Authentication dono jagah sync hota hai.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsPasswordModalOpen(true)}
+                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/20 transition-all cursor-pointer"
+                >
+                  <KeyRound className="w-4 h-4" />
+                  <span>Change Admin Password</span>
+                </button>
+              </div>
+            </div>
+
             {/* Dangerous Zone / Reset to Defaults Card */}
             <div className="bg-red-50/50 dark:bg-red-950/20 p-6 sm:p-7 rounded-2xl border border-red-200/80 dark:border-red-900/40 shadow-sm">
               <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
@@ -1161,6 +1187,13 @@ export default function AdminSettingsPage() {
         confirmLabel="Yes, Reset to Defaults"
         isDestructive={false}
         isLoading={isResetting}
+      />
+
+      {/* 5. Change Password Modal */}
+      <ChangePasswordModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+        userEmail="admin@digivigee.com"
       />
     </div>
   );

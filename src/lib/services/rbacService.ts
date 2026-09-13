@@ -3,6 +3,7 @@ import { COLLECTIONS } from "@/config/firebase";
 import { AdminUser, Role, Permission } from "@/types/rbac";
 import { SYSTEM_ROLES, ALL_PERMISSIONS } from "@/lib/auth/rbac";
 import { validateStrongPassword } from "@/lib/validation/passwordPolicy";
+import { storeAdminPassword } from "@/lib/services/adminAuthService";
 
 // In-memory cache for fast role and user permission resolution with globalThis persistence
 const globalForRbac = globalThis as unknown as {
@@ -497,6 +498,15 @@ export async function createAdminUser(data: {
     }
   }
 
+  // Save hashed credentials into admin_credentials and Firebase Auth
+  if (data.password) {
+    try {
+      await storeAdminPassword(cleanEmail, data.password, uid);
+    } catch (pwErr) {
+      console.warn("[createAdminUser] storeAdminPassword warning:", pwErr);
+    }
+  }
+
   const newUser: AdminUser = {
     id: uid,
     email: cleanEmail,
@@ -571,6 +581,13 @@ export async function updateAdminUser(
     if (!pwValidation.valid) {
       return { success: false, error: pwValidation.errors[0] || "Password does not meet platform security requirements." };
     }
+
+    try {
+      await storeAdminPassword(existing.email, pw, id);
+    } catch (pwErr) {
+      console.warn("[updateAdminUser] storeAdminPassword warning:", pwErr);
+    }
+
     const adminAuth = getAdminAuth();
     if (adminAuth) {
       try {

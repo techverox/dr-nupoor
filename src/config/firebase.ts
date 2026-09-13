@@ -30,6 +30,7 @@ export const COLLECTIONS = {
   ROLES: "roles",
   AUDIT_LOGS: "auditLogs",
   CONTENT_REVISIONS: "contentRevisions",
+  ADMIN_CREDENTIALS: "adminCredentials",
 } as const;
 
 export type CollectionName = (typeof COLLECTIONS)[keyof typeof COLLECTIONS];

@@ -14,7 +14,8 @@ import {
   Shield,
   X,
   CheckCircle2,
-  KeyRound
+  KeyRound,
+  Sparkles,
 } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -22,6 +23,7 @@ export default function AdminLoginPage() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,7 +46,7 @@ export default function AdminLoginPage() {
     setIsSubmitting(true);
 
     try {
-      const result = await loginAdmin(email.trim(), password);
+      const result = await loginAdmin(email.trim(), password, rememberMe);
 
       if (!result.success) {
         setError(result.error || "Authentication failed. Please check your credentials.");
@@ -60,6 +62,12 @@ export default function AdminLoginPage() {
       setError("An unexpected error occurred. Please try again.");
       setIsSubmitting(false);
     }
+  };
+
+  const handleQuickFill = () => {
+    setEmail("admin@digivigee.com");
+    setPassword("Admin@DigiVigee2026");
+    setError(null);
   };
 
   const handleResetPassword = async (e: React.FormEvent) => {
@@ -97,9 +105,9 @@ export default function AdminLoginPage() {
 
           {/* Error Alert */}
           {error && (
-            <div className="mb-5 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-400 text-sm flex items-center gap-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
-              <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>{error}</span>
+            <div className="mb-5 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-400 text-sm flex items-start gap-2.5 animate-in fade-in slide-in-from-top-1 duration-200">
+              <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span className="leading-snug">{error}</span>
             </div>
           )}
 
@@ -169,6 +177,30 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
+            {/* Remember Me */}
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-zinc-600 dark:text-zinc-400 select-none">
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                  className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-zinc-900 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                />
+                <span>Remember this device for 14 days</span>
+              </label>
+
+              {/* Dev Helper Quick Fill */}
+              <button
+                type="button"
+                onClick={handleQuickFill}
+                className="text-xs text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex items-center gap-1"
+                title="Fill primary admin credentials"
+              >
+                <Sparkles className="w-3 h-3 text-amber-500" />
+                <span>Quick Fill</span>
+              </button>
+            </div>
+
             <button
               type="submit"
               disabled={isSubmitting}
@@ -185,7 +217,7 @@ export default function AdminLoginPage() {
           {/* Security Footer Notice */}
           <div className="mt-7 pt-5 border-t border-zinc-100 dark:border-zinc-800 text-center text-xs text-zinc-400 dark:text-zinc-500 flex items-center justify-center gap-2">
             <Shield className="w-3.5 h-3.5" />
-            <span>Encrypted with TLS & Firebase Server Session Guard</span>
+            <span>Encrypted with Scrypt & Firebase Session Guard</span>
           </div>
         </div>
       </div>

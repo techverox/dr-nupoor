@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { AdminUserSession } from "@/lib/auth/constants";
 import { logoutAdmin } from "@/lib/auth/clientAuth";
+import { ChangePasswordModal } from "./ChangePasswordModal";
+import { KeyRound } from "lucide-react";
 
 export interface AdminTopBarProps {
   user: AdminUserSession;
@@ -42,6 +44,7 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
   const pathname = usePathname();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   // Sync theme state with document element (Default to Light First)
   React.useEffect(() => {
@@ -198,6 +201,16 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
           </div>
         </div>
 
+        {/* Change Password Button */}
+        <button
+          type="button"
+          onClick={() => setIsPasswordModalOpen(true)}
+          className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-colors cursor-pointer"
+          title="Change Admin Password"
+        >
+          <KeyRound className="w-4 h-4" />
+        </button>
+
         {/* Sign Out Button */}
         <button
           onClick={handleLogout}
@@ -221,6 +234,13 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
           </svg>
         </button>
       </div>
+
+      {/* Change Password Modal */}
+      <ChangePasswordModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+        userEmail={user.email}
+      />
     </header>
   );
 }
