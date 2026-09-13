@@ -15,7 +15,6 @@ import {
   X,
   CheckCircle2,
   KeyRound,
-  Sparkles,
 } from "lucide-react";
 
 export default function AdminLoginPage() {
@@ -62,12 +61,6 @@ export default function AdminLoginPage() {
       setError("An unexpected error occurred. Please try again.");
       setIsSubmitting(false);
     }
-  };
-
-  const handleQuickFill = () => {
-    setEmail("admin@digivigee.com");
-    setPassword("Admin@DigiVigee2026");
-    setError(null);
   };
 
   const handleResetPassword = async (e: React.FormEvent) => {
@@ -178,27 +171,16 @@ export default function AdminLoginPage() {
             </div>
 
             {/* Remember Me */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center">
               <label className="flex items-center gap-2 cursor-pointer text-xs font-medium text-zinc-600 dark:text-zinc-400 select-none">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-zinc-900 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-700 text-zinc-900 focus:ring-zinc-900 dark:focus:ring-zinc-100 cursor-pointer"
                 />
                 <span>Remember this device for 14 days</span>
               </label>
-
-              {/* Dev Helper Quick Fill */}
-              <button
-                type="button"
-                onClick={handleQuickFill}
-                className="text-xs text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors flex items-center gap-1"
-                title="Fill primary admin credentials"
-              >
-                <Sparkles className="w-3 h-3 text-amber-500" />
-                <span>Quick Fill</span>
-              </button>
             </div>
 
             <button

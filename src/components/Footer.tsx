@@ -110,23 +110,23 @@ export default function Footer() {
     }
   };
 
-  const phone = settings?.contact?.phone || SITE_CONFIG.contact.phone;
-  const email = settings?.contact?.email || SITE_CONFIG.contact.email;
-  const address = settings?.contact?.address || SITE_CONFIG.contact.address;
+  const phone = settings?.contact?.phone || SITE_CONFIG?.contact?.phone || "+91 90811 45178";
+  const email = settings?.contact?.email || SITE_CONFIG?.contact?.email || "Contact@digivigee.com";
+  const address = settings?.contact?.address || SITE_CONFIG?.contact?.address || "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Banaskantha, Gujarat - 385210";
   const copyright =
     settings?.footerContent?.copyrightText ||
     `© ${new Date().getFullYear()} DigiVigee Platform. All rights reserved.`;
 
   const socials = {
-    linkedin: settings?.socials?.linkedin || SITE_CONFIG.socials.linkedin,
-    twitter: settings?.socials?.twitter || SITE_CONFIG.socials.twitter,
-    instagram: settings?.socials?.instagram || SITE_CONFIG.socials.instagram,
-    facebook: settings?.socials?.facebook || SITE_CONFIG.socials.facebook,
-    youtube: settings?.socials?.youtube || SITE_CONFIG.socials.youtube,
+    linkedin: settings?.socials?.linkedin || SITE_CONFIG?.socials?.linkedin || "https://linkedin.com/company/digivigee",
+    twitter: settings?.socials?.twitter || SITE_CONFIG?.socials?.twitter || "https://twitter.com/digivigee",
+    instagram: settings?.socials?.instagram || SITE_CONFIG?.socials?.instagram || "https://instagram.com/digivigee",
+    facebook: settings?.socials?.facebook || SITE_CONFIG?.socials?.facebook || "https://facebook.com/digivigee",
+    youtube: settings?.socials?.youtube || SITE_CONFIG?.socials?.youtube || "https://youtube.com/@digivigee",
   };
 
   return (
-    <footer className="bg-white dark:bg-[#0B0F17] text-slate-600 dark:text-slate-400 text-xs border-t border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <footer className="relative z-10 w-full bg-white dark:bg-[#0B0F17] text-slate-600 dark:text-slate-400 text-xs border-t border-slate-200/80 dark:border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         
         {/* ================================================================
