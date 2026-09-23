@@ -8,6 +8,8 @@ import { AnalyticsScripts, GoogleTagManagerNoScript } from "@/components/analyti
 import { OfferNotificationBanner } from "@/components/public/OfferNotificationBanner";
 
 import { GlobalStructuredData } from "@/components/seo/StructuredData";
+import { getCmsSiteSettings } from "@/lib/services/cmsService";
+import { CustomCodeInjector } from "@/components/analytics/CustomCodeInjector";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -34,17 +36,26 @@ export async function generateMetadata(): Promise<Metadata> {
   return await resolveRootLayoutMetadata();
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let initialScripts = undefined;
+  try {
+    const siteSettings = await getCmsSiteSettings();
+    initialScripts = siteSettings?.customScripts;
+  } catch {
+    // Graceful fallback if settings fetch fails
+  }
+
   return (
     <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${outfit.variable} ${plusJakarta.variable} scroll-smooth`}>
       <head>
         <GlobalStructuredData />
       </head>
       <body className="bg-[#F8FAFC] text-slate-900 antialiased font-sans selection:bg-emerald-500/20 selection:text-emerald-900">
+        <CustomCodeInjector initialScripts={initialScripts} />
         <GoogleTagManagerNoScript />
         <AnalyticsScripts />
         <Suspense fallback={null}>

@@ -18,6 +18,13 @@ export interface SocialLinks {
   github?: string;
 }
 
+export interface CustomScriptsSettings {
+  isEnabled: boolean;
+  headerCode?: string; // Injected into <head> (Google Analytics, GTM container, Meta Pixel base, verification meta tags)
+  bodyCode?: string;   // Injected at start of <body> (GTM noscript fallback, body pixels)
+  footerCode?: string; // Injected before closing </body> (Live chat widgets, WhatsApp button, footer tracking)
+}
+
 export interface SiteSettings extends BaseEntity {
   siteName: string;
   tagline: string;
@@ -36,4 +43,6 @@ export interface SiteSettings extends BaseEntity {
     copyrightText: string;
     badgeText?: string;
   };
+  customScripts?: CustomScriptsSettings;
 }
+

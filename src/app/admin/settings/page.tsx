@@ -33,6 +33,11 @@ import {
   ShieldCheck,
   Megaphone,
   KeyRound,
+  Code2,
+  Terminal,
+  AlertTriangle,
+  Info,
+  Plus,
 } from "lucide-react";
 import { ChangePasswordModal } from "@/components/admin/ChangePasswordModal";
 
@@ -59,6 +64,10 @@ interface SettingsFormState {
   aboutText: string;
   copyrightText: string;
   badgeText: string;
+  customScriptsEnabled: boolean;
+  customHeaderCode: string;
+  customBodyCode: string;
+  customFooterCode: string;
 }
 
 const CANONICAL_SETTINGS: SettingsFormState = {
@@ -85,10 +94,14 @@ const CANONICAL_SETTINGS: SettingsFormState = {
     "DigiVigee is an enterprise-grade Agency Operating System and performance digital marketing platform dedicated to powering compounding revenue growth, automated workflows, and high-retention client experiences.",
   copyrightText: `© ${new Date().getFullYear()} DigiVigee Platform. All rights reserved.`,
   badgeText: "Enterprise-Grade Agency Operating System",
+  customScriptsEnabled: true,
+  customHeaderCode: "",
+  customBodyCode: "",
+  customFooterCode: "",
 };
 
 export default function AdminSettingsPage() {
-  const [activeTab, setActiveTab] = useState<"brand" | "contact" | "socials" | "footer" | "preview" | "sync">("brand");
+  const [activeTab, setActiveTab] = useState<"brand" | "contact" | "socials" | "footer" | "scripts" | "preview" | "sync">("brand");
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
@@ -145,6 +158,10 @@ export default function AdminSettingsPage() {
             aboutText: s.footerContent?.aboutText || CANONICAL_SETTINGS.aboutText,
             copyrightText: s.footerContent?.copyrightText || CANONICAL_SETTINGS.copyrightText,
             badgeText: s.footerContent?.badgeText || CANONICAL_SETTINGS.badgeText,
+            customScriptsEnabled: s.customScripts?.isEnabled ?? CANONICAL_SETTINGS.customScriptsEnabled,
+            customHeaderCode: s.customScripts?.headerCode || "",
+            customBodyCode: s.customScripts?.bodyCode || "",
+            customFooterCode: s.customScripts?.footerCode || "",
           });
         }
       } catch (e) {
@@ -196,6 +213,12 @@ export default function AdminSettingsPage() {
           aboutText: formData.aboutText.trim(),
           copyrightText: formData.copyrightText.trim(),
           badgeText: formData.badgeText.trim(),
+        },
+        customScripts: {
+          isEnabled: formData.customScriptsEnabled,
+          headerCode: formData.customHeaderCode.trim(),
+          bodyCode: formData.customBodyCode.trim(),
+          footerCode: formData.customFooterCode.trim(),
         },
       };
 
@@ -462,6 +485,7 @@ export default function AdminSettingsPage() {
           { id: "contact", label: "Contact Coordinates & HQ", icon: Phone },
           { id: "socials", label: "Social Channels", icon: Globe },
           { id: "footer", label: "Footer & Legal Notice", icon: FileText },
+          { id: "scripts", label: "Custom Code & Tracking", icon: Code2 },
           { id: "preview", label: "Live Simulator Preview", icon: Eye },
           { id: "sync", label: "Cloud Firestore Sync", icon: Zap },
         ].map((tab) => {
@@ -941,7 +965,359 @@ export default function AdminSettingsPage() {
           </div>
         )}
 
-        {/* TAB 5: Live Interactive Simulator (Side-by-Side Live Preview) */}
+        {/* TAB 5: Custom Code & Script Injections (Header, Body, Footer) */}
+        {activeTab === "scripts" && (
+          <div className="flex flex-col gap-6 animate-in fade-in duration-200">
+            {/* Master Control Card */}
+            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-800">
+                <div className="flex items-start gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                    <Code2 className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
+                        Custom Code & Script Injection
+                      </h2>
+                      <span
+                        className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
+                          formData.customScriptsEnabled
+                            ? "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300"
+                            : "bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300"
+                        }`}
+                      >
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            formData.customScriptsEnabled ? "bg-emerald-500 animate-pulse" : "bg-amber-500"
+                          }`}
+                        />
+                        {formData.customScriptsEnabled ? "Active & Live" : "Paused / Disabled"}
+                      </span>
+                    </div>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-2xl">
+                      Website ke Header (&lt;head&gt;), Body (&lt;body&gt; shuru me), aur Footer (before &lt;/body&gt;) me
+                      Google Analytics, Google Tag Manager, Meta Pixel ya Chatbots ko realtime me bina redeploy ke control karein.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Master Toggle */}
+                <div className="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-800/60 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 self-start sm:self-auto">
+                  <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                    Master Switch:
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        customScriptsEnabled: !prev.customScriptsEnabled,
+                      }))
+                    }
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
+                      formData.customScriptsEnabled ? "bg-emerald-600" : "bg-zinc-300 dark:bg-zinc-700"
+                    }`}
+                  >
+                    <span
+                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        formData.customScriptsEnabled ? "translate-x-6" : "translate-x-1"
+                      }`}
+                    />
+                  </button>
+                </div>
+              </div>
+
+              {/* Quick Preset Templates Accordion / Buttons */}
+              <div className="mt-6">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                    1-Click Ready Snippet Templates
+                  </h3>
+                  <span className="text-[11px] text-zinc-400 font-medium">Click to insert standard code</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                  {/* Preset 1: GA4 */}
+                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Google Analytics 4</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300">Header</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                        Official gtag.js script for website traffic & conversion analytics.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const template = `<!-- Google tag (gtag.js) -->\n<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-XXXXXXXXXX');\n</script>`;
+                        setFormData((prev) => ({
+                          ...prev,
+                          customHeaderCode: prev.customHeaderCode ? `${prev.customHeaderCode}\n\n${template}` : template,
+                        }));
+                        setFeedback({ message: "Google Analytics 4 template added to Header Code!", type: "success" });
+                      }}
+                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Insert into Header
+                    </button>
+                  </div>
+
+                  {/* Preset 2: GTM */}
+                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Google Tag Manager</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">Head + Body</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                        GTM container code for head and noscript iframe for body.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const headTemplate = `<!-- Google Tag Manager -->\n<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\nnew Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\nj=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>\n<!-- End Google Tag Manager -->`;
+                        const bodyTemplate = `<!-- Google Tag Manager (noscript) -->\n<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"\nheight="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n<!-- End Google Tag Manager (noscript) -->`;
+                        setFormData((prev) => ({
+                          ...prev,
+                          customHeaderCode: prev.customHeaderCode ? `${prev.customHeaderCode}\n\n${headTemplate}` : headTemplate,
+                          customBodyCode: prev.customBodyCode ? `${prev.customBodyCode}\n\n${bodyTemplate}` : bodyTemplate,
+                        }));
+                        setFeedback({ message: "Google Tag Manager template added to Header and Body!", type: "success" });
+                      }}
+                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Insert Head & Body
+                    </button>
+                  </div>
+
+                  {/* Preset 3: Meta Pixel */}
+                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Meta / FB Pixel</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">Header</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                        Facebook & Instagram Pixel code for event tracking & ad retargeting.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const template = `<!-- Meta Pixel Code -->\n<script>\n!function(f,b,e,v,n,t,s)\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\nn.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];\ns.parentNode.insertBefore(t,s)}(window, document,'script',\n'https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', 'YOUR_PIXEL_ID');\nfbq('track', 'PageView');\n</script>`;
+                        setFormData((prev) => ({
+                          ...prev,
+                          customHeaderCode: prev.customHeaderCode ? `${prev.customHeaderCode}\n\n${template}` : template,
+                        }));
+                        setFeedback({ message: "Meta Pixel template added to Header Code!", type: "success" });
+                      }}
+                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Insert into Header
+                    </button>
+                  </div>
+
+                  {/* Preset 4: Live Chat / Tawk.to */}
+                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Live Chat Widget</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Footer</span>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                        Tawk.to, Crisp, Zendesk, or custom support chatbot widget.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const template = `<!-- Live Chat Widget -->\n<script type="text/javascript">\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\n(function(){\nvar s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];\ns1.async=true;\ns1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/YOUR_WIDGET_ID';\ns1.charset='UTF-8';\ns1.setAttribute('crossorigin','*');\ns0.parentNode.insertBefore(s1,s0);\n})();\n</script>`;
+                        setFormData((prev) => ({
+                          ...prev,
+                          customFooterCode: prev.customFooterCode ? `${prev.customFooterCode}\n\n${template}` : template,
+                        }));
+                        setFeedback({ message: "Live Chat template added to Footer Code!", type: "success" });
+                      }}
+                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                    >
+                      <Plus className="w-3 h-3" />
+                      Insert into Footer
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Editor 1: Header Code */}
+            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    1. Header Code (&lt;head&gt; Injection)
+                  </h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                    Yeh code public website ke &lt;head&gt; tag ke andar sabse pehle run hota hai (Google Analytics, Meta Pixel, Meta tags).
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                    {formData.customHeaderCode.length} chars
+                  </span>
+                  {formData.customHeaderCode.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, customHeaderCode: "" }))}
+                      className="text-[11px] font-bold text-red-500 hover:underline cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950">
+                <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/90 border-b border-zinc-800/80 text-[11px] text-zinc-400 font-mono">
+                  <span>HTML / JavaScript &lt;head&gt;</span>
+                  <span>Auto-Formatted & Isolated</span>
+                </div>
+                <textarea
+                  value={formData.customHeaderCode}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, customHeaderCode: e.target.value }))}
+                  placeholder={`<!-- Paste your <script>, <meta>, or <link> tags here -->\n<script>\n  // Your custom header code\n</script>`}
+                  rows={8}
+                  spellCheck={false}
+                  className="w-full p-4 font-mono text-xs leading-relaxed bg-zinc-950 text-emerald-400 placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 resize-y"
+                />
+              </div>
+
+              {/* Validation helper */}
+              {formData.customHeaderCode.includes("<script") &&
+                formData.customHeaderCode.split("<script").length !== formData.customHeaderCode.split("</script>").length && (
+                  <div className="flex items-center gap-2 mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                    <span>Dhyan dein: &lt;script&gt; tag ka closing &lt;/script&gt; match nahi ho raha hai. Tag check karein.</span>
+                  </div>
+                )}
+            </div>
+
+            {/* Editor 2: Body Code */}
+            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                    2. Body Code (&lt;body&gt; Start Injection)
+                  </h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                    Yeh code &lt;body&gt; tag open hone ke turant baad run hota hai (Google Tag Manager &lt;noscript&gt; ya visual announcement snippets).
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                    {formData.customBodyCode.length} chars
+                  </span>
+                  {formData.customBodyCode.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, customBodyCode: "" }))}
+                      className="text-[11px] font-bold text-red-500 hover:underline cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950">
+                <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/90 border-b border-zinc-800/80 text-[11px] text-zinc-400 font-mono">
+                  <span>HTML &lt;noscript&gt; / &lt;body&gt;</span>
+                  <span>Immediately after opening body</span>
+                </div>
+                <textarea
+                  value={formData.customBodyCode}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, customBodyCode: e.target.value }))}
+                  placeholder={`<!-- Paste GTM <noscript> or body elements here -->\n<noscript>\n  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX" height="0" width="0"></iframe>\n</noscript>`}
+                  rows={6}
+                  spellCheck={false}
+                  className="w-full p-4 font-mono text-xs leading-relaxed bg-zinc-950 text-blue-400 placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 resize-y"
+                />
+              </div>
+            </div>
+
+            {/* Editor 3: Footer Code */}
+            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                <div>
+                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                    3. Footer Code (Before &lt;/body&gt; Closing)
+                  </h3>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                    Yeh code page ke end me run hota hai. Isse page load speed par koi farq nahi padta (Live Chat, WhatsApp widget, conversion trackers).
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                    {formData.customFooterCode.length} chars
+                  </span>
+                  {formData.customFooterCode.trim() && (
+                    <button
+                      type="button"
+                      onClick={() => setFormData((prev) => ({ ...prev, customFooterCode: "" }))}
+                      className="text-[11px] font-bold text-red-500 hover:underline cursor-pointer"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950">
+                <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/90 border-b border-zinc-800/80 text-[11px] text-zinc-400 font-mono">
+                  <span>HTML / JavaScript before &lt;/body&gt;</span>
+                  <span>Non-blocking / Deferred</span>
+                </div>
+                <textarea
+                  value={formData.customFooterCode}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, customFooterCode: e.target.value }))}
+                  placeholder={`<!-- Paste live chat widget or footer conversion scripts here -->\n<script>\n  // Live chat or footer script\n</script>`}
+                  rows={8}
+                  spellCheck={false}
+                  className="w-full p-4 font-mono text-xs leading-relaxed bg-zinc-950 text-indigo-400 placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 resize-y"
+                />
+              </div>
+
+              {/* Validation helper */}
+              {formData.customFooterCode.includes("<script") &&
+                formData.customFooterCode.split("<script").length !== formData.customFooterCode.split("</script>").length && (
+                  <div className="flex items-center gap-2 mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+                    <span>Dhyan dein: &lt;script&gt; tag ka closing &lt;/script&gt; match nahi ho raha hai. Tag check karein.</span>
+                  </div>
+                )}
+            </div>
+
+            {/* Enterprise Safety Note */}
+            <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-800/80 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-200 text-xs flex items-start gap-3">
+              <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+              <div>
+                <span className="font-bold block mb-0.5">Enterprise Fail-Safe & Real-Time Sync</span>
+                Injected custom scripts automatically run inside isolated try/catch browser wrappers. Agar koi external script fail bhi hota hai, website ka core React navigation bilkul safe aur fast rahega. Save karne par saare open tabs aur visitors bina page reload ke update ho jayenge.
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 6: Live Interactive Simulator (Side-by-Side Live Preview) */}
         {activeTab === "preview" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
             <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">

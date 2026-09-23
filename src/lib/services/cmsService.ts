@@ -221,6 +221,12 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     copyrightText: `© ${new Date().getFullYear()} DigiVigee Platform. All rights reserved.`,
     badgeText: "Enterprise-Grade Agency Operating System",
   },
+  customScripts: {
+    isEnabled: true,
+    headerCode: "",
+    bodyCode: "",
+    footerCode: "",
+  },
   createdAt: "2026-01-01T00:00:00Z",
   updatedAt: "2026-01-01T00:00:00Z",
 };
@@ -908,7 +914,14 @@ export async function resetCmsTeamMembersToDefaults(): Promise<{ success: boolea
 export function getLocalSiteSettingsFallback(): SiteSettings {
   const localSaved = getCollectionStore(COLLECTIONS.SITE_SETTINGS).get("global");
   if (localSaved) {
-    return { ...DEFAULT_SITE_SETTINGS, ...localSaved } as SiteSettings;
+    return {
+      ...DEFAULT_SITE_SETTINGS,
+      ...localSaved,
+      customScripts: {
+        ...DEFAULT_SITE_SETTINGS.customScripts,
+        ...((localSaved.customScripts as Record<string, unknown>) || {}),
+      },
+    } as SiteSettings;
   }
   return DEFAULT_SITE_SETTINGS;
 }
@@ -922,7 +935,19 @@ export async function getCmsSiteSettings(): Promise<SiteSettings> {
       if (adminDb) {
         const doc = await adminDb.collection(COLLECTIONS.SITE_SETTINGS).doc("global").get();
         if (doc.exists) {
-          return sanitizeFirestoreDoc<SiteSettings>(doc.id, doc.data()!);
+          const item = sanitizeFirestoreDoc<SiteSettings>(doc.id, doc.data()!);
+          return {
+            ...DEFAULT_SITE_SETTINGS,
+            ...item,
+            contact: { ...DEFAULT_SITE_SETTINGS.contact, ...(item.contact || {}) },
+            socials: { ...DEFAULT_SITE_SETTINGS.socials, ...(item.socials || {}) },
+            headerContent: { ...DEFAULT_SITE_SETTINGS.headerContent, ...(item.headerContent || {}) },
+            footerContent: { ...DEFAULT_SITE_SETTINGS.footerContent, ...(item.footerContent || {}) },
+            customScripts: {
+              ...DEFAULT_SITE_SETTINGS.customScripts,
+              ...(item.customScripts || {}),
+            },
+          } as SiteSettings;
         }
       }
       return getLocalSiteSettingsFallback();
