@@ -3,10 +3,10 @@ import { FAQItem } from "@/types";
 export const FAQS_DATA: FAQItem[] = [
   {
     id: "faq-1",
-    question: "How long does it take to see results from digital marketing?",
+    question: "When should I get a breast cancer screening?",
     answer:
-      "For paid ads (Performance Marketing), results and traffic begin within 24 to 48 hours of launch. For organic channels like SEO and Social Media Marketing, substantial compounding growth is typically achieved within 60 to 90 days.",
-    category: "General",
+      "Annual mammography screening is generally recommended starting at age 40, or earlier if you have a family history or specific genetic risk factors. Regular clinical examinations and breast awareness are vital for women of all ages.",
+    category: "Screening",
     order: 1,
     isPublished: true,
     isFeatured: true,
@@ -15,10 +15,10 @@ export const FAQS_DATA: FAQItem[] = [
   },
   {
     id: "faq-2",
-    question: "Which services are best suited for my specific business model?",
+    question: "Is a lump always cancerous?",
     answer:
-      "During our initial Free Strategy Consultation, we analyze your industry, current digital footprint, target demographics, and growth targets to recommend a custom roadmap tailored specifically to your business goals.",
-    category: "Services",
+      "No. In fact, more than 80% of breast lumps turn out to be benign (non-cancerous), such as fibroadenomas or fluid-filled cysts. However, any new, growing, or changing lump should be promptly evaluated by a breast specialist with clinical assessment and imaging.",
+    category: "Diagnosis",
     order: 2,
     isPublished: true,
     isFeatured: true,
@@ -27,10 +27,10 @@ export const FAQS_DATA: FAQItem[] = [
   },
   {
     id: "faq-3",
-    question: "Do you provide dedicated account support and regular progress reports?",
+    question: "What is oncoplastic breast surgery?",
     answer:
-      "Yes! Every client is assigned a dedicated strategist. We provide transparent weekly or monthly analytics reports, scheduled strategy review calls, and direct WhatsApp communication for rapid day-to-day coordination.",
-    category: "Support",
+      "Oncoplastic breast surgery combines the principles of surgical cancer removal (oncology) with plastic surgery techniques. It allows the surgeon to excise the tumor completely with safe margins while reshaping or reconstructing the breast to preserve natural symmetry, contour, and aesthetic appearance.",
+    category: "Surgery",
     order: 3,
     isPublished: true,
     isFeatured: true,
@@ -39,10 +39,10 @@ export const FAQS_DATA: FAQItem[] = [
   },
   {
     id: "faq-4",
-    question: "Can I customize existing packages or combine multiple services?",
+    question: "How long is the recovery after surgery?",
     answer:
-      "Absolutely. While we provide standardized packages for clarity, most of our growing enterprise clients benefit from customized cross-channel marketing suites that bundle SEO, Social Media, and Web Development.",
-    category: "Pricing",
+      "Recovery timelines depend on the specific procedure. For breast conservation surgery (lumpectomy), most patients return to normal light activities within 1 to 2 weeks. For mastectomy or breast reconstruction surgery, full physical recovery typically spans 3 to 6 weeks, with detailed postoperative guidance provided throughout.",
+    category: "Recovery",
     order: 4,
     isPublished: true,
     isFeatured: true,
@@ -51,10 +51,10 @@ export const FAQS_DATA: FAQItem[] = [
   },
   {
     id: "faq-5",
-    question: "Will you manage our ad campaigns directly on our own ad accounts?",
+    question: "Do you offer genetic counselling?",
     answer:
-      "Yes. We believe in complete transparency. Ad spend accounts are set up under your company name, ensuring you maintain 100% data ownership, billing control, and pixel assets at all times.",
-    category: "Performance",
+      "Yes. For individuals with a significant family history of breast, ovarian, or related cancers, or those diagnosed at a young age, we provide risk assessment, guidance on genetic testing (such as BRCA1 and BRCA2 gene sequencing), and personalized surveillance or risk-reduction strategies.",
+    category: "Genetics",
     order: 5,
     isPublished: true,
     isFeatured: true,
@@ -63,10 +63,10 @@ export const FAQS_DATA: FAQItem[] = [
   },
   {
     id: "faq-6",
-    question: "How do we get started with DigiVigee?",
+    question: "What documents should I bring to my appointment?",
     answer:
-      "Simply click 'Get Free Consultation' or send us a message via WhatsApp or our Contact form. We will schedule a 30-minute discovery call to review your objectives and prepare your custom growth proposal.",
-    category: "Onboarding",
+      "Please bring any previous mammograms, breast ultrasound CDs/reports, biopsy or histopathology reports, previous surgical summaries, and a list of your current medications. If this is a first consultation for a new concern, no prior tests are strictly mandatory.",
+    category: "Consultation",
     order: 6,
     isPublished: true,
     isFeatured: true,

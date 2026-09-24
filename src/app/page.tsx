@@ -1,27 +1,27 @@
 import React from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
-import AgencyRolePillars from "@/components/AgencyRolePillars";
-import CorePlatformSuite from "@/components/CorePlatformSuite";
-import AgencyTeamsShowcase from "@/components/AgencyTeamsShowcase";
-import Integrations from "@/components/Integrations";
-import AgencyRoiComparison from "@/components/AgencyRoiComparison";
-import LiveServicesShowcase from "@/components/public/LiveServicesShowcase";
-import LivePortfolioShowcase from "@/components/public/LivePortfolioShowcase";
-import LiveFaqAccordion from "@/components/public/LiveFaqAccordion";
-import FinalCta from "@/components/FinalCta";
-import Footer from "@/components/Footer";
+import DoctorNavbar from "@/components/doctor/DoctorNavbar";
+import DoctorHero from "@/components/doctor/DoctorHero";
+import EarlyDetectionSection from "@/components/doctor/EarlyDetectionSection";
+import ComprehensiveServicesGrid from "@/components/doctor/ComprehensiveServicesGrid";
+import BreastAnatomySection from "@/components/doctor/BreastAnatomySection";
+import TreatmentOptionsGrid from "@/components/doctor/TreatmentOptionsGrid";
+import DoctorAboutSpotlight from "@/components/doctor/DoctorAboutSpotlight";
+import CareJourneyTimeline from "@/components/doctor/CareJourneyTimeline";
+import InstagramAwarenessFeed from "@/components/doctor/InstagramAwarenessFeed";
+import PatientStoriesSection from "@/components/doctor/PatientStoriesSection";
+import DoctorFaqAccordion from "@/components/doctor/DoctorFaqAccordion";
+import HopeCtaBanner from "@/components/doctor/HopeCtaBanner";
+import TrustStrip from "@/components/doctor/TrustStrip";
+import HospitalAffiliationBanner from "@/components/doctor/HospitalAffiliationBanner";
+import DoctorFooter from "@/components/doctor/DoctorFooter";
 import {
   getCmsServices,
-  getCmsPortfolio,
   getCmsTestimonials,
   getCmsFaqs,
   getCmsPageContent,
   DEFAULT_HOME_PAGE_CONTENT,
 } from "@/lib/services/cmsService";
 import { SERVICES_DATA } from "@/data/services";
-import { PORTFOLIO_DATA } from "@/data/portfolio";
 import { TESTIMONIALS_DATA } from "@/data/testimonials";
 import { FAQS_DATA } from "@/data/faqs";
 
@@ -29,20 +29,15 @@ export const revalidate = 60;
 
 export default async function Home() {
   let services = SERVICES_DATA;
-  let portfolio = PORTFOLIO_DATA;
   let testimonials = TESTIMONIALS_DATA;
   let faqs = FAQS_DATA;
   let homeContent = DEFAULT_HOME_PAGE_CONTENT;
 
   try {
-    const [cmsServices, cmsPortfolio, cmsTestimonials, cmsFaqs, cmsHomeContent] = await Promise.all([
+    const [cmsServices, cmsTestimonials, cmsFaqs, cmsHomeContent] = await Promise.all([
       getCmsServices().catch((err) => {
         console.warn("[Home:services] Fallback:", err);
         return SERVICES_DATA;
-      }),
-      getCmsPortfolio().catch((err) => {
-        console.warn("[Home:portfolio] Fallback:", err);
-        return PORTFOLIO_DATA;
       }),
       getCmsTestimonials().catch((err) => {
         console.warn("[Home:testimonials] Fallback:", err);
@@ -59,54 +54,70 @@ export default async function Home() {
     ]);
 
     if (cmsServices && cmsServices.length > 0) services = cmsServices;
-    if (cmsPortfolio && cmsPortfolio.length > 0) portfolio = cmsPortfolio;
     if (cmsTestimonials && cmsTestimonials.length > 0) testimonials = cmsTestimonials;
     if (cmsFaqs && cmsFaqs.length > 0) faqs = cmsFaqs;
     if (cmsHomeContent) homeContent = cmsHomeContent;
-  } catch (err) {
-    console.warn("[Home:Hydration] Graceful fallback to default data:", err);
+  } catch (e) {
+    console.warn("[Home] Using resilient clinical seed data:", e);
   }
 
   return (
-    <div className="relative min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-emerald-500/20 selection:text-emerald-900">
-      {/* Global Interactive Crosshair Grid & Fluid Ambient Light Canvas */}
-      <GlobalSpotlightGrid />
+    <div className="min-h-screen flex flex-col bg-white selection:bg-[#D84C70]/20 selection:text-[#9B2846]">
+      {/* 1. Global Navigation Bar */}
+      <DoctorNavbar />
 
-      {/* Top Quiet Navigation Bar */}
-      <Navbar />
+      <main className="flex-1">
+        {/* 2. Hero Section */}
+        <DoctorHero
+          badge={homeContent.heroBadge}
+          headline={homeContent.heroHeadline}
+          headlineHighlight={homeContent.heroHeadlineHighlight}
+          subheadline={homeContent.heroSubheadline}
+          primaryCtaText={homeContent.primaryCtaText}
+          primaryCtaLink={homeContent.primaryCtaLink}
+          secondaryCtaText={homeContent.secondaryCtaText}
+          secondaryCtaLink={homeContent.secondaryCtaLink}
+        />
 
-      {/* Hero Section with Pinned Enterprise Logo Ribbon */}
-      <Hero content={homeContent} />
+        {/* 3. Why Breast Health Matters / Early Detection Strip */}
+        <EarlyDetectionSection />
 
-      {/* 40% Core Pillar: Full-Funnel Marketing Services Showcase (Live from /admin/services) */}
-      <LiveServicesShowcase services={services} />
+        {/* 4. Comprehensive Services Grid */}
+        <ComprehensiveServicesGrid services={services} />
 
-      {/* 60% SaaS Pillar 1: "Scale 10x retainers. Burn out 0 teams." (2x3 Bento Feature Grid) */}
-      <AgencyRolePillars />
+        {/* 5. Know Your Breasts / Understanding Anatomy */}
+        <BreastAnatomySection />
 
-      {/* 60% SaaS Pillar 2: "Your agency needs more than a task manager" (5 Tabs + Interactive Software Stage) */}
-      <CorePlatformSuite />
+        {/* 6. Treatment Options Grid */}
+        <TreatmentOptionsGrid />
 
-      {/* 60% SaaS Pillar 3: "Every agency department has work that Digivigee handles" (5 Department Cards) */}
-      <AgencyTeamsShowcase />
+        {/* 7. About Dr. Noopur Patel Spotlight */}
+        <DoctorAboutSpotlight />
 
-      {/* Wrike Section 4: AgencyScale 2026 Highlight Banner + 120+ Integrations Multi-Row Marquee */}
-      <Integrations />
+        {/* 8. Marengo CIMS Hospital Affiliation & Infrastructure */}
+        <HospitalAffiliationBanner />
 
-      {/* Wrike Section 5 & 6: Trusted Platform Dual Split Cards + Dynamic Testimonial Wall (Live from /admin/testimonials) */}
-      <AgencyRoiComparison initialTestimonials={testimonials} />
+        {/* 9. Care Journey Timeline */}
+        <CareJourneyTimeline />
 
-      {/* Dynamic Portfolio Showcase (Live from /admin/portfolio) */}
-      <LivePortfolioShowcase portfolio={portfolio} />
+        {/* 9. Latest from Instagram Feed */}
+        <InstagramAwarenessFeed />
 
-      {/* Dynamic FAQ Objection Clearance (Live from /admin/faqs) */}
-      <LiveFaqAccordion faqs={faqs} />
+        {/* 10. Real Patient Stories */}
+        <PatientStoriesSection testimonials={testimonials} />
 
-      {/* Wrike Section 7: High-Converting Final Conversion Banner & 6 Verified Award Badges */}
-      <FinalCta />
+        {/* 11. Frequently Asked Questions */}
+        <DoctorFaqAccordion faqs={faqs} />
 
-      {/* Wrike Section 8: Comprehensive 6-Column Agency OS Footer (Live from /admin/settings) */}
-      <Footer />
+        {/* 12. Hope CTA Banner */}
+        <HopeCtaBanner />
+
+        {/* 13. Trust Strip */}
+        <TrustStrip />
+      </main>
+
+      {/* 14. Global Footer */}
+      <DoctorFooter />
     </div>
   );
 }

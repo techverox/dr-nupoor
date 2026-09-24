@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Inter, Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Outfit, Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { resolveRootLayoutMetadata } from "@/lib/seo/metadata";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
@@ -32,6 +32,14 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
 export async function generateMetadata(): Promise<Metadata> {
   return await resolveRootLayoutMetadata();
 }
@@ -50,11 +58,11 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${outfit.variable} ${plusJakarta.variable} scroll-smooth`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${outfit.variable} ${plusJakarta.variable} ${playfair.variable} scroll-smooth`}>
       <head>
         <GlobalStructuredData />
       </head>
-      <body className="bg-[#F8FAFC] text-slate-900 antialiased font-sans selection:bg-emerald-500/20 selection:text-emerald-900">
+      <body className="bg-white text-slate-900 antialiased font-sans selection:bg-[#D84C70]/20 selection:text-[#9B2846]">
         <CustomCodeInjector initialScripts={initialScripts} />
         <GoogleTagManagerNoScript />
         <AnalyticsScripts />

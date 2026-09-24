@@ -2,7 +2,8 @@
 
 @theme {
   --font-sans: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: var(--font-playfair), "Georgia", "Times New Roman", serif;
+  --font-display: var(--font-playfair), var(--font-plus-jakarta), serif;
   --font-admin: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -10,17 +11,23 @@
 
 @layer base {
   :root {
-    --background: #F8FAFC;
-    --foreground: #09090B;
-    --brand-green: #00E05C;
-    --brand-green-dark: #009669;
-    --brand-cyan: #00E5BF;
-    --brand-navy: #162136;
+    --background: #FFFFFF;
+    --foreground: #1A202C;
+    --primary-rose: #D84C70;
+    --primary-rose-hover: #BE3A5C;
+    --primary-rose-dark: #9B2846;
+    --rose-light: #FDF2F4;
+    --rose-subtle: #FFF8F9;
+    --rose-border: #F5D6DE;
+    --text-navy: #1A202C;
+    --text-body: #334155;
+    --text-muted: #64748B;
   }
 
   body {
-    background-color: #F8FAFC;
-    color: #09090B;
+    background-color: #FFFFFF;
+    color: #1A202C;
+
     font-family: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

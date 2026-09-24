@@ -12,9 +12,9 @@ const clientEnvSchema = z.object({
 });
 
 const serverEnvSchema = z.object({
-  FIREBASE_PROJECT_ID: z.string().optional(),
-  FIREBASE_CLIENT_EMAIL: z.string().email().optional(),
-  FIREBASE_PRIVATE_KEY: z.string().optional(),
+  FIREBASE_PROJECT_ID: z.string().optional().or(z.literal("")),
+  FIREBASE_CLIENT_EMAIL: z.string().email().optional().or(z.literal("")),
+  FIREBASE_PRIVATE_KEY: z.string().optional().or(z.literal("")),
 });
 
 export type ClientEnv = z.infer<typeof clientEnvSchema>;
@@ -38,12 +38,6 @@ export function getClientEnv(): ClientEnv | null {
 
   const parsed = clientEnvSchema.safeParse(envValues);
   if (!parsed.success) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn(
-        "[DigiVigee Env] Client environment variables are incomplete:",
-        parsed.error.flatten().fieldErrors
-      );
-    }
     return null;
   }
   return parsed.data;
@@ -61,12 +55,6 @@ export function getServerEnv(): ServerEnv {
 
   const parsed = serverEnvSchema.safeParse(envValues);
   if (!parsed.success) {
-    if (process.env.NODE_ENV === "development") {
-      console.warn(
-        "[Env] Server environment variables validation warnings:",
-        parsed.error.flatten().fieldErrors
-      );
-    }
     return {};
   }
   return parsed.data;

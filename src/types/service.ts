@@ -50,5 +50,5 @@ export interface ServiceItem extends BaseEntity {
   faqs?: ServiceFAQ[];
   relatedServiceSlugs?: string[];
   relatedPortfolioSlugs?: string[];
-  seo: SEOMetadata;
+  seo?: SEOMetadata;
 }
