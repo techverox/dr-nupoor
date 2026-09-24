@@ -1,10 +1,10 @@
 /**
- * DigiVigee Real-Time Cross-Tab & Cross-Device CMS Synchronization
+ * Dr. Noopur Patel Real-Time Cross-Tab & Cross-Device CMS Synchronization
  * Broadcasts CMS mutations across browser tabs and devices to trigger instant UI refresh.
  */
 
-export const CMS_SYNC_CHANNEL_NAME = "digivigee-cms-sync";
-export const CMS_SYNC_STORAGE_KEY = "digivigee_cms_updated";
+export const CMS_SYNC_CHANNEL_NAME = "drn-cms-sync";
+export const CMS_SYNC_STORAGE_KEY = "drn_cms_updated";
 
 export function notifyCmsUpdate(source: string = "admin") {
   if (typeof window === "undefined") return;

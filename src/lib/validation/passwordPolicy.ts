@@ -1,5 +1,5 @@
 /**
- * DigiVigee Platform — Strong Password Policy & Validation
+ * Dr. Noopur Patel Practice Platform — Strong Password Policy & Validation
  *
  * Enforces enterprise-grade password complexity for administrative accounts
  * while maintaining a seamless, intuitive user experience.
@@ -30,8 +30,8 @@ const COMMON_WEAK_PASSWORDS = new Set([
   "123456789",
   "admin123",
   "admin@123",
-  "digivigee",
-  "digivigee123",
+  "clinic123",
+  "hospital123",
   "welcome123",
   "qwerty123",
   "letmein123",

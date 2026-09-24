@@ -60,7 +60,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         order: 1,
         isVisible: true,
         content: {
-          sectionTitle: "Why High-Growth Brands Partner with DigiVigee",
+          sectionTitle: "Why Patients Trust Dr. Noopur Patel",
           sectionSubtitle: "Enterprise-grade digital acquisition infrastructure built for tangible ROI.",
           features: [
             {
@@ -141,7 +141,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         isVisible: true,
         content: {
           quote:
-            "DigiVigee transformed our customer acquisition economics. Inquiries surged by 180% within 90 days and our cost-per-qualified-lead dropped by 42%.",
+            "Dr. Noopur Patel and her clinical team provided immense clarity, surgical expertise, and kindness throughout my treatment.",
           author: "Rajesh Patel",
           role: "Managing Director, Kalpvruksh Group",
         },
@@ -160,7 +160,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
           sectionTitle: "Frequently Asked Questions",
           items: [
             {
-              question: "How quickly do we see results from DigiVigee?",
+              question: "How quickly can I schedule an in-clinic consultation?",
               answer:
                 "Most campaigns deliver measurable lead spikes and verified attribution data within the first 14 to 21 days of launching ad sprints.",
             },
@@ -204,7 +204,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         order: 7,
         isVisible: true,
         content: {
-          copyrightText: "© 2026 DigiVigee Platform. High-ROI Performance Marketing.",
+          copyrightText: "© 2026 Dr. Noopur Patel. Surgical Breast Oncology & Oncoplastic Care.",
           showLegalLinks: true,
         },
         styling: {
@@ -232,9 +232,9 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
       leadSourceTag: "landing-page:performance-marketing",
     },
     seo: {
-      seoTitle: "Performance Marketing Agency | DigiVigee High-ROI Campaigns",
+      seoTitle: "Breast Cancer Surgery & Oncoplastic Care | Dr. Noopur Patel Ahmedabad",
       metaDescription:
-        "Scale qualified client leads and customer acquisitions with DigiVigee's performance marketing solutions.",
+        "Specialized breast cancer surgery and oncoplastic care by Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad.",
       keywords: ["performance marketing", "lead generation agency", "PPC audit"],
       noIndex: false,
     },
@@ -276,8 +276,8 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         order: 1,
         isVisible: true,
         content: {
-          sectionTitle: "The DigiVigee Retainer Advantage",
-          sectionSubtitle: "Why high-scale businesses replace fragmented agencies with DigiVigee.",
+          sectionTitle: "The Comprehensive Care Advantage",
+          sectionSubtitle: "Why patients and families trust Dr. Noopur Patel for surgical breast oncology.",
           features: [
             {
               title: "Dedicated Pod Architecture",
@@ -325,7 +325,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         isVisible: true,
         content: {
           quote:
-            "Partnering with DigiVigee on a monthly growth retainer allowed us to scale from 2 locations to 12 across Gujarat and Mumbai without hiring an internal marketing team.",
+            "Dr. Patel explained every surgical step with so much reassurance. Her skill in oncoplastic surgery preserved my natural breast contour.",
           author: "Sunil Mehta",
           role: "CEO, Apex Logistics & Retail",
         },
@@ -382,7 +382,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         order: 6,
         isVisible: true,
         content: {
-          copyrightText: "© 2026 DigiVigee Platform. Enterprise Growth Retainers.",
+          copyrightText: "© 2026 Dr. Noopur Patel. Marengo CIMS Hospital, Ahmedabad.",
           showLegalLinks: true,
         },
         styling: {
@@ -406,7 +406,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
       leadSourceTag: "landing-page:agency-os-retainer",
     },
     seo: {
-      seoTitle: "Enterprise Growth Retainers | DigiVigee Agency Pods",
+      seoTitle: "Patient Care Pathways & Oncology Care | Dr. Noopur Patel",
       metaDescription:
         "Dedicated marketing strategists and performance media buyers scaling ambitious businesses with weekly sprints.",
       noIndex: false,
@@ -498,7 +498,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         isVisible: true,
         content: {
           quote:
-            "Our Google Maps inquiries skyrocketed from 10 calls a month to over 150 within 60 days of DigiVigee optimizing our regional footprint.",
+            "The compassionate support and surgical expertise from Dr. Noopur Patel made our patient experience reassuring from day one.",
           author: "Dr. Ananya Sharma",
           role: "Clinical Director, Surat HealthCare",
         },
@@ -555,7 +555,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         order: 6,
         isVisible: true,
         content: {
-          copyrightText: "© 2026 DigiVigee Platform. Local Search Acceleration.",
+          copyrightText: "© 2026 Dr. Noopur Patel. All rights reserved.",
           showLegalLinks: true,
         },
         styling: {
@@ -578,9 +578,9 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
       includePhone: true,
     },
     seo: {
-      seoTitle: "Local SEO Services & Maps Ranking | DigiVigee",
+      seoTitle: "Breast Screening & Consultation | Dr. Noopur Patel",
       metaDescription:
-        "Dominate local Google Maps search results with DigiVigee's localized ranking framework.",
+        "Comprehensive breast cancer screening, diagnostic evaluation, and gentle patient care in Ahmedabad.",
       noIndex: false,
     },
     createdAt: "2026-02-18T09:00:00Z",
@@ -589,8 +589,8 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
   },
   {
     id: "lp-demo-homepage",
-    title: "DigiVigee Enterprise Agency OS (Homepage Clone)",
-    slug: "digivigee-homepage-os",
+    title: "Dr. Noopur Patel Breast Care Overview",
+    slug: "dr-noopur-patel-overview",
     status: "published",
     templateId: "tpl-agency-homepage",
     theme: {
@@ -607,7 +607,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
           eyebrow: "Enterprise Agency Growth OS",
           headline: "Scale 10x Client Retainers. Burn Out 0 Teams.",
           description:
-            "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee handles in seconds.",
+            "Compassionate, evidence-based breast cancer diagnosis, oncoplastic breast surgery, and dedicated survivorship care.",
           primaryCtaLabel: "Claim Your Free Proposal",
           primaryCtaTarget: "#lead-form",
           secondaryCtaLabel: "Explore Capabilities",
@@ -628,12 +628,12 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         content: {
           badge: "Agency Workflow Automation",
           sectionTitle: "Scale 10x retainers. Burn out 0 teams.",
-          sectionSubtitle: "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee AI handles in seconds.",
+          sectionSubtitle: "Specialized surgical breast oncology and natural contour preservation at Marengo CIMS Hospital.",
           features: [
             {
               tag: "Autonomous Ops",
               title: "Agency AI Agents",
-              desc: "Build autonomous marketing workflows with Digivigee agents and let them handle campaign pacing, weekly reporting, and client follow-ups.",
+              desc: "Individualized treatment planning, gentle diagnostics, and dedicated follow-up care for every woman.",
             },
             {
               tag: "Revenue Intelligence",
@@ -711,7 +711,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         isVisible: true,
         content: {
           quote:
-            "DigiVigee transformed our customer acquisition economics. Inquiries surged by 180% within 90 days and CAC dropped by 42%.",
+            "Dr. Patel and her team provided gentle, reassuring guidance and excellent surgical care throughout my recovery.",
           author: "Rajesh Patel",
           role: "Managing Director, Kalpvruksh Group",
         },
@@ -730,7 +730,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
           sectionTitle: "Frequently Asked Questions",
           items: [
             {
-              question: "How quickly do we see results from DigiVigee?",
+              question: "How quickly can I schedule an in-clinic consultation?",
               answer:
                 "Most campaigns deliver measurable lead spikes and verified attribution data within the first 14 to 21 days of launching ad sprints.",
             },
@@ -775,7 +775,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         isVisible: true,
         content: {
           headline: "Ready to Scale Your Agency 10x With Zero Burnout?",
-          subheadline: "Join 2,350+ ambitious brands and agency founders growing with DigiVigee today.",
+          subheadline: "Comprehensive breast health and oncology care tailored to your recovery.",
           buttonLabel: "Claim Your Free Proposal Now",
           buttonTarget: "#lead-form",
         },
@@ -791,7 +791,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
         order: 8,
         isVisible: true,
         content: {
-          copyrightText: "© 2026 DigiVigee Platform. The Intelligent Agency Operating System.",
+          copyrightText: "© 2026 Dr. Noopur Patel. All rights reserved.",
           showLegalLinks: true,
         },
         styling: {
@@ -819,7 +819,7 @@ export const SEED_LANDING_PAGES: LandingPage[] = [
       leadSourceTag: "landing-page:homepage-os",
     },
     seo: {
-      seoTitle: "DigiVigee | The Intelligent Agency Operating System Built for Scale",
+      seoTitle: "Dr. Noopur Patel | Breast Cancer Surgeon | Ahmedabad",
       metaDescription:
         "Scale 10x client retainers with zero team burnout. Automated campaign pacing, live client telemetry, and cross-channel performance buying.",
       keywords: ["agency operating system", "performance marketing", "growth retainer"],
@@ -1052,7 +1052,7 @@ export async function createLandingPage(input: CreateLandingPageInput): Promise<
           order: 1,
           isVisible: true,
           content: {
-            sectionTitle: "Why Choose DigiVigee",
+            sectionTitle: "Why Choose Dr. Noopur Patel",
             sectionSubtitle: "Engineered for high conversion and tangible revenue growth.",
             features: [
               { title: "Proven ROI Methodology", desc: "Transparent tracking from click to contract." },
@@ -1099,7 +1099,7 @@ export async function createLandingPage(input: CreateLandingPageInput): Promise<
     },
     seo: {
       seoTitle: input.seo?.seoTitle || input.title.trim(),
-      metaDescription: input.seo?.metaDescription || `Discover results with DigiVigee's ${input.title.trim()} services.`,
+      metaDescription: input.seo?.metaDescription || `Discover specialized clinical care with Dr. Noopur Patel's ${input.title.trim()} services.`,
       canonicalUrl: input.seo?.canonicalUrl || "",
       ogTitle: input.seo?.ogTitle || input.title.trim(),
       ogDescription: input.seo?.ogDescription || "",

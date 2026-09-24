@@ -3,329 +3,304 @@ import { BlogPost } from "@/types";
 export const BLOG_POSTS_DATA: BlogPost[] = [
   {
     id: "blog-1",
-    title: "The 2026 Agency Operating Playbook: Scaling Retainers with Zero Headcount Overhead",
-    slug: "10-social-media-marketing-tips",
+    title: "Early Detection of Breast Cancer: Why Timely Screening Saves Lives",
+    slug: "early-detection-of-breast-cancer",
     excerpt:
-      "How leading performance and social agencies replace 7 fragmented SaaS tools with a unified Agency OS to scale from 15 to 68 retainers.",
-    featuredImage: "/images/showcase/collaborate_keynote.jpg",
-    featuredImageAlt: "Agency Operations Team Scaling Retainers",
+      "Understanding the critical role of regular clinical examinations, digital mammography, and early symptom recognition in treating breast conditions successfully.",
+    featuredImage: "/images/doctor/assets/service-1.png",
+    featuredImageAlt: "Breast Cancer Early Detection and Clinical Evaluation",
     author: {
-      id: "author-1",
-      name: "Marcus Vance",
-      role: "Managing Partner",
-      avatar: "/images/showcase/marcus_vance.jpg",
-      bio: "Marcus has scaled multiple 8-figure performance marketing agencies and advises enterprise growth pods on operating margins.",
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
     },
     status: "published",
     publishedAt: "2026-02-15T00:00:00Z",
-    categoryId: "operations",
-    categoryName: "Agency OS & Operations",
-    tags: ["Agency OS", "Retainer Scale", "Operations", "SOPs"],
-    readingTimeMinutes: 6,
+    categoryId: "early-detection",
+    categoryName: "Screening & Detection",
+    tags: ["Early Detection", "Mammography", "Breast Health", "Screening"],
+    readingTimeMinutes: 5,
     isFeatured: true,
-    relatedPostSlugs: ["how-performance-marketing-boosts-roi", "why-good-website-design-matters"],
+    relatedPostSlugs: ["understanding-oncoplastic-breast-surgery", "breast-lumps-benign-vs-cancerous"],
     content: `
-## The Breaking Point: Why Traditional Agency Scaling Fails
+## Why Early Detection Matters Most
 
-For years, digital marketing agencies followed an unsustainable playbook: to grow revenue by 30%, you had to hire 30% more account managers and media buyers. This linear scaling model created severe operational bottlenecks, burned out talented team members, and crushed gross profit margins under a mountain of disjointed SaaS subscriptions.
+Breast cancer is one of the most treatable malignancies when identified in its earliest stages. With modern diagnostic tools—including high-resolution digital mammography, ultrasound, and targeted core biopsies—lesions can often be detected long before they can be felt physically.
 
-In 2026, the most profitable agencies in the world operate on a fundamentally different paradigm: **The Unified Agency Operating System**.
+Early detection allows for less invasive surgical procedures, significantly higher rates of breast preservation, and vastly improved long-term survivorship.
 
 ---
 
-### 1. The Consolidation Mandate: Kill Tool Sprawl
+### Key Steps for Every Woman:
 
-The average 25-person marketing agency pays for 7 to 10 disconnected tools: ClickUp for tasks, Harvest for time tracking, DashThis for monthly reporting, Google Sheets for budget pacing, Loom for updates, and Slack for client pings. 
-
-When your data is trapped in silos, account directors spend up to 14 hours per week merely synchronizing status updates rather than driving client strategy. Consolidating your operational workflows into a single system of record recovers up to 25% of billable team capacity instantly.
-
-### 2. Guardrailed Delegations with SOP Automation
-
-Instead of relying on tribal knowledge passed down through ad-hoc training, institutionalize your delivery engines into interactive kanban workflows. Every new client onboarding triggers automated deliverable templates with pre-configured SLA deadlines, eliminating delivery delays before they happen.
-
-### 3. Transparent Client Autonomy
-
-Clients don't want 40-page PDF slide decks sent five days late. They want on-demand access to real-time blended ROAS, delivery timelines, and 1-click creative review canvases. Providing a self-serve, white-labeled client portal eliminates 80% of routine client Slack pings and raises client retention to all-time highs.
-
-### 4. Milestone-Locked Retainer Cash Flow
-
-Stop chasing overdue invoices manually. Connect your recurring retainer agreements to automated Stripe billing rules tied to verified deliverable milestones. When billing runs on autopilot, your agency eliminates payment delays and protects healthy operating cash flow.
+1. **Monthly Self-Awareness (BSE)**: Familiarize yourself with the normal look and feel of your breasts. Report any persistent changes, unusual lumps, or nipple inversion.
+2. **Annual Clinical Examination**: Have a clinical breast examination performed by an oncology or breast specialist during routine wellness visits.
+3. **Screening Mammography**: Women starting at age 40 (or earlier if there is a significant family history of breast or ovarian cancer) should undergo regular digital screening mammograms.
+4. **Genetic Risk Assessment**: For patients with multiple affected family members, genetic counseling for BRCA1, BRCA2, and related mutations provides vital risk clarity.
 
 ---
 
 ## Conclusion
 
-Scaling an agency in 2026 isn't about working harder or hiring faster; it's about building operational leverage through connected infrastructure. Implement these operating principles today to unlock compounding retainer growth with zero headcount burnout.
+Empowering yourself with knowledge and scheduling regular screenings is the single most effective way to safeguard your breast health. If you notice any change, remember that early consultation brings peace of mind and the widest range of gentle treatment options.
     `,
     seo: {
-      title: "The 2026 Agency Operating Playbook | DigiVigee Agency OS",
-      description: "How leading digital marketing agencies scale to 68+ retainers with zero headcount burnout using unified agency operations.",
-      slug: "10-social-media-marketing-tips",
+      title: "Early Detection of Breast Cancer | Dr. Noopur Patel Ahmedabad",
+      description: "Learn about the critical importance of early breast cancer detection, digital screening mammograms, and symptom awareness from Dr. Noopur Patel.",
+      slug: "early-detection-of-breast-cancer",
     },
     createdAt: "2026-02-15T00:00:00Z",
     updatedAt: "2026-02-15T00:00:00Z",
   },
   {
     id: "blog-2",
-    title: "Automated Ad Ops & Budget Pacing: Eliminating Multi-Account Overspend Errors",
-    slug: "how-performance-marketing-boosts-roi",
+    title: "Understanding Oncoplastic Breast Surgery: Cancer Clearance with Aesthetic Care",
+    slug: "understanding-oncoplastic-breast-surgery",
     excerpt:
-      "Deploying automated daily pacing thresholds, live CAPI telemetry, and cross-channel ROAS dashboards across Meta, Google, and TikTok.",
-    featuredImage: "/images/showcase/pillar_roas_command.jpg",
-    featuredImageAlt: "Performance Ad Ops Command Center",
+      "How oncoplastic techniques combine complete oncologic tumor resection with plastic surgical rearrangement to preserve natural breast symmetry and form.",
+    featuredImage: "/images/doctor/assets/service-2.png",
+    featuredImageAlt: "Oncoplastic Breast Surgery Planning",
     author: {
-      id: "author-2",
-      name: "Elena Rostova",
-      role: "Head of Media Operations",
-      avatar: "/images/showcase/elena_rostova.jpg",
-      bio: "Elena oversees $14M+ in monthly multi-channel ad spend across DTC brands and enterprise performance agency pods.",
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
     },
     status: "published",
     publishedAt: "2026-02-10T00:00:00Z",
-    categoryId: "performance",
-    categoryName: "Performance Ad Ops",
-    tags: ["Ad Ops", "Budget Pacing", "Meta Ads", "CAPI Telemetry", "ROAS"],
-    readingTimeMinutes: 7,
+    categoryId: "oncoplastic-surgery",
+    categoryName: "Surgical Innovation",
+    tags: ["Oncoplastic Surgery", "Breast Conservation", "Cancer Surgery", "Aesthetics"],
+    readingTimeMinutes: 6,
     isFeatured: true,
-    relatedPostSlugs: ["10-social-media-marketing-tips", "content-marketing-strategies"],
+    relatedPostSlugs: ["early-detection-of-breast-cancer", "breast-lumps-benign-vs-cancerous"],
     content: `
-## Why Spreadsheets Are Deadly for Modern Media Buyers
+## Merging Oncologic Safety with Aesthetic Preservation
 
-Managing 40+ ad accounts across Meta, Google Ads, and TikTok using manual Google Sheets is an operational ticking time bomb. A single formula error or delayed spend update can trigger catastrophic client budget overspends during high-velocity shopping holidays.
+In the past, breast cancer surgery often left patients with substantial cosmetic defects or necessitated complete removal of the breast (mastectomy). Today, **Oncoplastic Breast Surgery** has revolutionized surgical oncology.
 
-Modern performance media buying requires continuous, automated pacing guardrails.
-
----
-
-### Key Pillars of Modern Automated Ad Ops:
-
-1. **Daily Pacing Velocity Guardrails**: Automated alerts trigger in real time if any account spends more than 115% or less than 85% of its daily target pacing curve.
-2. **Server-Side Conversion API (CAPI) Telemetry**: Direct server-side tracking bypasses browser-level cookie blockers to feed pristine purchase signals back into bidding algorithms.
-3. **Blended ROAS Command Dashboard**: Combine Shopify revenue, Google Ads spend, and Meta ad cost into an authoritative single-pane telemetry view.
-4. **Automated Creative Fatigue Alerts**: Flag declining CTR and rising frequency before ROAS drops, allowing creative teams to deploy fresh variants proactively.
+This specialized approach integrates principles of cancer resection with plastic surgery techniques, enabling complete tumor removal with wide, clear margins while actively reshaping the remaining glandular tissue to prevent deformities.
 
 ---
 
-## The Compounding Payoff
+### Core Advantages of Oncoplastic Surgery:
 
-When budget pacing is automated, media buyers shift from frantic administrative spreadsheet babysitting to high-leverage creative strategy and funnel optimization. Agency pods routinely report saving 14 hours per week while managing 3x larger budgets with zero overspend errors.
+- **Complete Oncologic Safety**: Ensuring disease eradication remains the uncompromising primary priority.
+- **Contour & Symmetry Preservation**: Adjacent glandular tissue is mobilized to fill defects, maintaining natural breast contours.
+- **Contralateral Symmetrization**: When beneficial, a matching procedure on the opposite breast can be performed to achieve balanced symmetry.
+- **Enhanced Emotional Well-being**: Preserving body image plays a profound role in a patient's psychological recovery and quality of life after cancer treatment.
+
+---
+
+## Is Oncoplastic Surgery Right for You?
+
+Suitability depends on tumor size, tumor location, breast volume, and the patient's individual treatment plan. A thorough clinical and radiological consultation with a trained surgical breast oncologist helps determine the optimal personalized strategy.
     `,
     seo: {
-      title: "Automated Ad Ops & Budget Pacing Guide | DigiVigee Agency OS",
-      description: "Master automated ad budget pacing and CAPI telemetry across Meta, Google, and TikTok to eliminate agency overspend errors.",
-      slug: "how-performance-marketing-boosts-roi",
+      title: "Understanding Oncoplastic Breast Surgery | Dr. Noopur Patel",
+      description: "Discover how oncoplastic breast surgery harmonizes oncologic cancer clearance with natural breast preservation in Ahmedabad.",
+      slug: "understanding-oncoplastic-breast-surgery",
     },
     createdAt: "2026-02-10T00:00:00Z",
     updatedAt: "2026-02-10T00:00:00Z",
   },
   {
     id: "blog-3",
-    title: "Interactive Creative Proofing Canvas: Accelerating Client Approvals from 4 Days to 8 Hours",
-    slug: "content-marketing-strategies",
+    title: "Breast Lumps: Benign vs Cancerous — What Every Woman Needs to Know",
+    slug: "breast-lumps-benign-vs-cancerous",
     excerpt:
-      "Why email threads and WhatsApp revisions kill agency margins, and how 1-click visual proofing unlocks 4x creative throughput.",
-    featuredImage: "/images/showcase/card_approvals.jpg",
-    featuredImageAlt: "Interactive Creative Proofing Canvas Interface",
+      "Over 80% of breast lumps are non-cancerous. Learn the key differences between fibroadenomas, cysts, and suspicious lesions, and why prompt evaluation is essential.",
+    featuredImage: "/images/doctor/assets/service-5.png",
+    featuredImageAlt: "Benign vs Malignant Breast Condition Assessment",
     author: {
-      id: "author-3",
-      name: "Arjun Mehta",
-      role: "Creative Operations Director",
-      avatar: "/images/showcase/arjun_studio.jpg",
-      bio: "Arjun leads high-volume social content and creative production pipelines across international creative agencies in London and NYC.",
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
     },
     status: "published",
     publishedAt: "2026-02-05T00:00:00Z",
-    categoryId: "social",
-    categoryName: "Social Media & Creative",
-    tags: ["Creative Proofing", "Visual Approval", "Social Media", "Reels"],
+    categoryId: "benign-conditions",
+    categoryName: "General Breast Health",
+    tags: ["Breast Lumps", "Fibroadenoma", "Breast Cysts", "Diagnosis"],
     readingTimeMinutes: 5,
     isFeatured: false,
-    relatedPostSlugs: ["10-social-media-marketing-tips", "why-good-website-design-matters"],
+    relatedPostSlugs: ["early-detection-of-breast-cancer", "screening-mammography-guide"],
     content: `
-## The Hidden Bottleneck Killing Creative Agency Margins
+## Why You Shouldn't Panic, But Must Never Ignore a Lump
 
-Creative directors know the nightmare: a campaign of 20 high-production Reels and Carousels is scheduled to launch on Friday, but client feedback is scattered across three different email threads, conflicting WhatsApp messages, and untracked Slack remarks.
+Finding a lump in your breast can trigger immediate anxiety. However, medical statistics provide immense reassurance: **more than 80% of all breast lumps evaluated in clinics turn out to be completely benign (non-cancerous)**.
 
-Approval delays stall over 40% of scheduled campaigns, creating intense last-minute panic and eroding agency profitability.
-
----
-
-### The Frictionless 1-Click Approval Blueprint:
-
-- **Zero-Login Client Review Links**: Clients click a single branded link sent via email or SMS and view all scheduled posts on an interactive calendar without remembering passwords.
-- **On-Canvas Visual Annotations**: Clients pinpoint exact video timestamps or graphic coordinates to leave precise revision notes.
-- **Automated Version Comparison**: Side-by-side visual diffing allows clients to verify that their revision requests were incorporated instantly.
-- **1-Click Bulk Approvals**: Clients approve an entire month's calendar in under two minutes, triggering automated publishing workflows.
+Common benign causes include:
+- **Fibroadenomas**: Smooth, firm, rubbery lumps common in younger women.
+- **Breast Cysts**: Fluid-filled sacs that may fluctuate in tenderness with menstrual cycles.
+- **Fibrocystic Changes**: Generalized nodularity or rope-like texture often related to hormonal fluctuations.
+- **Infections / Mastitis**: Swollen, painful areas often accompanied by redness and fever.
 
 ---
 
-## Result: 78% Faster Creative Turnaround
+### The Triple Assessment Approach
 
-Agencies migrating from email review chains to visual proofing canvases routinely decrease approval turnaround from 4.2 days to under 8 hours, increasing monthly creative throughput by 4x without hiring additional designers.
+To achieve definitive clarity, specialists utilize the gold-standard "Triple Assessment":
+1. **Clinical Examination**: Detailed physical palpation by a specialist.
+2. **Imaging**: High-frequency breast ultrasound or digital mammogram depending on age and breast density.
+3. **Tissue Sampling (Biopsy)**: When indicated, an image-guided core needle biopsy provides accurate histological confirmation without open surgery.
+
+---
+
+## When to Seek Immediate Evaluation
+
+Never wait to see if a lump resolves on its own. Any persistent lump, bloody nipple discharge, skin dimpling, or change in nipple direction warrants prompt assessment by an oncology specialist.
     `,
     seo: {
-      title: "Interactive Creative Proofing Blueprint | DigiVigee Agency OS",
-      description: "Accelerate client creative and video approvals from 4 days to 8 hours with zero-login interactive proofing canvases.",
-      slug: "content-marketing-strategies",
+      title: "Breast Lumps: Benign vs Cancerous | Dr. Noopur Patel Ahmedabad",
+      description: "Understand the differences between benign breast lumps and cancerous symptoms. Learn about the triple assessment from Dr. Noopur Patel.",
+      slug: "breast-lumps-benign-vs-cancerous",
     },
     createdAt: "2026-02-05T00:00:00Z",
     updatedAt: "2026-02-05T00:00:00Z",
   },
   {
     id: "blog-4",
-    title: "Local SEO & Multi-Location GBP Mastery: Automated Geo-Grid Audits for 850+ Locations",
-    slug: "local-seo-rank-higher",
+    title: "Screening Mammography Guide: What to Expect and How to Prepare",
+    slug: "screening-mammography-guide",
     excerpt:
-      "How an 8-person search pod manages multi-location Google Business Profiles and dominates Map Pack rankings with zero manual reporting.",
-    featuredImage: "/images/showcase/card_seo.jpg",
-    featuredImageAlt: "Local SEO Geo-Grid Audit Interface",
+      "A complete walkthrough of the mammography process, addressing common concerns regarding discomfort, radiation safety, and interpreting your report.",
+    featuredImage: "/images/doctor/assets/service-3.png",
+    featuredImageAlt: "Digital Mammography Screening Consultation",
     author: {
-      id: "author-4",
-      name: "Marcus Thorne",
-      role: "VP Local Search & Franchises",
-      avatar: "/images/showcase/enterprise_support_pro.jpg",
-      bio: "Marcus architected enterprise multi-location search campaigns managing over 850 franchise footprints nationwide.",
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
     },
     status: "published",
     publishedAt: "2026-01-28T00:00:00Z",
-    categoryId: "localseo",
-    categoryName: "Local SEO & GBP",
-    tags: ["Local SEO", "Google Business Profile", "Geo-Grid", "Franchise Search"],
-    readingTimeMinutes: 6,
+    categoryId: "early-detection",
+    categoryName: "Screening & Detection",
+    tags: ["Mammogram", "Breast Screening", "Diagnostic Imaging", "Prevention"],
+    readingTimeMinutes: 5,
     isFeatured: false,
-    relatedPostSlugs: ["how-performance-marketing-boosts-roi", "10-social-media-marketing-tips"],
+    relatedPostSlugs: ["early-detection-of-breast-cancer", "breast-lumps-benign-vs-cancerous"],
     content: `
-## The Scale Challenge of Multi-Location Local SEO
+## Demystifying the Screening Mammogram
 
-Auditing citation accuracy, monitoring reviews, and tracking Map Pack rankings manually across 500+ franchise locations is virtually impossible without massive headcount.
+A digital mammogram is an X-ray examination of the breast designed to identify abnormal micro-calcifications or subtle masses before they are detectable by physical touch.
 
-By deploying centralized API synchronization and geo-coordinate rank scorecards, a small 8-person pod can manage hundreds of enterprise locations with 99.8% precision.
-
----
-
-### The 4 Pillars of Automated Local Rank Architecture:
-
-1. **Centralized GBP API Sync**: Update business hours, holiday closures, service menus, and seasonal posts across hundreds of locations simultaneously.
-2. **Geo-Grid Rank Telemetry**: Track keyword rankings across 7x7 coordinate grids surrounding each store to pinpoint exact visibility dead zones.
-3. **Automated Review Alerts & AI Response Templates**: Flag negative feedback within minutes and route personalized responses to maintain high star ratings.
-4. **White-Labeled Executive Scorecards**: Deliver weekly local health scorecards straight to franchise general managers on autopilot.
+### Practical Tips for Your Mammogram:
+- **Optimal Timing**: Schedule your appointment for the week following your period, when breast tissue is generally least tender.
+- **Avoid Deodorants & Powders**: On the day of your scan, do not apply deodorants, antiperspirants, or powders to your underarms or chest, as their mineral particles can mimic microcalcifications on imaging.
+- **Comfort & Compression**: While brief compression is necessary to obtain clear images with minimal radiation, modern digital systems make the experience fast and manageable.
 
 ---
 
-## Commercial Impact
-
-Agencies utilizing automated Local Rank Architecture routinely report 76% gross margins on multi-location retainers while driving +340% improvements in top-3 Google Map Pack visibility.
+### Understanding the BI-RADS Category
+Your mammogram report will include a standardized BI-RADS assessment (Breast Imaging-Reporting and Data System) ranging from 0 (additional imaging needed) to 5 (highly suggestive of malignancy). Your breast specialist will clearly explain these findings and advise if further steps are needed.
     `,
     seo: {
-      title: "Multi-Location Local SEO Guide | DigiVigee Agency OS",
-      description: "Learn how to manage Google Business Profiles across hundreds of franchise locations using automated geo-grid tracking.",
-      slug: "local-seo-rank-higher",
+      title: "Screening Mammography Guide | Dr. Noopur Patel",
+      description: "Everything you need to know about screening mammograms, preparation tips, and BI-RADS scores from Dr. Noopur Patel in Ahmedabad.",
+      slug: "screening-mammography-guide",
     },
     createdAt: "2026-01-28T00:00:00Z",
     updatedAt: "2026-01-28T00:00:00Z",
   },
   {
     id: "blog-5",
-    title: "White-Label Client Reporting Architecture: Why 40-Page Monthly Slide Decks Are Dead",
-    slug: "why-good-website-design-matters",
+    title: "Breast Conservation Surgery (BCS): Preserving Your Natural Breast",
+    slug: "breast-conservation-surgery-facts",
     excerpt:
-      "Transitioning from painful month-end manual reporting to 100% white-labeled executive client dashboards with live ROAS telemetry.",
-    featuredImage: "/images/showcase/pillar_client_intelligence.jpg",
-    featuredImageAlt: "White-Label Client Portal Dashboard",
+      "Learn how lumpectomy combined with modern radiation therapy provides equivalent survival to full mastectomy while preserving your natural breast.",
+    featuredImage: "/images/doctor/assets/service-4.png",
+    featuredImageAlt: "Breast Conservation Surgery and Patient Counseling",
     author: {
-      id: "author-5",
-      name: "Sophie Laurent",
-      role: "Chief Operating Officer",
-      avatar: "/images/showcase/sophie_studio.jpg",
-      bio: "Sophie oversees enterprise agency operations, capacity forecasting, and client retention infrastructure across 50+ retainers.",
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
     },
     status: "published",
     publishedAt: "2026-01-20T00:00:00Z",
-    categoryId: "operations",
-    categoryName: "Client Portals & Reporting",
-    tags: ["White-Label", "Client Portals", "Agency Reporting", "NPS Lift"],
+    categoryId: "surgical-care",
+    categoryName: "Surgical Innovation",
+    tags: ["Lumpectomy", "Breast Conservation", "BCS", "Oncology Care"],
     readingTimeMinutes: 5,
     isFeatured: false,
-    relatedPostSlugs: ["10-social-media-marketing-tips", "how-performance-marketing-boosts-roi"],
+    relatedPostSlugs: ["understanding-oncoplastic-breast-surgery", "early-detection-of-breast-cancer"],
     content: `
-## The Month-End Nightmare Every Agency Director Dreads
+## Modern Oncology: More Precision, Less Radical Surgery
 
-The first five business days of every month are often the most miserable in an agency. Account directors spend 65+ hours exporting CSV files from Meta, Google Ads, and Shopify, formatting them into slide decks, and agonizing over formatting errors.
+Decades of robust international clinical trials have confirmed that for early-stage breast cancer, **Breast Conservation Surgery (lumpectomy) followed by whole-breast radiation therapy offers the same overall survival rates as total mastectomy**.
 
-By the time the client opens the deck, the data is already out of date.
-
----
-
-### Why Real-Time Executive Portals Beat Static Slide Decks:
-
-- **100% White-Labeled on Your Domain**: Host client portals under \`portal.youragency.com\` with custom brand colors, logos, and favicons.
-- **Live ROAS & Blended CAC Telemetry**: Clients see real-time spend, revenue, and customer acquisition metrics on their phone at any time.
-- **Deliverable Milestone Checklists**: Eliminate "What are you working on this week?" calls by showcasing completed, in-progress, and scheduled deliverables live.
-- **Client NPS Soars from 42 to 89**: Transparent reporting builds unshakable client trust, leading to zero churn during competitive renewal cycles.
+This has allowed millions of women worldwide to retain their natural breasts without compromising cancer clearance.
 
 ---
 
-## Eliminate 65 Hours of Monthly Reporting Today
+### How BCS is Performed:
+1. **Precise Tumor Excision**: The surgeon removes the primary tumor along with a safety rim of normal surrounding tissue (margin).
+2. **Sentinel Lymph Node Biopsy (SLNB)**: Instead of removing all underarm lymph nodes, only the first few filtering nodes are sampled, substantially reducing the risk of arm swelling (lymphedema).
+3. **Histopathology Verification**: Complete margin clearance is confirmed under microscopic examination.
 
-Stop wasting senior agency talent on manual deck preparation. Deploy automated white-label portals to turn client reporting from a dreaded monthly chore into your agency's greatest retention asset.
+---
+
+Dr. Noopur Patel works closely with each patient to assess tumor-to-breast size ratio, tumor biology, and personal preferences to determine if breast conservation is the best clinical path.
     `,
     seo: {
-      title: "White-Label Client Reporting Architecture | DigiVigee Agency OS",
-      description: "Replace painful 40-page monthly slide decks with real-time white-labeled client dashboards and live ROAS telemetry.",
-      slug: "why-good-website-design-matters",
+      title: "Breast Conservation Surgery Guide | Dr. Noopur Patel Ahmedabad",
+      description: "Learn why breast conservation surgery (lumpectomy) offers equivalent cancer cure rates to mastectomy with natural breast preservation.",
+      slug: "breast-conservation-surgery-facts",
     },
     createdAt: "2026-01-20T00:00:00Z",
     updatedAt: "2026-01-20T00:00:00Z",
   },
   {
     id: "blog-6",
-    title: "Retainer Cash Flow Engineering: Automating $180k/mo in Recurring Stripe Invoicing & SLA Rules",
-    slug: "email-marketing-best-practices",
+    title: "Post-Surgery Recovery & Survivorship: Comprehensive Healing After Breast Surgery",
+    slug: "post-surgery-recovery-and-survivorship",
     excerpt:
-      "Connecting card-on-file retainer renewals to verified deliverable milestones and eliminating unbilled scope creep permanently.",
-    featuredImage: "/images/showcase/pillar_stripe_billing.jpg",
-    featuredImageAlt: "Retainer Billing & Stripe Connect Automation",
+      "A practical guide to surgical wound care, gentle mobility exercises, lymphedema prevention, and emotional well-being following breast cancer surgery.",
+    featuredImage: "/images/doctor/assets/service-6.png",
+    featuredImageAlt: "Patient Survivorship and Post-Surgical Care",
     author: {
-      id: "author-6",
-      name: "David Sterling",
-      role: "Agency Principal",
-      avatar: "/images/showcase/david_studio.jpg",
-      bio: "David has led B2B demand gen agencies through multiple liquidity events and specializes in agency cash flow optimization.",
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
     },
     status: "published",
     publishedAt: "2026-01-14T00:00:00Z",
-    categoryId: "billing",
-    categoryName: "Billing & SLA Automation",
-    tags: ["Retainer Billing", "Stripe Connect", "SLA Guardrails", "Cash Flow"],
+    categoryId: "recovery",
+    categoryName: "Recovery & Care",
+    tags: ["Recovery", "Survivorship", "Post-Op Care", "Lymphedema"],
     readingTimeMinutes: 5,
     isFeatured: false,
-    relatedPostSlugs: ["10-social-media-marketing-tips", "how-performance-marketing-boosts-roi"],
+    relatedPostSlugs: ["breast-conservation-surgery-facts", "early-detection-of-breast-cancer"],
     content: `
-## Why High-Revenue Agencies Still Experience Cash Flow Crises
+## Healing with Confidence and Compassion
 
-It's an unfortunate paradox: an agency can bill $180,000 per month on paper, yet struggle to meet payroll because 18% of invoices are overdue by 30 to 60 days.
+Surgery is an important milestone on your cancer journey, but complete healing extends to your physical recovery, arm mobility, and emotional resilience.
 
-Delayed client payments, manual invoicing follow-ups, and rampant unbilled scope creep create immense cash flow friction that throttles agency scaling.
-
----
-
-### The 4 Rules of Autopilot Retainer Engineering:
-
-1. **Mandatory Card-on-File Automated Billing**: Retainers auto-charge on the 1st of every month via Stripe Connect, eliminating manual invoicing entirely.
-2. **Milestone-Locked Deliverables**: Campaign launches and creative deliveries are synchronized to active billing status.
-3. **Automated Scope Overage Alerts**: When a client requests deliverables outside their contracted scope, account managers receive instant alerts before unbilled work begins.
-4. **SLA Compliance Verification**: Track internal delivery deadlines against client contract guarantees to maintain 100% SLA compliance.
+### Essential Recovery Guidelines:
+- **Gentle Shoulder & Arm Exercises**: Starting gentle mobility routines as advised by your surgical team prevents shoulder stiffness without stressing incisions.
+- **Surgical Drain & Wound Care**: Keep incisions clean and dry. Follow simple instructions for monitoring any surgical drain output before removal.
+- **Lymphedema Awareness**: Protect your affected arm from heavy trauma, tight clothing, or blood draws to minimize fluid retention.
+- **Nutritional & Emotional Support**: Prioritize protein-rich nutrition, adequate hydration, and compassionate communication with your healthcare team and loved ones.
 
 ---
 
-## Result: Zero Overdue Invoices
-
-Agencies implementing automated retainer billing protocols achieve 100% on-time payment collection for consecutive years, expanding average client contract values by +310%.
+Dr. Patel and her clinical care team provide dedicated follow-up visits to support your long-term survivorship and wellness every step of the way.
     `,
     seo: {
-      title: "Retainer Cash Flow Engineering | DigiVigee Agency OS",
-      description: "Automate recurring retainer billing, eliminate overdue client invoices, and prevent scope creep with Stripe Connect rules.",
-      slug: "email-marketing-best-practices",
+      title: "Post-Surgery Recovery & Survivorship | Dr. Noopur Patel",
+      description: "Practical recovery tips, wound care guidance, and lymphedema prevention strategies after breast surgery from Dr. Noopur Patel.",
+      slug: "post-surgery-recovery-and-survivorship",
     },
     createdAt: "2026-01-14T00:00:00Z",
     updatedAt: "2026-01-14T00:00:00Z",

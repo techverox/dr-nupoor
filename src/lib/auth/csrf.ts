@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * DigiVigee Platform — CSRF & Cross-Origin Mutation Verification Guard
+ * Dr. Noopur Patel Platform — CSRF & Cross-Origin Mutation Verification Guard
  *
  * Verifies that state-changing requests (POST, PUT, PATCH, DELETE) originate
  * from legitimate application origins, preventing Cross-Site Request Forgery.

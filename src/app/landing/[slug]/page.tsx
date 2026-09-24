@@ -27,15 +27,15 @@ export async function generateMetadata({ params }: LandingPageProps): Promise<Me
 
   if (!page || page.status !== "published") {
     return {
-      title: "Page Not Found | DigiVigee",
+      title: "Page Not Found | Dr. Noopur Patel",
       robots: { index: false, follow: false },
     };
   }
 
-  const defaultTitle = page.seo?.seoTitle?.trim() || `${page.title} | DigiVigee`;
+  const defaultTitle = page.seo?.seoTitle?.trim() || `${page.title} | Dr. Noopur Patel`;
   const defaultDescription =
     page.seo?.metaDescription?.trim() ||
-    `Discover ${page.title}. High-performance digital marketing, technical SEO, and conversion optimization by DigiVigee.`;
+    `Discover ${page.title}. Specialized breast surgery and oncoplastic care by Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad.`;
 
   return await resolveDynamicPageMetadata(`/landing/${page.slug}`, {
     title: defaultTitle,
@@ -114,18 +114,15 @@ export default async function PublicLandingPage({ params }: LandingPageProps) {
       {/* 1. Conversion-Focused Quiet Top Navigation Bar */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 group focus:outline-none">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-950 to-slate-800 flex items-center justify-center shadow-md border border-slate-700/50 group-hover:scale-105 transition-transform">
-              <span className="font-extrabold text-white text-lg tracking-tight">DV</span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-slate-950 text-lg tracking-tight leading-none group-hover:text-emerald-600 transition-colors">
-                DIGIVIGEE
-              </span>
-              <span className="text-[10px] font-bold text-emerald-600 tracking-wider uppercase mt-0.5">
-                Performance Growth
-              </span>
-            </div>
+          <Link href="/" className="flex items-center gap-3 group focus:outline-none" aria-label="Dr. Noopur Patel — Home">
+            <Image
+              src="/images/doctor/assets/logo.png"
+              alt="Dr. Noopur Patel"
+              width={160}
+              height={48}
+              className="h-9 w-auto object-contain"
+              priority
+            />
           </Link>
 
           <div className="flex items-center gap-3 sm:gap-4">
@@ -175,7 +172,7 @@ export default async function PublicLandingPage({ params }: LandingPageProps) {
               </h1>
               <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
                 {page.seo?.metaDescription ||
-                  "Partner with DigiVigee to compound your agency retainers and client acquisition pipeline."}
+                  "Consult with Dr. Noopur Patel for specialized surgical breast oncology, oncoplastic care, and dedicated survivorship support."}
               </p>
               <a
                 href={primaryCtaTarget}
@@ -238,9 +235,9 @@ export default async function PublicLandingPage({ params }: LandingPageProps) {
       <footer className="bg-slate-950 text-white py-12 border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-400">
           <div className="flex items-center gap-3">
-            <span className="font-extrabold text-white tracking-tight">DIGIVIGEE</span>
+            <span className="font-extrabold text-white tracking-tight">DR. NOOPUR PATEL</span>
             <span>•</span>
-            <span>© {new Date().getFullYear()} DigiVigee Platform. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} Dr. Noopur Patel. All rights reserved.</span>
           </div>
 
           <div className="flex items-center gap-6">

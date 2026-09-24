@@ -5,20 +5,20 @@ import {
   getAllCmsBlogPostsAdmin,
 } from "@/lib/services/cmsService";
 import { getAllLandingPagesAdmin } from "@/lib/services/landingPageService";
+import { SITE_CONFIG } from "@/config/site";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Revalidate at most once every hour
 
 /**
  * Next.js Dynamic XML Sitemap Route
- * Generates authoritative sitemap index on https://digivigee.com
- * covering core pages, CMS services, portfolio case studies, blog articles, and landing pages.
+ * Generates authoritative sitemap index for Dr. Noopur Patel's medical practice.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://digivigee.com";
+  const baseUrl = SITE_CONFIG.url || "https://drnoopurpatel.com";
   const now = new Date();
 
-  // 1. Core High-Priority Static Routes
+  // 1. Core High-Priority Clinical Routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/about`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.9,
     },
     {
       url: `${baseUrl}/services`,
@@ -39,16 +39,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/portfolio`,
+      url: `${baseUrl}/patient-guide`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.85,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/patient-stories`,
       lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.8,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/appointments`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.95,
     },
     {
       url: `${baseUrl}/contact`,
@@ -57,16 +63,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/case-studies`,
+      url: `${baseUrl}/faq`,
       lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.7,
+      changeFrequency: "monthly",
+      priority: 0.75,
     },
     {
-      url: `${baseUrl}/solutions`,
+      url: `${baseUrl}/blog`,
       lastModified: now,
-      changeFrequency: "weekly",
+      changeFrequency: "daily",
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/medical-disclaimer`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.4,
     },
     {
       url: `${baseUrl}/privacy-policy`,

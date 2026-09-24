@@ -1,5 +1,5 @@
 /**
- * DigiVigee Platform — Centralized In-Memory Sliding Window Rate Limiter
+ * Dr. Noopur Patel Platform — Centralized In-Memory Sliding Window Rate Limiter
  *
  * Provides high-performance, sliding-window rate limiting for authentication,
  * password resets, public form submissions, media uploads, and general API routes.

@@ -51,7 +51,7 @@ export async function loginAdmin(
       user: data.user,
     };
   } catch (error: unknown) {
-    console.error("[DigiVigee Auth] loginAdmin error:", error);
+    console.error("[Dr. Noopur Patel Auth] loginAdmin error:", error);
     return {
       success: false,
       error: "Unable to connect to authentication server. Please check your connection and try again.",
@@ -84,7 +84,7 @@ export async function changeAdminPassword(
 
     return { success: true };
   } catch (error) {
-    console.error("[DigiVigee Auth] changeAdminPassword error:", error);
+    console.error("[Dr. Noopur Patel Auth] changeAdminPassword error:", error);
     return {
       success: false,
       error: "An unexpected error occurred while updating your password.",
@@ -117,7 +117,7 @@ export async function logoutAdmin(): Promise<AuthActionResult> {
 
     return { success: true };
   } catch (error) {
-    console.error("[DigiVigee Auth] Logout error:", error);
+    console.error("[Dr. Noopur Patel Auth] Logout error:", error);
     return { success: false, error: "An unexpected error occurred during logout." };
   }
 }
@@ -148,7 +148,7 @@ export async function requestPasswordReset(email: string): Promise<AuthActionRes
       success: true,
     };
   } catch (error: unknown) {
-    console.warn("[DigiVigee Auth] Password reset warning:", error);
+    console.warn("[Dr. Noopur Patel Auth] Password reset warning:", error);
     return {
       success: true,
     };

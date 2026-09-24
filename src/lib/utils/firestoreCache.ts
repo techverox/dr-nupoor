@@ -17,25 +17,25 @@ interface CacheEntry<T> {
 
 // Global persistent cache map across Turbopack / HMR reloads
 const globalForCache = globalThis as unknown as {
-  __DIGIVIGEE_FIRESTORE_CACHE__?: Map<string, CacheEntry<unknown>>;
-  __DIGIVIGEE_QUOTA_COOLDOWN__?: number;
+  __DRN_FIRESTORE_CACHE__?: Map<string, CacheEntry<unknown>>;
+  __DRN_QUOTA_COOLDOWN__?: number;
 };
 
 const memoryCache =
-  globalForCache.__DIGIVIGEE_FIRESTORE_CACHE__ || new Map<string, CacheEntry<unknown>>();
+  globalForCache.__DRN_FIRESTORE_CACHE__ || new Map<string, CacheEntry<unknown>>();
 
-if (!globalForCache.__DIGIVIGEE_FIRESTORE_CACHE__) {
-  globalForCache.__DIGIVIGEE_FIRESTORE_CACHE__ = memoryCache;
+if (!globalForCache.__DRN_FIRESTORE_CACHE__) {
+  globalForCache.__DRN_FIRESTORE_CACHE__ = memoryCache;
 }
 
-let quotaCooldownUntil = globalForCache.__DIGIVIGEE_QUOTA_COOLDOWN__ || 0;
+let quotaCooldownUntil = globalForCache.__DRN_QUOTA_COOLDOWN__ || 0;
 const QUOTA_COOLDOWN_MS = 3 * 60 * 1000; // 3 minutes cooldown
 
 export function isFirestoreQuotaExhausted(): boolean {
   if (quotaCooldownUntil === 0) return false;
   if (Date.now() > quotaCooldownUntil) {
     quotaCooldownUntil = 0;
-    globalForCache.__DIGIVIGEE_QUOTA_COOLDOWN__ = 0;
+    globalForCache.__DRN_QUOTA_COOLDOWN__ = 0;
     return false;
   }
   return true;
@@ -56,7 +56,7 @@ export function tripFirestoreQuotaBreaker(error?: unknown): void {
     const now = Date.now();
     if (quotaCooldownUntil === 0 || now > quotaCooldownUntil) {
       quotaCooldownUntil = now + QUOTA_COOLDOWN_MS;
-      globalForCache.__DIGIVIGEE_QUOTA_COOLDOWN__ = quotaCooldownUntil;
+      globalForCache.__DRN_QUOTA_COOLDOWN__ = quotaCooldownUntil;
       console.warn(
         `[Firestore CircuitBreaker] ⚠️ Free Tier daily quota reached (Code 8). Circuit open for 3m. Gracefully serving cached/seed data with 0ms downtime.`
       );

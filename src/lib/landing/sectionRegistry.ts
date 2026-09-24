@@ -67,8 +67,8 @@ export const SECTION_REGISTRY: SectionDefinition[] = [
     icon: "🖼️",
     defaultContent: {
       imageUrl: "",
-      altText: "DigiVigee Campaign Visual",
-      caption: "Strategic campaign creative designed for optimal conversion.",
+      altText: "Dr. Noopur Patel Clinical Visual",
+      caption: "Clinical practice and breast oncology care at Marengo CIMS Hospital.",
       aspectRatio: "16/9",
     },
     defaultStyling: {
@@ -269,11 +269,11 @@ export const SECTION_REGISTRY: SectionDefinition[] = [
     description: "Authentic client review cards with attribution, quotes, and trust badges.",
     icon: "💬",
     defaultContent: {
-      sectionTitle: "What Industry Leaders Say",
+      sectionTitle: "Patient Experiences & Care Journeys",
       quote:
-        "DigiVigee completely restructured our acquisition pipeline. We achieved a 3x lift in qualified leads while lowering our effective cost per acquisition.",
-      author: "Rajesh Patel",
-      role: "Managing Director, Kalpvruksh Group",
+        "Dr. Noopur Patel's surgical care and guidance provided peace of mind, exceptional oncological safety, and compassionate recovery at Marengo CIMS Hospital.",
+      author: "Patient Care Journey",
+      role: "Ahmedabad, Gujarat",
     },
     defaultStyling: {
       backgroundColor: "#f8fafc",
@@ -358,11 +358,11 @@ export const SECTION_REGISTRY: SectionDefinition[] = [
     description: "Frictionless direct WhatsApp chat conversion prompt with pre-filled greeting.",
     icon: "🟢",
     defaultContent: {
-      headline: "Need Immediate Marketing Guidance?",
-      subheadline: "Chat directly with an agency specialist on WhatsApp for quick estimates and campaign reviews.",
+      headline: "Need Immediate Clinical Guidance?",
+      subheadline: "Chat directly with Dr. Noopur Patel's consultation coordination desk on WhatsApp for appointment scheduling and reports review.",
       buttonLabel: "Chat on WhatsApp Now",
       phoneNumber: "+919876543210",
-      prefilledMessage: "Hi DigiVigee team! I am interested in exploring your marketing services.",
+      prefilledMessage: "Hello Dr. Noopur Patel's clinic desk, I would like to schedule a breast consultation.",
     },
     defaultStyling: {
       backgroundColor: "#ecfdf5",
@@ -396,11 +396,11 @@ export const SECTION_REGISTRY: SectionDefinition[] = [
     description: "Direct agency contact channels including office address, email, phone, and business hours.",
     icon: "📍",
     defaultContent: {
-      heading: "Get in Touch Directly",
-      email: "hello@digivigee.com",
+      heading: "Clinical Consultation Location",
+      email: "dr.noopurpatel@gmail.com",
       phone: "+91 98765 43210",
-      address: "Digital Marketing Agency Hub, Surat, Gujarat, India",
-      hours: "Monday – Friday: 9:00 AM – 7:00 PM",
+      address: "Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad, Gujarat 380060",
+      hours: "Monday – Saturday: 9:00 AM – 6:00 PM",
     },
     defaultStyling: {
       backgroundColor: "#ffffff",
@@ -458,8 +458,8 @@ export const SECTION_REGISTRY: SectionDefinition[] = [
     description: "Clean minimalist landing-page footer with copyright, disclaimer, and privacy links.",
     icon: "⚓",
     defaultContent: {
-      copyrightText: "© 2026 DigiVigee Platform. All Rights Reserved.",
-      disclaimer: "DigiVigee is a registered digital marketing agency.",
+      copyrightText: "© 2026 Dr. Noopur Patel. All Rights Reserved.",
+      disclaimer: "Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad.",
       showLegalLinks: true,
     },
     defaultStyling: {

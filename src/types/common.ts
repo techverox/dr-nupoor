@@ -1,5 +1,5 @@
 /**
- * Base common types for all entities in the DigiVigee Platform.
+ * Base common types for all entities in the Dr. Noopur Patel Practice Platform.
  */
 
 export interface BaseEntity {

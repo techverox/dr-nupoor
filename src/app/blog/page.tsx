@@ -11,17 +11,16 @@ export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   return await resolveDynamicPageMetadata("/blog", {
-    title: "Agency Scaling Playbooks & Growth Engineering | DigiVigee Agency OS",
+    title: "Breast Health & Oncology Insights | Dr. Noopur Patel",
     description:
-      "Explore actionable agency operating playbooks, ad pacing telemetry, client reporting automation, and local SEO frameworks from DigiVigee growth directors.",
+      "Evidence-based articles on breast health awareness, early detection screening, oncoplastic surgical techniques, and survivorship guidance by Dr. Noopur Patel.",
     path: "/blog",
     keywords: [
-      "agency operating playbooks",
-      "digital agency blog",
-      "performance ad ops strategies",
-      "client reporting automation",
-      "agency growth insights",
-      "DigiVigee articles",
+      "breast health blog",
+      "breast cancer awareness ahmedabad",
+      "breast lump symptoms",
+      "oncoplastic surgery articles",
+      "mammography guide",
     ],
   });
 }

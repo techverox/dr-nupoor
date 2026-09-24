@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 /**
- * DigiVigee Platform — Native RFC 6238 TOTP Multi-Factor Authentication (2FA)
+ * Dr. Noopur Patel Platform — Native RFC 6238 TOTP Multi-Factor Authentication (2FA)
  *
  * Implements full TOTP secret generation, 6-digit verification code generation,
  * drift-tolerant verification, and hashed recovery backup codes using Node.js crypto.
@@ -132,7 +132,7 @@ export function verifyTwoFactorCode(
 export function getTwoFactorOtpAuthUrl(
   email: string,
   secretBase32: string,
-  issuer: string = "DigiVigee"
+  issuer: string = "DrNoopurPatel"
 ): string {
   const encodedIssuer = encodeURIComponent(issuer);
   const encodedAccount = encodeURIComponent(email);

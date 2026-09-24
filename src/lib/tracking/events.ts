@@ -1,5 +1,5 @@
 /**
- * Privacy-conscious event tracking abstraction for DigiVigee Platform.
+ * Privacy-conscious event tracking abstraction for Dr. Noopur Patel Platform.
  * Dispatches to First-Party Analytics Engine (/api/analytics/events), Google Analytics (gtag),
  * Meta Pixel (fbq), and native DOM events safely.
  * Will NEVER throw errors or degrade client performance if providers are blocked or offline.
@@ -17,7 +17,7 @@ declare global {
   }
 }
 
-export type DigiVigeeEvent =
+export type DrNoopurEvent =
   | "page_view"
   | "landing_page_view"
   | "cta_click"
@@ -29,8 +29,10 @@ export type DigiVigeeEvent =
   | "primary_cta_click"
   | "newsletter_subscription";
 
+export type DigiVigeeEvent = DrNoopurEvent;
+
 export function trackEvent(
-  eventName: DigiVigeeEvent | string,
+  eventName: DrNoopurEvent | string,
   params: Record<string, unknown> = {}
 ): void {
   if (typeof window === "undefined") return;
@@ -142,16 +144,16 @@ export function trackEvent(
 
     // 5. Native Custom DOM Event (for client listeners/audit)
     window.dispatchEvent(
-      new CustomEvent("digivigee:analytics", {
+      new CustomEvent("drn:analytics", {
         detail: { event: eventName, params: enrichedParams },
       })
     );
 
     if (process.env.NODE_ENV === "development") {
-      console.log(`[DigiVigee Analytics] Event tracked: "${eventName}"`, enrichedParams);
+      console.log(`[Dr. Noopur Analytics] Event tracked: "${eventName}"`, enrichedParams);
     }
   } catch (error) {
     // Analytics failure must NEVER break the website
-    console.warn("[DigiVigee Analytics] Event tracking error:", error);
+    console.warn("[Dr. Noopur Analytics] Event tracking error:", error);
   }
 }

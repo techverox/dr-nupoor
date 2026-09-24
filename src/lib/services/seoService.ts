@@ -13,19 +13,23 @@ import { cachedFirestoreRead, invalidateFirestoreCache } from "@/lib/utils/fires
 
 export const DEFAULT_GLOBAL_SEO: GlobalSeoSettings = {
   id: "global_seo",
-  defaultTitle: "DigiVigee — Premier Digital Marketing Agency",
-  titleTemplate: "%s | DigiVigee",
+  defaultTitle: "Dr. Noopur Patel — Breast Cancer Surgeon | Marengo CIMS Hospital, Ahmedabad",
+  titleTemplate: "%s | Dr. Noopur Patel",
   defaultDescription:
-    "DigiVigee is a premier full-service digital marketing agency dedicated to compounding revenue growth through precision performance advertising, creative social storytelling, and technical SEO.",
-  canonicalBaseUrl: SITE_CONFIG.url,
-  defaultOgImage: "/images/og-image.jpg",
+    "Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Specialising in oncoplastic breast surgery, breast conservation, and compassionate breast care.",
+  canonicalBaseUrl: SITE_CONFIG.url || "https://drnoopurpatel.com",
+  defaultOgImage: "/images/doctor/assets/hero-doctor.png",
   defaultKeywords: [
-    "digital marketing agency",
-    "performance marketing",
-    "social media agency",
-    "SEO services India",
-    "lead generation",
-    "DigiVigee",
+    "Dr Noopur Patel",
+    "Breast Cancer Surgeon Ahmedabad",
+    "Breast Surgeon Ahmedabad",
+    "Oncoplastic Breast Surgery",
+    "Surgical Breast Oncology",
+    "Marengo CIMS Hospital Ahmedabad",
+    "Breast Clinic Ahmedabad",
+    "Breast Cancer Treatment",
+    "Lumpectomy",
+    "Mastectomy",
   ],
   robotsIndex: true,
   robotsFollow: true,
@@ -103,7 +107,7 @@ export async function saveGlobalSeoSettings(
 }
 
 /**
- * Resets global SEO configuration to canonical DigiVigee defaults.
+ * Resets global SEO configuration to canonical Dr. Noopur Patel practice defaults.
  */
 export async function resetSeoSettingsAdmin(): Promise<{
   success: boolean;
@@ -113,7 +117,7 @@ export async function resetSeoSettingsAdmin(): Promise<{
   const adminDb = getAdminFirestore();
   const canonicalDefaults: GlobalSeoSettings = {
     ...DEFAULT_GLOBAL_SEO,
-    canonicalBaseUrl: "https://digivigee.com",
+    canonicalBaseUrl: SITE_CONFIG.url || "https://drnoopurpatel.com",
     updatedAt: new Date().toISOString(),
   };
 
@@ -308,10 +312,10 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
     directory.push(
       mergePageSeo(
         "page-about",
-        "About DigiVigee",
+        "About Dr. Noopur Patel",
         "/about",
-        "About Us — Results-Driven Marketing | DigiVigee",
-        aboutContent.heroSubheadline || "Learn about DigiVigee's philosophy and data-driven marketing team.",
+        "About Dr. Noopur Patel — Breast Cancer Surgeon | Ahmedabad",
+        aboutContent.heroSubheadline || "Learn about Dr. Noopur Patel's surgical oncology experience, fellowship training, and patient-centered care.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -321,10 +325,10 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
     directory.push(
       mergePageSeo(
         "page-services",
-        "Services Directory",
+        "Services & Treatments",
         "/services",
-        "Digital Marketing Services — Performance, SEO & Creative | DigiVigee",
-        "Comprehensive suite of digital marketing solutions tailored for high-growth businesses.",
+        "Breast Cancer Surgery & Oncoplastic Treatments | Dr. Noopur Patel",
+        "Specialised breast cancer surgery, breast conservation, oncoplastic reconstruction, and screening treatments.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -333,11 +337,24 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
 
     directory.push(
       mergePageSeo(
-        "page-portfolio",
-        "Case Studies & Portfolio",
-        "/portfolio",
-        "Proven Results & Case Studies — Performance Marketing ROI | DigiVigee",
-        "Real campaign case studies, ROI metrics, and proven scale delivered for ambitious brands.",
+        "page-patient-guide",
+        "Patient Guide & Resources",
+        "/patient-guide",
+        "Patient Guide & Resources | Dr. Noopur Patel",
+        "Evidence-based breast health guidance, screening recommendations, surgical FAQs, and recovery support.",
+        globalSeo.defaultOgImage,
+        true,
+        "published"
+      )
+    );
+
+    directory.push(
+      mergePageSeo(
+        "page-patient-stories",
+        "Patient Stories",
+        "/patient-stories",
+        "Patient Stories & Experiences | Dr. Noopur Patel",
+        "Real stories of courage, compassionate healing, and cancer survival under the care of Dr. Noopur Patel.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -347,10 +364,10 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
     directory.push(
       mergePageSeo(
         "page-blog",
-        "Blog & Marketing Insights",
+        "Breast Health Blog & Insights",
         "/blog",
-        "Blog & Marketing Insights — Growth Playbooks & Strategy | DigiVigee",
-        "Explore actionable digital marketing playbooks, SEO strategies, paid media optimization, and social growth tactics.",
+        "Breast Health Blog & Clinical Insights | Dr. Noopur Patel",
+        "Articles on breast health, early cancer detection, surgical choices, and post-surgery wellness by Dr. Noopur Patel.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -360,10 +377,23 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
     directory.push(
       mergePageSeo(
         "page-contact",
-        "Contact & Discovery",
+        "Contact & Clinic Location",
         "/contact",
-        "Contact Our Growth Strategists | DigiVigee",
-        contactContent.heroSubheadline || "Schedule your custom growth roadmap and competitive digital audit with our specialists.",
+        "Contact & Clinic Location | Dr. Noopur Patel",
+        contactContent.heroSubheadline || "Visit Dr. Noopur Patel at Marengo CIMS Hospital, Sola, Ahmedabad, or schedule an appointment.",
+        globalSeo.defaultOgImage,
+        true,
+        "published"
+      )
+    );
+
+    directory.push(
+      mergePageSeo(
+        "page-appointments",
+        "Book Consultation",
+        "/appointments",
+        "Book an Appointment | Dr. Noopur Patel",
+        "Schedule an in-person clinical consultation or second opinion with Dr. Noopur Patel at Marengo CIMS Hospital.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -375,8 +405,8 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
         "page-privacy",
         "Privacy Policy",
         "/privacy-policy",
-        "Privacy Policy | DigiVigee",
-        "Read our commitment to transparency, client confidentiality, and data privacy safeguards.",
+        "Privacy Policy | Dr. Noopur Patel",
+        "Our commitment to patient confidentiality, data privacy, and ethical healthcare communication.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -388,8 +418,8 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
         "page-terms",
         "Terms and Conditions",
         "/terms-and-conditions",
-        "Terms & Conditions | DigiVigee",
-        "Official terms and conditions governing DigiVigee's services and digital platform usage.",
+        "Terms & Conditions | Dr. Noopur Patel",
+        "Official terms and conditions governing Dr. Noopur Patel's medical practice website.",
         globalSeo.defaultOgImage,
         true,
         "published"
@@ -403,7 +433,7 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
           `service-${s.id}`,
           `Service: ${s.title}`,
           `/services/${s.slug}`,
-          s.seo?.title || `${s.title} — Digital Marketing Services`,
+          s.seo?.title || `${s.title} — Dr. Noopur Patel`,
           s.seo?.description || s.shortDescription,
           s.seo?.ogImage || globalSeo.defaultOgImage,
           s.isPublished,
@@ -419,7 +449,7 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
           `portfolio-${p.id}`,
           `Case Study: ${p.title}`,
           `/portfolio/${p.slug}`,
-          p.seo?.title || `${p.title} Case Study | DigiVigee`,
+          p.seo?.title || `${p.title} Case Study | Dr. Noopur Patel`,
           p.seo?.description || p.shortDescription,
           p.heroImage || globalSeo.defaultOgImage,
           p.isPublished,
@@ -451,7 +481,7 @@ export async function getPageSeoDirectory(): Promise<PageSeoSummary[]> {
           `landing-${lp.id}`,
           `Landing: ${lp.title}`,
           `/landing/${lp.slug}`,
-          lp.seo?.seoTitle || `${lp.title} | DigiVigee`,
+          lp.seo?.seoTitle || `${lp.title} | Dr. Noopur Patel`,
           lp.seo?.metaDescription || lp.title,
           lp.seo?.ogImage || globalSeo.defaultOgImage,
           lp.status === "published" && !lp.seo?.noIndex,

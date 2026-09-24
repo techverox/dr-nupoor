@@ -119,7 +119,7 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
         .get();
       newLeads = newCountSnapshot.data().count;
     } catch (error) {
-      console.warn("[DigiVigee Dashboard Engine] Firestore query warning:", error);
+      console.warn("[Dr. Noopur Patel Dashboard Engine] Firestore query warning:", error);
       firestoreStatus = "disconnected";
     }
   }

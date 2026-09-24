@@ -47,19 +47,21 @@ export default function AdminSeoManagementPage() {
   // Form State
   const [globalSeo, setGlobalSeo] = useState<GlobalSeoSettings>({
     id: "global_seo",
-    defaultTitle: "DigiVigee — Premier Digital Marketing Agency",
-    titleTemplate: "%s | DigiVigee",
+    defaultTitle: "Dr. Noopur Patel — Breast Cancer Surgeon | Marengo CIMS Hospital, Ahmedabad",
+    titleTemplate: "%s | Dr. Noopur Patel",
     defaultDescription:
-      "DigiVigee is a premier full-service digital marketing agency dedicated to compounding revenue growth through precision performance advertising, creative social storytelling, and technical SEO.",
-    canonicalBaseUrl: "https://digivigee.com",
-    defaultOgImage: "/images/og-image.jpg",
+      "Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Specialising in oncoplastic breast surgery, breast conservation, and compassionate breast care.",
+    canonicalBaseUrl: "https://drnoopurpatel.com",
+    defaultOgImage: "/images/doctor/assets/hero-doctor.png",
     defaultKeywords: [
-      "digital marketing agency",
-      "performance marketing",
-      "social media agency",
-      "SEO services India",
-      "lead generation",
-      "DigiVigee",
+      "Dr Noopur Patel",
+      "Breast Cancer Surgeon Ahmedabad",
+      "Oncoplastic Breast Surgery",
+      "Surgical Breast Oncology",
+      "Marengo CIMS Hospital",
+      "Breast Clinic Ahmedabad",
+      "Lumpectomy",
+      "Mastectomy",
     ],
     robotsIndex: true,
     robotsFollow: true,
@@ -129,7 +131,7 @@ export default function AdminSeoManagementPage() {
       });
       const data = await res.json();
       if (data.success) {
-        setFeedback({ message: "✨ Global SEO configuration saved & live across digivigee.com!", type: "success" });
+        setFeedback({ message: "✨ Global SEO configuration saved & live across drnoopurpatel.com!", type: "success" });
         setTimeout(() => setFeedback(null), 4000);
       } else {
         setFeedback({ message: data.error || "Failed to save SEO configuration.", type: "error" });
@@ -169,8 +171,8 @@ export default function AdminSeoManagementPage() {
   };
 
   const copyRobotsContent = () => {
-    const robotsTxt = `# DigiVigee Robots Configuration
-# Authoritative domain: https://digivigee.com
+    const robotsTxt = `# Dr. Noopur Patel Robots Configuration
+# Authoritative domain: https://drnoopurpatel.com
 
 User-agent: *
 Allow: /
@@ -198,8 +200,8 @@ Disallow: /api/
 Disallow: /dashboard/
 Disallow: /private/
 
-Sitemap: https://digivigee.com/sitemap.xml
-Host: https://digivigee.com`;
+Sitemap: https://drnoopurpatel.com/sitemap.xml
+Host: https://drnoopurpatel.com`;
 
     navigator.clipboard.writeText(robotsTxt);
     setCopiedRobots(true);
@@ -211,24 +213,24 @@ Host: https://digivigee.com`;
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": "https://digivigee.com/#organization",
+        "@id": "https://drnoopurpatel.com/#organization",
         name: "Dr. Noopur Patel",
         url: "https://drnoopurpatel.com",
         logo: "https://drnoopurpatel.com/images/doctor/assets/logo.png",
         description: globalSeo.defaultDescription,
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road",
-          addressLocality: "Chhapi, Banaskantha",
+          streetAddress: "Marengo CIMS Hospital, Off Science City Road, Sola",
+          addressLocality: "Ahmedabad",
           addressRegion: "Gujarat",
-          postalCode: "385210",
+          postalCode: "380060",
           addressCountry: "IN",
         },
         contactPoint: {
           "@type": "ContactPoint",
-          telephone: "+91 90811 45178",
-          contactType: "customer service",
-          email: "Contact@digivigee.com",
+          telephone: "+91 98765 43210",
+          contactType: "clinic appointment",
+          email: "dr.noopurpatel@gmail.com",
           availableLanguage: ["English", "Hindi", "Gujarati"],
         },
       },
@@ -571,7 +573,7 @@ Host: https://digivigee.com`;
                         value={globalSeo.canonicalBaseUrl}
                         onChange={(e) => setGlobalSeo((prev) => ({ ...prev, canonicalBaseUrl: e.target.value }))}
                         className="block w-full px-3.5 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-900 text-sm font-medium text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-mono"
-                        placeholder="https://digivigee.com"
+                        placeholder="https://drnoopurpatel.com"
                       />
                       <p className="text-xs text-zinc-400 mt-1">
                         Prevents duplicate content penalties by telling Google the single official domain.
@@ -730,17 +732,17 @@ Host: https://digivigee.com`;
                       </div>
                       <div className="min-w-0">
                         <div className="text-xs font-bold text-zinc-900 dark:text-zinc-200 leading-tight truncate">
-                          DigiVigee
+                          Dr. Noopur Patel
                         </div>
                         <div className="text-[11px] text-zinc-500 dark:text-zinc-400 font-mono truncate">
-                          {globalSeo.canonicalBaseUrl || "https://digivigee.com"}
+                          {globalSeo.canonicalBaseUrl || "https://drnoopurpatel.com"}
                         </div>
                       </div>
                     </div>
 
                     {/* Google Blue Link */}
                     <div className="text-lg font-medium text-[#1a0dab] dark:text-[#8ab4f8] leading-snug hover:underline cursor-pointer break-words mb-1.5 mt-1">
-                      {globalSeo.defaultTitle || "DigiVigee — Premier Digital Marketing Agency"}
+                      {globalSeo.defaultTitle || "Dr. Noopur Patel — Breast Cancer Surgeon | Ahmedabad"}
                     </div>
 
                     {/* Rich Snippet Star Rating */}
@@ -750,27 +752,27 @@ Host: https://digivigee.com`;
                           <Star key={s} className="w-3 h-3 fill-current" />
                         ))}
                       </div>
-                      <span className="font-bold text-zinc-800 dark:text-zinc-200">4.9</span>
-                      <span className="text-zinc-400">(128 reviews)</span>
+                      <span className="font-bold text-zinc-800 dark:text-zinc-200">5.0</span>
+                      <span className="text-zinc-400">(Verified Patients)</span>
                       <span className="text-zinc-300 dark:text-zinc-600">•</span>
-                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">Verified Agency</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">Specialist Breast Oncology</span>
                     </div>
 
                     {/* Snippet Description */}
                     <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed break-words line-clamp-3">
                       {globalSeo.defaultDescription ||
-                        "DigiVigee is a premier full-service digital marketing agency driving exponential client growth..."}
+                        "Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad..."}
                     </p>
 
                     {/* Google Sitelinks Simulation */}
                     <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800 grid grid-cols-2 gap-2 text-[11px]">
                       <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
                         <div className="font-bold text-[#1a0dab] dark:text-[#8ab4f8]">Services</div>
-                        <div className="text-zinc-400 text-[10px]">SEO, Ads &amp; Social</div>
+                        <div className="text-zinc-400 text-[10px]">Breast Surgery &amp; Care</div>
                       </div>
                       <div className="p-2 rounded-lg bg-zinc-50 dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800">
-                        <div className="font-bold text-[#1a0dab] dark:text-[#8ab4f8]">Case Studies</div>
-                        <div className="text-zinc-400 text-[10px]">Client ROI Results</div>
+                        <div className="font-bold text-[#1a0dab] dark:text-[#8ab4f8]">Appointments</div>
+                        <div className="text-zinc-400 text-[10px]">Consultation Booking</div>
                       </div>
                     </div>
                   </div>
@@ -805,7 +807,7 @@ Host: https://digivigee.com`;
                       )}
                     </div>
                     <div className="p-3 bg-white dark:bg-zinc-900">
-                      <div className="text-[10px] font-bold uppercase text-zinc-400">digivigee.com</div>
+                      <div className="text-[10px] font-bold uppercase text-zinc-400">drnoopurpatel.com</div>
                       <div className="text-xs font-bold text-zinc-900 dark:text-zinc-100 truncate mt-0.5">
                         {globalSeo.defaultTitle}
                       </div>

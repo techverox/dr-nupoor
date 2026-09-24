@@ -340,7 +340,7 @@ export async function getSystemBackupStatus(): Promise<SystemBackupStatus> {
       description:
         "For complete disaster recovery (infrastructure-level Point-In-Time recovery), configure Google Cloud Firestore Scheduled Backups to a Cloud Storage Bucket via gcloud CLI or Cloud Scheduler.",
       command:
-        "gcloud firestore export gs://digivigee-backup-bucket --async",
+        "gcloud firestore export gs://dr-noopur-website-backup-bucket --async",
     },
   };
 }

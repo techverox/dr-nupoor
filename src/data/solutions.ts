@@ -184,7 +184,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionItem> = {
     ],
     relatedSolutionSlugs: ["social-media-agencies", "scaling-agencies", "local-seo-agencies"],
     seo: {
-      title: "For Performance Agencies | Scale Retained ROAS & Automated Ad Ops | DigiVigee",
+      title: "For Performance Agencies | Scale Retained ROAS & Automated Ad Ops | Dr. Noopur Patel Practice",
       description:
         "The all-in-one ad ops terminal for performance marketing agencies. Consolidate Meta & Google ad spend, automate client ROAS reporting, and protect retainers.",
       keywords: ["performance agencies", "ad ops", "ROAS tracking", "Meta ad budget pacing", "agency reporting"],
@@ -321,7 +321,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionItem> = {
     ],
     relatedSolutionSlugs: ["performance-agencies", "scaling-agencies", "local-seo-agencies"],
     seo: {
-      title: "For Social Media Agencies | Content Pipelines & 1-Click Approvals | DigiVigee",
+      title: "For Social Media Agencies | Content Pipelines & 1-Click Approvals | Dr. Noopur Patel Practice",
       description:
         "The all-in-one OS for social media agencies. Batch 30 days of content, preview vertical video reels, and collect client approvals in seconds.",
       keywords: ["social media agencies", "content calendar", "client approvals", "video proofing", "agency scheduler"],
@@ -458,7 +458,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionItem> = {
     ],
     relatedSolutionSlugs: ["performance-agencies", "scaling-agencies", "social-media-agencies"],
     seo: {
-      title: "For Local SEO & GBP Agencies | Google 3-Pack & Geo-Grid Telemetry | DigiVigee",
+      title: "For Local SEO & GBP Agencies | Google 3-Pack & Geo-Grid Telemetry | Dr. Noopur Patel Practice",
       description:
         "Multi-location Google Business Profile sync, geo-grid rank tracking, and review automation built for local SEO agencies.",
       keywords: ["local SEO agencies", "GBP management", "geo grid rank tracker", "review automation", "Google Maps SEO"],
@@ -595,7 +595,7 @@ export const SOLUTIONS_DATA: Record<string, SolutionItem> = {
     ],
     relatedSolutionSlugs: ["performance-agencies", "social-media-agencies", "local-seo-agencies"],
     seo: {
-      title: "For Full-Service Scaling Agencies | Unified Multi-Department OS | DigiVigee",
+      title: "For Full-Service Scaling Agencies | Unified Multi-Department OS | Dr. Noopur Patel Practice",
       description:
         "The all-in-one operating system for 7-figure scaling digital agencies. Unify CRM, tasks, marketing delivery, and automated billing.",
       keywords: ["scaling agencies", "agency operating system", "all in one agency software", "agency CRM", "retainer billing"],

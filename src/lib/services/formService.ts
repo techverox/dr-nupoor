@@ -9,7 +9,7 @@ import {
 import { checkRateLimit } from "@/lib/services/leadService";
 import { sanitizeInput } from "@/lib/validation/lead";
 
-// Starter Seed Forms for DigiVigee
+// Starter Seed Forms for Dr. Noopur Patel Clinical Practice
 export const SEED_FORMS: FormDefinition[] = [
   {
     id: "form-consultation-default",
@@ -556,9 +556,9 @@ export const SEED_FORMS: FormDefinition[] = [
         isVisible: true,
       },
     ],
-    submitButtonText: "Apply for Agency Partnership",
+    submitButtonText: "Submit Clinical Enquiry",
     successAction: "message",
-    successMessage: "Thank you for applying to the DigiVigee Partner Network! Our agency partnerships team will review your credentials within 24 hours.",
+    successMessage: "Thank you for your enquiry! Dr. Noopur Patel's clinical coordination team at Marengo CIMS Hospital will connect with you within 24 hours.",
     createLead: true,
     leadSource: "agency_partner_program",
     spamProtection: {

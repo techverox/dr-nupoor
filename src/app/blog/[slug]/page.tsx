@@ -37,12 +37,12 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 
   if (!post || post.status !== "published") {
     return {
-      title: "Article Not Found | DigiVigee",
+      title: "Article Not Found | Dr. Noopur Patel",
       robots: { index: false, follow: false },
     };
   }
 
-  const title = post.seo?.title?.trim() || `${post.title} | DigiVigee Blog`;
+  const title = post.seo?.title?.trim() || `${post.title} | Dr. Noopur Patel`;
   const description = post.seo?.description?.trim() || post.excerpt;
 
   return await resolveDynamicPageMetadata(`/blog/${post.slug}`, {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     ogImage: post.seo?.ogImage || post.featuredImage,
     ogType: "article",
     publishedTime: post.publishedAt || post.createdAt,
-    authors: [post.author?.name || "DigiVigee Team"],
+    authors: [post.author?.name || "Dr. Noopur Patel"],
   });
 }
 
@@ -94,8 +94,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     dateModified: post.updatedAt || post.publishedAt || post.createdAt,
     author: {
       "@type": "Person",
-      name: post.author?.name || "DigiVigee Team",
-      jobTitle: post.author?.role || "Growth Strategist",
+      name: post.author?.name || "Dr. Noopur Patel",
+      jobTitle: post.author?.role || "Breast Cancer Surgeon",
     },
     publisher: {
       "@type": "Organization",
@@ -271,7 +271,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {post.author.bio ||
-                  `${post.author.name} is a growth marketing specialist at DigiVigee, publishing validated frameworks on ROI compounding, technical SEO, and conversion optimization.`}
+                  `${post.author.name} is an experienced breast surgeon and surgical oncologist at Marengo CIMS Hospital, Ahmedabad, providing evidence-based patient education.`}
               </p>
             </div>
           </div>
@@ -282,11 +282,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <section className="mb-16">
             <div className="flex items-center justify-between mb-6">
               <div>
-                <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest">
+                <span className="text-xs font-bold text-rose-600 uppercase tracking-widest">
                   Continue Reading
                 </span>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-950 mt-1">
-                  Related Growth Playbooks
+                  Related Clinical Articles
                 </h2>
               </div>
               <Link
@@ -306,10 +306,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   className="group bg-white rounded-2xl border border-slate-200 p-5 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-2 py-0.5 rounded-md">
-                      {item.categoryName || "Strategy"}
+                    <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider bg-rose-50 px-2 py-0.5 rounded-md">
+                      {item.categoryName || "Breast Health"}
                     </span>
-                    <h4 className="text-sm font-bold text-slate-950 group-hover:text-emerald-600 transition-colors mt-3 mb-2 line-clamp-2 leading-snug">
+                    <h4 className="text-sm font-bold text-slate-950 group-hover:text-rose-600 transition-colors mt-3 mb-2 line-clamp-2 leading-snug">
                       {item.title}
                     </h4>
                     <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
@@ -318,7 +318,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400 mt-4">
                     <span>{item.readingTimeMinutes || 5} min read</span>
-                    <span className="font-bold text-emerald-600 group-hover:translate-x-0.5 transition-transform">
+                    <span className="font-bold text-rose-600 group-hover:translate-x-0.5 transition-transform">
                       Read →
                     </span>
                   </div>
@@ -328,35 +328,35 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </section>
         )}
 
-        {/* 5. High-Impact Strategic Call to Action Banner (100% Light-First $10B SaaS) */}
-        <section className="bg-gradient-to-b from-white via-white to-emerald-50/40 rounded-3xl p-8 sm:p-12 text-center border border-emerald-200/90 shadow-xl shadow-emerald-950/[0.03] relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-emerald-500/5 via-transparent to-transparent" />
+        {/* 5. High-Impact Strategic Call to Action Banner */}
+        <section className="bg-gradient-to-b from-white via-white to-rose-50/40 rounded-3xl p-8 sm:p-12 text-center border border-rose-200/90 shadow-xl shadow-rose-950/[0.03] relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-rose-500/5 via-transparent to-transparent" />
           <div className="relative z-10 max-w-xl mx-auto space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-[#008744] text-xs font-bold uppercase tracking-wider border border-emerald-200/80">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#008744] animate-ping" />
-              Agency Growth Roadmap
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 text-[#D84C70] text-xs font-bold uppercase tracking-wider border border-rose-200/80">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D84C70] animate-ping" />
+              Expert Consultation
             </span>
             <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-[#0C1628]">
-              Ready to implement this framework for your brand?
+              Have questions about your breast health or diagnosis?
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Schedule a 30-minute growth roadmap session with our marketing directors. We analyze your unit economics and build a custom execution plan.
+              Schedule a consultation with Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad. Personalized clinical evaluation, gentle diagnostics, and clear guidance.
             </p>
             <div className="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Link href="/contact">
+              <Link href="/appointments">
                 <ShimmerButton
                   shimmerColor="rgba(255, 255, 255, 0.45)"
-                  className="px-8 py-3.5 rounded-xl bg-[#008744] hover:bg-[#009b4e] text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-600/20 cursor-pointer"
+                  className="px-8 py-3.5 rounded-xl bg-[#D84C70] hover:bg-[#c23d60] text-white font-bold text-xs sm:text-sm shadow-md shadow-rose-600/20 cursor-pointer"
                 >
-                  <span>Request Free Growth Audit</span>
+                  <span>Book an Appointment</span>
                   <ArrowRight className="w-4 h-4" />
                 </ShimmerButton>
               </Link>
               <Link
-                href="/portfolio"
+                href="/patient-stories"
                 className="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-[#0C1628] font-bold text-xs sm:text-sm border border-slate-200 shadow-xs transition-colors"
               >
-                Browse All Case Studies
+                Read Patient Stories
               </Link>
             </div>
           </div>

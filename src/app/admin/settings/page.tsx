@@ -71,29 +71,29 @@ interface SettingsFormState {
 }
 
 const CANONICAL_SETTINGS: SettingsFormState = {
-  siteName: "DigiVigee",
-  tagline: "Professional Solutions For Your Digital Growth",
+  siteName: "Dr. Noopur Patel",
+  tagline: "Breast Surgeon & Oncoplastic Surgeon — Expert Care. Stronger Tomorrows.",
   logoUrl: "/images/doctor/assets/logo.png",
   faviconUrl: "/favicon.ico",
-  showAnnouncementBar: true,
-  announcementBarText: "🚀 Special Offer: Scale with DigiVigee Platform — Claim Your Growth Audit Today →",
-  announcementLink: "/offers",
-  phone: "+91 90811 45178",
-  whatsapp: "+91 90811 45178",
-  email: "Contact@digivigee.com",
-  address: "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Banaskantha, Gujarat - 385210",
-  businessHours: "24/7 Priority Support & Strategy Pods",
-  googleMapsEmbedUrl: "https://maps.google.com/maps?q=Chhapi%20Gujarat%20385210&t=&z=13&ie=UTF8&iwloc=&output=embed",
-  linkedin: "https://linkedin.com/company/digivigee",
-  twitter: "https://twitter.com/digivigee",
-  instagram: "https://instagram.com/digivigee",
-  facebook: "https://facebook.com/digivigee",
-  youtube: "https://youtube.com/@digivigee",
-  github: "https://github.com/digivigee",
+  showAnnouncementBar: false,
+  announcementBarText: "Expert Breast Care & Consultations — Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad",
+  announcementLink: "/appointments",
+  phone: "+91 98765 43210",
+  whatsapp: "+91 98765 43210",
+  email: "dr.noopurpatel@gmail.com",
+  address: "Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad, Gujarat 380060",
+  businessHours: "Mon - Sat: 10:00 AM - 6:00 PM",
+  googleMapsEmbedUrl: "https://maps.google.com/maps?q=Marengo%20CIMS%20Hospital%20Ahmedabad&t=&z=14&ie=UTF8&iwloc=&output=embed",
+  linkedin: "https://linkedin.com/in/drnoopurpatel",
+  twitter: "https://twitter.com/drnoopurpatel",
+  instagram: "https://instagram.com/drnoopurpatel",
+  facebook: "https://facebook.com/drnoopurpatel",
+  youtube: "https://youtube.com/@drnoopurpatel",
+  github: "",
   aboutText:
-    "DigiVigee is an enterprise-grade Agency Operating System and performance digital marketing platform dedicated to powering compounding revenue growth, automated workflows, and high-retention client experiences.",
-  copyrightText: `© ${new Date().getFullYear()} DigiVigee Platform. All rights reserved.`,
-  badgeText: "Enterprise-Grade Agency Operating System",
+    "Dedicated to compassionate, evidence-based, and patient-centered breast surgical oncology. Combining oncologic clearance with aesthetic preservation for every woman.",
+  copyrightText: `© ${new Date().getFullYear()} Dr. Noopur Patel. All rights reserved.`,
+  badgeText: "Surgical Breast Oncology & Oncoplastic Surgery",
   customScriptsEnabled: true,
   customHeaderCode: "",
   customBodyCode: "",
@@ -1346,7 +1346,7 @@ export default function AdminSettingsPage() {
                     <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
                   </div>
                   <div className="flex-1 max-w-md mx-auto bg-zinc-800 px-3 py-1 rounded-md text-[11px] font-mono text-zinc-400 truncate text-center">
-                    https://digivigee.com
+                    https://drnoopurpatel.com
                   </div>
                 </div>
 
@@ -1569,7 +1569,7 @@ export default function AdminSettingsPage() {
       <ChangePasswordModal
         isOpen={isPasswordModalOpen}
         onClose={() => setIsPasswordModalOpen(false)}
-        userEmail="admin@digivigee.com"
+        userEmail="admin@noopur.com"
       />
     </div>
   );

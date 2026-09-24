@@ -9,15 +9,15 @@ export const DEFAULT_SEED_OFFERS = CANONICAL_OFFERS;
 
 // In-memory runtime store for real-time mutations and zero-downtime quota resilience
 const globalForOffers = globalThis as unknown as {
-  __DIGIVIGEE_OFFERS_STORE__?: Map<string, OfferItem>;
+  __DRN_OFFERS_STORE__?: Map<string, OfferItem>;
 };
 
 const offersStore =
-  globalForOffers.__DIGIVIGEE_OFFERS_STORE__ ||
+  globalForOffers.__DRN_OFFERS_STORE__ ||
   new Map<string, OfferItem>();
 
-if (!globalForOffers.__DIGIVIGEE_OFFERS_STORE__) {
-  globalForOffers.__DIGIVIGEE_OFFERS_STORE__ = offersStore;
+if (!globalForOffers.__DRN_OFFERS_STORE__) {
+  globalForOffers.__DRN_OFFERS_STORE__ = offersStore;
   CANONICAL_OFFERS.forEach((o) => offersStore.set(o.id, { ...o }));
 }
 
@@ -294,6 +294,6 @@ export async function resetOffersAdmin(): Promise<{ success: boolean; offers: Of
   return {
     success: true,
     offers: freshOffers,
-    message: "Successfully reset to 6 canonical DigiVigee banners and popups.",
+    message: "Successfully reset to canonical banners and announcements.",
   };
 }

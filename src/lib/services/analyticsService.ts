@@ -164,9 +164,9 @@ function generateTimelineSlots(start: Date, end: Date, isHourly: boolean): strin
 }
 
 /**
- * Canonical DigiVigee Platform baseline analytics telemetry.
- * Covers the last 90 days with realistic daily pageviews across all real DigiVigee routes,
- * UTM campaigns, channels, user interactions, form submissions, and conversion stages.
+ * Canonical Dr. Noopur Patel Platform baseline analytics telemetry.
+ * Covers the last 90 days with realistic daily pageviews across all real Dr. Noopur Patel routes,
+ * UTM campaigns, channels, user interactions, consultation requests, and conversion stages.
  */
 export function generateCanonicalAnalyticsEvents(): RawEventDoc[] {
   const events: RawEventDoc[] = [];
@@ -174,13 +174,13 @@ export function generateCanonicalAnalyticsEvents(): RawEventDoc[] {
   const DAY_MS = 86400000;
 
   const pages = [
-    { path: "/", title: "DigiVigee — Full-Service Digital Marketing Agency & Enterprise Studio", weight: 38 },
-    { path: "/landing/homepage-os", title: "Homepage OS — Turn High-Intent Traffic into Scaled Revenue", weight: 18 },
-    { path: "/landing/performance-marketing-blueprint", title: "Performance Marketing Blueprint — High-ROAS Growth", weight: 14 },
-    { path: "/services", title: "Services & Capabilities | DigiVigee Platform", weight: 10 },
-    { path: "/portfolio", title: "Client Success Case Studies | DigiVigee Portfolio", weight: 8 },
-    { path: "/blog", title: "Growth Marketing Playbooks & Insights | DigiVigee Blog", weight: 7 },
-    { path: "/contact", title: "Schedule Strategy Consultation | DigiVigee", weight: 5 },
+    { path: "/", title: "Dr. Noopur Patel — Breast Cancer Surgeon | Marengo CIMS Hospital, Ahmedabad", weight: 38 },
+    { path: "/about", title: "About Dr. Noopur Patel — Surgical Breast Oncologist", weight: 18 },
+    { path: "/services", title: "Surgical Procedures & Clinical Care | Dr. Noopur Patel", weight: 14 },
+    { path: "/patient-guide", title: "Patient Care Guide & Breast Health Roadmap", weight: 10 },
+    { path: "/portfolio", title: "Patient Care Journeys & Outcomes | Dr. Noopur Patel", weight: 8 },
+    { path: "/blog", title: "Breast Health Guides & Oncology Insights | Dr. Noopur Patel", weight: 7 },
+    { path: "/contact", title: "Contact & Consultation Booking | Dr. Noopur Patel", weight: 5 },
   ];
 
   const channels = [
@@ -477,13 +477,13 @@ export async function getAdvancedAnalyticsReport(
   let rawSubscribers: RawSubDoc[] = [];
   const formNameMap = new Map<string, string>();
 
-  // Canonical DigiVigee form definitions fallback map
-  formNameMap.set("form-consultation-default", "General Strategy Consultation");
-  formNameMap.set("form-audit-lead-gen", "Growth & Paid Media Audit Request");
-  formNameMap.set("form-seo-review", "Organic Search & SEO Performance Review");
-  formNameMap.set("form-quick-quote", "Express Project Estimate & Quote");
-  formNameMap.set("form-enterprise-expansion", "Enterprise Transformation & Scale Request");
-  formNameMap.set("form-vip-partner", "VIP Strategic Agency Partnership");
+  // Canonical clinical form definitions fallback map
+  formNameMap.set("form-consultation-default", "Clinical Breast Consultation Request");
+  formNameMap.set("form-audit-lead-gen", "Second Opinion & Board Review Request");
+  formNameMap.set("form-seo-review", "Mammography / Ultrasound Report Evaluation");
+  formNameMap.set("form-quick-quote", "Surgical Procedure Estimate & Consultation");
+  formNameMap.set("form-enterprise-expansion", "High-Risk Screening & Genetic Assessment");
+  formNameMap.set("form-vip-partner", "Hospital Referral & Multidisciplinary Case Review");
 
   if (adminDb) {
     try {
@@ -512,7 +512,7 @@ export async function getAdvancedAnalyticsReport(
 
   // 100% Real Website Data Sync Fallback:
   // If Firestore collections are empty (e.g. initial launch or test environment),
-  // seed with realistic canonical DigiVigee telemetry matching real routes, forms, and channels.
+  // seed with realistic canonical clinical telemetry matching real routes, forms, and channels.
   if (rawEvents.length === 0) {
     rawEvents = generateCanonicalAnalyticsEvents();
   }
@@ -1107,7 +1107,7 @@ export async function getAnalyticsSummary(
 /**
  * 1-Click "Reset to Defaults":
  * Clears old or corrupt test analytics events from Firestore,
- * seeds high-fidelity canonical telemetry matching DigiVigee's real website pages and funnels,
+ * seeds high-fidelity canonical telemetry matching Dr. Noopur Patel's real website pages and consultation funnels,
  * and immediately returns a fresh 30-day analytics report with comparison.
  */
 export async function resetAnalyticsAdmin(): Promise<AdvancedAnalyticsReport> {

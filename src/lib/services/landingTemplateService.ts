@@ -8,16 +8,16 @@ import {
 } from "@/types/landingPage";
 import { createLandingPage } from "@/lib/services/landingPageService";
 
-// Pre-structured canonical starter templates matching DigiVigee 1:1
+// Pre-structured canonical starter templates matching Dr. Noopur Patel clinical practice
 const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
   {
     id: "tpl-homepage-os",
-    name: "DigiVigee Agency Operating System (1:1 Homepage Clone)",
+    name: "Dr. Noopur Patel Practice Homepage Template",
     description:
-      "Exact 1:1 canonical replica of the DigiVigee homepage with 8 sections: Enterprise Hero + Logos Ribbon, Bento Role Pillars, Capabilities Suite, Proof Counter, Dual Split Testimonial Wall, Objection Clearance FAQ, Lead Form, and Final CTA Banner.",
-    category: "Enterprise OS",
-    badge: "Homepage Clone",
-    tags: ["homepage", "agency-os", "full-funnel", "enterprise"],
+      "Canonical clinical template for Dr. Noopur Patel with Hero, Clinical Focus Pillars, Surgical Capabilities, Patient Outcomes, FAQ, and Consultation Booking.",
+    category: "Clinical Practice",
+    badge: "Practice Homepage",
+    tags: ["homepage", "breast-oncology", "clinical", "hospital"],
     sections: [
       {
         id: "sec-os-hero",
@@ -25,18 +25,18 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         order: 0,
         isVisible: true,
         content: {
-          eyebrow: "Enterprise Agency Growth OS",
-          headline: "Scale 10x Client Retainers. Burn Out 0 Teams.",
+          eyebrow: "Surgical Breast Oncology & Oncoplastic Care",
+          headline: "Comprehensive, Compassionate & Evidence-Based Breast Care",
           description:
-            "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee handles in seconds.",
-          primaryCtaLabel: "Claim Your Free Proposal",
+            "Personalized breast cancer surgery and oncoplastic techniques preserving form, function, and dignity at Marengo CIMS Hospital, Ahmedabad.",
+          primaryCtaLabel: "Book Consultation",
           primaryCtaTarget: "#lead-form",
-          secondaryCtaLabel: "Explore Capabilities",
+          secondaryCtaLabel: "Clinical Specialities",
           secondaryCtaTarget: "#features",
-          logosHeading: "Trusted by 2,350+ Scaling Agencies & Enterprises",
+          logosHeading: "Affiliated with Marengo CIMS Hospital, Ahmedabad",
         },
         styling: {
-          backgroundColor: "#0f172a",
+          backgroundColor: "#0B4F6C",
           textColor: "#ffffff",
           paddingY: "xl",
         },
@@ -47,40 +47,40 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         order: 1,
         isVisible: true,
         content: {
-          badge: "Agency Workflow Automation",
-          sectionTitle: "Scale 10x retainers. Burn out 0 teams.",
+          badge: "Clinical Philosophy",
+          sectionTitle: "Evidence-Based Surgical Breast Oncology",
           sectionSubtitle:
-            "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee AI handles in seconds.",
+            "Combining international clinical standards with empathetic patient care at Marengo CIMS Hospital.",
           features: [
             {
-              tag: "Autonomous Ops",
-              title: "Agency AI Agents",
-              desc: "Build autonomous marketing workflows with Digivigee agents and let them handle campaign pacing, weekly reporting, and client follow-ups.",
+              tag: "Aesthetic Oncology",
+              title: "Oncoplastic Conservation",
+              desc: "Complete tumor excision paired with cosmetic breast tissue remodeling to preserve natural symmetry.",
             },
             {
-              tag: "Revenue Intelligence",
-              title: "Full-Funnel Attribution",
-              desc: "Connect your media buying ad accounts directly with client CRM telemetry to prove bottom-line pipeline revenue.",
+              tag: "Minimally Invasive",
+              title: "Sentinel Node Staging",
+              desc: "Targeted lymph node evaluation minimizing trauma and reducing chronic upper-limb lymphedema risk.",
             },
             {
-              tag: "Speed & Scale",
-              title: "Omnichannel Blueprints",
-              desc: "Deploy pre-approved creative architectures across Meta, Google PMax, and LinkedIn in under 24 hours.",
+              tag: "Tumour Board",
+              title: "Multidisciplinary Review",
+              desc: "Collaborative care pathways integrated with medical oncologists, radiation oncologists, and pathologists.",
             },
             {
-              tag: "Team Health",
-              title: "Zero Team Burnout",
-              desc: "Automate repetitive data collation so senior strategists spend 100% of their energy driving creative strategy.",
+              tag: "Benign Care",
+              title: "Benign Breast Clinic",
+              desc: "Specialized assessment for fibroadenomas, complex cysts, breast pain, and nipple discharge.",
             },
             {
-              tag: "Client Retention",
-              title: "Executive Proof Portals",
-              desc: "Give clients real-time white-labeled dashboards that update 24/7 without manual CSV export.",
+              tag: "Risk Assessment",
+              title: "Genetics & High-Risk Screening",
+              desc: "Personalized screening protocols and risk-reduction strategies for family history and BRCA variants.",
             },
             {
-              tag: "Predictable Growth",
-              title: "Scalable Agency Framework",
-              desc: "Transform erratic monthly project income into high-margin, predictable recurring retainers.",
+              tag: "Holistic Care",
+              title: "Dedicated Patient Navigation",
+              desc: "Compassionate, patient-centered care and long-term surveillance from consultation to recovery.",
             },
           ],
         },
@@ -164,9 +164,9 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         isVisible: true,
         content: {
           quote:
-            "DigiVigee completely restructured our acquisition pipeline. We achieved a 3.4x lift in qualified inbound enterprise inquiries within 90 days while reducing our blended customer acquisition cost by 42%.",
-          author: "Rajesh Patel",
-          role: "Managing Director, Kalpvruksh Group",
+            "Dr. Noopur Patel's surgical precision, clear communication, and compassionate guidance made all the difference during my breast cancer surgery and recovery at Marengo CIMS Hospital.",
+          author: "Patient Care Journey",
+          role: "Ahmedabad, Gujarat",
         },
         styling: {
           backgroundColor: "#F8FAFC",
@@ -183,24 +183,24 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
           sectionTitle: "Frequently Asked Questions",
           items: [
             {
-              question: "How quickly can we launch our first campaign sprint?",
+              question: "When should I consult a breast surgeon?",
               answer:
-                "Typically within 5 to 7 business days following our initial technical tracking audit and creative blueprint signoff.",
+                "You should schedule an evaluation if you notice a new breast lump, persistent localized pain, skin dimpling, nipple retraction or discharge, or receive abnormal mammogram findings.",
             },
             {
-              question: "What monthly ad spend budgets do you work with?",
+              question: "What is oncoplastic breast surgery?",
               answer:
-                "We manage campaigns across a broad spectrum, from high-growth businesses spending $3,000/mo to large enterprise accounts deploying $100k+/month.",
+                "Oncoplastic surgery combines oncological tumor resection with reconstructive plastic surgery principles to preserve the natural shape, contour, and aesthetic symmetry of the breast.",
             },
             {
-              question: "How is performance tracked and verified?",
+              question: "Can breast cancer be treated while preserving the breast?",
               answer:
-                "You receive access to a 24/7 real-time telemetry dashboard integrated directly with your ad accounts and CRM.",
+                "Yes, Breast Conservation Surgery (lumpectomy with oncoplastic remodeling) is a safe and proven standard for suitable candidates, offering equivalent survival to mastectomy.",
             },
             {
-              question: "Are there long-term lock-in contracts?",
+              question: "Where are consultations and surgeries conducted?",
               answer:
-                "No. All our standard retainers operate on flexible 90-day growth sprints with transparent monthly milestones.",
+                "Dr. Noopur Patel consults and operates at Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad, Gujarat.",
             },
           ],
         },
@@ -216,10 +216,10 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         order: 6,
         isVisible: true,
         content: {
-          headline: "Claim Your Free Strategic Growth Proposal",
+          headline: "Schedule a Consultation with Dr. Noopur Patel",
           subheadline:
-            "Receive a complimentary 15-minute acquisition audit, competitor gap analysis, and tailored 90-day roadmap.",
-          leadSourceTag: "landing-page:homepage-os",
+            "Fill in patient details to coordinate an appointment slot at Marengo CIMS Hospital, Ahmedabad.",
+          leadSourceTag: "landing-page:homepage-clinical",
         },
         styling: {
           backgroundColor: "#F8FAFC",
@@ -233,29 +233,29 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         order: 7,
         isVisible: true,
         content: {
-          headline: "Ready to Scale 10x Client Retainers?",
+          headline: "Seeking an Expert Surgical Breast Oncology Opinion?",
           subheadline:
-            "Join 2,350+ agencies and enterprise leaders growing predictably with DigiVigee. Zero lock-in contracts.",
-          buttonLabel: "Request Strategic Consultation",
+            "Consult with Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad. Comprehensive report reviews and second opinions welcome.",
+          buttonLabel: "Request Appointment",
           buttonTarget: "#lead-form",
         },
         styling: {
-          backgroundColor: "linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)",
+          backgroundColor: "linear-gradient(135deg, #0B4F6C 0%, #083a50 100%)",
           textColor: "#ffffff",
           paddingY: "xl",
         },
       },
     ],
     defaultCta: {
-      primaryCtaLabel: "Claim Your Free Proposal",
+      primaryCtaLabel: "Book Consultation",
       primaryCtaType: "scroll_to_form",
       primaryCtaTarget: "#lead-form",
     },
     defaultForm: {
-      formTitle: "Claim Your Free Strategic Growth Proposal",
-      formSubtitle: "Fill in your details and an agency strategist will review your market within 24 hours.",
-      submitButtonText: "Claim Free Proposal",
-      leadSourceTag: "landing-page:homepage-os",
+      formTitle: "Schedule a Consultation with Dr. Noopur Patel",
+      formSubtitle: "Fill in patient details to coordinate an appointment slot at Marengo CIMS Hospital.",
+      submitButtonText: "Request Appointment Slot",
+      leadSourceTag: "landing-page:homepage-clinical",
     },
     createdAt: "2026-08-01T00:00:00.000Z",
     updatedAt: "2026-08-01T00:00:00.000Z",
@@ -340,7 +340,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         content: {
           sectionTitle: "Client Success Proof",
           quote:
-            "DigiVigee completely restructured our acquisition pipeline. We achieved a 3x lift in qualified leads while lowering our effective cost per acquisition.",
+            "Dr. Noopur Patel's clinical insight and surgical approach provided profound confidence during our breast cancer care at Marengo CIMS Hospital.",
           author: "Rajesh Patel",
           role: "Managing Director, Kalpvruksh Group",
         },
@@ -419,7 +419,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         order: 8,
         isVisible: true,
         content: {
-          copyrightText: "© 2026 DigiVigee Platform. All Rights Reserved.",
+          copyrightText: "© 2026 Dr. Noopur Patel. All Rights Reserved.",
           showLegalLinks: true,
         },
         styling: { backgroundColor: "#0b132b", textColor: "#ffffff", paddingY: "md" },
@@ -507,7 +507,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         type: "footer",
         order: 4,
         isVisible: true,
-        content: { copyrightText: "© 2026 DigiVigee Platform.", showLegalLinks: true },
+        content: { copyrightText: "© 2026 Dr. Noopur Patel.", showLegalLinks: true },
         styling: { backgroundColor: "#0b132b", textColor: "#ffffff", paddingY: "md" },
       },
     ],
@@ -589,7 +589,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         type: "footer",
         order: 4,
         isVisible: true,
-        content: { copyrightText: "© 2026 DigiVigee Platform.", showLegalLinks: true },
+        content: { copyrightText: "© 2026 Dr. Noopur Patel.", showLegalLinks: true },
         styling: { backgroundColor: "#0b132b", textColor: "#ffffff", paddingY: "md" },
       },
     ],
@@ -668,7 +668,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         isVisible: true,
         content: {
           headline: "Schedule Your 15-Minute Software Demo",
-          subheadline: "See how DigiVigee automates your acquisition and reporting pipelines.",
+          subheadline: "Schedule a comprehensive clinical case consultation with Dr. Noopur Patel.",
           submitButtonText: "Confirm Demo Time",
           leadSourceTag: "landing-page:saas-demand",
         },
@@ -734,7 +734,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         content: {
           heading: "Our Agency Headquarters",
           phone: "+91 98765 43210",
-          email: "hello@digivigee.com",
+          email: "dr.noopurpatel@gmail.com",
           address: "Digital Marketing Agency Hub, Surat, Gujarat, India",
         },
         styling: { backgroundColor: "#ffffff", paddingY: "lg" },
@@ -756,7 +756,7 @@ const SEED_LANDING_TEMPLATES: LandingPageTemplate[] = [
         type: "footer",
         order: 4,
         isVisible: true,
-        content: { copyrightText: "© 2026 DigiVigee Platform.", showLegalLinks: true },
+        content: { copyrightText: "© 2026 Dr. Noopur Patel.", showLegalLinks: true },
         styling: { backgroundColor: "#0b132b", textColor: "#ffffff", paddingY: "md" },
       },
     ],

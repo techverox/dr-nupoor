@@ -27,12 +27,12 @@ export async function createAdminSessionCookie(
   // 1. Explicit check for development mock token
   if (idToken.startsWith("mock-dev-token-")) {
     const payload = {
-      email: (userEmail || "admin@digivigee.com").toLowerCase().trim(),
+      email: (userEmail || "admin@noopur.com").toLowerCase().trim(),
       uid: "dev-admin-user",
       time: Date.now(),
       exp: Date.now() + AUTH_CONFIG.SESSION_EXPIRATION_MS,
     };
-    const devCookie = `digivigee-session-${Buffer.from(JSON.stringify(payload)).toString("base64url")}`;
+    const devCookie = `drn-session-${Buffer.from(JSON.stringify(payload)).toString("base64url")}`;
     return { success: true, sessionCookie: devCookie };
   }
 
@@ -46,7 +46,7 @@ export async function createAdminSessionCookie(
       });
       return { success: true, sessionCookie };
     } catch (error) {
-      console.warn("[DigiVigee Auth] Admin createSessionCookie error, falling back to verified JWT session:", error);
+      console.warn("[Dr. Noopur Auth] Admin createSessionCookie error, falling back to verified JWT session:", error);
     }
   }
 
@@ -77,11 +77,11 @@ export async function createAdminSessionCookie(
         created: Date.now(),
       };
 
-      const sessionCookie = `digivigee-session-${Buffer.from(JSON.stringify(sessionPayload)).toString("base64url")}`;
+      const sessionCookie = `drn-session-${Buffer.from(JSON.stringify(sessionPayload)).toString("base64url")}`;
       return { success: true, sessionCookie };
     }
   } catch (parseErr) {
-    console.error("[DigiVigee Auth] Failed to create fallback session:", parseErr);
+    console.error("[Dr. Noopur Auth] Failed to create fallback session:", parseErr);
   }
 
   return {
@@ -104,12 +104,12 @@ export async function verifyAdminSessionCookie(
       return { authenticated: false, error: "No session cookie provided." };
     }
 
-    // A. Handle custom verified session cookie (digivigee-session- or dev-session-)
-    if (sessionCookie.startsWith("digivigee-session-") || sessionCookie.startsWith("dev-session-")) {
+    // A. Handle custom verified session cookie (drn-session-, digivigee-session- or dev-session-)
+    if (sessionCookie.startsWith("drn-session-") || sessionCookie.startsWith("digivigee-session-") || sessionCookie.startsWith("dev-session-")) {
       try {
-        const raw = sessionCookie.replace(/^digivigee-session-|^dev-session-/, "");
+        const raw = sessionCookie.replace(/^drn-session-|^digivigee-session-|^dev-session-/, "");
         const decoded = JSON.parse(Buffer.from(raw, "base64url").toString("utf8"));
-        const email = (decoded.email || "admin@digivigee.com").toLowerCase().trim();
+        const email = (decoded.email || "admin@noopur.com").toLowerCase().trim();
         const uid = decoded.uid || "dev-admin-user";
 
         if (decoded.exp && Date.now() > decoded.exp) {
@@ -177,7 +177,7 @@ export async function verifyAdminSessionCookie(
 
     return { authenticated: false, error: "Unable to verify session." };
   } catch (err) {
-    console.error("[DigiVigee Auth] Unexpected verifyAdminSessionCookie error:", err);
+    console.error("[Dr. Noopur Auth] Unexpected verifyAdminSessionCookie error:", err);
     return { authenticated: false, error: "Session verification exception." };
   }
 }
@@ -194,7 +194,7 @@ export async function revokeAdminSession(sessionCookie: string | undefined): Pro
       const decoded = await adminAuth.verifySessionCookie(sessionCookie, false);
       await adminAuth.revokeRefreshTokens(decoded.sub);
     } catch (error) {
-      console.warn("[DigiVigee Auth] Session revocation warning:", error);
+      console.warn("[Dr. Noopur Auth] Session revocation warning:", error);
     }
   }
 }

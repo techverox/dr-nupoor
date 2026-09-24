@@ -1,5 +1,5 @@
 /**
- * DigiVigee Platform — Role-Based Access Control (RBAC) Types
+ * Dr. Noopur Patel Practice Platform — Role-Based Access Control (RBAC) Types
  * Standardized permission identifiers, roles, and administrative user models.
  */
 

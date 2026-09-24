@@ -17,6 +17,8 @@ import {
   Headphones,
 } from "lucide-react";
 
+import { SITE_CONFIG } from "@/config/site";
+
 export interface ContactDirectChannelsProps {
   phone?: string;
   email?: string;
@@ -25,10 +27,10 @@ export interface ContactDirectChannelsProps {
 }
 
 export default function ContactDirectChannels({
-  phone = "+91 90811 45178",
-  email = "Contact@digivigee.com",
-  address = "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Banaskantha, Gujarat - 385210",
-  workingHours = "24/7 Priority Support & Strategy Pods",
+  phone = SITE_CONFIG.contact.phoneFormatted,
+  email = SITE_CONFIG.contact.email,
+  address = SITE_CONFIG.contact.address,
+  workingHours = SITE_CONFIG.contact.workingHours,
 }: ContactDirectChannelsProps) {
   const [copiedItem, setCopiedItem] = useState<string | null>(null);
 
@@ -41,11 +43,11 @@ export default function ContactDirectChannels({
   };
 
   const cleanPhone = phone.replace(/[^0-9+]/g, "");
-  const whatsappUrl = `https://wa.me/919081145178?text=${encodeURIComponent(
-    "Hi DigiVigee team, I would like to schedule a strategy consultation / inquire about your digital solutions."
+  const whatsappUrl = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+    "Hello Dr. Noopur Patel's clinic, I would like to inquire about a consultation / appointment."
   )}`;
   const googleMapsSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    "Orchid Complex, Approach Road, Chhapi, Banaskantha, Gujarat 385210"
+    SITE_CONFIG.contact.address
   )}`;
 
   return (

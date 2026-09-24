@@ -33,33 +33,22 @@ export const DEFAULT_SUPER_ADMIN: AdminUser = {
 export const CANONICAL_ADMIN_USERS: AdminUser[] = [
   DEFAULT_SUPER_ADMIN,
   {
-    id: "user-disha-parmar",
-    email: "disha@digivigee.com",
-    displayName: "Disha Parmar",
+    id: "user-clinical-coordinator",
+    email: "care@drnoopurpatel.com",
+    displayName: "Clinical Care Coordinator",
     roleId: "content_manager",
-    roleName: "Content Manager",
+    roleName: "Content & Care Manager",
     isActive: true,
     createdAt: "2026-01-15T00:00:00Z",
     updatedAt: "2026-01-15T00:00:00Z",
     lastLoginAt: "2026-09-10T16:45:00Z",
   },
   {
-    id: "user-krunal-vyas",
-    email: "krunal@digivigee.com",
-    displayName: "Krunal Vyas",
-    roleId: "seo_manager",
-    roleName: "SEO & GEO Specialist",
-    isActive: true,
-    createdAt: "2026-02-01T00:00:00Z",
-    updatedAt: "2026-02-01T00:00:00Z",
-    lastLoginAt: "2026-09-11T09:15:00Z",
-  },
-  {
-    id: "user-meet-patel",
-    email: "meet@digivigee.com",
-    displayName: "Meet Patel",
+    id: "user-patient-support",
+    email: "appointments@drnoopurpatel.com",
+    displayName: "Patient Appointments Lead",
     roleId: "lead_manager",
-    roleName: "Lead & Growth Manager",
+    roleName: "Patient Appointments Manager",
     isActive: true,
     createdAt: "2026-02-15T00:00:00Z",
     updatedAt: "2026-02-15T00:00:00Z",
@@ -375,7 +364,7 @@ export async function getAdminUserByIdOrEmail(idOrEmail: string): Promise<AdminU
   }
 
   // Pre-cached default Super Admin
-  if (normalized === "admin@digivigee.com" || idOrEmail === "dev-admin-user" || idOrEmail === "default-super-admin") {
+  if (normalized === "admin@noopur.com" || normalized === "admin@digivigee.com" || idOrEmail === "dev-admin-user" || idOrEmail === "default-super-admin" || idOrEmail === "admin-noopur-patel") {
     return DEFAULT_SUPER_ADMIN;
   }
 
@@ -412,7 +401,7 @@ export async function getAdminUserByIdOrEmail(idOrEmail: string): Promise<AdminU
     }
   } catch (error) {
     console.warn(`[getAdminUserByIdOrEmail] Quota/offline warning for ${idOrEmail}:`, (error as { message?: string })?.message || error);
-    if (normalized === "admin@digivigee.com" || idOrEmail === "dev-admin-user" || idOrEmail === "default-super-admin") {
+    if (normalized === "admin@noopur.com" || normalized === "admin@digivigee.com" || idOrEmail === "dev-admin-user" || idOrEmail === "default-super-admin" || idOrEmail === "admin-noopur-patel") {
       return DEFAULT_SUPER_ADMIN;
     }
   }
@@ -667,7 +656,7 @@ export async function deleteAdminUser(
 }
 
 /**
- * 1-Click "Reset to Defaults": Restores canonical DigiVigee team users and system roles.
+ * 1-Click "Reset to Defaults": Restores canonical clinical administration team users and system roles.
  */
 export async function resetRbacToDefaultsAdmin(): Promise<{
   success: boolean;
@@ -718,7 +707,7 @@ export async function resetRbacToDefaultsAdmin(): Promise<{
     success: true,
     users: CANONICAL_ADMIN_USERS,
     roles: Object.values(SYSTEM_ROLES),
-    message: "Successfully reset to canonical DigiVigee team users and system roles.",
+    message: "Successfully reset to canonical clinical administration team users and system roles.",
   };
 }
 

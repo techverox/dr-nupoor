@@ -206,7 +206,7 @@ export default function SolutionDetailView({
                 <div className="p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100 text-xs text-emerald-900 leading-relaxed">
                   <span className="font-bold block mb-1 text-[#008744] flex items-center gap-1.5">
                     <span>✅</span>
-                    <span>With DigiVigee OS</span>
+                    <span>With Dr. Noopur Patel Practice</span>
                   </span>
                   {item.after}
                 </div>
@@ -418,7 +418,7 @@ export default function SolutionDetailView({
                   Complementary Solutions
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-500 mt-1">
-                  Explore how DigiVigee powers other specialized agency models.
+                  Explore specialized clinical oncology and patient care pathways.
                 </p>
               </div>
               <Link

@@ -18,12 +18,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Agency Solutions | Specialized Operating Systems | DigiVigee",
+  title: "Clinical Solutions & Surgical Care | Dr. Noopur Patel",
   description:
-    "Explore DigiVigee's purpose-built operating platforms for performance agencies, social media agencies, local SEO agencies, and full-service scaling teams.",
+    "Explore comprehensive breast oncology procedures, surgical oncoplastic solutions, and personalized care frameworks by Dr. Noopur Patel.",
   openGraph: {
-    title: "Agency Solutions | DigiVigee OS",
-    description: "Purpose-built operating systems for specialized digital marketing agencies.",
+    title: "Clinical Solutions & Care Pathways | Dr. Noopur Patel",
+    description: "Purpose-built oncologic and surgical care pathways for patients in Ahmedabad.",
     type: "website",
   },
 };

@@ -1,5 +1,5 @@
 /**
- * DigiVigee Platform — Comprehensive Input Sanitization & Injection Defense
+ * Dr. Noopur Patel Medical Platform — Comprehensive Input Sanitization & Injection Defense
  *
  * Protects server-side endpoints and database query boundaries against XSS,
  * SQL-like patterns, NoSQL operator injection, and malicious string manipulation.

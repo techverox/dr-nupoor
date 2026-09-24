@@ -1,12 +1,12 @@
 import { MetadataRoute } from "next";
+import { SITE_CONFIG } from "@/config/site";
 
 /**
  * Next.js Dynamic Robots.txt Route
- * Generates authoritative crawling directives for standard search engines
- * and explicitly configures Generative AI SEO (GEO) bots (ChatGPT, Google Gemini, Claude, Perplexity).
+ * Generates authoritative crawling directives for Dr. Noopur Patel's website.
  */
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://digivigee.com";
+  const baseUrl = SITE_CONFIG.url || "https://drnoopurpatel.com";
 
   return {
     rules: [
@@ -22,7 +22,7 @@ export default function robots(): MetadataRoute.Robots {
           "/tmp/",
         ],
       },
-      // Generative AI SEO (GEO) Agents — Explicitly welcomed to index DigiVigee knowledge base & public services
+      // Generative AI SEO (GEO) Agents — Explicitly welcomed to index Dr. Noopur Patel's clinical resources & breast oncology guides
       {
         userAgent: [
           "GPTBot",

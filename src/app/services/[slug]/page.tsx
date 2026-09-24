@@ -20,18 +20,18 @@ export async function generateMetadata({ params }: ServicePageProps) {
 
   if (!service) {
     return {
-      title: "Service Not Found | DigiVigee",
+      title: "Service Not Found | Dr. Noopur Patel",
     };
   }
 
   return resolveDynamicPageMetadata(`/services/${slug}`, {
-    title: service.seo?.title || `${service.title} | DigiVigee Engine`,
+    title: service.seo?.title || `${service.title} | Dr. Noopur Patel`,
     description:
       service.seo?.description ||
       service.shortDescription ||
-      "Enterprise digital marketing and performance delivery engine by DigiVigee.",
+      "Specialised breast cancer surgery and oncoplastic care by Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad.",
     path: `/services/${slug}`,
-    keywords: service.seo?.keywords || [service.title, "delivery engine", "digital marketing", "agency retainers"],
+    keywords: service.seo?.keywords || [service.title, "breast surgeon ahmedabad", "oncoplastic surgery", "marengo cims hospital"],
     ogImage: service.seo?.ogImage || service.heroImage,
   });
 }
@@ -53,15 +53,15 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
   // Schema.org Service
   const serviceSchema = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "MedicalProcedure",
     name: service.title,
     description: service.shortDescription,
     provider: {
-      "@type": "Organization",
-      name: "DigiVigee",
-      url: "https://digivigee.com",
+      "@type": "Physician",
+      name: "Dr. Noopur Patel",
+      url: "https://drnoopurpatel.com",
     },
-    serviceType: "Digital Agency Delivery Engine",
+    procedureType: "Surgical Breast Oncology",
   };
 
   return (

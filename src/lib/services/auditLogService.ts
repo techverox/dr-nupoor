@@ -71,7 +71,7 @@ export async function recordAuditLog(
 
   const actor: AuditActor = {
     uid: input.actor.uid || "system",
-    email: input.actor.email || "system@digivigee.com",
+    email: input.actor.email || "system@drnoopurpatel.com",
     displayName: input.actor.displayName || input.actor.email?.split("@")[0] || "System",
     role: input.actor.role || "super_admin",
     roleName: input.actor.roleName || "Super Admin",
@@ -188,7 +188,7 @@ export async function queryAuditLogs(
           return {
             id: doc.id,
             timestamp: data.timestamp || new Date().toISOString(),
-            actor: data.actor || { uid: "system", email: "system@digivigee.com", role: "system" },
+            actor: data.actor || { uid: "system", email: "system@drnoopurpatel.com", role: "system" },
             action: data.action,
             resourceType: data.resourceType,
             resourceId: data.resourceId,

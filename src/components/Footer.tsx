@@ -110,19 +110,19 @@ export default function Footer() {
     }
   };
 
-  const phone = settings?.contact?.phone || SITE_CONFIG?.contact?.phone || "+91 90811 45178";
-  const email = settings?.contact?.email || SITE_CONFIG?.contact?.email || "Contact@digivigee.com";
-  const address = settings?.contact?.address || SITE_CONFIG?.contact?.address || "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Banaskantha, Gujarat - 385210";
+  const phone = settings?.contact?.phone || SITE_CONFIG?.contact?.phone || "+91 98765 43210";
+  const email = settings?.contact?.email || SITE_CONFIG?.contact?.email || "dr.noopurpatel@gmail.com";
+  const address = settings?.contact?.address || SITE_CONFIG?.contact?.address || "Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad, Gujarat 380060";
   const copyright =
     settings?.footerContent?.copyrightText ||
-    `© ${new Date().getFullYear()} DigiVigee Platform. All rights reserved.`;
+    `© ${new Date().getFullYear()} Dr. Noopur Patel. All rights reserved.`;
 
   const socials = {
-    linkedin: settings?.socials?.linkedin || SITE_CONFIG?.socials?.linkedin || "https://linkedin.com/company/digivigee",
-    twitter: settings?.socials?.twitter || SITE_CONFIG?.socials?.twitter || "https://twitter.com/digivigee",
-    instagram: settings?.socials?.instagram || SITE_CONFIG?.socials?.instagram || "https://instagram.com/digivigee",
-    facebook: settings?.socials?.facebook || SITE_CONFIG?.socials?.facebook || "https://facebook.com/digivigee",
-    youtube: settings?.socials?.youtube || SITE_CONFIG?.socials?.youtube || "https://youtube.com/@digivigee",
+    linkedin: settings?.socials?.linkedin || SITE_CONFIG?.socials?.linkedin || "https://linkedin.com/in/drnoopurpatel",
+    twitter: settings?.socials?.twitter || SITE_CONFIG?.socials?.twitter || "https://twitter.com/drnoopurpatel",
+    instagram: settings?.socials?.instagram || SITE_CONFIG?.socials?.instagram || "https://instagram.com/drnoopurpatel",
+    facebook: settings?.socials?.facebook || SITE_CONFIG?.socials?.facebook || "https://facebook.com/drnoopurpatel",
+    youtube: settings?.socials?.youtube || SITE_CONFIG?.socials?.youtube || "https://youtube.com/@drnoopurpatel",
   };
 
   return (
@@ -148,16 +148,16 @@ export default function Footer() {
               </div>
               <div>
                 <span className="font-bold text-sm text-slate-900 dark:text-slate-100 tracking-tight">
-                  DIGIVIGEE
+                  Dr. Noopur Patel
                 </span>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Performance & Digital Growth
+                  Breast Cancer & Oncoplastic Surgeon
                 </p>
               </div>
             </Link>
 
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-sm">
-              Full-funnel performance marketing, search engine optimization, and conversion-focused web systems engineered to accelerate compounding agency revenue.
+              Compassionate, evidence-based, and personalised surgical breast oncology care. Combining oncologic clearance with aesthetic preservation for every woman.
             </p>
 
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 font-mono text-[11px] font-semibold">
@@ -274,106 +274,108 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Column 2: Core Growth Services (100% Real URLs) */}
+          {/* Column 2: Core Clinical Services */}
           <div className="lg:col-span-3 space-y-3">
             <div className="text-[12px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
-              Growth Services
+              Clinical Services
             </div>
             <ul className="space-y-2 text-slate-500 dark:text-slate-400">
               <li>
-                <Link href="/services/performance-marketing" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Performance Marketing & Ads
+                <Link href="/services/breast-cancer-diagnosis-and-treatment" className="hover:text-[#D84C70] transition-colors">
+                  Breast Cancer Diagnosis & Surgery
                 </Link>
               </li>
               <li>
-                <Link href="/services/seo-and-local-seo" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  SEO & Local Optimization
+                <Link href="/services/oncoplastic-breast-surgery" className="hover:text-[#D84C70] transition-colors">
+                  Oncoplastic Breast Surgery
                 </Link>
               </li>
               <li>
-                <Link href="/services/social-media-marketing" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Social Media Marketing
+                <Link href="/services/breast-conservation-surgery" className="hover:text-[#D84C70] transition-colors">
+                  Breast Conservation Surgery (BCS)
                 </Link>
               </li>
               <li>
-                <Link href="/services/website-design-and-development" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Web Design & Development
+                <Link href="/services/breast-reconstruction-surgery" className="hover:text-[#D84C70] transition-colors">
+                  Breast Reconstruction Surgery
                 </Link>
               </li>
               <li>
-                <Link href="/services/lead-generation-and-automation" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Lead Generation & Automation
+                <Link href="/services/benign-breast-conditions" className="hover:text-[#D84C70] transition-colors">
+                  Benign Breast Conditions Care
                 </Link>
               </li>
               <li>
-                <Link href="/services/meta-partner" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1.5">
-                  <span>Meta Business Partner</span>
-                  <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">
-                    Official
-                  </span>
+                <Link href="/services/follow-up-and-long-term-care" className="hover:text-[#D84C70] transition-colors">
+                  Follow-up & Survivorship Care
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline flex items-center gap-1 pt-1">
-                  <span>View All Services</span>
+                <Link href="/services" className="text-[#D84C70] font-semibold hover:underline flex items-center gap-1 pt-1">
+                  <span>View All Clinical Services</span>
                   <ArrowRight className="w-3 h-3" />
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Company & Real Pages */}
+          {/* Column 3: Patient Care & Resources */}
           <div className="lg:col-span-2 space-y-3">
             <div className="text-[12px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
-              Company
+              Patient Care
             </div>
             <ul className="space-y-2 text-slate-500 dark:text-slate-400">
               <li>
-                <Link href="/" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                <Link href="/" className="hover:text-[#D84C70] transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  About DigiVigee
+                <Link href="/about" className="hover:text-[#D84C70] transition-colors">
+                  About Dr. Noopur Patel
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Client Case Studies
+                <Link href="/patient-guide" className="hover:text-[#D84C70] transition-colors">
+                  Patient Guide & Screening
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Agency Solutions
+                <Link href="/patient-stories" className="hover:text-[#D84C70] transition-colors">
+                  Patient Care Stories
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Marketing Insights & Blog
+                <Link href="/faq" className="hover:text-[#D84C70] transition-colors">
+                  FAQs & Patient Guidance
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                  Contact & Consultation
+                <Link href="/blog" className="hover:text-[#D84C70] transition-colors">
+                  Breast Health Insights
                 </Link>
               </li>
               <li>
-                <Link href="/admin/login" className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors text-slate-400 dark:text-slate-500 text-[11px]">
-                  Admin Portal 🔐
+                <Link href="/appointments" className="hover:text-[#D84C70] transition-colors">
+                  Book an Appointment
+                </Link>
+              </li>
+              <li>
+                <Link href="/admin/login" className="hover:text-[#D84C70] transition-colors text-slate-400 dark:text-slate-500 text-[11px]">
+                  Doctor / Admin Portal 🔐
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 4: Newsletter & Growth Insights (3 cols on lg) */}
+          {/* Column 4: Breast Health Updates */}
           <div className="lg:col-span-3 space-y-3">
             <div className="text-[12px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-emerald-500" />
-              <span>Agency Newsletter</span>
+              <Sparkles className="w-3.5 h-3.5 text-[#D84C70]" />
+              <span>Breast Health Updates</span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              Get data-backed performance marketing playbooks, ROAS scaling frameworks, and SEO updates.
+              Evidence-based breast health guidance, screening reminders, and awareness insights from Dr. Noopur Patel.
             </p>
 
             {!subSuccess ? (
@@ -439,22 +441,22 @@ export default function Footer() {
 
           {/* Center: Live Platform Status Pill */}
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-[11px] font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Systems Active • Meta Verified Partner</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+            <span>Consultations Active • Marengo CIMS Hospital</span>
           </div>
 
           {/* Right: 100% Real Working Legal Links */}
           <div className="flex items-center gap-4 text-[11.5px]">
+            <Link href="/medical-disclaimer" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+              Medical Disclaimer
+            </Link>
+            <span className="text-slate-300 dark:text-slate-700">•</span>
             <Link href="/privacy-policy" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
               Privacy Policy
             </Link>
             <span className="text-slate-300 dark:text-slate-700">•</span>
             <Link href="/terms-and-conditions" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
               Terms of Service
-            </Link>
-            <span className="text-slate-300 dark:text-slate-700">•</span>
-            <Link href="/contact" className="hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
-              Support
             </Link>
           </div>
 

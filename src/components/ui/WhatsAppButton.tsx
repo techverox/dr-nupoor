@@ -15,8 +15,8 @@ export interface WhatsAppButtonProps {
 export function WhatsAppButton({
   variant = "inline",
   phoneNumber,
-  message = "Hello DigiVigee, I'd like to discuss growing my business with digital marketing.",
-  label = "WhatsApp Us",
+  message = "Hello Dr. Noopur Patel's clinic desk, I would like to schedule a breast consultation.",
+  label = "WhatsApp Consultation",
   className = "",
 }: WhatsAppButtonProps) {
   const [activeNumber, setActiveNumber] = useState<string>(
@@ -48,7 +48,7 @@ export function WhatsAppButton({
     let channel: BroadcastChannel | null = null;
     try {
       if (typeof window !== "undefined" && "BroadcastChannel" in window) {
-        channel = new BroadcastChannel("digivigee-cms-sync");
+        channel = new BroadcastChannel("drn-cms-sync");
         channel.onmessage = (e) => {
           if (e.data?.type === "CMS_UPDATED") {
             fetchLiveWhatsapp();
@@ -58,7 +58,7 @@ export function WhatsAppButton({
     } catch {}
 
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === "digivigee_cms_updated") {
+      if (e.key === "drn_cms_updated") {
         fetchLiveWhatsapp();
       }
     };
@@ -102,8 +102,8 @@ export function WhatsAppButton({
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        aria-label="Chat with DigiVigee on WhatsApp"
-        className={`digivigee-whatsapp-floating ${className}`}
+        aria-label="Chat with Dr. Noopur Patel Clinic on WhatsApp"
+        className={`drn-whatsapp-floating ${className}`}
         style={{
           position: "fixed",
           bottom: "max(2rem, env(safe-area-inset-bottom, 2rem))",
@@ -133,8 +133,8 @@ export function WhatsAppButton({
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        aria-label="Chat with DigiVigee on WhatsApp"
-        className={`digivigee-whatsapp-icon ${className}`}
+        aria-label="Chat with Dr. Noopur Patel Clinic on WhatsApp"
+        className={`drn-whatsapp-icon ${className}`}
         style={{
           width: "44px",
           height: "44px",

@@ -6,7 +6,7 @@ import {
   UpdateReusableComponentInput,
 } from "@/types/landingPage";
 
-// 11 In-memory canonical homepage-grade master components matching DigiVigee 1:1
+// 11 In-memory canonical master components
 const SEED_REUSABLE_COMPONENTS: ReusableComponent[] = [
   {
     id: "cmp-hero-enterprise",
@@ -19,7 +19,7 @@ const SEED_REUSABLE_COMPONENTS: ReusableComponent[] = [
       eyebrow: "Enterprise Agency Growth OS",
       headline: "Scale 10x Client Retainers. Burn Out 0 Teams.",
       description:
-        "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee handles in seconds.",
+        "Compassionate, evidence-based breast cancer care, oncoplastic breast surgery, and dedicated survivorship support.",
       primaryCtaLabel: "Claim Your Free Proposal",
       primaryCtaTarget: "#lead-form",
       secondaryCtaLabel: "Explore Capabilities",
@@ -44,11 +44,11 @@ const SEED_REUSABLE_COMPONENTS: ReusableComponent[] = [
     sectionContent: {
       sectionTitle: "Scale 10x Retainers. Burn Out 0 Teams.",
       sectionSubtitle:
-        "Every agency department has manual work that DigiVigee automated frameworks handle seamlessly.",
+        "Dr. Noopur Patel provides comprehensive surgical breast oncology and oncoplastic care.",
       features: [
         {
           title: "Agency AI Agents",
-          desc: "Build autonomous marketing workflows with Digivigee agents to handle campaign pacing, weekly reporting, and client follow-ups.",
+          desc: "Personalized treatment plans tailored to each patient's clinical stage, anatomy, and recovery goals.",
         },
         {
           title: "Full-Funnel Attribution",
@@ -163,7 +163,7 @@ const SEED_REUSABLE_COMPONENTS: ReusableComponent[] = [
     sectionType: "testimonials",
     sectionContent: {
       quote:
-        "DigiVigee completely restructured our acquisition pipeline. We achieved a 3.4x lift in qualified inbound enterprise inquiries within 90 days while reducing our blended customer acquisition cost by 42%.",
+        "Dr. Noopur Patel and her team provided immense clarity, surgical expertise, and kindness throughout my treatment.",
       author: "Rajesh Patel",
       role: "Managing Director, Kalpvruksh Group",
     },
@@ -353,7 +353,7 @@ const SEED_REUSABLE_COMPONENTS: ReusableComponent[] = [
     sectionContent: {
       headline: "Ready to Scale 10x Client Retainers?",
       subheadline:
-        "Join 2,350+ agencies and enterprise leaders growing predictably with DigiVigee. Zero lock-in contracts.",
+        "Schedule an in-clinic consultation with Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad.",
       buttonLabel: "Request Strategic Consultation",
       buttonTarget: "#lead-form",
     },
@@ -609,7 +609,7 @@ export async function deleteReusableComponent(id: string): Promise<boolean> {
 }
 
 /**
- * 1-Click "Reset to Defaults": Restores all 11 canonical DigiVigee homepage-grade
+ * 1-Click "Reset to Defaults": Restores all 11 canonical master
  * master components into Firestore / in-memory store.
  */
 export async function resetReusableComponentsAdmin(): Promise<ReusableComponent[]> {

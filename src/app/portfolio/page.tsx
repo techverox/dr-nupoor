@@ -10,16 +10,15 @@ export const revalidate = 60;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/portfolio", {
-    title: "Client Case Studies & Audited Agency Results | DigiVigee",
+    title: "Patient Care Stories & Clinical Outcomes | Dr. Noopur Patel",
     description:
-      "Explore audited agency case studies showing how DigiVigee scaled performance, social, and local search agencies with automated pacing and verified ROAS.",
+      "Read verified recovery journeys, compassionate care experiences, and surgical outcomes from patients treated by Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad.",
     path: "/portfolio",
     keywords: [
-      "agency case studies",
-      "digital marketing portfolio",
-      "audited ROAS results",
-      "agency operating system case studies",
-      "white label agency results",
+      "patient care stories",
+      "breast surgery recovery",
+      "oncoplastic surgery testimonials",
+      "breast cancer care ahmedabad",
     ],
   });
 }

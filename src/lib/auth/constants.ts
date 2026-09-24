@@ -1,9 +1,10 @@
 /**
- * DigiVigee Platform — Authentication & Session Constants
+ * Dr. Noopur Patel Platform — Authentication & Session Constants
  */
 
 export const AUTH_CONFIG = {
-  SESSION_COOKIE_NAME: "digivigee_admin_session",
+  SESSION_COOKIE_NAME: "drn_admin_session",
+  LEGACY_SESSION_COOKIE_NAME: "digivigee_admin_session",
   // 5 days in milliseconds
   SESSION_EXPIRATION_MS: 5 * 24 * 60 * 60 * 1000,
   // 5 days in seconds for cookie max-age

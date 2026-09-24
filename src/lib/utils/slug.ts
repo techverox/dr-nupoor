@@ -1,5 +1,5 @@
 /**
- * Universal slug generation and validation utilities for the DigiVigee Platform.
+ * Universal slug generation and validation utilities for the Dr. Noopur Patel Platform.
  */
 
 export const RESERVED_SLUGS = new Set([

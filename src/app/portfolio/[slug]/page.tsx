@@ -21,18 +21,18 @@ export async function generateMetadata({ params }: PortfolioPageProps) {
 
   if (!item) {
     return {
-      title: "Case Study Not Found | DigiVigee",
+      title: "Story Not Found | Dr. Noopur Patel",
     };
   }
 
   return resolveDynamicPageMetadata(`/portfolio/${slug}`, {
-    title: item.seo?.title || `${item.title} | Case Study | DigiVigee`,
+    title: item.seo?.title || `${item.title} | Patient Care Journey | Dr. Noopur Patel`,
     description:
       item.seo?.description ||
       item.shortDescription ||
-      `How DigiVigee helped ${item.clientName} achieve compounding digital growth and verified ROAS.`,
+      `Clinical journey and breast surgical outcomes with Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad.`,
     path: `/portfolio/${slug}`,
-    keywords: item.seo?.keywords || [item.clientName, item.industry, "case study", "digital marketing results"],
+    keywords: item.seo?.keywords || [item.clientName, item.industry, "patient care journey", "breast oncology outcomes"],
     ogImage: item.seo?.ogImage || item.heroImage,
   });
 }
@@ -59,12 +59,12 @@ export default async function PortfolioDetailPage({ params }: PortfolioPageProps
     description: item.shortDescription,
     image: item.heroImage ? [item.heroImage] : undefined,
     author: {
-      "@type": "Organization",
-      name: "DigiVigee Growth Pod",
+      "@type": "Physician",
+      name: "Dr. Noopur Patel",
     },
     publisher: {
       "@type": "Organization",
-      name: "DigiVigee",
+      name: "Dr. Noopur Patel Breast Clinic",
       logo: {
         "@type": "ImageObject",
         url: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,

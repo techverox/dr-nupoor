@@ -30,7 +30,7 @@ function safeNodeRequire(moduleName: string): any {
       const req = mod.createRequire(process.cwd() + "/package.json");
       return req(moduleName);
     } catch (err) {
-      console.error(`[DigiVigee Firebase Admin] Failed to load "${moduleName}":`, directErr, err);
+      console.error(`[Firebase Admin] Failed to load "${moduleName}":`, directErr, err);
       return null;
     }
   }
@@ -53,7 +53,7 @@ export function getFirebaseAdminApp(): App | null {
       if (process.env.NODE_ENV === "development" && !hasWarnedCredentials) {
         hasWarnedCredentials = true;
         console.info(
-          "[DigiVigee Firebase Admin] Service Account credentials not set. Running in robust fallback mode."
+          "[Firebase Admin] Service Account credentials not set. Running in robust fallback mode."
         );
       }
       return null;
@@ -74,7 +74,7 @@ export function getFirebaseAdminApp(): App | null {
       }),
     });
   } catch (error) {
-    console.error("[DigiVigee Firebase Admin] Initialization failed:", error);
+    console.error("[Firebase Admin] Initialization failed:", error);
     return null;
   }
 }
@@ -94,7 +94,7 @@ export function getAdminFirestore(): Firestore | null {
     }
     return db;
   } catch (err) {
-    console.error("[DigiVigee Firebase Admin] Firestore init error:", err);
+    console.error("[Firebase Admin] Firestore init error:", err);
     return null;
   }
 }
@@ -108,7 +108,7 @@ export function getAdminAuth(): Auth | null {
 
     return authModule.getAuth(app);
   } catch (err) {
-    console.error("[DigiVigee Firebase Admin] Auth init error:", err);
+    console.error("[Firebase Admin] Auth init error:", err);
     return null;
   }
 }
@@ -122,7 +122,7 @@ export function getAdminStorage(): Storage | null {
 
     return storageModule.getStorage(app);
   } catch (err) {
-    console.error("[DigiVigee Firebase Admin] Storage init error:", err);
+    console.error("[Firebase Admin] Storage init error:", err);
     return null;
   }
 }

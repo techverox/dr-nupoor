@@ -51,7 +51,7 @@ export async function createContentRevision(
     changeSummary: changeSummary || (version === 1 ? "Initial version snapshot" : `Updated to version ${version}`),
     createdBy: {
       uid: actor.uid || "system",
-      email: actor.email || "system@digivigee.com",
+      email: actor.email || "system@drnoopurpatel.com",
       displayName: actor.displayName || actor.email?.split("@")[0] || "System",
       role: actor.role || "super_admin",
       roleName: actor.roleName,
@@ -109,7 +109,7 @@ export async function getRevisionHistory(
             version: data.version || 1,
             snapshot: data.snapshot || {},
             changeSummary: data.changeSummary,
-            createdBy: data.createdBy || { uid: "system", email: "system@digivigee.com", role: "system" },
+            createdBy: data.createdBy || { uid: "system", email: "system@drnoopurpatel.com", role: "system" },
             createdAt: data.createdAt || new Date().toISOString(),
             restoredFromVersion: data.restoredFromVersion,
           } as ContentRevision;

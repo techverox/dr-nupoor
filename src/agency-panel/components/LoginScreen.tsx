@@ -91,9 +91,9 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
 
       {/* Footer Link */}
       <div className="mt-8 text-center text-[14px]">
-        <span className="text-slate-600 dark:text-slate-400">Don't have a Digivigee account yet? </span>
-        <a href="#" className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors">
-          Get started now
+        <span className="text-slate-600 dark:text-slate-400">Need admin access? </span>
+        <a href="mailto:admin@noopur.com" className="text-[#00875A] hover:underline font-medium transition-colors">
+          Contact Administrator
         </a>
       </div>
       

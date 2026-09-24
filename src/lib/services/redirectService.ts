@@ -394,6 +394,6 @@ export async function resetRedirectsAdmin(): Promise<{ success: boolean; redirec
   return {
     success: true,
     redirects: freshRedirects,
-    message: "Successfully reset to 8 canonical DigiVigee URL redirect rules.",
+    message: "Successfully reset to canonical URL redirect rules.",
   };
 }

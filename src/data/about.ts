@@ -52,7 +52,7 @@ export interface ApproachStep {
   description: string;
 }
 
-export interface WhyDigivigeeItem {
+export interface WhyDrNoopurItem {
   id: string;
   title: string;
   badge: string;
@@ -61,6 +61,8 @@ export interface WhyDigivigeeItem {
   statLabel?: string;
   colSpan: string;
 }
+
+export type WhyDigivigeeItem = WhyDrNoopurItem;
 
 export const COMPANY_FOUNDING_YEAR = 2016;
 
@@ -313,185 +315,167 @@ export const OUR_APPROACH_STEPS: ApproachStep[] = [
   },
 ];
 
-export const WHY_DIGIVIGEE: WhyDigivigeeItem[] = [
+export const WHY_DR_NOOPUR: WhyDrNoopurItem[] = [
   {
     id: "one-ecosystem",
-    title: "Multiple Digital Solutions Under One Ecosystem",
-    badge: "01. UNIFIED",
+    title: "Comprehensive Breast Care Under One Roof",
+    badge: "01. INTEGRATED",
     description:
-      "Businesses should not have to deal with 10 different fragmented agencies and vendors for every digital requirement. Digivigee brings tools, technology, and marketing together in one cohesive stack.",
-    stat: "1 Stack",
-    statLabel: "All-in-one ecosystem",
+      "Patients and families receive seamless, multidisciplinary care spanning screening, advanced oncoplastic surgery, systemic therapy coordination, and holistic recovery at Marengo CIMS Hospital.",
+    stat: "End-to-End",
+    statLabel: "Integrated oncology",
     colSpan: "col-span-1 md:col-span-2",
   },
   {
-    id: "business-thinking",
-    title: "Technology Combined with Business-Focused Thinking",
-    badge: "02. PRAGMATIC",
+    id: "evidence-based",
+    title: "Evidence-Based Surgical Decision Making",
+    badge: "02. CLINICAL EXCELLENCE",
     description:
-      "The objective is never to add technology for the sake of technology, but to deploy it where it creates real, verifiable commercial value and eliminates bottlenecks.",
-    stat: "ROI-First",
-    statLabel: "Commercial focus",
+      "Every treatment recommendation is guided by international NCCN and ESMO clinical guidelines, ensuring maximum oncological cure rates with minimal treatment morbidity.",
+    stat: "NCCN/ESMO",
+    statLabel: "Guideline compliance",
     colSpan: "col-span-1",
   },
   {
-    id: "practical-tools",
-    title: "Practical Tools for Automation, Marketing & Productivity",
-    badge: "03. ACTIONABLE",
+    id: "oncoplastic-precision",
+    title: "Oncoplastic Breast Conservation Expertise",
+    badge: "03. AESTHETIC ONCOLOGY",
     description:
-      "From WhatsApp Cloud automation to real-time CRM syncing and paperless digital cards, we deliver tools that your staff and customers actually enjoy using.",
-    stat: "Zero Fluff",
-    statLabel: "Real-world utility",
+      "Specialized training in oncoplastic surgery allows complete surgical excision of breast cancer while preserving breast symmetry, contour, and psychological well-being.",
+    stat: "Form & Cure",
+    statLabel: "Aesthetic conservation",
     colSpan: "col-span-1",
   },
   {
-    id: "custom-engineering",
-    title: "Custom Website & Application Development Capabilities",
-    badge: "04. ENGINEERING",
+    id: "minimally-invasive",
+    title: "Minimally Invasive Axillary Staging",
+    badge: "04. ADVANCED TECHNIQUE",
     description:
-      "High-speed Next.js web applications, native Android apps, and custom APIs built to enterprise standards without templates or sluggish codebases.",
-    stat: "100%",
-    statLabel: "Tailored codebases",
+      "Routine use of Sentinel Lymph Node Biopsy (SLNB) avoids unnecessary full axillary clearance, dramatically reducing the lifetime risk of chronic arm lymphedema.",
+    stat: "SLNB Standard",
+    statLabel: "Reduced lymphedema risk",
     colSpan: "col-span-1 md:col-span-2",
   },
   {
-    id: "saas-products",
-    title: "SaaS Products Developed for Specific Business Needs",
-    badge: "05. PROPRIETARY",
+    id: "multidisciplinary-board",
+    title: "Multidisciplinary Tumour Board Review",
+    badge: "05. COLLABORATIVE",
     description:
-      "We build our own market-tested products like RestroMitra (Restaurant SaaS) and Maru Gujarat (Local Directory App), proving our deep software architecture expertise.",
-    stat: "2 Flagships",
-    statLabel: "Proprietary software",
+      "Complex breast cancer cases are deliberated in multidisciplinary tumour boards alongside medical oncologists, radiation oncologists, radiologists, and pathologists.",
+    stat: "Tumour Board",
+    statLabel: "Multidisciplinary review",
     colSpan: "col-span-1 md:col-span-2",
   },
   {
-    id: "meta-visibility",
-    title: "Digital Marketing & Online Visibility Solutions",
-    badge: "06. META PARTNER",
+    id: "compassionate-care",
+    title: "Empathetic, Patient-Centered Communication",
+    badge: "06. COMPASSION",
     description:
-      "As an official Meta Partner, we manage Facebook & Instagram advertising with strategic audience segmentation, creative production, and full-funnel optimization.",
-    stat: "Meta Partner",
-    statLabel: "Official recognition",
+      "A cancer diagnosis is deeply emotional. Dr. Noopur Patel ensures ample time for every patient consultation, answering questions and guiding families through every step.",
+    stat: "Patient First",
+    statLabel: "Empathetic guidance",
     colSpan: "col-span-1",
   },
   {
-    id: "tailored-requirements",
-    title: "Solutions Designed Around Actual Business Requirements",
-    badge: "07. CUSTOMIZED",
+    id: "hospital-infrastructure",
+    title: "Tertiary Cancer Care Infrastructure at Marengo CIMS Hospital",
+    badge: "07. INFRASTRUCTURE",
     description:
-      "No rigid packages or cookie-cutter solutions. We carefully audit your exact operational model and tailor digital workflows that address your specific growth bottlenecks.",
-    stat: "100% Fit",
-    statLabel: "Customized alignment",
+      "Consultations and surgeries are conducted at Marengo CIMS Hospital, Ahmedabad — a premier, NABH-accredited tertiary medical facility with state-of-the-art surgical suites and intensive care.",
+    stat: "NABH Center",
+    statLabel: "Tertiary care hospital",
     colSpan: "col-span-1 md:col-span-3",
   },
 ];
 
+export const WHY_DIGIVIGEE = WHY_DR_NOOPUR;
+
 export const JOURNEY_MILESTONES: JourneyMilestone[] = [
   {
-    id: "foundation-2016",
-    year: "2016",
+    id: "foundation-med",
+    year: "Academic Foundation",
     phase: "PHASE 01",
-    tag: "ORIGIN & FOUNDATION",
-    title: "The Genesis: Bridging Business & Digital Reality",
-    headline: "Founded in 2016 with a commitment to bring practical, result-oriented digital solutions to growing businesses.",
+    tag: "MEDICAL EDUCATION",
+    title: "Rigorous Surgical Training & General Surgery Foundation",
+    headline: "Extensive surgical training establishing deep expertise in operative anatomy, oncology principles, and patient care.",
     narrative:
-      "Digivigee was established in 2016 on a clear realization: businesses were being sold confusing marketing promises and bloated packages without practical digital tools. We set out to become a trusted digital partner helping companies build, automate, market, and grow with technology that actually works.",
+      "Dr. Noopur Patel completed comprehensive surgical training with exceptional academic distinction, developing an enduring passion for dedicated breast disease management and oncologic precision.",
     milestones: [
-      "Company founded in 2016 with focus on high-impact digital solutions",
-      "Delivered first 50+ business websites and conversion marketing campaigns",
-      "Pioneered transparent client communication and practical digital onboarding",
+      "Rigorous surgical residency and advanced clinical operative training",
+      "Focused training on surgical precision, aseptic technique, and wound healing",
+      "Dedication to patient-first medical ethics and multidisciplinary care",
     ],
     keyMetric: {
-      value: "2016",
-      label: "Official Year Founded",
+      value: "MBBS, MS",
+      label: "Surgical Foundation",
     },
     badgeColor: "emerald",
   },
   {
-    id: "engineering-2019",
-    year: "2019",
+    id: "specialization-breast",
+    year: "Subspecialty Focus",
     phase: "PHASE 02",
-    tag: "EXPANSION & DEV",
-    title: "Custom Applications & Operational Software",
-    headline: "Expanding beyond websites into custom web apps, POS, and digital workflow software.",
+    tag: "BREAST ONCOLOGY",
+    title: "Specialized Surgical Breast Oncology & Oncoplastic Surgery",
+    headline: "Dedicated sub-specialization in breast cancer surgery, breast conservation, and oncoplastic techniques.",
     narrative:
-      "As businesses matured, their needs expanded beyond brochure websites. In 2019, Digivigee invested heavily into software engineering capabilities—building custom business applications, billing systems, POS software, and digital branding solutions tailored to daily operational workflows.",
+      "Committed to preserving quality of life alongside cancer cure, Dr. Patel pursued advanced subspecialty training in breast surgical oncology, mastering modern volume-displacement and volume-replacement techniques that preserve natural breast aesthetics.",
     milestones: [
-      "Engineered tailored web applications and custom business software",
-      "Introduced retail billing and POS integration solutions",
-      "Surpassed 120+ active business clients across multiple sectors",
+      "Advanced oncoplastic surgical techniques and contour preservation",
+      "Sentinel lymph node biopsy protocols minimizing lymphedema risks",
+      "Comprehensive management of benign, high-risk, and malignant breast conditions",
     ],
     keyMetric: {
-      value: "100+",
-      label: "Custom Software Implementations",
+      value: "Oncoplastic",
+      label: "Advanced Subspecialty",
     },
     badgeColor: "blue",
   },
   {
-    id: "meta-partner-2022",
-    year: "2022",
+    id: "clinical-excellence",
+    year: "Clinical Practice",
     phase: "PHASE 03",
-    tag: "META PARTNER & AUTOMATION",
-    title: "Official Meta Partnership & AI/WhatsApp Automation",
-    headline: "Achieving official Meta Partner accreditation and rolling out conversational business automation.",
+    tag: "MARENGO CIMS HOSPITAL",
+    title: "Associate Consultant – Surgical Breast Oncology",
+    headline: "Delivering world-class surgical breast oncology care at Marengo CIMS Hospital, Ahmedabad.",
     narrative:
-      "In 2022, Digivigee became an official Meta Partner, cementing our advanced capabilities across Facebook and Instagram advertising. Simultaneously, we deployed WhatsApp Cloud automation and CRM integration tools, enabling local and regional businesses to capture and nurture leads with zero latency.",
+      "Today, Dr. Noopur Patel serves patients across Gujarat and western India with evidence-based surgical oncology care, collaborating within a multidisciplinary tumor board of radiation oncologists, medical oncologists, and pathologists.",
     milestones: [
-      "Accredited as an Official Meta Partner with verified compliance",
-      "Launched full-funnel WhatsApp Automation & CRM integration pipelines",
-      "Pioneered server-side conversion tracking & advanced audience segmentation",
+      "Associate Consultant – Surgical Breast Oncology at Marengo CIMS Hospital",
+      "Active participant in multidisciplinary breast tumor board discussions",
+      "Patient education initiatives for early breast screening and awareness",
     ],
     keyMetric: {
-      value: "Meta",
-      label: "Official Partner Status",
+      value: "CIMS",
+      label: "Marengo CIMS Hospital",
     },
     badgeColor: "purple",
-  },
-  {
-    id: "products-2024-2026",
-    year: "2024–2026+",
-    phase: "PHASE 04",
-    tag: "PROPRIETARY ECOSYSTEM",
-    title: "Flagship Products: RestroMitra, Maru Gujarat & Beyond",
-    headline: "Launching proprietary SaaS solutions and unifying digital tools into a single powerful ecosystem.",
-    narrative:
-      "Entering our second decade of digital excellence, Digivigee launched two major proprietary digital products: RestroMitra (restaurant management SaaS) and Maru Gujarat (local business directory Android app). Today, we provide a unified ecosystem where businesses find the exact tools, software, and expertise to do business better.",
-    milestones: [
-      "Launched RestroMitra: Cloud restaurant POS & management SaaS",
-      "Launched Maru Gujarat: Gujarat business directory Android application",
-      "Integrated 10+ digital tools categories into a single accessible platform",
-    ],
-    keyMetric: {
-      value: "10+ Yrs",
-      label: "Proven Digital Track Record",
-    },
-    badgeColor: "amber",
   },
 ];
 
 export const TRUST_CREDENTIALS = [
   {
-    name: "Official Meta Partner",
-    badge: "Badged Partner",
-    rating: "Facebook & Instagram",
-    verified: "Official Advertising & Business Partner",
+    name: "Marengo CIMS Hospital",
+    badge: "Clinical Base",
+    rating: "Tertiary Cancer Care",
+    verified: "Off Science City Road, Sola, Ahmedabad",
   },
   {
-    name: "Google Business Partner",
-    badge: "Local Discovery",
-    rating: "Top Optimization",
-    verified: "Google Business Profile Specialists",
+    name: "Surgical Breast Oncology",
+    badge: "Subspecialty",
+    rating: "Cancer Surgery",
+    verified: "Evidence-Based Surgical Treatment",
   },
   {
-    name: "RestroMitra SaaS",
-    badge: "Proprietary F&B Tech",
-    rating: "Cloud POS",
-    verified: "Built & Maintained by Digivigee",
+    name: "Oncoplastic Techniques",
+    badge: "Aesthetic Safety",
+    rating: "Breast Preservation",
+    verified: "Volume Displacement & Symmetry",
   },
   {
-    name: "Maru Gujarat App",
-    badge: "Android Platform",
-    rating: "Local Discovery",
-    verified: "Built & Maintained by Digivigee",
+    name: "Patient-Centered Care",
+    badge: "Compassionate",
+    rating: "Holistic Healing",
+    verified: "Personalized Treatment Pathways",
   },
 ];

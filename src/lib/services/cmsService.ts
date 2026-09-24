@@ -40,15 +40,15 @@ export function revalidateWebsitePages() {
 
 // Global persistent dev/runtime store for real-time mutations
 const globalForCms = globalThis as unknown as {
-  __DIGIVIGEE_CMS_STORE__?: Map<string, Map<string, Record<string, unknown>>>;
+  __DRN_CMS_STORE__?: Map<string, Map<string, Record<string, unknown>>>;
 };
 
 const devStore =
-  globalForCms.__DIGIVIGEE_CMS_STORE__ ||
+  globalForCms.__DRN_CMS_STORE__ ||
   new Map<string, Map<string, Record<string, unknown>>>();
 
-if (!globalForCms.__DIGIVIGEE_CMS_STORE__) {
-  globalForCms.__DIGIVIGEE_CMS_STORE__ = devStore;
+if (!globalForCms.__DRN_CMS_STORE__) {
+  globalForCms.__DRN_CMS_STORE__ = devStore;
 }
 
 export function getCollectionStore(collectionName: string): Map<string, Record<string, unknown>> {
@@ -193,7 +193,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     email: SITE_CONFIG.contact.email,
     address: SITE_CONFIG.contact.address,
     businessHours: SITE_CONFIG.contact.workingHours,
-    googleMapsEmbedUrl: "https://maps.google.com/maps?q=Chhapi%20Gujarat%20385210&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    googleMapsEmbedUrl: "https://maps.google.com/maps?q=Marengo%20CIMS%20Hospital%20Ahmedabad&t=&z=14&ie=UTF8&iwloc=&output=embed",
   },
   socials: {
     facebook: SITE_CONFIG.socials.facebook,
@@ -201,7 +201,6 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     linkedin: SITE_CONFIG.socials.linkedin,
     twitter: SITE_CONFIG.socials.twitter,
     youtube: SITE_CONFIG.socials.youtube,
-    github: "https://github.com/digivigee",
   },
   defaultSEO: {
     title: `${SITE_CONFIG.name} — ${SITE_CONFIG.tagline}`,
@@ -210,15 +209,15 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
     canonicalUrl: SITE_CONFIG.url,
   },
   headerContent: {
-    announcementBarText: "🚀 Special Offer: Scale with DigiVigee Platform — Claim Your Growth Audit Today →",
-    showAnnouncementBar: true,
-    announcementLink: "/offers",
+    announcementBarText: "Expert Breast Care & Consultations — Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad",
+    showAnnouncementBar: false,
+    announcementLink: "/appointments",
   },
   footerContent: {
     aboutText:
-      "DigiVigee is an enterprise-grade Agency Operating System and performance digital marketing platform dedicated to powering compounding revenue growth, automated workflows, and high-retention client experiences.",
-    copyrightText: `© ${new Date().getFullYear()} DigiVigee Platform. All rights reserved.`,
-    badgeText: "Enterprise-Grade Agency Operating System",
+      "Dedicated to compassionate, evidence-based, and patient-centered breast surgical oncology. Combining oncologic clearance with aesthetic preservation for every woman.",
+    copyrightText: `© ${new Date().getFullYear()} Dr. Noopur Patel. All rights reserved.`,
+    badgeText: "Surgical Breast Oncology & Oncoplastic Surgery",
   },
   customScripts: {
     isEnabled: true,
@@ -956,8 +955,8 @@ export async function getCmsSiteSettings(): Promise<SiteSettings> {
 }
 
 /**
- * 1-Click "Reset to Defaults": Restores canonical DigiVigee site settings
- * (brand identity, contact coordinates, social channels, and footer) in Firestore and memory.
+ * 1-Click "Reset to Defaults": Restores canonical Dr. Noopur Patel site settings
+ * (clinical identity, hospital coordinates, consultation channels, and footer) in Firestore and memory.
  */
 export async function resetCmsSiteSettingsToDefaults(): Promise<{ success: boolean; settings: SiteSettings }> {
   const colStore = getCollectionStore(COLLECTIONS.SITE_SETTINGS);

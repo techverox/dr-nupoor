@@ -139,8 +139,8 @@ export async function syncAllDataToFirestore(): Promise<SyncResult> {
     const adminUserRef = adminDb.collection(COLLECTIONS.ADMIN_USERS).doc("default-super-admin");
     await adminUserRef.set({
       id: "default-super-admin",
-      email: "admin@digivigee.com",
-      displayName: "DigiVigee Administrator",
+      email: "admin@noopur.com",
+      displayName: "Dr. Noopur Patel Administrator",
       roleId: "super_admin",
       isActive: true,
       updatedAt: timestamp,

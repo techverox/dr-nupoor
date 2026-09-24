@@ -33,13 +33,14 @@ export function generatePageMetadata({
   const fullTitle = `${title} | ${SITE_CONFIG.name}`;
 
   const defaultKeywords = [
-    "digital marketing agency",
-    "social media marketing",
-    "performance marketing",
-    "SEO services",
-    "web design and development",
-    "lead generation",
-    "DigiVigee",
+    "Dr Noopur Patel",
+    "Breast Cancer Surgeon Ahmedabad",
+    "Breast Surgeon Ahmedabad",
+    "Oncoplastic Breast Surgery",
+    "Surgical Breast Oncology",
+    "Marengo CIMS Hospital",
+    "Breast Clinic Ahmedabad",
+    "Breast Health Specialist Gujarat",
   ];
 
   const mergedKeywords = Array.from(new Set([...keywords, ...defaultKeywords]));
@@ -203,14 +204,14 @@ export async function resolveRootLayoutMetadata(): Promise<Metadata> {
       getCustomPageSeo("/"),
     ]);
 
-    const rawBaseUrl = (globalSeo?.canonicalBaseUrl || SITE_CONFIG.url || "https://digivigee.com").trim();
+    const rawBaseUrl = (globalSeo?.canonicalBaseUrl || SITE_CONFIG.url || "https://drnoopurpatel.com").trim();
     const siteUrl = rawBaseUrl.startsWith("http") ? rawBaseUrl : `https://${rawBaseUrl}`;
 
     let metadataBase: URL;
     try {
       metadataBase = new URL(siteUrl);
     } catch {
-      metadataBase = new URL("https://digivigee.com");
+      metadataBase = new URL("https://drnoopurpatel.com");
     }
 
     const titleDefault =
@@ -228,13 +229,16 @@ export async function resolveRootLayoutMetadata(): Promise<Metadata> {
       SITE_CONFIG.description;
 
     const defaultKeywords = [
-      "digital marketing agency",
-      "performance marketing",
-      "social media marketing",
-      "SEO services",
-      "web design and development",
-      "lead generation",
-      "DigiVigee",
+      "Dr Noopur Patel",
+      "Breast Cancer Surgeon Ahmedabad",
+      "Breast Surgeon Ahmedabad",
+      "Oncoplastic Breast Surgery",
+      "Surgical Breast Oncology",
+      "Marengo CIMS Hospital",
+      "Breast Clinic Ahmedabad",
+      "Breast Health Specialist",
+      "Mastectomy",
+      "Lumpectomy",
     ];
 
     const keywords = Array.from(

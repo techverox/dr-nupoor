@@ -22,7 +22,9 @@ export async function requirePermission(
   permission: Permission
 ): Promise<PermissionCheckResult> {
   const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value;
+  const sessionCookie =
+    cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value ||
+    cookieStore.get(AUTH_CONFIG.LEGACY_SESSION_COOKIE_NAME)?.value;
   const { authenticated, user, error } = await verifyAdminSessionCookie(sessionCookie);
 
   if (!authenticated || !user) {
@@ -61,7 +63,9 @@ export async function requireAnyPermission(
   permissions: Permission[]
 ): Promise<PermissionCheckResult> {
   const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value;
+  const sessionCookie =
+    cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value ||
+    cookieStore.get(AUTH_CONFIG.LEGACY_SESSION_COOKIE_NAME)?.value;
   const { authenticated, user, error } = await verifyAdminSessionCookie(sessionCookie);
 
   if (!authenticated || !user) {
@@ -100,7 +104,9 @@ export async function requireRole(
   allowedRoles: string[]
 ): Promise<PermissionCheckResult> {
   const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value;
+  const sessionCookie =
+    cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value ||
+    cookieStore.get(AUTH_CONFIG.LEGACY_SESSION_COOKIE_NAME)?.value;
   const { authenticated, user, error } = await verifyAdminSessionCookie(sessionCookie);
 
   if (!authenticated || !user) {

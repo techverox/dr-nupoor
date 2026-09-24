@@ -1,5 +1,5 @@
 /**
- * Client-Side Attribution & Session Management for DigiVigee Platform.
+ * Client-Side Attribution & Session Management for Dr. Noopur Patel Platform.
  *
  * Provides privacy-safe visitor & session identifiers and captures standard
  * UTM campaign parameters (utm_source, utm_medium, utm_campaign, utm_content, utm_term).
@@ -8,11 +8,11 @@
  */
 
 const STORAGE_KEYS = {
-  SESSION_ID: "dv_session_id",
-  VISITOR_ID: "dv_visitor_id",
-  SESSION_UTM: "dv_session_utm",
-  FIRST_TOUCH_UTM: "dv_first_touch_utm",
-  REFERRER: "dv_initial_referrer",
+  SESSION_ID: "drn_session_id",
+  VISITOR_ID: "drn_visitor_id",
+  SESSION_UTM: "drn_session_utm",
+  FIRST_TOUCH_UTM: "drn_first_touch_utm",
+  REFERRER: "drn_initial_referrer",
 } as const;
 
 export interface UtmParams {

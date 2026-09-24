@@ -214,7 +214,7 @@ export async function createLead(
 
       return { success: true, leadId: docRef.id };
     } catch (error) {
-      console.error("[DigiVigee Lead Engine] Admin Firestore write error:", error);
+      console.error("[Clinical Enquiries Engine] Admin Firestore write error:", error);
     }
   }
 
@@ -238,12 +238,12 @@ export async function createLead(
 
       return { success: true, leadId: docRef.id };
     } catch (error) {
-      console.error("[DigiVigee Lead Engine] Client Firestore write error:", error);
+      console.error("[Clinical Enquiries Engine] Client Firestore write error:", error);
     }
   }
 
   // 6. Local Development Fallback (when Firebase credentials are not yet configured in .env.local)
-  console.log("[DigiVigee Lead Engine] Lead logged:", {
+  console.log("[Clinical Enquiries Engine] Consultation enquiry logged:", {
     name: payload.name,
     email: payload.email,
     phone: payload.phone,
@@ -294,7 +294,7 @@ export async function createNewsletterSubscriber(
             success: true,
             isDuplicate: true,
             leadId: existingDoc.id,
-            message: "You are already subscribed to DigiVigee insights!",
+            message: "You are already subscribed to Dr. Noopur Patel's breast health updates!",
           };
         } else {
           // Reactivate previously unsubscribed contact
@@ -340,10 +340,10 @@ export async function createNewsletterSubscriber(
       return {
         success: true,
         leadId: docRef.id,
-        message: "Thank you for subscribing to DigiVigee insights!",
+        message: "Thank you for subscribing to Dr. Noopur Patel's breast health updates!",
       };
     } catch (error) {
-      console.error("[DigiVigee Newsletter] Admin Firestore write error:", error);
+      console.error("[Clinical Newsletter] Admin Firestore write error:", error);
     }
   }
 
@@ -362,18 +362,18 @@ export async function createNewsletterSubscriber(
       return {
         success: true,
         leadId: docRef.id,
-        message: "Thank you for subscribing to DigiVigee insights!",
+        message: "Thank you for subscribing to Dr. Noopur Patel's breast health updates!",
       };
     } catch (error) {
-      console.error("[DigiVigee Newsletter] Client Firestore write error:", error);
+      console.error("[Clinical Newsletter] Client Firestore write error:", error);
     }
   }
 
-  console.log("[DigiVigee Newsletter] Subscriber logged:", normalizedEmail);
+  console.log("[Clinical Newsletter] Subscriber logged:", normalizedEmail);
   return {
     success: true,
     leadId: `local-sub-${Date.now()}`,
-    message: "Thank you for subscribing to DigiVigee insights!",
+    message: "Thank you for subscribing to Dr. Noopur Patel's breast health updates!",
   };
 }
 

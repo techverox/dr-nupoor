@@ -3,8 +3,8 @@ import { COLLECTIONS } from "@/config/firebase";
 import { NewsletterSubscriber, SubscriberStatus } from "@/types";
 
 /**
- * 10 Canonical DigiVigee Platform audience subscribers.
- * Synchronized with DigiVigee's real website routes, lead magnets, and growth playbooks.
+ * Canonical audience subscribers for Dr. Noopur Patel clinical practice.
+ * Synchronized with website routes and breast health awareness guides.
  */
 export const CANONICAL_SUBSCRIBERS: NewsletterSubscriber[] = [
   {
