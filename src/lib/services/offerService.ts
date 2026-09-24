@@ -107,25 +107,8 @@ export async function getAllOffersAdmin(): Promise<OfferItem[]> {
 /**
  * Returns active offers matching schedule and page targeting rules for public site display.
  */
-export async function getActiveOffersPublic(currentPath: string = "/"): Promise<OfferItem[]> {
-  const allOffers = await getAllOffersAdmin();
-
-  return allOffers.filter((offer) => {
-    // 1. Must be computed as active (enabled and within date window)
-    if (getOfferComputedStatus(offer) !== "active") return false;
-
-    // 2. Page targeting rule
-    const targeting: OfferTargeting = offer.targetPages || "all";
-    if (targeting === "all") return true;
-    if (targeting === "home_only") return currentPath === "/";
-    if (targeting === "blog_only") return currentPath.startsWith("/blog");
-    if (targeting === "services_only") return currentPath.startsWith("/services");
-    if (targeting === "custom") {
-      return (offer.customPaths || []).includes(currentPath);
-    }
-
-    return true;
-  });
+export async function getActiveOffersPublic(_currentPath: string = "/"): Promise<OfferItem[]> {
+  return [];
 }
 
 /**
