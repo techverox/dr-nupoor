@@ -5,8 +5,6 @@ import "./globals.css";
 import { resolveRootLayoutMetadata } from "@/lib/seo/metadata";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { AnalyticsScripts, GoogleTagManagerNoScript } from "@/components/analytics/AnalyticsScripts";
-import { OfferNotificationBanner } from "@/components/public/OfferNotificationBanner";
-
 import { GlobalStructuredData } from "@/components/seo/StructuredData";
 import { getCmsSiteSettings } from "@/lib/services/cmsService";
 import { CustomCodeInjector } from "@/components/analytics/CustomCodeInjector";
@@ -69,7 +67,6 @@ export default async function RootLayout({
         <Suspense fallback={null}>
           <AnalyticsTracker />
         </Suspense>
-        <OfferNotificationBanner />
         {children}
       </body>
     </html>
