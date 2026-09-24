@@ -73,7 +73,7 @@ interface SettingsFormState {
 const CANONICAL_SETTINGS: SettingsFormState = {
   siteName: "DigiVigee",
   tagline: "Professional Solutions For Your Digital Growth",
-  logoUrl: "/images/digivigee_logo.png",
+  logoUrl: "/images/doctor/assets/logo.png",
   faviconUrl: "/favicon.ico",
   showAnnouncementBar: true,
   announcementBarText: "🚀 Special Offer: Scale with DigiVigee Platform — Claim Your Growth Audit Today →",
@@ -583,7 +583,7 @@ export default function AdminSettingsPage() {
                   <div className="p-3 bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-between border border-zinc-800">
                     <div className="relative h-9 w-32">
                       <Image
-                        src={formData.logoUrl || "/images/digivigee_logo.png"}
+                        src={formData.logoUrl || "/images/doctor/assets/logo.png"}
                         alt="Logo Preview"
                         fill
                         className="object-contain"
@@ -1362,7 +1362,7 @@ export default function AdminSettingsPage() {
                   <div className="flex items-center gap-3">
                     <div className="relative h-8 w-28">
                       <Image
-                        src={formData.logoUrl || "/images/digivigee_logo.png"}
+                        src={formData.logoUrl || "/images/doctor/assets/logo.png"}
                         alt={formData.siteName}
                         fill
                         className="object-contain"

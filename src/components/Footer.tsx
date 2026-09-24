@@ -139,11 +139,11 @@ export default function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="px-2.5 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-2xs group-hover:scale-105 transition-all">
                 <Image
-                  src="/images/digivigee_logo.png"
-                  alt="DigiVigee Logo"
-                  width={120}
-                  height={38}
-                  className="h-7 w-auto object-contain"
+                  src="/images/doctor/assets/logo.png"
+                  alt="Dr. Noopur Patel Logo"
+                  width={150}
+                  height={50}
+                  className="h-8 w-auto object-contain"
                 />
               </div>
               <div>

@@ -158,13 +158,13 @@ export default function DoctorHero({
             </div>
 
             {/* Bottom Right Floating Badge (Exact Match) */}
-            <div className="absolute -bottom-4 right-0 sm:right-2 bg-white/95 backdrop-blur-md border border-[#F5D6DE] rounded-2xl p-3 shadow-xl flex items-center gap-3 max-w-[210px] animate-fade-in">
-              <div className="relative w-8 h-10 flex-shrink-0 flex items-center justify-center">
+            <div className="absolute -bottom-4 right-0 sm:right-2 bg-white/95 backdrop-blur-md border border-[#F5D6DE] rounded-2xl p-2.5 shadow-xl flex items-center gap-3 max-w-[220px] animate-fade-in">
+              <div className="relative w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden shadow-xs">
                 <Image
-                  src="/images/doctor/assets/pink-ribbon-logo.png"
-                  alt="Pink Ribbon"
-                  width={30}
-                  height={38}
+                  src="/images/doctor/assets/favicon.png"
+                  alt="Dr. Noopur Patel Brand Icon"
+                  width={40}
+                  height={40}
                   className="object-contain"
                 />
               </div>

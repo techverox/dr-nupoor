@@ -233,13 +233,13 @@ export default function Navbar() {
       {/* Container aligned with page grid — Microsoft Standard 54px Height */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[54px] relative flex items-center justify-between">
         
-        {/* Left: Official Digivigee Logo (Precision Calibrated: Exactly 28px Height / ~133px Width) */}
+        {/* Left: Official Dr. Noopur Patel Logo */}
         <div className="flex items-center shrink-0 z-10 relative">
           <Link href="/" className="flex items-center group relative z-10">
             <img
-              src="/images/digivigee_logo.png"
-              alt="DIGIVIGEE"
-              className="h-[26px] sm:h-[28px] md:h-[28px] w-auto object-contain group-hover:opacity-90 transition-opacity duration-200 drop-shadow-2xs"
+              src="/images/doctor/assets/logo.png"
+              alt="Dr. Noopur Patel"
+              className="h-[32px] sm:h-[36px] w-auto object-contain group-hover:opacity-90 transition-opacity duration-200"
             />
           </Link>
         </div>
@@ -530,9 +530,9 @@ export default function Navbar() {
           <div className="flex items-center justify-between pb-3 border-b border-slate-100">
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="inline-flex items-center">
               <img
-                src="/images/digivigee_logo.png"
-                alt="DIGIVIGEE"
-                className="h-[26px] w-auto object-contain"
+                src="/images/doctor/assets/logo.png"
+                alt="Dr. Noopur Patel"
+                className="h-[30px] w-auto object-contain"
               />
             </Link>
             <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">

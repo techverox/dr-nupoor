@@ -151,11 +151,11 @@ export default function Sidebar({
           <div className="flex items-center gap-2 min-w-0">
             <Link href="/" className="flex items-center group shrink-0">
               <img
-                src="/images/digivigee_logo.png"
-                alt="DIGIVIGEE"
+                src="/images/doctor/assets/logo.png"
+                alt="Dr. Noopur Patel"
                 className={`h-[28px] w-auto object-contain transition-all ${
                   isCollapsed ? "max-w-[32px] overflow-hidden" : ""
-                } ${isDark ? "brightness-110" : ""}`}
+                }`}
               />
             </Link>
             {!isCollapsed && (

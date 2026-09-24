@@ -29,8 +29,8 @@ export const DEFAULT_GLOBAL_SEO: GlobalSeoSettings = {
   ],
   robotsIndex: true,
   robotsFollow: true,
-  organizationName: "DigiVigee",
-  organizationLogo: "/images/digivigee_logo.png",
+  organizationName: "Dr. Noopur Patel",
+  organizationLogo: "/images/doctor/assets/logo.png",
   createdAt: "2026-01-01T00:00:00Z",
   updatedAt: "2026-01-01T00:00:00Z",
 };

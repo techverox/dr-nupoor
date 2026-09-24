@@ -25,27 +25,14 @@ export default function DoctorFooter() {
           
           {/* Column 1: Doctor Identity & Mission */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-10 h-12 flex-shrink-0 flex items-center justify-center">
-                <Image
-                  src="/images/doctor/assets/pink-ribbon-logo.png"
-                  alt="Dr. Noopur Patel Logo"
-                  width={38}
-                  height={46}
-                  className="object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-serif text-[22px] font-bold text-[#1A202C] leading-none">
-                  Dr. Noopur Patel
-                </span>
-                <span className="text-[10px] font-bold tracking-wider uppercase text-[#D84C70] mt-1">
-                  Breast Surgeon & Oncoplastic Surgeon
-                </span>
-                <span className="text-[10px] text-slate-500 font-normal">
-                  Expert Care. Stronger Tomorrows.
-                </span>
-              </div>
+            <Link href="/" className="inline-block group" aria-label="Dr. Noopur Patel — Home">
+              <Image
+                src="/images/doctor/assets/logo.png"
+                alt="Dr. Noopur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
+                width={250}
+                height={84}
+                className="h-14 sm:h-16 w-auto object-contain transition-opacity hover:opacity-95"
+              />
             </Link>
 
             <p className="text-[13.5px] text-slate-600 leading-relaxed pt-2">

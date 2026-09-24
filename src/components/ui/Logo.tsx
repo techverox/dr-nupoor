@@ -20,9 +20,9 @@ export function Logo({
   const isDark = variant === "dark";
 
   const scaleMap = {
-    sm: { height: 26, width: 124, gap: "0.4rem" },
-    md: { height: 34, width: 162, gap: "0.5rem" },
-    lg: { height: 44, width: 209, gap: "0.6rem" },
+    sm: { height: 30, width: 90, gap: "0.4rem" },
+    md: { height: 42, width: 126, gap: "0.5rem" },
+    lg: { height: 54, width: 162, gap: "0.6rem" },
   };
 
   const currentScale = scaleMap[size];
@@ -39,8 +39,8 @@ export function Logo({
     >
       <div style={{ display: "flex", flexDirection: "column", gap: currentScale.gap }}>
         <Image 
-          src="/images/digivigee_logo.png" 
-          alt="DigiVigee Logo" 
+          src="/images/doctor/assets/logo.png" 
+          alt="Dr. Noopur Patel Logo" 
           width={currentScale.width} 
           height={currentScale.height} 
           style={{ objectFit: "contain", ...(isDark ? { filter: "brightness(0) invert(1)" } : {}) }} 
@@ -52,7 +52,7 @@ export function Logo({
 
   if (asLink) {
     return (
-      <Link href="/" aria-label="DigiVigee — Home" style={{ textDecoration: "none" }}>
+      <Link href="/" aria-label="Dr. Noopur Patel — Home" style={{ textDecoration: "none" }}>
         {content}
       </Link>
     );

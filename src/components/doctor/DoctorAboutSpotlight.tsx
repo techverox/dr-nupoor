@@ -107,11 +107,11 @@ export default function DoctorAboutSpotlight() {
                     Breast Cancer Surgeon
                   </span>
                 </div>
-                <div className="w-7 h-9 relative opacity-80 flex items-center justify-center">
+                <div className="w-9 h-9 relative flex items-center justify-center rounded-lg overflow-hidden shadow-xs">
                   <Image
-                    src="/images/doctor/assets/pink-ribbon-logo.png"
-                    alt="Ribbon"
-                    width={28}
+                    src="/images/doctor/assets/favicon.png"
+                    alt="Dr. Noopur Patel Emblem"
+                    width={36}
                     height={36}
                     className="object-contain"
                   />

@@ -32,8 +32,8 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         <div className="flex items-center justify-center mb-10">
           <div className="relative w-48 h-14">
             <Image 
-              src="/images/digivigee_logo.png" 
-              alt="Digivigee Logo" 
+              src="/images/doctor/assets/logo.png" 
+              alt="Dr. Noopur Patel Logo" 
               fill
               className="object-contain"
               priority

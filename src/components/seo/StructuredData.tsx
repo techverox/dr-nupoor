@@ -13,7 +13,7 @@ export function GlobalStructuredData() {
     "@id": `${SITE_CONFIG.url}/#organization`,
     name: SITE_CONFIG.name,
     url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/images/digivigee_logo.png`,
+    logo: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,
     description: SITE_CONFIG.description,
     address: {
       "@type": "PostalAddress",
@@ -121,7 +121,7 @@ export function ArticleStructuredData({ post }: { post: BlogPost }) {
       url: SITE_CONFIG.url,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_CONFIG.url}/images/digivigee_logo.png`,
+        url: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,
       },
     },
     mainEntityOfPage: {

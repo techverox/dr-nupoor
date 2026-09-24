@@ -103,7 +103,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       url: SITE_CONFIG.url,
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_CONFIG.url}/images/digivigee_logo.png`,
+        url: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,
       },
     },
     mainEntityOfPage: {

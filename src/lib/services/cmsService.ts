@@ -185,7 +185,7 @@ export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   id: "global",
   siteName: SITE_CONFIG.name,
   tagline: SITE_CONFIG.tagline,
-  logoUrl: "/images/doctor/assets/pink-ribbon-logo.png",
+  logoUrl: "/images/doctor/assets/logo.png",
   faviconUrl: "/favicon.ico",
   contact: {
     phone: SITE_CONFIG.contact.phoneFormatted,

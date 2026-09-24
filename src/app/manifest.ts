@@ -7,14 +7,14 @@ import { MetadataRoute } from "next";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "DigiVigee — Premier Digital Marketing Agency",
-    short_name: "DigiVigee",
+    name: "Dr. Noopur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist",
+    short_name: "Dr. Noopur",
     description:
-      "One Platform to Run Your Entire Digital Marketing Agency & Compound Revenue.",
+      "Dr. Noopur Patel, Breast Cancer & Oncoplastic Surgeon at Marengo CIMS Hospital, Ahmedabad. Dedicated to compassionate, evidence-based breast care.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0C1628",
-    theme_color: "#008744",
+    background_color: "#FFFFFF",
+    theme_color: "#D84C70",
     icons: [
       {
         src: "/favicon.ico",
@@ -44,6 +44,6 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
     ],
-    categories: ["business", "marketing", "productivity"],
+    categories: ["medical", "health", "lifestyle"],
   };
 }

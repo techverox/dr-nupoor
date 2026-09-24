@@ -184,12 +184,12 @@ export default function PatientStoriesPage() {
                   </p>
                 </div>
 
-                <div className="absolute -bottom-4 right-2 sm:right-6 bg-white/95 backdrop-blur-md border border-[#F5D6DE] rounded-2xl p-3 shadow-lg flex items-center gap-3 max-w-[200px]">
-                  <div className="relative w-7 h-9 flex-shrink-0 flex items-center justify-center">
+                <div className="absolute -bottom-4 right-2 sm:right-6 bg-white/95 backdrop-blur-md border border-[#F5D6DE] rounded-2xl p-2.5 shadow-lg flex items-center gap-3 max-w-[210px]">
+                  <div className="relative w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden shadow-xs">
                     <Image
-                      src="/images/doctor/assets/pink-ribbon-logo.png"
+                      src="/images/doctor/assets/favicon.png"
                       alt="Stronger Women"
-                      width={28}
+                      width={36}
                       height={36}
                       className="object-contain"
                     />

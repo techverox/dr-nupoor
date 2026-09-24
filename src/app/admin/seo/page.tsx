@@ -63,8 +63,8 @@ export default function AdminSeoManagementPage() {
     ],
     robotsIndex: true,
     robotsFollow: true,
-    organizationName: "DigiVigee",
-    organizationLogo: "/images/digivigee_logo.png",
+    organizationName: "Dr. Noopur Patel",
+    organizationLogo: "/images/doctor/assets/logo.png",
     createdAt: "2026-01-01T00:00:00Z",
     updatedAt: "2026-01-01T00:00:00Z",
   });
@@ -212,9 +212,9 @@ Host: https://digivigee.com`;
         "@context": "https://schema.org",
         "@type": "Organization",
         "@id": "https://digivigee.com/#organization",
-        name: "DigiVigee",
-        url: "https://digivigee.com",
-        logo: "https://digivigee.com/images/digivigee_logo.png",
+        name: "Dr. Noopur Patel",
+        url: "https://drnoopurpatel.com",
+        logo: "https://drnoopurpatel.com/images/doctor/assets/logo.png",
         description: globalSeo.defaultDescription,
         address: {
           "@type": "PostalAddress",

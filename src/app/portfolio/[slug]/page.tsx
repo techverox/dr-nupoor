@@ -6,6 +6,7 @@ import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
 import CaseStudyDetailClientView from "@/components/portfolio/CaseStudyDetailClientView";
 import { getCmsPortfolioBySlug, getCmsPortfolio } from "@/lib/services/cmsService";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
+import { SITE_CONFIG } from "@/config/site";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -66,7 +67,7 @@ export default async function PortfolioDetailPage({ params }: PortfolioPageProps
       name: "DigiVigee",
       logo: {
         "@type": "ImageObject",
-        url: "https://digivigee.com/images/digivigee_logo.png",
+        url: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,
       },
     },
   };

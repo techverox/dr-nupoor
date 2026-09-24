@@ -344,11 +344,11 @@ export async function resolveRootLayoutMetadata(): Promise<Metadata> {
     console.warn("[resolveRootLayoutMetadata] Fallback metadata:", error);
     return {
       title: {
-        default: "DIGIVIGEE — High-Performance Marketing Powered by AI",
-        template: "%s | DigiVigee",
+        default: "Dr. Noopur Patel — Breast Cancer Surgeon | Marengo CIMS Hospital, Ahmedabad",
+        template: "%s | Dr. Noopur Patel",
       },
       description:
-        "CRM, client management, websites, SEO, social media, campaigns, reporting, approvals and agency operations — connected in one powerful platform.",
+        "Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Specializing in oncoplastic breast surgery, breast conservation, and comprehensive breast care.",
       icons: {
         icon: [
           { url: "/favicon.ico", sizes: "any" },

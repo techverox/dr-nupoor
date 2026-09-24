@@ -122,28 +122,15 @@ export default function DoctorNavbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo Branding */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-11 flex-shrink-0 flex items-center justify-center">
-              <Image
-                src="/images/doctor/assets/pink-ribbon-logo.png"
-                alt="Breast Cancer Awareness Ribbon"
-                width={36}
-                height={44}
-                className="object-contain"
-                priority
-              />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif text-[22px] sm:text-[24px] font-bold tracking-tight text-[#1A202C] leading-none">
-                Dr. Noopur Patel
-              </span>
-              <span className="text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-[#D84C70] mt-1">
-                Breast Surgeon & Oncoplastic Surgeon
-              </span>
-              <span className="text-[9px] text-slate-500 font-normal tracking-tight">
-                Expert Care. Stronger Tomorrows.
-              </span>
-            </div>
+          <Link href="/" className="flex items-center group py-0.5" aria-label="Dr. Noopur Patel — Home">
+            <Image
+              src="/images/doctor/assets/logo.png"
+              alt="Dr. Noopur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
+              width={240}
+              height={80}
+              className="h-12 sm:h-14 md:h-[58px] w-auto object-contain transition-opacity hover:opacity-95"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -219,17 +206,14 @@ export default function DoctorNavbar() {
           <div className="w-[82%] max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center">
                   <Image
-                    src="/images/doctor/assets/pink-ribbon-logo.png"
-                    alt="Logo"
-                    width={28}
-                    height={34}
-                    className="object-contain"
+                    src="/images/doctor/assets/logo.png"
+                    alt="Dr. Noopur Patel Logo"
+                    width={180}
+                    height={60}
+                    className="h-10 w-auto object-contain"
                   />
-                  <span className="font-serif font-bold text-slate-900 text-lg">
-                    Dr. Noopur Patel
-                  </span>
                 </div>
                 <button
                   type="button"
