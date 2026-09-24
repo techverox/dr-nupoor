@@ -48,8 +48,8 @@ export default function DoctorNavbar() {
   return (
     <header className="w-full z-50 transition-all duration-300">
       {/* 1. TOP UTILITY BAR (Exact Match with Reference) */}
-      <div className="bg-[#FFF8F9] border-b border-[#F5D6DE]/60 text-[12px] text-slate-600 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between">
+      <div className="bg-[#FFF8F9] border-b border-[#F5D6DE]/60 text-[11.5px] sm:text-[12px] text-slate-600 hidden md:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <span className="flex items-center gap-1.5 text-slate-700 font-medium">
               <MapPin className="w-3.5 h-3.5 text-[#D84C70]" />
@@ -116,8 +116,8 @@ export default function DoctorNavbar() {
       <nav
         className={`w-full bg-white transition-all duration-300 ${
           isScrolled
-            ? "sticky top-0 shadow-[0_4px_20px_rgba(216,76,112,0.08)] py-3"
-            : "py-4 border-b border-slate-100"
+            ? "sticky top-0 shadow-[0_4px_20px_rgba(216,76,112,0.08)] py-1.5 sm:py-2"
+            : "py-2 sm:py-2.5 border-b border-slate-100"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -126,9 +126,9 @@ export default function DoctorNavbar() {
             <Image
               src="/images/doctor/assets/logo.png"
               alt="Dr. Noopur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
-              width={240}
-              height={80}
-              className="h-12 sm:h-14 md:h-[58px] w-auto object-contain transition-opacity hover:opacity-95"
+              width={220}
+              height={73}
+              className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-opacity hover:opacity-95"
               priority
             />
           </Link>
@@ -141,7 +141,7 @@ export default function DoctorNavbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-[14px] font-medium transition-all duration-200 relative py-1 ${
+                  className={`text-[13.5px] sm:text-[14px] font-medium transition-all duration-200 relative py-1 ${
                     active
                       ? "text-[#D84C70] font-semibold"
                       : "text-slate-700 hover:text-[#D84C70]"
@@ -157,10 +157,10 @@ export default function DoctorNavbar() {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3.5">
             <button
               type="button"
-              className="p-2 text-slate-500 hover:text-[#D84C70] hover:bg-[#FDF2F4] rounded-full transition-colors"
+              className="p-1.5 text-slate-500 hover:text-[#D84C70] hover:bg-[#FDF2F4] rounded-full transition-colors"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
@@ -168,9 +168,9 @@ export default function DoctorNavbar() {
 
             <Link
               href="/appointments"
-              className="inline-flex items-center gap-2 bg-[#D84C70] hover:bg-[#BE3A5C] text-white text-[13.5px] font-semibold px-5 py-2.5 rounded-full shadow-[0_4px_12px_rgba(216,76,112,0.25)] hover:shadow-[0_6px_18px_rgba(216,76,112,0.35)] transition-all duration-200 active:scale-95"
+              className="inline-flex items-center gap-2 bg-[#D84C70] hover:bg-[#BE3A5C] text-white text-[13px] font-semibold px-4.5 py-2 rounded-full shadow-[0_4px_12px_rgba(216,76,112,0.22)] hover:shadow-[0_6px_16px_rgba(216,76,112,0.32)] transition-all duration-200 active:scale-95"
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-3.5 h-3.5" />
               <span>Book Appointment</span>
             </Link>
           </div>
