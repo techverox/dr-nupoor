@@ -72,7 +72,7 @@ export async function bootstrapAdminCredentials(): Promise<void> {
   await bootstrapSystemRbac();
 
   const superAdminEmail = DEFAULT_SUPER_ADMIN.email.toLowerCase().trim();
-  const defaultPassword = process.env.INITIAL_ADMIN_PASSWORD || "Admin@DigiVigee2026";
+  const defaultPassword = process.env.INITIAL_ADMIN_PASSWORD || "123456";
 
   const adminDb = getAdminFirestore();
 

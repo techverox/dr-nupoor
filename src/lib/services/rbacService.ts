@@ -19,15 +19,15 @@ if (!globalForRbac.__RBAC_ROLES_CACHE__) globalForRbac.__RBAC_ROLES_CACHE__ = ro
 if (!globalForRbac.__RBAC_USERS_CACHE__) globalForRbac.__RBAC_USERS_CACHE__ = usersCache;
 
 export const DEFAULT_SUPER_ADMIN: AdminUser = {
-  id: "dev-admin-user",
-  email: "admin@digivigee.com",
-  displayName: "Vipul Gajjar",
+  id: "admin-noopur-patel",
+  email: "admin@noopur.com",
+  displayName: "Dr. Noopur Patel Admin",
   roleId: "super_admin",
   roleName: "Super Administrator",
   isActive: true,
   createdAt: "2026-01-01T00:00:00Z",
   updatedAt: "2026-01-01T00:00:00Z",
-  lastLoginAt: "2026-09-11T12:30:00Z",
+  lastLoginAt: "2026-09-25T00:00:00Z",
 };
 
 export const CANONICAL_ADMIN_USERS: AdminUser[] = [
