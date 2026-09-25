@@ -27,37 +27,38 @@ export default function DoctorHero({
   secondaryCtaLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}`,
 }: DoctorHeroProps) {
   return (
-    <section className="relative w-full overflow-hidden bg-white border-b border-rose-100/60 lg:min-h-[640px] xl:min-h-[700px] flex items-center">
+    <section className="relative w-full overflow-hidden bg-white border-b border-rose-100/60 lg:min-h-[580px] xl:min-h-[640px] flex items-center">
       {/* =========================================================================
           DESKTOP FULL-WIDTH BACKGROUND IMAGE LAYER (lg and up)
           Uses the user's provided custom hero image (Dr. Noopur Patel on the right,
           faded clinic interior on the left).
           ========================================================================= */}
-      <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none select-none">
+      <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         <div
-          className="absolute inset-0 bg-no-repeat bg-cover"
+          className="absolute inset-y-0 right-0 w-full max-w-[1800px] bg-no-repeat"
           style={{
             backgroundImage: "url('/images/doctor/assets/hero-image.png')",
-            backgroundPosition: "center right",
+            backgroundPosition: "right 35%",
+            backgroundSize: "cover",
           }}
         />
 
         {/* Soft Left Gradient Overlay: Guarantees 100% text readability without dimming the doctor */}
-        <div className="absolute inset-y-0 left-0 w-[60%] xl:w-[52%] bg-gradient-to-r from-white via-white/95 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-[55%] xl:w-[48%] bg-gradient-to-r from-white via-white/95 to-transparent pointer-events-none" />
 
         {/* Subtle Top & Bottom Transition Fades */}
-        <div className="absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-white/70 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-4 bg-gradient-to-b from-white/30 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-4 bg-gradient-to-t from-white/30 to-transparent pointer-events-none" />
       </div>
 
       {/* =========================================================================
           FOREGROUND CONTENT CONTAINER
           ========================================================================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-10 sm:py-14 lg:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-10 lg:py-12 my-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-6">
           
           {/* LEFT SIDE: Clean, Premium Specialist Copy (50-55% width) */}
-          <div className="lg:col-span-7 xl:col-span-6 space-y-5 sm:space-y-6 max-w-xl lg:max-w-[540px]">
+          <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 max-w-xl lg:max-w-[540px]">
             
             {/* 1. Top Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FDF2F4] border border-[#F5D6DE] text-[#D84C70] text-[11px] sm:text-[12px] font-bold tracking-widest uppercase shadow-2xs">
