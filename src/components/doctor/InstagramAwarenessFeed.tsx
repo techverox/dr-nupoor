@@ -16,8 +16,6 @@ export default function InstagramAwarenessFeed() {
       category: "Doctor Insights",
       title: "Meet Dr. Noopur Patel",
       caption: "Dedicated to providing compassionate, evidence-based surgical breast oncology at Marengo CIMS Hospital.",
-      likes: "1,428",
-      comments: "54",
       hashtag: "#BreastSurgeon",
     },
     {
@@ -26,8 +24,6 @@ export default function InstagramAwarenessFeed() {
       category: "Self-Exam Guide",
       title: "Monthly Self-Exam Protocol",
       caption: "5 minutes each month can save a life. Knowing your normal breast tissue helps spot subtle changes early.",
-      likes: "2,190",
-      comments: "86",
       hashtag: "#EarlyDetection",
     },
     {
@@ -36,8 +32,6 @@ export default function InstagramAwarenessFeed() {
       category: "Warning Signs",
       title: "Know The Warning Signs",
       caption: "Lumps, skin dimpling, or nipple changes merit prompt evaluation. Early staging ensures the highest cure rates.",
-      likes: "1,845",
-      comments: "63",
       hashtag: "#BreastHealth",
     },
     {
@@ -46,8 +40,6 @@ export default function InstagramAwarenessFeed() {
       category: "Oncoplastic Care",
       title: "Restoring Form & Symmetry",
       caption: "Oncoplastic surgery combines clean cancer clearance with plastic surgical techniques to preserve natural shape.",
-      likes: "2,460",
-      comments: "92",
       hashtag: "#OncoplasticSurgery",
     },
     {
@@ -56,8 +48,6 @@ export default function InstagramAwarenessFeed() {
       category: "Patient Support",
       title: "You Are Never Alone",
       caption: "Compassionate clinical companionship, emotional reassurance, and dedicated post-surgical surveillance.",
-      likes: "3,110",
-      comments: "118",
       hashtag: "#StrongerWomen",
     },
   ];
@@ -197,8 +187,8 @@ export default function InstagramAwarenessFeed() {
                     <Bookmark className="w-4 h-4 text-slate-700 hover:text-slate-900 transition-colors" />
                   </div>
 
-                  <div className="text-[11.5px] font-bold text-slate-900 mb-1">
-                    {post.likes} likes
+                  <div className="text-[11px] font-semibold text-[#8B2346] bg-[#FFF0F3] px-2 py-0.5 rounded-full inline-block mb-1.5 border border-[#F5D6DE]/60">
+                    Patient Awareness • Educational Post
                   </div>
 
                   {/* Title & Caption */}
@@ -211,10 +201,12 @@ export default function InstagramAwarenessFeed() {
                   </p>
                 </div>
 
-                {/* Hashtag & Comments Footer */}
-                <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-[10.5px]">
+                {/* Clinical Topic Footer */}
+                <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-[11px]">
                   <span className="font-semibold text-[#D84C70]">{post.hashtag}</span>
-                  <span className="text-slate-400">View {post.comments} comments</span>
+                  <span className="text-slate-500 font-medium group-hover:text-[#D84C70] transition-colors flex items-center gap-1">
+                    View on Instagram →
+                  </span>
                 </div>
               </div>
             </a>

@@ -1,41 +1,95 @@
 import React from "react";
 import { JsonLd } from "./JsonLd";
 import { SITE_CONFIG } from "@/config/site";
-import { ServiceItem, BlogPost } from "@/types";
+import { ServiceItem } from "@/types";
 
 /**
- * Global Organization & WebSite JSON-LD Schema.
+ * Global Physician & Medical Clinic JSON-LD Schema.
+ * Formatted to Google Healthcare Knowledge Graph and Medical Schema guidelines.
  */
 export function GlobalStructuredData() {
-  const organizationSchema = {
+  const physicianSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${SITE_CONFIG.url}/#organization`,
-    name: SITE_CONFIG.name,
-    url: SITE_CONFIG.url,
-    logo: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,
+    "@type": ["Physician", "MedicalBusiness"],
+    "@id": `${SITE_CONFIG.url}/#physician`,
+    name: "Dr. Noopur Patel",
+    jobTitle: "Consultant Breast Cancer & Oncoplastic Surgeon",
     description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    image: `${SITE_CONFIG.url}/images/doctor/assets/dr-noopur-hd.jpg`,
+    medicalSpecialty: [
+      "https://schema.org/Oncologic",
+      "https://schema.org/Surgical",
+    ],
+    availableService: [
+      {
+        "@type": "MedicalProcedure",
+        name: "Breast Cancer Surgery",
+      },
+      {
+        "@type": "MedicalProcedure",
+        name: "Oncoplastic Breast Surgery",
+      },
+      {
+        "@type": "MedicalProcedure",
+        name: "Breast Conservation Surgery (BCS)",
+      },
+      {
+        "@type": "MedicalProcedure",
+        name: "Breast Reconstruction Surgery",
+      },
+      {
+        "@type": "MedicalProcedure",
+        name: "Benign Breast Disease Evaluation & Excision",
+      },
+    ],
+    hospitalAffiliation: {
+      "@type": "Hospital",
+      name: "Marengo CIMS Hospital",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Off Science City Road, Sola",
+        addressLocality: "Ahmedabad",
+        addressRegion: "Gujarat",
+        postalCode: "380060",
+        addressCountry: "IN",
+      },
+    },
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road",
-      addressLocality: "Chhapi, Banaskantha",
+      streetAddress: "Marengo CIMS Hospital, Off Science City Road, Sola",
+      addressLocality: "Ahmedabad",
       addressRegion: "Gujarat",
-      postalCode: "385210",
+      postalCode: "380060",
       addressCountry: "IN",
     },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: SITE_CONFIG.contact.phoneFormatted,
-      contactType: "customer service",
-      email: SITE_CONFIG.contact.email,
-      availableLanguage: ["English", "Hindi", "Gujarati"],
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "23.0768",
+      longitude: "72.5085",
     },
+    telephone: SITE_CONFIG.contact.phoneFormatted,
+    email: SITE_CONFIG.contact.email,
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "10:00",
+        closes: "18:00",
+      },
+    ],
     sameAs: [
-      SITE_CONFIG.socials.facebook,
       SITE_CONFIG.socials.instagram,
-      SITE_CONFIG.socials.linkedin,
-      SITE_CONFIG.socials.twitter,
+      SITE_CONFIG.socials.facebook,
       SITE_CONFIG.socials.youtube,
+      SITE_CONFIG.socials.linkedin,
     ],
   };
 
@@ -44,136 +98,84 @@ export function GlobalStructuredData() {
     "@type": "WebSite",
     "@id": `${SITE_CONFIG.url}/#website`,
     url: SITE_CONFIG.url,
-    name: SITE_CONFIG.name,
+    name: "Dr. Noopur Patel | Breast Cancer Surgeon Ahmedabad",
     description: SITE_CONFIG.tagline,
     publisher: {
-      "@id": `${SITE_CONFIG.url}/#organization`,
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_CONFIG.url}/blog?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
+      "@id": `${SITE_CONFIG.url}/#physician`,
     },
   };
 
-  return <JsonLd schema={[organizationSchema, webSiteSchema]} />;
+  return <JsonLd schema={[physicianSchema, webSiteSchema]} />;
 }
 
 /**
- * Service JSON-LD Schema for service detail pages.
+ * Service JSON-LD Schema for clinical procedures.
  */
 export function ServiceStructuredData({ service }: { service: ServiceItem }) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Service",
+    "@type": "MedicalProcedure",
     name: service.title,
     description: service.shortDescription,
+    procedureType: "https://schema.org/SurgicalProcedure",
     provider: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
+      "@type": "Physician",
+      name: "Dr. Noopur Patel",
       url: SITE_CONFIG.url,
+      hospitalAffiliation: "Marengo CIMS Hospital, Ahmedabad",
     },
-    serviceType: "Digital Marketing",
-    areaServed: {
-      "@type": "Country",
-      name: "India",
-    },
-    hasOfferCatalog: service.packages
-      ? {
-          "@type": "OfferCatalog",
-          name: `${service.title} Packages`,
-          itemListElement: service.packages.map((pkg) => ({
-            "@type": "Offer",
-            name: pkg.name,
-            description: pkg.description,
-            price: pkg.price,
-            priceCurrency: "INR",
-          })),
-        }
-      : undefined,
+    bodyLocation: "Breast",
   };
 
   return <JsonLd schema={schema} />;
 }
 
+export interface BreadcrumbItemSchema {
+  name: string;
+  url?: string;
+  href?: string;
+}
+
 /**
- * Article JSON-LD Schema for blog posts.
+ * BreadcrumbList JSON-LD Schema.
  */
-export function ArticleStructuredData({ post }: { post: BlogPost }) {
+export function BreadcrumbStructuredData({ items }: { items: BreadcrumbItemSchema[] }) {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.publishedAt || post.createdAt,
-    dateModified: post.updatedAt || post.createdAt,
-    author: {
-      "@type": "Person",
-      name: post.author.name,
-      jobTitle: post.author.role,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: SITE_CONFIG.name,
-      url: SITE_CONFIG.url,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_CONFIG.url}/images/doctor/assets/logo.png`,
-      },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": `${SITE_CONFIG.url}/blog/${post.slug}`,
-    },
-    keywords: post.tags?.join(", "),
+    "@type": "BreadcrumbList",
+    itemListElement: (items || []).map((item, index) => {
+      const link = item.url || item.href || "/";
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: link.startsWith("http") ? link : `${SITE_CONFIG.url}${link}`,
+      };
+    }),
   };
 
   return <JsonLd schema={schema} />;
 }
 
+export interface FAQItemSchema {
+  question: string;
+  answer: string;
+}
+
 /**
- * FAQPage JSON-LD Schema for FAQs sections.
+ * FAQPage JSON-LD Schema for patient educational queries.
  */
-export function FAQStructuredData({
-  faqs,
-}: {
-  faqs: Array<{ question: string; answer: string }>;
-}) {
+export function FAQStructuredData({ faqs }: { faqs: FAQItemSchema[] }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
+    mainEntity: (faqs || []).map((faq) => ({
       "@type": "Question",
       name: faq.question,
       acceptedAnswer: {
         "@type": "Answer",
         text: faq.answer,
       },
-    })),
-  };
-
-  return <JsonLd schema={schema} />;
-}
-
-/**
- * BreadcrumbList JSON-LD Schema.
- */
-export function BreadcrumbStructuredData({
-  items,
-}: {
-  items: Array<{ name: string; href: string }>;
-}) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: item.name,
-      item: `${SITE_CONFIG.url}${item.href}`,
     })),
   };
 

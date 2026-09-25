@@ -9,10 +9,10 @@ import {
   Clock, 
   Phone, 
   Calendar, 
-  Search, 
   Menu, 
   X, 
-  MessageCircle
+  MessageCircle,
+  ExternalLink
 } from "lucide-react";
 import { InstagramIcon, FacebookIcon, YoutubeIcon, LinkedinIcon } from "./SocialIcons";
 import { SITE_CONFIG } from "@/config/site";
@@ -30,6 +30,25 @@ export default function DoctorNavbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock background scroll when mobile menu is open & listen for ESC key
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          setIsMobileMenuOpen(false);
+        }
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isMobileMenuOpen]);
+
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -40,19 +59,27 @@ export default function DoctorNavbar() {
   ];
 
   const isActive = (href: string) => {
-    if (href === "/" && pathname !== "/") return false;
+    if (href === "/") return pathname === "/";
     return pathname.startsWith(href);
   };
 
+  const whatsappUrl = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+    "Hello Dr. Noopur Patel, I would like to schedule a consultation."
+  )}`;
+
   return (
-    <header className="w-full z-50 transition-all duration-300">
-      {/* 1. TOP UTILITY BAR (Exact Match with Reference) */}
-      <div className="bg-[#FFF8F9] border-b border-[#F5D6DE]/60 text-[11.5px] sm:text-[12px] text-slate-600 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between">
+    <header className="w-full z-50 sticky top-0 transition-all duration-300">
+      {/* 1. TOP UTILITY BAR (Hides on scroll for sleek sticky experience) */}
+      <div
+        className={`bg-[#FFF8F9] border-b border-[#F5D6DE]/60 text-[11.5px] sm:text-[12px] text-slate-600 hidden md:block transition-all duration-300 ${
+          isScrolled ? "max-h-0 py-0 opacity-0 overflow-hidden" : "max-h-12 py-1.5 opacity-100"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div className="flex items-center space-x-6">
             <span className="flex items-center gap-1.5 text-slate-700 font-medium">
               <MapPin className="w-3.5 h-3.5 text-[#D84C70]" />
-              Ahmedabad, Gujarat
+              Marengo CIMS Hospital, Ahmedabad
             </span>
             <span className="flex items-center gap-1.5 text-slate-600">
               <Clock className="w-3.5 h-3.5 text-[#D84C70]" />
@@ -68,13 +95,13 @@ export default function DoctorNavbar() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="text-slate-500 font-medium">Follow Us:</span>
+            <span className="text-slate-500 font-medium">Connect:</span>
             <div className="flex items-center space-x-3 text-slate-600">
               <a
                 href={SITE_CONFIG.socials.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#D84C70] transition-colors"
+                className="hover:text-[#D84C70] transition-colors p-1"
                 aria-label="Instagram"
               >
                 <InstagramIcon className="w-3.5 h-3.5" />
@@ -83,7 +110,7 @@ export default function DoctorNavbar() {
                 href={SITE_CONFIG.socials.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#D84C70] transition-colors"
+                className="hover:text-[#D84C70] transition-colors p-1"
                 aria-label="Facebook"
               >
                 <FacebookIcon className="w-3.5 h-3.5" />
@@ -92,7 +119,7 @@ export default function DoctorNavbar() {
                 href={SITE_CONFIG.socials.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#D84C70] transition-colors"
+                className="hover:text-[#D84C70] transition-colors p-1"
                 aria-label="YouTube"
               >
                 <YoutubeIcon className="w-3.5 h-3.5" />
@@ -101,7 +128,7 @@ export default function DoctorNavbar() {
                 href={SITE_CONFIG.socials.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#D84C70] transition-colors"
+                className="hover:text-[#D84C70] transition-colors p-1"
                 aria-label="LinkedIn"
               >
                 <LinkedinIcon className="w-3.5 h-3.5" />
@@ -113,11 +140,12 @@ export default function DoctorNavbar() {
 
       {/* 2. MAIN NAVIGATION BAR */}
       <nav
-        className={`w-full bg-white transition-all duration-300 ${
+        className={`w-full bg-white/95 backdrop-blur-md transition-all duration-300 ${
           isScrolled
-            ? "sticky top-0 shadow-[0_4px_20px_rgba(216,76,112,0.08)] py-1.5 sm:py-2"
-            : "py-2 sm:py-2.5 border-b border-slate-100"
+            ? "shadow-[0_4px_20px_rgba(23,25,35,0.06)] py-2 sm:py-2.5 border-b border-slate-100"
+            : "py-2.5 sm:py-3 border-b border-slate-100"
         }`}
+        aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo Branding */}
@@ -156,38 +184,41 @@ export default function DoctorNavbar() {
           </div>
 
           {/* Right Action Buttons */}
-          <div className="hidden md:flex items-center space-x-3.5">
-            <button
-              type="button"
-              className="p-1.5 text-slate-500 hover:text-[#D84C70] hover:bg-[#FDF2F4] rounded-full transition-colors"
-              aria-label="Search"
+          <div className="hidden md:flex items-center space-x-3">
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100/70 border border-emerald-200 text-[13px] font-semibold px-3.5 py-2 rounded-full transition-colors"
             >
-              <Search className="w-4 h-4" />
-            </button>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>WhatsApp</span>
+            </a>
 
             <Link
               href="/appointments"
-              className="inline-flex items-center gap-2 bg-[#D84C70] hover:bg-[#BE3A5C] text-white text-[13px] font-semibold px-4.5 py-2 rounded-full shadow-[0_4px_12px_rgba(216,76,112,0.22)] hover:shadow-[0_6px_16px_rgba(216,76,112,0.32)] transition-all duration-200 active:scale-95"
+              className="inline-flex items-center gap-2 bg-[#D84C70] hover:bg-[#BE3A5C] text-white text-[13px] font-semibold px-5 py-2 rounded-full shadow-[0_2px_8px_rgba(216,76,112,0.22)] hover:shadow-[0_4px_14px_rgba(216,76,112,0.32)] transition-all duration-200 active:scale-95"
             >
               <Calendar className="w-3.5 h-3.5" />
               <span>Book Appointment</span>
             </Link>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Hamburger & Quick CTA */}
           <div className="flex items-center gap-2 lg:hidden">
             <Link
               href="/appointments"
-              className="inline-flex items-center gap-1.5 bg-[#D84C70] text-white text-[12px] font-semibold px-3.5 py-2 rounded-full"
+              className="inline-flex items-center gap-1 bg-[#D84C70] text-white text-[12px] font-semibold px-3 py-1.5 rounded-full"
             >
-              <Calendar className="w-3.5 h-3.5" />
+              <Calendar className="w-3 h-3" />
               <span>Book</span>
             </Link>
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-[#D84C70] focus:outline-none"
+              className="p-2 text-slate-700 hover:text-[#D84C70] focus:outline-none min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
               aria-label="Toggle navigation menu"
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -199,70 +230,79 @@ export default function DoctorNavbar() {
         </div>
       </nav>
 
-      {/* 3. MOBILE SLIDE-OVER DRAWER */}
+      {/* 3. MOBILE ACCESSIBLE SLIDE-OVER DRAWER */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-black/40 backdrop-blur-xs flex justify-end">
-          <div className="w-[82%] max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile Navigation"
+          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex justify-end animate-in fade-in duration-200"
+          onClick={() => setIsMobileMenuOpen(false)}
+        >
+          <div
+            className="w-[85%] max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-                <div className="flex items-center">
-                  <Image
-                    src="/images/doctor/assets/logo.png"
-                    alt="Dr. Noopur Patel Logo"
-                    width={180}
-                    height={60}
-                    className="h-10 w-auto object-contain"
-                  />
-                </div>
+                <Image
+                  src="/images/doctor/assets/logo.png"
+                  alt="Dr. Noopur Patel Logo"
+                  width={180}
+                  height={60}
+                  className="h-9 w-auto object-contain"
+                />
                 <button
                   type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-slate-500 hover:text-slate-800"
+                  className="p-2 text-slate-500 hover:text-slate-800 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                  aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <div className="flex flex-col space-y-3 mt-6">
+              <nav className="flex flex-col space-y-2 mt-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-[15px] font-medium px-3 py-2 rounded-lg transition-colors ${
+                    className={`text-[15px] font-medium px-4 py-3 rounded-xl transition-colors min-h-[44px] flex items-center ${
                       isActive(link.href)
-                        ? "bg-[#FDF2F4] text-[#D84C70] font-semibold"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#D84C70]"
+                        ? "bg-[#FFF8F9] text-[#D84C70] font-bold border border-[#F5D6DE]"
+                        : "text-slate-800 hover:bg-slate-50"
                     }`}
                   >
                     {link.label}
                   </Link>
                 ))}
-              </div>
+              </nav>
             </div>
 
-            <div className="pt-6 border-t border-slate-100 space-y-4">
+            <div className="pt-6 border-t border-slate-100 space-y-3">
               <Link
                 href="/appointments"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 bg-[#D84C70] text-white py-3 rounded-full font-semibold text-sm shadow-md"
+                className="w-full flex items-center justify-center gap-2 bg-[#D84C70] text-white py-3.5 rounded-full font-semibold text-sm shadow-md min-h-[44px]"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book an Appointment</span>
               </Link>
 
               <a
-                href={`https://wa.me/${SITE_CONFIG.contact.whatsappNumber}`}
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 border border-[#25D366] text-[#25D366] py-2.5 rounded-full font-medium text-sm hover:bg-[#25D366]/5"
+                className="w-full flex items-center justify-center gap-2 border border-emerald-500 text-emerald-700 bg-emerald-50/50 py-3 rounded-full font-semibold text-sm min-h-[44px]"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 text-emerald-600" />
                 <span>Consult on WhatsApp</span>
               </a>
 
-              <div className="text-xs text-slate-500 text-center space-y-1 pt-2">
-                <p>Marengo CIMS Hospital, Ahmedabad</p>
+              <div className="text-xs text-slate-500 text-center space-y-0.5 pt-2">
+                <p className="font-semibold text-slate-700">Marengo CIMS Hospital, Ahmedabad</p>
+                <p>OPD Hours: Mon - Sat: 10:00 AM - 6:00 PM</p>
                 <p>{SITE_CONFIG.contact.phone}</p>
               </div>
             </div>

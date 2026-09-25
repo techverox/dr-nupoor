@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Inter, Outfit, Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
+import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { resolveRootLayoutMetadata } from "@/lib/seo/metadata";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
@@ -10,32 +10,18 @@ import { getCmsSiteSettings } from "@/lib/services/cmsService";
 import { CustomCodeInjector } from "@/components/analytics/CustomCodeInjector";
 import { LiveSyncListener } from "@/components/sync/LiveSyncListener";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
-});
-
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   style: ["normal", "italic"],
 });
 
@@ -57,7 +43,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${outfit.variable} ${plusJakarta.variable} ${playfair.variable} scroll-smooth`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${plusJakarta.variable} ${playfair.variable} scroll-smooth`}>
       <head>
         <GlobalStructuredData />
       </head>

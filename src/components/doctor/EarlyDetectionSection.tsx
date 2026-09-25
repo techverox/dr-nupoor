@@ -8,27 +8,27 @@ export default function EarlyDetectionSection() {
   const cards = [
     {
       icon: <Activity className="w-5 h-5 text-[#D84C70]" />,
-      stat: "1 in 8",
-      label: "Women may develop breast cancer",
-      description: "Lifetime risk highlights the importance of routine self-examinations and awareness.",
+      stat: "Monthly",
+      label: "Self-Breast Examination",
+      description: "Familiarity with your breast tissue allows early recognition of subtle lumps, changes, or thickening.",
     },
     {
       icon: <Heart className="w-5 h-5 text-[#D84C70]" />,
-      stat: "90%+",
-      label: "Survival rate with early detection",
-      description: "When diagnosed at early stages, clinical treatment outcomes are exceptionally positive.",
+      stat: "Stage 0–1",
+      label: "Optimal Clinical Outcomes",
+      description: "Early-stage detection provides the highest likelihood of breast conservation and successful treatment.",
     },
     {
       icon: <ShieldCheck className="w-5 h-5 text-[#D84C70]" />,
-      stat: "Regular",
-      label: "Screening saves lives",
-      description: "Clinical mammography and expert evaluation detect changes before physical symptoms appear.",
+      stat: "Annual",
+      label: "Clinical Screening",
+      description: "Diagnostic imaging can identify microscopic lesions and tissue changes before physical symptoms appear.",
     },
     {
       icon: <Users className="w-5 h-5 text-[#D84C70]" />,
-      stat: "You are not alone",
-      label: "We are here to support",
-      description: "Comprehensive guidance, compassionate answers, and clinical companionship every step.",
+      stat: "Complete",
+      label: "Multidisciplinary Support",
+      description: "Collaborative surgical oncology, radiology, and pathology consultation at Marengo CIMS Hospital.",
     },
   ];
 

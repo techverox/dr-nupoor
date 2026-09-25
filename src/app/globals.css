@@ -1,508 +1,180 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: var(--font-playfair), "Georgia", "Times New Roman", serif;
-  --font-display: var(--font-playfair), var(--font-plus-jakarta), serif;
-  --font-admin: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-playfair), serif;
 }
-
-@variant dark (&:where(.dark, .dark *));
 
 @layer base {
   :root {
-    --background: #FFFFFF;
-    --foreground: #1A202C;
-    --primary-rose: #D84C70;
+    /* Brand Medical Color System (Editorial Healthcare Standard) */
+    --color-ink: #171923;
+    --color-charcoal: #2D3748;
+    --color-body: #4A5568;
+    --color-muted: #718096;
+
+    /* Rose & Medical Pink Scale */
+    --primary-rose: #D94B72;
     --primary-rose-hover: #BE3A5C;
-    --primary-rose-dark: #9B2846;
-    --rose-light: #FDF2F4;
-    --rose-subtle: #FFF8F9;
-    --rose-border: #F5D6DE;
-    --text-navy: #1A202C;
-    --text-body: #334155;
-    --text-muted: #64748B;
+    --primary-rose-dark: #8B2346;
+    --rose-light: #F8E7EC;
+    --rose-subtle: #FFF7F9;
+    --rose-border: #E9DDE1;
+
+    /* Clean Surfaces & Borders */
+    --surface-white: #FFFFFF;
+    --surface-warm: #FFFDFC;
+    --border-light: #E2E8F0;
+    --border-subtle: #F1F5F9;
+
+    /* Semantic Status Accents */
+    --status-success: #059669;
+    --status-warning: #D97706;
+    --status-error: #DC2626;
   }
 
   body {
     background-color: #FFFFFF;
-    color: #1A202C;
-
-    font-family: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--color-ink);
+    font-family: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    font-feature-settings: "cv02" 1, "cv03" 1, "cv04" 1, "cv11" 1;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-feature-settings: "cv02" 1, "cv03" 1, "cv04" 1, "cv11" 1;
-    letter-spacing: -0.02em;
+    font-family: var(--font-playfair), "Georgia", serif;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
   }
 
+  /* Accessible Focus Outlines across interactive elements */
+  :focus-visible {
+    outline: 2px solid var(--primary-rose);
+    outline-offset: 2px;
+  }
 
-  /* Custom Smooth Scrollbar */
+  /* Custom Clean Scrollbar */
   ::-webkit-scrollbar {
-    width: 7px;
+    width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #F1F5F9;
+    background: #F8FAFC;
   }
   ::-webkit-scrollbar-thumb {
     background: #CBD5E1;
-    border-radius: 4px;
+    border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #94A3B8;
   }
 }
 
-/* Floating animation for Wrike-style badges */
-@keyframes float-badge-slow {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-6px) rotate(2deg);
-  }
+/* ============================================================================
+   TYPOGRAPHY SCALE & UTILITIES
+   ============================================================================ */
+.font-editorial {
+  font-family: var(--font-playfair), "Georgia", serif;
 }
 
-@keyframes float-badge-reverse {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(6px) rotate(-2deg);
-  }
-}
-
-@keyframes pulse-subtle {
-  0%, 100% {
-    opacity: 0.9;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.03);
-  }
-}
-
-@keyframes magnetic-shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* Wrike-Style Hero Progress Bar 1s Progressive Fill Animation */
-@keyframes wrike-bar-fill {
-  0% {
-    width: 0%;
-    opacity: 0.85;
-  }
-  100% {
-    width: 100%;
-    opacity: 1;
-  }
-}
-
-.animate-wrike-fill-1 {
-  animation: wrike-bar-fill 980ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-wrike-fill-2 {
-  animation: wrike-bar-fill 980ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
-}
-
-.animate-float-slow {
-  animation: float-badge-slow 4.5s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: float-badge-reverse 5s ease-in-out infinite;
-}
-
-.animate-pulse-subtle {
-  animation: pulse-subtle 3s ease-in-out infinite;
-}
-
-/* Wrike Spring Physics Classes - GPU Optimized */
-.transition-spring {
-  transition-property: transform, opacity, border-color, background-color;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  transition-duration: 0.35s;
-}
-
-.transition-spring-fast {
-  transition-property: transform, opacity;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-  transition-duration: 0.2s;
-}
-
-.transition-spring-bounce {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
-  transition-duration: 0.3s;
-}
-
-/* 100% GPU-composited hardware-accelerated marquee */
-@keyframes marquee-left {
-  0% { transform: translate3d(0%, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-
-@keyframes marquee-right {
-  0% { transform: translate3d(-50%, 0, 0); }
-  100% { transform: translate3d(0%, 0, 0); }
-}
-
-.animate-marquee-left {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: marquee-left 32s linear infinite;
-}
-
-.animate-marquee-right {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: marquee-right 32s linear infinite;
-}
-
-.animate-marquee-left:hover,
-.animate-marquee-right:hover {
-  animation-play-state: paused;
-}
-
-/* Subtle glow for play buttons and primary elements */
-.glow-emerald {
-  box-shadow: 0 0 30px rgba(0, 224, 92, 0.4);
-}
-
-.glow-emerald-hover:hover {
-  box-shadow: 0 0 40px rgba(0, 224, 92, 0.6);
-}
-
-/* Magnetic Button Elastic Feedback */
-.btn-magnetic {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.btn-magnetic:hover {
-  transform: translateY(-2px) scale(1.02);
-}
-.btn-magnetic:active {
-  transform: translateY(1px) scale(0.98);
+.font-ui {
+  font-family: var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* ============================================================================
-   $10 BILLION DIFFUSE SHADOW & GLASSMORPHISM DESIGN SYSTEM
-   Multi-Layered Diffuse Ambient Occlusion + Specular Rim + Backdrop Blur
+   CARD ELEVATIONS & SURFACES
+   Restrained, high-end medical practice depth without exaggerated glow
    ============================================================================ */
-
-/* Multi-layered diffuse elevation as defined by enterprise design leaders (Linear, Stripe) */
-.shadow-diffuse {
-  box-shadow: 
-    0 20px 40px -15px rgba(0, 0, 0, 0.05),
-    0 0 0 1px rgba(0, 0, 0, 0.04);
-}
-
-.shadow-diffuse-lg {
-  box-shadow: 
-    0 24px 48px -12px rgba(15, 23, 42, 0.08),
-    0 12px 24px -8px rgba(15, 23, 42, 0.04),
-    0 0 0 1px rgba(15, 23, 42, 0.05);
-}
-
-.shadow-card-diffuse {
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.02),
-    0 4px 12px rgba(0, 0, 0, 0.03),
-    0 16px 32px -4px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(0, 0, 0, 0.04);
-}
-
-.shadow-card-diffuse:hover,
-.hover-shadow-card-diffuse:hover {
-  box-shadow:
-    0 8px 16px -4px rgba(0, 0, 0, 0.04),
-    0 24px 48px -8px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(59, 130, 246, 0.2);
-}
-
-/* Floating Glassmorphic Elevation with Internal Ambient Light Rim */
-.shadow-glass {
-  box-shadow: 
-    0 20px 50px -12px rgba(15, 23, 42, 0.08),
-    0 4px 16px -2px rgba(15, 23, 42, 0.04),
-    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9),
-    0 0 0 1px rgba(226, 232, 240, 0.8);
-}
-
-.shadow-glass-dark {
-  box-shadow: 
-    0 24px 60px -12px rgba(0, 0, 0, 0.55),
-    0 12px 24px -8px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.12),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-/* Glassmorphism Surface Bases */
-.glass-surface-light {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-.glass-surface-translucent {
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.glass-surface-dark {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Smooth Radiant Gradient Dividers (Linear / Stripe Standard) */
-.divider-gradient {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(203, 213, 225, 0.8) 50%, transparent 100%);
-}
-
-.divider-gradient-subtle {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(226, 232, 240, 0.6) 50%, transparent 100%);
-}
-
-.divider-gradient-dark {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent 0%, rgba(51, 65, 85, 0.8) 50%, transparent 100%);
-}
-
-/* ============================================================================
-   LIVING MICRO-INTERACTIONS ($10B Enterprise UI Standard)
-   ============================================================================ */
-
-/* Living Radar Pulse */
-@keyframes radar-pulse-ring {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.6);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-}
-
-.radar-ping {
-  animation: radar-pulse-ring 2.2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
-}
-
-/* Card 3D Lift & Dynamic Tactile Physics */
-.card-living {
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
-  will-change: transform, box-shadow;
-}
-
-.card-living:hover {
-  transform: translateY(-3px) scale(1.008);
-}
-
-/* Specular Shimmer Beam for Data Updates */
-@keyframes data-flash {
-  0% {
-    color: #00E05C;
-    transform: scale(1.02);
-  }
-  100% {
-    color: inherit;
-    transform: scale(1);
-  }
-}
-
-.animate-data-flash {
-  animation: data-flash 0.6s ease-out;
-}
-
-/* Luminous Metallic Shimmer Sweep for High-Conversion Primary CTAs (Stripe/Linear Tier) */
-@keyframes metallic-shimmer-sweep {
-  0% {
-    transform: translateX(-160%) skewX(-20deg);
-  }
-  22%, 100% {
-    transform: translateX(260%) skewX(-20deg);
-  }
-}
-
-.shimmer-sweep {
-  position: relative;
-  overflow: hidden;
-}
-
-.shimmer-sweep::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  bottom: -50%;
-  left: -20%;
-  width: 50%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.38) 50%,
-    transparent 100%
-  );
-  animation: metallic-shimmer-sweep 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  pointer-events: none;
-}
-
-/* ============================================================================
-   ADMIN MINIMALIST DESIGN SYSTEM & TYPOGRAPHY
-   Linear / Stripe / Vercel Developer-Grade Minimalist Standards
-   ============================================================================ */
-.admin-font {
-  font-family: var(--font-plus-jakarta), var(--font-inter), -apple-system, BlinkMacSystemFont, sans-serif;
-  letter-spacing: -0.012em;
-}
-
-.admin-tabular {
-  font-feature-settings: "tnum" 1;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Minimalist Admin Card */
-.admin-card {
-  background: #FFFFFF;
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  border-radius: 1rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.dark .admin-card {
-  background: #0E1422;
-  border-color: rgba(30, 41, 59, 0.8);
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-}
-
-.admin-card-hover:hover {
-  border-color: rgba(203, 213, 225, 1);
-  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.05);
-}
-
-.dark .admin-card-hover:hover {
-  border-color: rgba(51, 65, 85, 0.9);
-  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
-}
-
-/* Minimalist Admin Input */
-.admin-input {
-  background-color: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: 0.75rem;
-  color: #0F172A;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  transition: all 0.15s ease;
-}
-
-.dark .admin-input {
-  background-color: rgba(15, 23, 42, 0.6);
-  border-color: #334155;
-  color: #F1F5F9;
-}
-
-.admin-input:focus {
-  outline: none;
-  border-color: #059669;
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+.card-clinical {
   background-color: #FFFFFF;
+  border: 1px solid #E9DDE1;
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(23, 25, 35, 0.04), 0 4px 12px 0 rgba(217, 75, 114, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.dark .admin-input:focus {
-  border-color: #10B981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-  background-color: #0F172A;
+.card-clinical:hover {
+  border-color: #D94B72;
+  box-shadow: 0 4px 20px -2px rgba(217, 75, 114, 0.08), 0 2px 6px -1px rgba(23, 25, 35, 0.04);
 }
 
-/* Minimalist Admin Button Primary */
-.admin-btn-primary {
+.card-rose-subtle {
+  background-color: #FFF7F9;
+  border: 1px solid #F8E7EC;
+  border-radius: 1.25rem;
+}
+
+/* ============================================================================
+   BUTTON SYSTEM
+   ============================================================================ */
+.btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background-color: #059669;
+  background-color: #D94B72;
   color: #FFFFFF;
-  font-size: 0.8125rem;
+  font-family: var(--font-plus-jakarta), sans-serif;
   font-weight: 600;
-  border-radius: 0.75rem;
-  padding: 0.5625rem 1rem;
-  box-shadow: 0 1px 2px 0 rgba(5, 150, 105, 0.2);
-  transition: all 0.15s ease;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(217, 75, 114, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.admin-btn-primary:hover {
-  background-color: #047857;
+.btn-primary:hover {
+  background-color: #BE3A5C;
+  box-shadow: 0 4px 14px rgba(217, 75, 114, 0.35);
   transform: translateY(-1px);
-  box-shadow: 0 4px 10px -2px rgba(5, 150, 105, 0.3);
 }
 
-.admin-btn-primary:active {
-  transform: translateY(0);
+.btn-primary:active {
+  transform: translateY(0px);
 }
 
-/* Minimalist Admin Button Secondary */
-.admin-btn-secondary {
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   background-color: #FFFFFF;
-  color: #334155;
-  border: 1px solid #E2E8F0;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  border-radius: 0.75rem;
-  padding: 0.5625rem 0.875rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
-  transition: all 0.15s ease;
+  color: #8B2346;
+  border: 1px solid #E9DDE1;
+  font-family: var(--font-plus-jakarta), sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
-.dark .admin-btn-secondary {
-  background-color: #0F172A;
-  color: #E2E8F0;
-  border-color: #334155;
+.btn-secondary:hover {
+  background-color: #FFF7F9;
+  border-color: #D94B72;
+  color: #D94B72;
+  transform: translateY(-1px);
 }
 
-.admin-btn-secondary:hover {
-  background-color: #F8FAFC;
-  border-color: #CBD5E1;
-  color: #0F172A;
+.btn-secondary:active {
+  transform: translateY(0px);
 }
 
-.dark .admin-btn-secondary:hover {
-  background-color: #1E293B;
-  border-color: #475569;
-  color: #FFFFFF;
+/* ============================================================================
+   ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-
-
-
-

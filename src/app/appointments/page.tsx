@@ -56,21 +56,25 @@ export default function AppointmentPage() {
           name: formData.name.trim(),
           phone: formData.phone.trim(),
           email: formData.email.trim() || undefined,
-          serviceNeeded: `${formData.consultationType} on ${formData.date || "Preferred Date"} (${formData.time})`,
+          service: `${formData.consultationType} on ${formData.date || "Preferred Date"} (${formData.time})`,
           message: formData.message.trim() || `Consultation request: ${formData.consultationType}`,
-          source: "Appointment Booking Page",
+          source: "appointment_page",
         }),
       });
 
-      if (!res.ok) {
-        throw new Error("Failed to submit appointment request.");
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Unable to submit appointment request.");
       }
 
       setSubmitted(true);
     } catch (err: any) {
-      console.warn("Appointment API error, switching to graceful fallback:", err);
-      // Even if API has transient issues, display success to ensure patient peace of mind
-      setSubmitted(true);
+      console.error("[Appointment Submission Error]:", err);
+      setError(
+        err.message || "We could not submit your request online right now. Please call us directly or reach us instantly on WhatsApp."
+      );
+      setSubmitted(false);
     } finally {
       setLoading(false);
     }
@@ -199,45 +203,64 @@ export default function AppointmentPage() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   {error && (
-                    <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      <span>{error}</span>
+                    <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-sm space-y-2">
+                      <div className="flex items-start gap-2.5">
+                        <AlertCircle className="w-5 h-5 flex-shrink-0 text-[#D84C70] mt-0.5" />
+                        <span className="leading-relaxed">{error}</span>
+                      </div>
+                      <div className="pt-1 pl-7">
+                        <a
+                          href={`https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+                            `Hello Dr. Noopur Patel clinic, I would like to book a consultation for ${formData.name || "myself"}.`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D84C70] hover:underline"
+                        >
+                          <MessageCircle className="w-3.5 h-3.5" />
+                          <span>Tap here to message directly on WhatsApp &rarr;</span>
+                        </a>
+                      </div>
                     </div>
                   )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Your Name */}
                     <div>
-                      <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                      <label htmlFor="apt-name" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
                         Your Name <span className="text-[#D84C70]">*</span>
                       </label>
                       <div className="relative">
-                        <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                        <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                         <input
+                          id="apt-name"
                           type="text"
                           required
+                          autoComplete="name"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Priyaben Shah"
-                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors"
+                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all"
                         />
                       </div>
                     </div>
 
                     {/* Phone Number */}
                     <div>
-                      <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                      <label htmlFor="apt-phone" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
                         Phone Number <span className="text-[#D84C70]">*</span>
                       </label>
                       <div className="relative">
-                        <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                        <Phone className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                         <input
+                          id="apt-phone"
                           type="tel"
                           required
+                          autoComplete="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                           placeholder="e.g. +91 98765 43210"
-                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors"
+                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all"
                         />
                       </div>
                     </div>
@@ -246,34 +269,37 @@ export default function AppointmentPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Email Address */}
                     <div>
-                      <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
-                        Email Address
+                      <label htmlFor="apt-email" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                        Email Address <span className="text-slate-400 text-xs font-normal">(Optional)</span>
                       </label>
                       <div className="relative">
-                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                        <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                         <input
+                          id="apt-email"
                           type="email"
+                          autoComplete="email"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           placeholder="your.email@example.com"
-                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors"
+                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all"
                         />
                       </div>
                     </div>
 
                     {/* Preferred Date */}
                     <div>
-                      <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                      <label htmlFor="apt-date" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
                         Preferred Date <span className="text-[#D84C70]">*</span>
                       </label>
                       <div className="relative">
-                        <Calendar className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
+                        <Calendar className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                         <input
+                          id="apt-date"
                           type="date"
                           required
                           value={formData.date}
                           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors text-slate-700"
+                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all text-slate-700"
                         />
                       </div>
                     </div>
@@ -282,15 +308,16 @@ export default function AppointmentPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {/* Preferred Time */}
                     <div>
-                      <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                      <label htmlFor="apt-time" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
                         Preferred Time <span className="text-[#D84C70]">*</span>
                       </label>
                       <div className="relative">
                         <Clock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                         <select
+                          id="apt-time"
                           value={formData.time}
                           onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors appearance-none cursor-pointer"
+                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all appearance-none cursor-pointer"
                         >
                           <option>10:00 AM - 01:00 PM (Morning)</option>
                           <option>02:00 PM - 04:00 PM (Afternoon)</option>
@@ -301,15 +328,16 @@ export default function AppointmentPage() {
 
                     {/* Consultation Type */}
                     <div>
-                      <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                      <label htmlFor="apt-type" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
                         Consultation Type <span className="text-[#D84C70]">*</span>
                       </label>
                       <div className="relative">
                         <FileText className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 pointer-events-none" />
                         <select
+                          id="apt-type"
                           value={formData.consultationType}
                           onChange={(e) => setFormData({ ...formData, consultationType: e.target.value })}
-                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors appearance-none cursor-pointer"
+                          className="w-full bg-white pl-10 pr-4 py-2.5 rounded-xl border border-[#F5D6DE] text-[14px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all appearance-none cursor-pointer"
                         >
                           <option>In-Clinic Consultation</option>
                           <option>Online Video Consultation</option>
@@ -321,15 +349,16 @@ export default function AppointmentPage() {
 
                   {/* Message */}
                   <div>
-                    <label className="block text-[13px] font-semibold text-slate-700 mb-1.5">
-                      Your Message (Optional)
+                    <label htmlFor="apt-message" className="block text-[13px] font-semibold text-slate-700 mb-1.5">
+                      Your Message <span className="text-slate-400 text-xs font-normal">(Optional)</span>
                     </label>
                     <textarea
+                      id="apt-message"
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Tell us about your concern, diagnosis or reason for consultation..."
-                      className="w-full bg-white p-3.5 rounded-xl border border-[#F5D6DE] text-[14px] focus:outline-none focus:border-[#D84C70] transition-colors resize-none"
+                      className="w-full bg-white p-3.5 rounded-xl border border-[#F5D6DE] text-[14px] text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/30 focus:border-[#D84C70] transition-all resize-none"
                     />
                   </div>
 

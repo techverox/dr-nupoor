@@ -85,7 +85,9 @@ export default function DoctorFaqAccordion({ faqs }: DoctorFaqAccordionProps) {
                   <button
                     type="button"
                     onClick={() => toggleAccordion(idx)}
-                    className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-[#FFF8F9] transition-colors gap-4"
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-answer-${idx}`}
+                    className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-[#FFF8F9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D84C70] transition-colors gap-4"
                   >
                     <span className="font-serif text-[16px] sm:text-[17px] font-bold text-[#1A202C]">
                       {faq.question}
@@ -100,7 +102,12 @@ export default function DoctorFaqAccordion({ faqs }: DoctorFaqAccordionProps) {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-1 text-[14px] text-slate-600 leading-relaxed border-t border-[#F5D6DE]/40 bg-[#FFF8F9]/30">
+                    <div
+                      id={`faq-answer-${idx}`}
+                      role="region"
+                      aria-labelledby={`faq-question-${idx}`}
+                      className="px-5 pb-5 pt-1 text-[14px] text-slate-600 leading-relaxed border-t border-[#F5D6DE]/40 bg-[#FFF8F9]/30"
+                    >
                       {faq.answer}
                     </div>
                   )}

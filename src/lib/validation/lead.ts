@@ -13,7 +13,7 @@ export function sanitizeInput(input: string): string {
 }
 
 /**
- * Zod validation schema for incoming public lead submissions.
+ * Zod validation schema for incoming public appointment & lead submissions.
  */
 export const leadSubmissionSchema = z.object({
   name: z
@@ -25,16 +25,23 @@ export const leadSubmissionSchema = z.object({
     .string()
     .email("Please provide a valid email address.")
     .max(150, "Email cannot exceed 150 characters.")
-    .transform((val) => sanitizeInput(val).toLowerCase()),
+    .optional()
+    .or(z.literal(""))
+    .transform((val) => (val ? sanitizeInput(val).toLowerCase() : undefined)),
   phone: z
     .string()
+    .min(7, "Phone number must be at least 7 digits.")
     .max(25, "Phone number cannot exceed 25 characters.")
+    .transform(sanitizeInput),
+  service: z
+    .string()
+    .max(200, "Service name cannot exceed 200 characters.")
     .optional()
     .or(z.literal(""))
     .transform((val) => (val ? sanitizeInput(val) : undefined)),
-  service: z
+  serviceNeeded: z
     .string()
-    .max(100, "Service name cannot exceed 100 characters.")
+    .max(200)
     .optional()
     .or(z.literal(""))
     .transform((val) => (val ? sanitizeInput(val) : undefined)),
@@ -44,18 +51,9 @@ export const leadSubmissionSchema = z.object({
     .optional()
     .or(z.literal(""))
     .transform((val) => (val ? sanitizeInput(val) : undefined)),
-  source: z
-    .enum([
-      "contact_form",
-      "hero_form",
-      "consultation_cta",
-      "whatsapp",
-      "landing_page",
-      "manual",
-    ])
-    .default("contact_form"),
+  source: z.string().max(100).default("appointment_page"),
   sourceUrl: z.string().max(500).optional(),
-  formType: z.string().max(50).default("contact"),
+  formType: z.string().max(50).default("appointment"),
   // Honeypot field for bot detection (must remain empty for human submissions)
   website_hp: z.string().optional().or(z.literal("")),
   // Timestamp when form was loaded in the client (to detect instant automated bot submissions)

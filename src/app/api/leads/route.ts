@@ -56,13 +56,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: "Thank you! Your inquiry has been received. Our senior strategist will contact you shortly.",
+        message: "Thank you. Your consultation request has been received. Dr. Noopur Patel's clinical coordinator will contact you shortly.",
         leadId: result.leadId,
       },
       { status: 200 }
     );
   } catch (error) {
-    console.error("[DigiVigee /api/leads] Unhandled POST error:", error);
+    console.error("[Dr. Noopur Patel /api/leads] Unhandled POST error:", error);
     return NextResponse.json(
       { success: false, error: "An unexpected error occurred. Please contact us via phone or WhatsApp." },
       { status: 500 }
