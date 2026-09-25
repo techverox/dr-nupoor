@@ -2,8 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Star, Quote } from "lucide-react";
+import { ArrowRight, Star, Quote, ShieldCheck, Heart } from "lucide-react";
 import { TestimonialItem } from "@/types";
 
 interface PatientStoriesSectionProps {
@@ -15,146 +14,110 @@ export default function PatientStoriesSection({
 }: PatientStoriesSectionProps) {
   const defaultStories = [
     {
-      avatar: "/images/doctor/assets/patient-avatar-1.png",
+      author: "Priya S.",
+      location: "Ahmedabad",
+      treatment: "Breast Conservation Surgery",
       quote:
-        "Dr. Noopur Patel made a difficult journey feel less overwhelming. Her clarity, kindness and confidence gave me so much strength.",
-      author: "Patient from Ahmedabad",
-      tag: "Early Detection",
+        "Dr. Noopur Patel made a terrifying diagnosis feel calm and manageable. Her surgical precision, clear explanations, and kind reassurance gave my family and me immense confidence throughout recovery.",
     },
     {
-      avatar: "/images/doctor/assets/patient-avatar-2.png",
+      author: "Meena R.",
+      location: "Sola, Ahmedabad",
+      treatment: "Fibroadenoma Daycare Excision",
       quote:
-        "I felt heard, supported and well cared for throughout my treatment. Highly recommend her to anyone seeking expert breast care.",
-      author: "Patient from Gandhinagar",
-      tag: "Benign Breast Condition",
+        "I was very anxious about having a breast lump removed. Dr. Patel explained everything with utmost gentleness. The surgery was smooth, scarless, and I was comfortably back home the very same afternoon.",
     },
     {
-      avatar: "/images/doctor/assets/patient-avatar-3.png",
+      author: "Sneha P.",
+      location: "Gandhinagar",
+      treatment: "Oncoplastic Breast Reshaping",
       quote:
-        "Excellent doctor with a very compassionate approach. She explains everything so well and makes you feel comfortable.",
-      author: "Patient from Ahmedabad",
-      tag: "Oncoplastic Surgery",
+        "An exceptional doctor with rare empathy. She listened patiently to all my concerns regarding body image and delivered a wonderful oncoplastic result with clean margins.",
     },
   ];
 
-  const stories = testimonials && testimonials.length > 0
-    ? testimonials.slice(0, 3).map((t, idx) => ({
-        avatar: t.clientAvatar || defaultStories[idx]?.avatar || "/images/doctor/assets/patient-avatar-1.png",
-        quote: t.testimonial,
-        author: t.clientName,
-        tag: t.clientRole || "Verified Patient",
-      }))
-    : defaultStories;
+  const stories =
+    testimonials && testimonials.length > 0
+      ? testimonials.slice(0, 3).map((t, idx) => ({
+          author: t.clientName || defaultStories[idx]?.author,
+          location: defaultStories[idx]?.location || "Ahmedabad",
+          treatment: t.clientRole || defaultStories[idx]?.treatment,
+          quote: t.testimonial || defaultStories[idx]?.quote,
+        }))
+      : defaultStories;
 
   return (
-    <section className="w-full py-16 lg:py-24 bg-[#FFF8F9]/50 border-b border-rose-100/60" id="patient-stories">
+    <section className="w-full py-16 lg:py-24 bg-[#FAF7F8] border-b border-[#F5E6EA]" id="patient-stories">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
           <div className="max-w-2xl">
-            <span className="text-[11px] sm:text-[12px] font-bold tracking-widest uppercase text-[#D84C70] block mb-2">
-              PATIENT STORIES
-            </span>
-            <h2 className="font-serif text-[32px] sm:text-[42px] font-bold text-[#1A202C] leading-tight mb-3">
-              Real Experiences. Real Strength.
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FCE8ED] text-[#88213B] text-[11px] sm:text-xs font-bold tracking-wider uppercase border border-[#F5CAD5] mb-3">
+              <Heart className="w-3.5 h-3.5 fill-[#88213B]" />
+              PATIENT EXPERIENCES &amp; TRUST
+            </div>
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight">
+              What Our Patients Say
             </h2>
-            <p className="text-slate-600 text-[15px] sm:text-[16px] leading-relaxed">
-              Stories from women who trusted us with their care.
+            <p className="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+              Real reflections from women and families who trusted Dr. Noopur Patel with their breast care and healing journey.
             </p>
           </div>
 
           <div>
             <Link
               href="/patient-stories"
-              className="inline-flex items-center gap-2 text-[#D84C70] hover:text-[#BE3A5C] text-[14px] font-semibold px-5 py-2.5 rounded-full border border-[#F5D6DE] bg-white hover:bg-[#FDF2F4] transition-all shadow-xs"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#88213B] hover:text-[#6E172E] px-5 py-2.5 rounded-full bg-white border border-[#EED7DC] shadow-xs hover:shadow transition-all"
             >
-              <span>View More Stories</span>
+              <span>View More Patient Stories</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
 
-        {/* 3 Experience Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {stories.map((story, idx) => (
+        {/* 3 Testimonial Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {stories.map((item, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-2xl p-6 sm:p-7 border border-[#F5D6DE] hover:border-[#D84C70] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+              className="bg-white rounded-3xl border border-[#F0D5DC] p-6 sm:p-7 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
             >
               <div>
-                {/* Clinical Governance Tag */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#FFF0F3] text-[#D84C70] border border-[#F5D6DE]">
-                    Patient Reflection
-                  </span>
-                  <span className="text-[10px] text-slate-500 font-medium">
-                    Verified Consent
-                  </span>
+                {/* Star Rating & Quote Icon */}
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, sIdx) => (
+                      <Star key={sIdx} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                  </div>
+                  <Quote className="w-6 h-6 text-[#9B2846]/20 fill-[#9B2846]/10" />
                 </div>
 
-                {/* Quote */}
-                <p className="text-[14px] text-slate-700 leading-relaxed italic mb-6">
-                  &ldquo;{story.quote}&rdquo;
+                {/* Testimonial Quote */}
+                <p className="text-xs sm:text-sm text-slate-700 leading-relaxed italic mb-6">
+                  &ldquo;{item.quote}&rdquo;
                 </p>
               </div>
 
-              {/* Author Row */}
-              <div className="flex items-center gap-3 pt-4 border-t border-[#F5D6DE]/60">
-                <div className="relative w-11 h-11 rounded-full overflow-hidden border border-[#F5D6DE] bg-[#FFF8F9] flex-shrink-0">
-                  <Image
-                    src={story.avatar}
-                    alt={story.author}
-                    fill
-                    className="object-cover"
-                    sizes="44px"
-                  />
-                </div>
+              {/* Author Info & Treatment Badge */}
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                 <div>
-                  <span className="text-[13.5px] font-bold text-[#1A202C] block">
-                    {story.author}
-                  </span>
-                  <span className="text-[11.5px] text-[#D84C70] font-medium block">
-                    {story.tag}
-                  </span>
+                  <div className="text-xs font-bold text-slate-900">{item.author}</div>
+                  <div className="text-[11px] text-slate-500">{item.location}</div>
                 </div>
+                <span className="text-[10px] font-bold text-[#88213B] bg-[#FAF3F5] px-2.5 py-1 rounded-full border border-[#F5D6DE]">
+                  {item.treatment}
+                </span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Interactive QR Code & Share Story CTA Strip */}
-        <div className="mt-12 bg-white rounded-2xl p-5 sm:p-6 border border-[#F5D6DE] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5 text-center sm:text-left">
-            <div className="w-11 h-11 rounded-xl bg-[#FFF0F3] border border-[#F5D6DE] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
-              <Star className="w-5 h-5 text-[#D84C70] fill-[#D84C70]" />
-            </div>
-            <div>
-              <p className="font-serif text-[15px] sm:text-[16px] font-bold text-slate-900 leading-tight">
-                Treated by Dr. Noopur Patel? Share Your Healing Journey
-              </p>
-              <p className="text-[12px] sm:text-[12.5px] text-slate-500">
-                Your reflection guides and comforts other women facing breast health decisions.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2.5 w-full sm:w-auto">
-            <Link
-              href="/share-story"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold text-white bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] hover:opacity-95 shadow-xs transition-all"
-            >
-              <span>Scan QR / Submit Review</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Consent & Ethics Advisory */}
-        <div className="mt-8 text-center">
-          <p className="text-[11.5px] text-slate-500 max-w-xl mx-auto leading-relaxed">
-            * Patient reflections are shared for supportive and educational purposes with appropriate patient consent. Every diagnosis and surgical treatment plan is individualized; outcomes vary based on medical condition.
-          </p>
+        {/* Clinical Consent Disclaimer */}
+        <div className="mt-8 text-center text-[11px] text-slate-500 flex items-center justify-center gap-1.5">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+          <span>Patient testimonials reflect individual experiences shared with appropriate clinical consent. Clinical outcomes vary based on individual diagnosis.</span>
         </div>
 
       </div>

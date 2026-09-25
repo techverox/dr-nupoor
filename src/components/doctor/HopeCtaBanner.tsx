@@ -7,66 +7,57 @@ import { Calendar, MessageCircle, ArrowRight, ShieldCheck, Heart, Phone } from "
 import { SITE_CONFIG } from "@/config/site";
 
 export default function HopeCtaBanner() {
-  const whatsappUrl = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-    "Hello Dr. Noopur Patel, I would like to consult with you regarding breast health."
-  )}`;
-
   return (
-    <section className="w-full py-10 sm:py-14 bg-white" id="hope-cta" aria-labelledby="hope-cta-heading">
+    <section className="w-full py-12 sm:py-16 bg-white" id="hope-cta" aria-labelledby="hope-cta-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Editorial Healthcare Banner */}
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#D94B72] via-[#C53A62] to-[#9B2846] text-white shadow-[0_12px_36px_rgba(217,75,114,0.2)] border border-rose-300/30 p-8 sm:p-12 lg:p-14">
+        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#FFF5F7] via-[#FDF0F3] to-[#FCE8ED] border border-[#F5CAD5] shadow-sm p-6 sm:p-10 lg:p-12">
           
-          {/* Subtle Ambient Decorative Circles */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-2xl pointer-events-none -ml-10 -mb-10" />
-
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Content (8 cols) */}
-            <div className="lg:col-span-8 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-xs text-white text-[11.5px] font-bold tracking-widest uppercase border border-white/30">
-                <Heart className="w-3.5 h-3.5 fill-white" />
-                <span>COMPASSIONATE CLINICAL CARE</span>
-              </div>
-
-              <h2 id="hope-cta-heading" className="font-serif text-[28px] sm:text-[38px] lg:text-[44px] font-bold leading-[1.15] text-white">
-                Have a Breast Health Concern?
-              </h2>
-
-              <p className="text-white/90 text-[15px] sm:text-[16.5px] leading-relaxed max-w-2xl font-normal">
-                If you have a breast lump, breast-related symptoms, a recent diagnosis, or questions about breast cancer surgery, schedule a consultation to discuss your condition and treatment options.
-              </p>
-
-              <div className="flex items-center gap-4 text-[12.5px] text-white/80 pt-1 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-rose-200" />
-                  Marengo CIMS Hospital, Ahmedabad
-                </span>
-                <span>•</span>
-                <span>Confidential Consultation</span>
+            {/* Left Column: Doctor Cutout Photo */}
+            <div className="lg:col-span-3 flex justify-center lg:justify-start">
+              <div className="relative w-44 h-56 sm:w-48 sm:h-64 rounded-2xl overflow-hidden border border-[#F5CAD5] shadow-xs bg-white">
+                <Image
+                  src="/images/doctor/assets/dr-noopur-hd.jpg"
+                  alt="Dr. Noopur Patel"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 768px) 180px, 200px"
+                />
               </div>
             </div>
 
-            {/* Right Action CTAs (4 cols) */}
-            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3.5 justify-center">
-              <Link
-                href="/appointments"
-                className="inline-flex items-center justify-center gap-2 bg-white text-[#8B2346] hover:bg-rose-50 text-[14.5px] font-bold py-3.5 px-7 rounded-full shadow-lg transition-all active:scale-95"
-              >
-                <Calendar className="w-4 h-4 text-[#D94B72]" />
-                <span>Book an Appointment</span>
-                <ArrowRight className="w-4 h-4 ml-auto sm:ml-0" />
-              </Link>
+            {/* Right Column: Content & Action Buttons */}
+            <div className="lg:col-span-9 space-y-4">
+              <h2 id="hope-cta-heading" className="font-serif text-[26px] sm:text-[34px] lg:text-[38px] font-bold leading-tight text-slate-900">
+                Have a Breast Health Concern?
+              </h2>
 
-              <a
-                href={`tel:${SITE_CONFIG.contact.phone.replace(/\s+/g, "")}`}
-                className="inline-flex items-center justify-center gap-2 border-1.5 border-white/80 hover:bg-white/15 text-white text-[14.5px] font-semibold py-3.5 px-6 rounded-full transition-all active:scale-95"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Call the Clinic</span>
-              </a>
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl">
+                If you noticed a breast lump, abnormal nipple discharge, or a recent diagnosis, or want a second opinion from a breast surgeon, schedule a consultation to discuss your condition.
+              </p>
+
+              {/* Action Buttons Row */}
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <Link
+                  href="/appointments"
+                  className="inline-flex items-center gap-2 bg-[#88213B] hover:bg-[#731930] text-white text-xs sm:text-sm font-bold py-3.5 px-7 rounded-full shadow-md shadow-[#88213B]/20 transition-all active:scale-95"
+                >
+                  <Calendar className="w-4 h-4" />
+                  <span>Book Appointment</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
+                <a
+                  href={`tel:${SITE_CONFIG.contact.phone.replace(/\s+/g, "")}`}
+                  className="inline-flex items-center gap-2 bg-white hover:bg-[#FAF3F5] text-slate-800 hover:text-[#88213B] border border-[#EED7DC] text-xs sm:text-sm font-bold py-3.5 px-6 rounded-full transition-all active:scale-95 shadow-2xs"
+                >
+                  <Phone className="w-4 h-4 text-[#D84C70]" />
+                  <span>Call Now</span>
+                </a>
+              </div>
             </div>
 
           </div>

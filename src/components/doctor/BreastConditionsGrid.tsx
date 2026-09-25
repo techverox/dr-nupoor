@@ -83,32 +83,32 @@ export default function BreastConditionsGrid() {
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight">
             Breast Conditions We Evaluate &amp; Treat
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-2xl mx-auto leading-relaxed">
-            Not sure about your symptoms? Over 80% of breast lumps evaluated in clinics are completely non-cancerous. Explore common conditions below and book a clinical checkup for clear answers.
+          <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto leading-relaxed">
+            Comprehensive care for a wide range of breast conditions.
           </p>
         </div>
 
         {/* 6 Condition Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {BREAST_CONDITIONS.map((cond) => (
+          {BREAST_CONDITIONS.map((cond, idx) => (
             <div
               key={cond.id}
               className="bg-white rounded-2xl border border-[#F0D5DC] p-6 shadow-sm hover:shadow-md hover:border-[#D84C70]/60 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#9B2846] bg-[#FAF0F3] px-2.5 py-1 rounded-md border border-[#F5D2DB]">
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#FFF5F7] border border-[#F5CAD5] text-[#D84C70] flex items-center justify-center group-hover:bg-[#D84C70] group-hover:text-white transition-colors duration-300">
+                    <Activity className="w-5 h-5" />
+                  </div>
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#88213B] bg-[#FAF0F3] px-2.5 py-1 rounded-md border border-[#F5D2DB]">
                     {cond.badge}
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-[#FDF2F4] text-[#D84C70] flex items-center justify-center group-hover:bg-[#D84C70] group-hover:text-white transition-colors duration-300">
-                    <Activity className="w-4 h-4" />
-                  </div>
                 </div>
 
-                <h3 className="font-serif text-xl font-bold text-slate-900 mb-1 group-hover:text-[#9B2846] transition-colors">
+                <h3 className="font-serif text-xl font-bold text-slate-900 mb-1 group-hover:text-[#88213B] transition-colors">
                   {cond.title}
                 </h3>
-                <div className="text-xs font-semibold text-[#88213B] mb-3">
+                <div className="text-xs font-semibold text-[#D84C70] mb-3">
                   {cond.subtitle}
                 </div>
                 <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed mb-6">

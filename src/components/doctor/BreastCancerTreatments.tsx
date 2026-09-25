@@ -2,58 +2,46 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, CheckCircle2, Sparkles, Scissors, Layers, HeartPulse } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 
-export interface TreatmentCard {
+export interface TreatmentCardItem {
   title: string;
-  shortDesc: string;
-  clinicalNote: string;
+  subtitle: string;
+  image: string;
   href: string;
-  icon: React.ReactNode;
 }
 
-export const TREATMENTS: TreatmentCard[] = [
+export const TREATMENTS_5: TreatmentCardItem[] = [
   {
-    title: "Breast Conservation Surgery",
-    shortDesc: "Organ-preserving tumor removal (lumpectomy) with a clear margin of healthy tissue.",
-    clinicalNote: "Provides the same overall survival rate as mastectomy when paired with post-operative radiation.",
+    title: "Breast Conservation Surgery (BCS)",
+    subtitle: "Removing cancer while preserving the breast",
+    image: "/images/doctor/assets/service-1.png",
     href: "/breast-conservation-surgery-ahmedabad",
-    icon: <Sparkles className="w-5 h-5 text-[#9B2846]" />,
   },
   {
     title: "Mastectomy",
-    shortDesc: "Complete surgical removal of breast tissue when clinically necessary or preferred.",
-    clinicalNote: "Includes Total, Modified Radical (MRM), Skin-Sparing, and Nipple-Sparing techniques.",
+    subtitle: "Total removal of breast tissue when clinically appropriate",
+    image: "/images/doctor/assets/service-2.png",
     href: "/mastectomy-ahmedabad",
-    icon: <Scissors className="w-5 h-5 text-[#9B2846]" />,
   },
   {
     title: "Sentinel Lymph Node Biopsy",
-    shortDesc: "Targeted evaluation of the primary 'gatekeeper' lymph nodes draining the tumor area.",
-    clinicalNote: "Spares unnecessary axillary node removal, dramatically reducing chronic arm lymphedema risk.",
+    subtitle: "Accurate staging with minimal risk of arm lymphedema",
+    image: "/images/doctor/assets/service-3.png",
     href: "/sentinel-lymph-node-biopsy",
-    icon: <ShieldCheck className="w-5 h-5 text-[#9B2846]" />,
   },
   {
     title: "Oncoplastic Breast Surgery",
-    shortDesc: "Harmonizing radical tumor resection with plastic surgical tissue rearrangement.",
-    clinicalNote: "Preserves natural breast contour, prevents surgical defects, and offers contralateral balancing.",
+    subtitle: "Combining oncologic safety with plastic surgery reshaping",
+    image: "/images/doctor/assets/service-5.png",
     href: "/oncoplastic-breast-surgery-ahmedabad",
-    icon: <Layers className="w-5 h-5 text-[#9B2846]" />,
-  },
-  {
-    title: "Axillary Lymph Node Surgery",
-    shortDesc: "Careful staging and therapeutic clearance of affected underarm lymph nodes.",
-    clinicalNote: "Guided by ultrasound and sentinel node biopsy to ensure complete regional disease eradication.",
-    href: "/sentinel-lymph-node-biopsy",
-    icon: <HeartPulse className="w-5 h-5 text-[#9B2846]" />,
   },
   {
     title: "Breast Reconstruction",
-    shortDesc: "Restoring natural breast shape using cohesive silicone implants or autologous tissue flaps.",
-    clinicalNote: "Offered simultaneously during cancer surgery (immediate) or post-cancer recovery (delayed).",
+    subtitle: "Options to restore breast form using implants or tissue flaps",
+    image: "/images/doctor/assets/service-4.png",
     href: "/breast-reconstruction-surgery-ahmedabad",
-    icon: <Sparkles className="w-5 h-5 text-[#9B2846]" />,
   },
 ];
 
@@ -70,40 +58,47 @@ export default function BreastCancerTreatments() {
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight">
             Breast Cancer Treatment &amp; Surgery in Ahmedabad
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-2xl mx-auto leading-relaxed">
-            Surgical planning is personalized for each patient based on tumor biology, cancer stage, breast anatomy, and long-term quality of life. Explore modern surgical options led by Dr. Noopur Patel.
+          <p className="text-slate-600 text-sm sm:text-base mt-2 max-w-2xl mx-auto leading-relaxed">
+            Evidence-based surgical care with a personalised approach
           </p>
         </div>
 
-        {/* 6 Treatments Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TREATMENTS.map((item, idx) => (
+        {/* 5 Treatments Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+          {TREATMENTS_5.map((item, idx) => (
             <div
               key={idx}
-              className="bg-[#FAF7F8] rounded-2xl border border-[#F0D5DC] p-6 shadow-sm hover:shadow-md hover:border-[#9B2846]/40 transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-[#F0D5DC] overflow-hidden shadow-xs hover:shadow-md hover:border-[#D84C70]/60 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-white border border-[#EED7DC] flex items-center justify-center mb-4 shadow-xs group-hover:scale-110 transition-transform">
-                  {item.icon}
+                {/* Image on Top */}
+                <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 250px"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                 </div>
-                <h3 className="font-serif text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-[#9B2846] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-xs sm:text-[13px] text-slate-700 leading-relaxed mb-3">
-                  {item.shortDesc}
-                </p>
-                <div className="flex items-start gap-2 p-2.5 rounded-lg bg-white/80 border border-[#F5DCE2] text-[11px] text-slate-600 mb-6">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>{item.clinicalNote}</span>
+
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-serif text-[15px] sm:text-[16px] font-bold text-slate-900 leading-snug mb-1.5 group-hover:text-[#88213B] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    {item.subtitle}
+                  </p>
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#F0D5DC]">
+              <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0">
                 <Link
                   href={item.href}
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#88213B] group-hover:text-[#6E172E] transition-colors"
                 >
-                  <span>Explore Procedure</span>
+                  <span>Learn More</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -115,7 +110,7 @@ export default function BreastCancerTreatments() {
         <div className="mt-12 text-center">
           <Link
             href="/breast-cancer-surgery"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#9B2846] to-[#88213B] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#9B2846]/20 hover:brightness-105 active:scale-95 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#88213B] hover:bg-[#731930] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#88213B]/20 transition-all active:scale-95"
           >
             <span>View All Breast Cancer Treatments</span>
             <ArrowRight className="w-4 h-4" />

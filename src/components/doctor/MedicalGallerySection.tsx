@@ -28,57 +28,57 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     id: "gal-2",
     category: "hospital",
     categoryLabel: "Hospital & Facilities",
-    title: "Marengo CIMS Hospital – Sola, Ahmedabad",
-    description: "Tertiary-care cancer infrastructure, modular surgical suites & advanced digital diagnostic radiology.",
-    image: "/images/doctor/assets/doctor-office-home.png",
+    title: "OPD Breast Care Consultation Suite",
+    description: "Private consultation environment with dedicated female nursing staff and calming amenities.",
+    image: "/images/doctor/assets/clinic-consultation.jpg",
   },
   {
     id: "gal-3",
+    category: "hospital",
+    categoryLabel: "Hospital & Facilities",
+    title: "Marengo CIMS Hospital Reception & Lounge",
+    description: "Modern hospital reception, fast-track registration, and dedicated patient assistance desk.",
+    image: "/images/doctor/assets/clinic-reception.jpg",
+  },
+  {
+    id: "gal-4",
+    category: "hospital",
+    categoryLabel: "Hospital & Facilities",
+    title: "Advanced Digital 3D Mammography Suite",
+    description: "State-of-the-art low-dose digital mammography and stereotactic core biopsy equipment.",
+    image: "/images/doctor/assets/clinic-mammography.jpg",
+  },
+  {
+    id: "gal-5",
     category: "education",
     categoryLabel: "Medical Education",
-    title: "Understanding Breast Anatomy & Ductal Staging",
+    title: "Understanding Breast Anatomy & Warning Signs",
     description: "Visual patient education guiding early symptom recognition and benign vs malignant tissue understanding.",
     image: "/images/doctor/assets/anatomy-diagram.png",
   },
   {
-    id: "gal-4",
+    id: "gal-6",
     category: "events",
     categoryLabel: "Events & Awareness",
-    title: "Pink Ribbon Awareness & Screening Initiative",
-    description: "Spreading awareness on monthly self-breast examination and regular screening mammograms across Gujarat.",
+    title: "Pink Ribbon Screening & Health Camps",
+    description: "Active community outreach, educating women on monthly self-examination and timely mammograms.",
     image: "/images/doctor/assets/early-detection-woman.png",
-  },
-  {
-    id: "gal-5",
-    category: "doctor",
-    categoryLabel: "Doctor & Professional",
-    title: "Clinical Excellence & Surgical Planning",
-    description: "Reviewing multi-slice mammograms, breast ultrasound scans, and core biopsy pathology blocks.",
-    image: "/images/doctor/assets/doctor-consultation-about.png",
-  },
-  {
-    id: "gal-6",
-    category: "education",
-    categoryLabel: "Medical Education",
-    title: "Oncoplastic Breast Reshaping Concept",
-    description: "Demonstrating volume displacement and therapeutic mammoplasty for clean margins with natural symmetry.",
-    image: "/images/doctor/assets/service-2.png",
   },
   {
     id: "gal-7",
     category: "hospital",
     categoryLabel: "Hospital & Facilities",
-    title: "Comprehensive Outpatient Breast Suite",
-    description: "Designed for utmost privacy, female chaperone support, and calm clinical conversations.",
-    image: "/images/doctor/assets/hero-doctor.png",
+    title: "Patient Recovery & Care Lounge",
+    description: "Serene post-consultation lounge designed for patient comfort, privacy, and counseling.",
+    image: "/images/doctor/assets/clinic-lounge.jpg",
   },
   {
     id: "gal-8",
-    category: "events",
-    categoryLabel: "Events & Awareness",
-    title: "Empowering Women in Breast Cancer Survivorship",
-    description: "Holistic recovery support including lymphedema prevention, arm mobility, and emotional resilience.",
-    image: "/images/doctor/assets/service-6.png",
+    category: "doctor",
+    categoryLabel: "Doctor & Professional",
+    title: "Multidisciplinary Tumor Board Review",
+    description: "Collaborative staging alongside medical oncologists and radiation specialists for personalized care.",
+    image: "/images/doctor/assets/doctor-consultation-about.png",
   },
 ];
 
@@ -126,18 +126,18 @@ export default function MedicalGallerySection() {
             Medical Gallery
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
-            A Glimpse Into Our Clinical Practice, Facilities, Patient Education &amp; Community Awareness
+            A glimpse into our clinical environment, professional activities and awareness programs.
           </p>
         </div>
 
         {/* Category Filter Tabs */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
           {[
-            { id: "all", label: "All Visuals" },
-            { id: "doctor", label: "Doctor & Professional" },
-            { id: "hospital", label: "Hospital & Facilities" },
-            { id: "education", label: "Medical Education" },
-            { id: "events", label: "Events & Awareness" },
+            { id: "all", label: "All" },
+            { id: "hospital", label: "Clinic" },
+            { id: "events", label: "Events" },
+            { id: "education", label: "Awareness" },
+            { id: "doctor", label: "OT / In-Action" },
           ].map((tab) => (
             <button
               key={tab.id}

@@ -25,44 +25,44 @@ export default function CareJourneyTimeline() {
     {
       num: "01",
       title: "Consultation",
-      subtitle: "Confidential discussion of symptoms & health history",
-      icon: <Calendar className="w-5 h-5 text-[#9B2846]" />,
+      subtitle: "Detailed discussion of your concerns",
+      icon: <Calendar className="w-5 h-5 text-[#88213B]" />,
     },
     {
       num: "02",
       title: "Clinical Evaluation",
-      subtitle: "Gentle physical breast exam with female chaperone",
-      icon: <Stethoscope className="w-5 h-5 text-[#9B2846]" />,
+      subtitle: "Physical examination with female chaperone",
+      icon: <Stethoscope className="w-5 h-5 text-[#88213B]" />,
     },
     {
       num: "03",
       title: "Imaging / Biopsy",
-      subtitle: "High-resolution ultrasound, mammogram or core biopsy",
-      icon: <Microscope className="w-5 h-5 text-[#9B2846]" />,
+      subtitle: "Mammogram, ultrasound, and biopsy if needed",
+      icon: <Microscope className="w-5 h-5 text-[#88213B]" />,
     },
     {
       num: "04",
       title: "Diagnosis & Staging",
-      subtitle: "Clear histopathology review & TNM cancer staging",
-      icon: <FileCheck2 className="w-5 h-5 text-[#9B2846]" />,
+      subtitle: "Accurate diagnosis and cancer staging",
+      icon: <FileCheck2 className="w-5 h-5 text-[#88213B]" />,
     },
     {
       num: "05",
       title: "Treatment Planning",
-      subtitle: "Multidisciplinary tumor board customized roadmap",
-      icon: <GitBranch className="w-5 h-5 text-[#9B2846]" />,
+      subtitle: "Personalised to your condition and health priorities",
+      icon: <GitBranch className="w-5 h-5 text-[#88213B]" />,
     },
     {
       num: "06",
       title: "Surgery / Treatment",
-      subtitle: "Precision oncoplastic excision or mastectomy",
-      icon: <Activity className="w-5 h-5 text-[#9B2846]" />,
+      subtitle: "Advanced surgical care and expert clinical care",
+      icon: <Activity className="w-5 h-5 text-[#88213B]" />,
     },
     {
       num: "07",
-      title: "Follow-Up & Recovery",
-      subtitle: "Rehabilitation, lymphedema care & long-term support",
-      icon: <HeartHandshake className="w-5 h-5 text-[#9B2846]" />,
+      title: "Follow-Up",
+      subtitle: "Regular follow-up and long-term care",
+      icon: <HeartHandshake className="w-5 h-5 text-[#88213B]" />,
     },
   ];
 
@@ -71,14 +71,14 @@ export default function CareJourneyTimeline() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-[#9B2846] block mb-2 bg-[#FCE8ED] px-3.5 py-1.5 rounded-full border border-[#F5CAD5] inline-block">
+          <span className="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-[#88213B] block mb-2 bg-[#FCE8ED] px-3.5 py-1.5 rounded-full border border-[#F5CAD5] inline-block">
             STEP-BY-STEP PATIENT PATHWAY
           </span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight mt-1">
             Your Breast Cancer Care Journey
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
-            Understanding what comes next reduces fear and builds confidence. Here is how Dr. Noopur Patel guides each patient through a structured, supportive care pathway.
+          <p className="text-slate-600 text-sm sm:text-base mt-2 leading-relaxed">
+            A clear and supportive journey, from consultation to recovery.
           </p>
         </div>
 
