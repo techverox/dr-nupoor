@@ -556,7 +556,9 @@ export async function getAllCmsTestimonialsAdmin(): Promise<TestimonialItem[]> {
 
 export async function getCmsTestimonials(): Promise<TestimonialItem[]> {
   const all = await getAllCmsTestimonialsAdmin();
-  return all.filter((t) => t.isPublished !== false);
+  return all.filter(
+    (t) => t.isPublished !== false && t.status !== "pending" && t.status !== "rejected"
+  );
 }
 
 export async function resetCmsTestimonialsToDefaults(): Promise<{ success: boolean; count: number }> {

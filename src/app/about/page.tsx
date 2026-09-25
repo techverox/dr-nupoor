@@ -86,22 +86,22 @@ export default async function AboutPage() {
   const facilities = [
     {
       title: "Modern Reception Desk",
-      image: "/images/doctor/assets/clinic-reception.png",
+      image: "/images/doctor/assets/clinic-reception.jpg",
       desc: "Warm and confidential welcome",
     },
     {
       title: "Consultation Suite",
-      image: "/images/doctor/assets/clinic-consultation.png",
+      image: "/images/doctor/assets/clinic-consultation.jpg",
       desc: "Private and comfortable space for thorough discussion",
     },
     {
       title: "Advanced Diagnostic Technology",
-      image: "/images/doctor/assets/clinic-mammography.png",
+      image: "/images/doctor/assets/clinic-mammography.jpg",
       desc: "High-resolution digital mammography and imaging",
     },
     {
       title: "Patient Recovery Lounge",
-      image: "/images/doctor/assets/clinic-lounge.png",
+      image: "/images/doctor/assets/clinic-lounge.jpg",
       desc: "Tranquil recovery and counselling environment",
     },
   ];
@@ -339,7 +339,7 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/assets/clinic-mammography.png"
+                    src="/images/doctor/assets/clinic-mammography.jpg"
                     alt="Accurate Diagnosis"
                     fill
                     className="object-cover"
