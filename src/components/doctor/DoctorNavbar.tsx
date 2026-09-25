@@ -36,7 +36,6 @@ export default function DoctorNavbar() {
     { label: "Services", href: "/services" },
     { label: "Patient Guide", href: "/patient-guide" },
     { label: "Patient Stories", href: "/patient-stories" },
-    { label: "Resources", href: "/patient-resources" },
     { label: "Contact", href: "/contact" },
   ];
 
