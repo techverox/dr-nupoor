@@ -57,7 +57,7 @@ export function EditPageSeoModal({
 
   if (!isOpen || !page) return null;
 
-  const baseUrl = (canonicalBaseUrl || "https://digivigee.com").replace(/\/+$/, "");
+  const baseUrl = (canonicalBaseUrl || "https://drnoopurpatel.com").replace(/\/+$/, "");
   const simulatedCanonical = canonicalUrl.trim() || `${baseUrl}${page.routePath === "/" ? "" : page.routePath}`;
 
   // Character length evaluation
@@ -567,7 +567,7 @@ export function EditPageSeoModal({
                         🌐
                       </div>
                       <div style={{ fontSize: "14px", color: "#202124" }}>
-                        <span style={{ fontWeight: 500 }}>DigiVigee</span>
+                        <span style={{ fontWeight: 500 }}>Dr. Noopur Patel</span>
                         <span style={{ color: "#5f6368", fontSize: "12px", marginLeft: "4px" }}>
                           {simulatedCanonical.replace(/^https?:\/\//, "")}
                         </span>

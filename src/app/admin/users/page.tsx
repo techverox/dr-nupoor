@@ -101,11 +101,11 @@ export default function AdminUsersPage() {
   const broadcastAuthUpdate = () => {
     try {
       if (typeof window !== "undefined" && "BroadcastChannel" in window) {
-        const channel = new BroadcastChannel("digivigee-cms-sync");
+        const channel = new BroadcastChannel("drn-cms-sync");
         channel.postMessage({ type: "CMS_UPDATED", timestamp: Date.now() });
         channel.close();
       }
-      localStorage.setItem("digivigee_cms_updated", Date.now().toString());
+      localStorage.setItem("drn_cms_updated", Date.now().toString());
     } catch {}
   };
 
@@ -132,7 +132,7 @@ export default function AdminUsersPage() {
       if (rolesJson.success) setRoles(rolesJson.roles);
     } catch (err) {
       console.error("[UsersPage] Fetch error:", err);
-      showToast("error", "Failed to load team and role data.");
+      showToast("error", "Failed to load clinic team and role data.");
     } finally {
       setLoading(false);
     }
@@ -199,7 +199,7 @@ export default function AdminUsersPage() {
         });
         const data = await res.json();
         if (!res.ok || !data.success) {
-          throw new Error(data.error || "Failed to update user.");
+          throw new Error(data.error || "Failed to update staff member.");
         }
         showToast("success", `Updated permissions for ${userFormData.displayName || userFormData.email}.`);
       } else {
@@ -210,7 +210,7 @@ export default function AdminUsersPage() {
         });
         const data = await res.json();
         if (!res.ok || !data.success) {
-          throw new Error(data.error || "Failed to invite user.");
+          throw new Error(data.error || "Failed to invite staff member.");
         }
         showToast("success", `Invited new administrator "${userFormData.displayName}" successfully.`);
       }
@@ -235,14 +235,14 @@ export default function AdminUsersPage() {
       });
       const data = await res.json();
       if (!res.ok || !data.success) {
-        throw new Error(data.error || "Failed to delete user.");
+        throw new Error(data.error || "Failed to remove staff account.");
       }
       showToast("success", `Removed administrator account for ${userToDelete.displayName || userToDelete.email}.`);
       broadcastAuthUpdate();
       setUserToDelete(null);
       fetchData();
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Failed to delete user.";
+      const msg = err instanceof Error ? err.message : "Failed to remove account.";
       showToast("error", msg);
     } finally {
       setIsDeletingUser(false);
@@ -252,8 +252,8 @@ export default function AdminUsersPage() {
   // Password Reset Handler
   const handleOpenPasswordModal = (user: AdminUser) => {
     setPasswordTargetUser(user);
-    // Generate secure suggested password
-    const suggested = `DV#${Math.random().toString(36).slice(2, 6)}!${Date.now().toString().slice(-4)}`;
+    // Generate secure suggested password with DRN prefix
+    const suggested = `DRN#${Math.random().toString(36).slice(2, 6).toUpperCase()}!${Date.now().toString().slice(-4)}`;
     setNewPassword(suggested);
     setCopiedPassword(false);
     setIsPasswordModalOpen(true);
@@ -295,7 +295,7 @@ export default function AdminUsersPage() {
       if (!res.ok || !data.success) {
         throw new Error(data.error || "Failed to toggle status.");
       }
-      showToast("success", `Administrator account ${targetUser.isActive === false ? "activated" : "deactivated"}.`);
+      showToast("success", `Staff account ${targetUser.isActive === false ? "activated" : "deactivated"}.`);
       broadcastAuthUpdate();
       fetchData();
     } catch (err: unknown) {
@@ -317,7 +317,7 @@ export default function AdminUsersPage() {
       if (!res.ok || !data.success) {
         throw new Error(data.error || "Failed to reset to defaults.");
       }
-      showToast("success", "Successfully restored canonical DigiVigee administrators and system roles!");
+      showToast("success", "Successfully restored canonical clinical administrators and system roles!");
       broadcastAuthUpdate();
       setIsResetDefaultsModalOpen(false);
       fetchData();
@@ -416,19 +416,19 @@ export default function AdminUsersPage() {
     }
   };
 
-  // Helper colors for roles (Minimalist Soft Tones)
+  // Helper colors for roles (Crisp Medical Palette)
   const getRoleBadgeStyle = (roleId: string) => {
     switch (roleId) {
       case "super_admin":
-        return "bg-purple-50 text-purple-700 border-purple-200/80 dark:bg-purple-950/40 dark:text-purple-300 dark:border-purple-800/60";
+        return "bg-rose-50 text-rose-700 border-rose-200/80";
       case "content_manager":
-        return "bg-blue-50 text-blue-700 border-blue-200/80 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800/60";
+        return "bg-blue-50 text-blue-700 border-blue-200/80";
       case "seo_manager":
-        return "bg-amber-50 text-amber-700 border-amber-200/80 dark:bg-amber-950/40 dark:text-amber-300 dark:border-amber-800/60";
+        return "bg-amber-50 text-amber-700 border-amber-200/80";
       case "lead_manager":
-        return "bg-emerald-50 text-emerald-700 border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800/60";
+        return "bg-emerald-50 text-emerald-700 border-emerald-200/80";
       default:
-        return "bg-slate-50 text-slate-700 border-slate-200/80 dark:bg-slate-800/40 dark:text-slate-300 dark:border-slate-700/60";
+        return "bg-slate-50 text-slate-700 border-slate-200/80";
     }
   };
 
@@ -437,21 +437,21 @@ export default function AdminUsersPage() {
       {/* 1. Header Bar with Real-Time Live Status */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-600 shrink-0 shadow-2xs">
+          <div className="w-12 h-12 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-rose-600 shrink-0 shadow-2xs">
             <Shield className="w-6 h-6" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1">
               <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
-                Users, Permissions & Security
+                Staff & Security Permissions
               </h1>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                🟢 Live RBAC Cloud: Connected (Turant Sync)
+                Live Staff RBAC: Connected & Synced
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 font-normal">
-              Manage team administrators, RBAC roles, and granular permission matrices in one unified place.
+              Manage clinical team accounts, coordinator access levels, and granular oncology practice roles.
             </p>
           </div>
         </div>
@@ -470,10 +470,10 @@ export default function AdminUsersPage() {
           <button
             type="button"
             onClick={() => handleOpenUserModal()}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-all shadow-xs active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-all shadow-xs active:scale-[0.98] cursor-pointer"
           >
             <UserPlus className="w-4 h-4" />
-            <span>Invite Administrator</span>
+            <span>Invite Team Member</span>
           </button>
         </div>
       </div>
@@ -484,9 +484,9 @@ export default function AdminUsersPage() {
         <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Administrators
+              Clinical Team Members
             </span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
               <Users className="w-4 h-4" />
             </div>
           </div>
@@ -495,7 +495,7 @@ export default function AdminUsersPage() {
               {users.length} Active Accounts
             </div>
             <p className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-1">
-              <CheckCircle2 className="w-3 h-3" /> Vipul, Disha, Krunal & Meet
+              <CheckCircle2 className="w-3 h-3" /> Dr. Noopur Patel, Coordinators & Staff
             </p>
           </div>
         </div>
@@ -504,7 +504,7 @@ export default function AdminUsersPage() {
         <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Security Roles
+              Clinical Roles
             </span>
             <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
               <Crown className="w-4 h-4" />
@@ -512,10 +512,10 @@ export default function AdminUsersPage() {
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight tabular-nums">
-              {roles.length} Roles Configured
+              {roles.length} Roles Defined
             </div>
             <p className="text-[11px] text-purple-600 font-medium flex items-center gap-1 mt-1">
-              <ShieldCheck className="w-3 h-3" /> Tiered RBAC Hierarchy
+              <ShieldCheck className="w-3 h-3" /> Tiered Medical RBAC
             </p>
           </div>
         </div>
@@ -524,7 +524,7 @@ export default function AdminUsersPage() {
         <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
-              Permissions
+              Platform Rules
             </span>
             <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
               <ShieldCheck className="w-4 h-4" />
@@ -532,10 +532,10 @@ export default function AdminUsersPage() {
           </div>
           <div>
             <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight tabular-nums">
-              35 Security Rules
+              35 Access Rules
             </div>
             <p className="text-[11px] text-blue-600 font-medium flex items-center gap-1 mt-1">
-              <Sparkles className="w-3 h-3" /> Granular Access Control
+              <Sparkles className="w-3 h-3" /> Strict Oncology Data Privacy
             </p>
           </div>
         </div>
@@ -573,7 +573,7 @@ export default function AdminUsersPage() {
       <div className="flex flex-wrap items-center justify-between gap-2 p-1.5 bg-slate-100/90 rounded-2xl border border-slate-200/80">
         <div className="flex flex-wrap items-center gap-1.5">
           {[
-            { id: "users", label: `Team Users (${users.length})`, icon: Users },
+            { id: "users", label: `Staff Accounts (${users.length})`, icon: Users },
             { id: "roles", label: `Roles & Access (${roles.length})`, icon: Crown },
             { id: "matrix", label: "Permissions Matrix", icon: ShieldCheck },
           ].map((tab) => {
@@ -590,7 +590,7 @@ export default function AdminUsersPage() {
                     : "text-slate-500 hover:text-slate-900 hover:bg-white/50"
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : "text-slate-400"}`} />
+                <Icon className={`w-4 h-4 ${isActive ? "text-rose-600" : "text-slate-400"}`} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -599,14 +599,14 @@ export default function AdminUsersPage() {
 
         {/* Grid vs List View switch for Users tab */}
         {activeTab === "users" && (
-          <div className="hidden sm:flex items-center gap-1 bg-white dark:bg-slate-800 p-1 rounded-xl border border-slate-200 dark:border-slate-700">
+          <div className="hidden sm:flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-2xs">
             <button
               type="button"
               onClick={() => setViewMode("grid")}
-              className={`p-1.5 rounded-lg transition-colors ${
+              className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                 viewMode === "grid"
-                  ? "bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 font-bold"
-                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                  ? "bg-slate-100 text-slate-900 font-bold"
+                  : "text-slate-400 hover:text-slate-600"
               }`}
               title="Grid View"
             >
@@ -615,10 +615,10 @@ export default function AdminUsersPage() {
             <button
               type="button"
               onClick={() => setViewMode("table")}
-              className={`p-1.5 rounded-lg transition-colors ${
+              className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
                 viewMode === "table"
-                  ? "bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-slate-100 font-bold"
-                  : "text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
+                  ? "bg-slate-100 text-slate-900 font-bold"
+                  : "text-slate-400 hover:text-slate-600"
               }`}
               title="Table View"
             >
@@ -632,7 +632,7 @@ export default function AdminUsersPage() {
       {activeTab === "users" && (
         <div className="flex flex-col gap-5 animate-in fade-in duration-200">
           {/* Search & Filters */}
-          <div className="bg-white dark:bg-[#0E1422] p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div className="relative flex-1 min-w-0">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <Search className="w-4 h-4" />
@@ -641,8 +641,8 @@ export default function AdminUsersPage() {
                 type="text"
                 value={userSearch}
                 onChange={(e) => setUserSearch(e.target.value)}
-                placeholder="Search team member by name or email address..."
-                className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 dark:text-slate-100"
+                placeholder="Search staff by name or email address..."
+                className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 placeholder:text-slate-400"
               />
             </div>
 
@@ -650,7 +650,7 @@ export default function AdminUsersPage() {
               <select
                 value={roleFilter}
                 onChange={(e) => setRoleFilter(e.target.value)}
-                className="px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 cursor-pointer"
+                className="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 cursor-pointer"
               >
                 <option value="all">All Roles</option>
                 {roles.map((r) => (
@@ -663,7 +663,7 @@ export default function AdminUsersPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value as typeof statusFilter)}
-                className="px-3.5 py-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 cursor-pointer"
+                className="px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 cursor-pointer"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active Only</option>
@@ -674,16 +674,16 @@ export default function AdminUsersPage() {
 
           {/* User List or Grid */}
           {loading ? (
-            <div className="py-16 text-center text-zinc-400 flex flex-col items-center justify-center">
-              <div className="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin mb-3"></div>
-              <p className="text-xs font-semibold">Loading administrators...</p>
+            <div className="py-16 text-center text-slate-400 flex flex-col items-center justify-center">
+              <div className="w-8 h-8 border-3 border-rose-500 border-t-transparent rounded-full animate-spin mb-3"></div>
+              <p className="text-xs font-semibold text-slate-600">Loading clinic team...</p>
             </div>
           ) : filteredUsers.length === 0 ? (
-            <div className="py-16 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 text-center p-6">
-              <Users className="w-10 h-10 text-zinc-300 dark:text-zinc-600 mx-auto mb-3" />
-              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">No team members found</h3>
-              <p className="text-xs text-zinc-500 mt-1 max-w-sm mx-auto">
-                No administrators match your current search query or filter criteria.
+            <div className="py-16 bg-white rounded-2xl border border-slate-200/80 text-center p-6 shadow-2xs">
+              <Users className="w-10 h-10 text-slate-300 mx-auto mb-3" />
+              <h3 className="text-base font-bold text-slate-900">No team members found</h3>
+              <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
+                No accounts match your current search query or filter criteria.
               </p>
             </div>
           ) : viewMode === "grid" ? (
@@ -703,28 +703,28 @@ export default function AdminUsersPage() {
                 return (
                   <div
                     key={u.id}
-                    className="bg-white dark:bg-[#0E1422] rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition-all flex flex-col justify-between"
+                    className="bg-white rounded-2xl border border-slate-200/80 p-5 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between"
                   >
                     <div>
                       {/* Top Row */}
                       <div className="flex items-start justify-between gap-3 mb-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-bold text-xs flex items-center justify-center shadow-2xs shrink-0">
+                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 text-white font-bold text-xs flex items-center justify-center shadow-2xs shrink-0">
                             {initials}
                           </div>
                           <div>
-                            <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 leading-tight">
+                            <h3 className="text-sm font-semibold text-slate-900 leading-tight">
                               {u.displayName || "Admin User"}
                             </h3>
-                            <span className="text-xs text-slate-400 truncate block mt-0.5 font-normal">{u.email}</span>
+                            <span className="text-xs text-slate-500 truncate block mt-0.5 font-normal">{u.email}</span>
                           </div>
                         </div>
 
                         <span
                           className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold border ${
                             u.isActive !== false
-                              ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/40"
-                              : "bg-red-50 text-red-700 dark:bg-red-950/60 dark:text-red-400 border-red-200/60 dark:border-red-800/40"
+                              ? "bg-emerald-50 text-emerald-700 border-emerald-200/60"
+                              : "bg-red-50 text-red-700 border-red-200/60"
                           }`}
                         >
                           <span
@@ -743,13 +743,13 @@ export default function AdminUsersPage() {
                             u.roleId
                           )}`}
                         >
-                          {isSuper && <Crown className="w-3 h-3 text-purple-600" />}
+                          {isSuper && <Crown className="w-3 h-3 text-rose-600" />}
                           <span>{u.roleName || u.roleId}</span>
                         </span>
                       </div>
 
                       {/* Metadata */}
-                      <div className="text-[11px] text-slate-400 space-y-1 mb-5 font-normal">
+                      <div className="text-[11px] text-slate-500 space-y-1 mb-5 font-normal">
                         <div className="flex items-center gap-1.5">
                           <Clock className="w-3 h-3 text-slate-400" />
                           <span>Last Active: {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString() : "Recently"}</span>
@@ -758,20 +758,20 @@ export default function AdminUsersPage() {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-2">
+                    <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                       <div className="flex items-center gap-1">
                         <button
                           type="button"
                           onClick={() => handleOpenUserModal(u)}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                          title="Edit User Details & Role"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+                          title="Edit Details & Role"
                         >
                           <Edit2 className="w-3.5 h-3.5" />
                         </button>
                         <button
                           type="button"
                           onClick={() => handleOpenPasswordModal(u)}
-                          className="p-1.5 rounded-lg text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/40 transition-colors"
+                          className="p-1.5 rounded-lg text-amber-600 hover:bg-amber-50 transition-colors cursor-pointer"
                           title="Reset Password"
                         >
                           <Key className="w-3.5 h-3.5" />
@@ -780,7 +780,7 @@ export default function AdminUsersPage() {
                           type="button"
                           onClick={() => handleToggleUserStatus(u)}
                           disabled={isSuper}
-                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors disabled:opacity-40"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors disabled:opacity-40 cursor-pointer"
                           title={u.isActive !== false ? "Disable Account" : "Activate Account"}
                         >
                           {u.isActive !== false ? <XCircle className="w-3.5 h-3.5" /> : <CheckCircle2 className="w-3.5 h-3.5" />}
@@ -791,8 +791,8 @@ export default function AdminUsersPage() {
                         <button
                           type="button"
                           onClick={() => setUserToDelete(u)}
-                          className="p-2 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
-                          title="Remove Administrator"
+                          className="p-2 rounded-lg text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+                          title="Remove Account"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
                         </button>
@@ -804,26 +804,26 @@ export default function AdminUsersPage() {
             </div>
           ) : (
             /* Table View */
-            <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs sm:text-sm">
-                  <thead className="bg-zinc-50 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400 font-bold uppercase tracking-wider text-[11px] border-b border-zinc-200 dark:border-zinc-800">
+                  <thead className="bg-slate-50 text-slate-500 font-bold uppercase tracking-wider text-[11px] border-b border-slate-200">
                     <tr>
-                      <th className="px-5 py-3.5">Administrator</th>
+                      <th className="px-5 py-3.5">Staff Member</th>
                       <th className="px-5 py-3.5">Assigned Role</th>
                       <th className="px-5 py-3.5">Status</th>
                       <th className="px-5 py-3.5">Last Login</th>
                       <th className="px-5 py-3.5 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60 font-medium">
+                  <tbody className="divide-y divide-slate-100 font-medium">
                     {filteredUsers.map((u) => {
                       const isSuper = u.roleId === "super_admin";
                       return (
-                        <tr key={u.id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition-colors">
+                        <tr key={u.id} className="hover:bg-slate-50/50 transition-colors">
                           <td className="px-5 py-3.5">
-                            <div className="font-bold text-zinc-900 dark:text-zinc-100">{u.displayName}</div>
-                            <div className="text-xs text-zinc-400 font-mono">{u.email}</div>
+                            <div className="font-bold text-slate-900">{u.displayName}</div>
+                            <div className="text-xs text-slate-400 font-mono">{u.email}</div>
                           </td>
                           <td className="px-5 py-3.5">
                             <span
@@ -831,7 +831,7 @@ export default function AdminUsersPage() {
                                 u.roleId
                               )}`}
                             >
-                              {isSuper && <Crown className="w-3 h-3 text-purple-600" />}
+                              {isSuper && <Crown className="w-3 h-3 text-rose-600" />}
                               <span>{u.roleName || u.roleId}</span>
                             </span>
                           </td>
@@ -839,8 +839,8 @@ export default function AdminUsersPage() {
                             <span
                               className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold ${
                                 u.isActive !== false
-                                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300"
-                                  : "bg-red-50 text-red-700 dark:bg-red-950/60 dark:text-red-300"
+                                  ? "bg-emerald-50 text-emerald-700"
+                                  : "bg-red-50 text-red-700"
                               }`}
                             >
                               <span
@@ -851,7 +851,7 @@ export default function AdminUsersPage() {
                               {u.isActive !== false ? "Active" : "Disabled"}
                             </span>
                           </td>
-                          <td className="px-5 py-3.5 text-xs text-zinc-400">
+                          <td className="px-5 py-3.5 text-xs text-slate-500">
                             {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString() : "Recent"}
                           </td>
                           <td className="px-5 py-3.5 text-right">
@@ -859,7 +859,7 @@ export default function AdminUsersPage() {
                               <button
                                 type="button"
                                 onClick={() => handleOpenUserModal(u)}
-                                className="p-1.5 rounded-lg text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                                className="p-1.5 rounded-lg text-slate-600 hover:bg-slate-100 cursor-pointer"
                                 title="Edit Role"
                               >
                                 <Edit2 className="w-4 h-4" />
@@ -867,7 +867,7 @@ export default function AdminUsersPage() {
                               <button
                                 type="button"
                                 onClick={() => handleOpenPasswordModal(u)}
-                                className="p-1.5 rounded-lg text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-950/40"
+                                className="p-1.5 rounded-lg text-amber-600 hover:bg-amber-50 cursor-pointer"
                                 title="Reset Password"
                               >
                                 <Key className="w-4 h-4" />
@@ -876,7 +876,7 @@ export default function AdminUsersPage() {
                                 <button
                                   type="button"
                                   onClick={() => setUserToDelete(u)}
-                                  className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40"
+                                  className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 cursor-pointer"
                                   title="Remove User"
                                 >
                                   <Trash2 className="w-4 h-4" />
@@ -898,17 +898,17 @@ export default function AdminUsersPage() {
       {/* 5. TAB 2: Roles & Access Levels */}
       {activeTab === "roles" && (
         <div className="flex flex-col gap-5 animate-in fade-in duration-200">
-          <div className="flex items-center justify-between bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+          <div className="flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs">
             <div>
-              <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100">Security Roles & Access Levels</h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Pre-configured system roles with granular permission rules.
+              <h2 className="text-base font-bold text-slate-900">Security Roles & Access Levels</h2>
+              <p className="text-xs text-slate-500">
+                Pre-configured clinical oncology system roles with granular permission rules.
               </p>
             </div>
             <button
               type="button"
               onClick={() => handleOpenRoleModal()}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Create Custom Role</span>
@@ -921,39 +921,39 @@ export default function AdminUsersPage() {
               return (
                 <div
                   key={r.id}
-                  className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 p-6 shadow-sm flex flex-col justify-between"
+                  className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-2xs flex flex-col justify-between"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-3 mb-3">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">{r.name}</h3>
+                          <h3 className="text-base font-bold text-slate-900">{r.name}</h3>
                           {r.isSystemRole && (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-600 border border-slate-200">
                               System Built-in
                             </span>
                           )}
                         </div>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 leading-relaxed">{r.description}</p>
+                        <p className="text-xs text-slate-500 mt-1 leading-relaxed">{r.description}</p>
                       </div>
                     </div>
 
                     {/* Stats pills */}
                     <div className="flex flex-wrap items-center gap-2 my-4">
-                      <span className="px-3 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 text-xs font-bold">
-                        👥 {assignedCount} {assignedCount === 1 ? "User" : "Users"} Assigned
+                      <span className="px-3 py-1 rounded-xl bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-100">
+                        👥 {assignedCount} {assignedCount === 1 ? "Staff Member" : "Staff Members"}
                       </span>
-                      <span className="px-3 py-1 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-bold">
+                      <span className="px-3 py-1 rounded-xl bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200">
                         🛡️ {r.permissions.length} Permissions
                       </span>
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between">
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                     <button
                       type="button"
                       onClick={() => setActiveTab("matrix")}
-                      className="text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                      className="text-xs font-bold text-rose-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
                       <span>View in Matrix</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -963,7 +963,7 @@ export default function AdminUsersPage() {
                       <button
                         type="button"
                         onClick={() => handleOpenRoleModal(r)}
-                        className="px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700 text-xs font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                        className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-100 cursor-pointer"
                       >
                         Edit Role
                       </button>
@@ -978,22 +978,22 @@ export default function AdminUsersPage() {
 
       {/* 6. TAB 3: Permissions Matrix */}
       {activeTab === "matrix" && (
-        <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm overflow-hidden animate-in fade-in duration-200">
-          <div className="p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden animate-in fade-in duration-200">
+          <div className="p-6 border-b border-slate-200 flex items-center justify-between">
             <div>
-              <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100">Granular Permission Matrix</h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Complete comparative breakdown of what each role is permitted to perform across the platform.
+              <h2 className="text-base font-bold text-slate-900">Granular Permissions Matrix</h2>
+              <p className="text-xs text-slate-500 mt-0.5">
+                Complete comparative breakdown of clinical oncology operations permitted per role.
               </p>
             </div>
-            <span className="px-3 py-1 rounded-xl text-xs font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+            <span className="px-3 py-1 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
               35 Rules Active
             </span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="bg-zinc-50 dark:bg-zinc-800/60 text-zinc-700 dark:text-zinc-300 font-bold border-b border-zinc-200 dark:border-zinc-800">
+              <thead className="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
                 <tr>
                   <th className="px-5 py-3 w-1/3">Permission Feature</th>
                   {roles.map((r) => (
@@ -1003,30 +1003,30 @@ export default function AdminUsersPage() {
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {PERMISSION_GROUPS.map((group) => (
                   <React.Fragment key={group.category}>
-                    <tr className="bg-zinc-100/70 dark:bg-zinc-850 font-bold text-zinc-900 dark:text-zinc-100">
-                      <td colSpan={roles.length + 1} className="px-5 py-2.5 uppercase tracking-wider text-[11px] text-zinc-500 dark:text-zinc-400">
+                    <tr className="bg-slate-50/80 font-bold text-slate-900">
+                      <td colSpan={roles.length + 1} className="px-5 py-2.5 uppercase tracking-wider text-[11px] text-slate-600">
                         {group.category}
                       </td>
                     </tr>
                     {group.permissions.map((p) => (
-                      <tr key={p.key} className="hover:bg-zinc-50/60 dark:hover:bg-zinc-800/40">
+                      <tr key={p.key} className="hover:bg-slate-50/60">
                         <td className="px-5 py-2.5">
-                          <div className="font-semibold text-zinc-900 dark:text-zinc-100">{p.label}</div>
-                          <div className="text-[11px] text-zinc-400 font-mono">{p.key}</div>
+                          <div className="font-semibold text-slate-900">{p.label}</div>
+                          <div className="text-[11px] text-slate-400 font-mono">{p.key}</div>
                         </td>
                         {roles.map((r) => {
                           const isGranted = r.id === "super_admin" || r.permissions.includes(p.key);
                           return (
                             <td key={r.id} className="px-4 py-2.5 text-center">
                               {isGranted ? (
-                                <div className="w-5 h-5 mx-auto rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                                <div className="w-5 h-5 mx-auto rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center">
                                   <Check className="w-3 h-3" />
                                 </div>
                               ) : (
-                                <span className="text-zinc-300 dark:text-zinc-600 font-mono font-bold">—</span>
+                                <span className="text-slate-300 font-mono font-bold">—</span>
                               )}
                             </td>
                           );
@@ -1043,17 +1043,17 @@ export default function AdminUsersPage() {
 
       {/* MODAL 1: Invite / Edit User Modal */}
       {isUserModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 text-zinc-900 dark:text-zinc-100">
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-100 dark:border-zinc-800 mb-5">
-              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                <UserPlus className="w-4 h-4 text-indigo-600" />
-                <span>{editingUser ? "Edit Administrator Access" : "Invite New Team Administrator"}</span>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-xl p-6 text-slate-900">
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-5">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                <UserPlus className="w-4 h-4 text-rose-600" />
+                <span>{editingUser ? "Edit Staff Access" : "Invite New Clinical Administrator"}</span>
               </h3>
               <button
                 type="button"
                 onClick={() => setIsUserModalOpen(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1061,22 +1061,22 @@ export default function AdminUsersPage() {
 
             <form onSubmit={handleSaveUser} className="flex flex-col gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
-                  Full Name <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                  Full Name <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={userFormData.displayName}
                   onChange={(e) => setUserFormData((prev) => ({ ...prev, displayName: e.target.value }))}
                   required
-                  placeholder="e.g. Vipul Gajjar"
-                  className="block w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  placeholder="e.g. Clinical Care Coordinator"
+                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
-                  Email Address <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                  Email Address <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -1084,19 +1084,19 @@ export default function AdminUsersPage() {
                   disabled={!!editingUser}
                   onChange={(e) => setUserFormData((prev) => ({ ...prev, email: e.target.value }))}
                   required
-                  placeholder="name@digivigee.com"
-                  className="block w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none disabled:opacity-60"
+                  placeholder="coordinator@drnoopurpatel.com"
+                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none text-slate-900 placeholder:text-slate-400 disabled:opacity-60"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
-                  Role Assignment <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                  Role Assignment <span className="text-rose-500">*</span>
                 </label>
                 <select
                   value={userFormData.roleId}
                   onChange={(e) => setUserFormData((prev) => ({ ...prev, roleId: e.target.value }))}
-                  className="block w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-bold text-zinc-800 dark:text-zinc-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold text-slate-800 focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none cursor-pointer"
                 >
                   {roles.map((r) => (
                     <option key={r.id} value={r.id}>
@@ -1108,7 +1108,7 @@ export default function AdminUsersPage() {
 
               {!editingUser && (
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                     Temporary Password (Optional)
                   </label>
                   <input
@@ -1116,7 +1116,7 @@ export default function AdminUsersPage() {
                     value={userFormData.password}
                     onChange={(e) => setUserFormData((prev) => ({ ...prev, password: e.target.value }))}
                     placeholder="Auto-generated if left blank"
-                    className="block w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                    className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 focus:outline-none text-slate-900 placeholder:text-slate-400"
                   />
                 </div>
               )}
@@ -1127,25 +1127,25 @@ export default function AdminUsersPage() {
                   id="userActiveCheck"
                   checked={userFormData.isActive}
                   onChange={(e) => setUserFormData((prev) => ({ ...prev, isActive: e.target.checked }))}
-                  className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-zinc-300"
+                  className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300"
                 />
-                <label htmlFor="userActiveCheck" className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                <label htmlFor="userActiveCheck" className="text-xs font-semibold text-slate-700 cursor-pointer">
                   Account is Active & Allowed to Sign In
                 </label>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setIsUserModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-bold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmittingUser}
-                  className="px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all shadow-md shadow-indigo-600/20 disabled:opacity-60 cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-all shadow-xs disabled:opacity-60 cursor-pointer"
                 >
                   {isSubmittingUser ? "Saving..." : editingUser ? "Update Access" : "Send Invitation"}
                 </button>
@@ -1157,29 +1157,29 @@ export default function AdminUsersPage() {
 
       {/* MODAL 2: Reset Password Modal */}
       {isPasswordModalOpen && passwordTargetUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-md bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 text-zinc-900 dark:text-zinc-100">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-4">
-              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="relative w-full max-w-md bg-white rounded-2xl border border-slate-200 shadow-xl p-6 text-slate-900">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <Key className="w-4 h-4 text-amber-500" />
                 <span>Reset Administrator Password</span>
               </h3>
               <button
                 type="button"
                 onClick={() => setIsPasswordModalOpen(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <form onSubmit={handleSavePassword} className="flex flex-col gap-4">
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Setting a new password for <span className="font-bold text-zinc-900 dark:text-zinc-100">{passwordTargetUser.displayName}</span> ({passwordTargetUser.email}).
+              <p className="text-xs text-slate-500">
+                Setting a new secure password for <span className="font-bold text-slate-900">{passwordTargetUser.displayName}</span> ({passwordTargetUser.email}).
               </p>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                   New Secure Password
                 </label>
                 <div className="relative">
@@ -1188,7 +1188,7 @@ export default function AdminUsersPage() {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
-                    className="block w-full pl-3.5 pr-20 py-2.5 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-mono font-bold text-zinc-800 dark:text-zinc-100"
+                    className="block w-full pl-3.5 pr-20 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-slate-900"
                   />
                   <button
                     type="button"
@@ -1197,25 +1197,25 @@ export default function AdminUsersPage() {
                       setCopiedPassword(true);
                       setTimeout(() => setCopiedPassword(false), 2000);
                     }}
-                    className="absolute right-2 top-2 px-2 py-1 rounded bg-zinc-200 dark:bg-zinc-700 text-[11px] font-bold text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300"
+                    className="absolute right-2 top-2 px-2.5 py-1 rounded-lg bg-slate-200 text-[11px] font-bold text-slate-700 hover:bg-slate-300 transition-colors cursor-pointer"
                   >
                     {copiedPassword ? "Copied" : "Copy"}
                   </button>
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setIsPasswordModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-bold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isResettingPassword}
-                  className="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-all shadow-md shadow-amber-600/20 disabled:opacity-60 cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-semibold transition-all shadow-xs disabled:opacity-60 cursor-pointer"
                 >
                   {isResettingPassword ? "Saving..." : "Set New Password"}
                 </button>
@@ -1227,17 +1227,17 @@ export default function AdminUsersPage() {
 
       {/* MODAL 3: Custom Role Creator Modal */}
       {isRoleModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="relative w-full max-w-2xl bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 text-zinc-900 dark:text-zinc-100 max-h-[90vh] flex flex-col">
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-zinc-800 mb-4 shrink-0">
-              <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="relative w-full max-w-2xl bg-white rounded-2xl border border-slate-200 shadow-xl p-6 text-slate-900 max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4 shrink-0">
+              <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                 <Crown className="w-4 h-4 text-purple-600" />
                 <span>{editingRole ? `Edit Role: ${editingRole.name}` : "Create Custom Security Role"}</span>
               </h3>
               <button
                 type="button"
                 onClick={() => setIsRoleModalOpen(false)}
-                className="p-1 rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -1245,35 +1245,35 @@ export default function AdminUsersPage() {
 
             <form onSubmit={handleSaveRole} className="flex flex-col gap-4 overflow-y-auto pr-1 flex-1">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
-                  Role Name <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
+                  Role Name <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={roleFormData.name}
                   onChange={(e) => setRoleFormData((prev) => ({ ...prev, name: e.target.value }))}
                   required
-                  placeholder="e.g. Regional Campaign Manager"
-                  className="block w-full px-3.5 py-2 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  placeholder="e.g. Patient Care Coordinator"
+                  className="block w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:outline-none text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-1.5">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                   Role Description
                 </label>
                 <input
                   type="text"
                   value={roleFormData.description}
                   onChange={(e) => setRoleFormData((prev) => ({ ...prev, description: e.target.value }))}
-                  placeholder="Briefly describe what duties this role is designed for..."
-                  className="block w-full px-3.5 py-2 bg-zinc-50 dark:bg-zinc-800/70 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-medium focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                  placeholder="Briefly describe what clinical or admin duties this role handles..."
+                  className="block w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 focus:outline-none text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
               {/* Permission Checkboxes */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400 mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
                   Assign Granular Permissions ({roleFormData.permissions.length} selected)
                 </label>
                 <div className="space-y-4">
@@ -1281,13 +1281,13 @@ export default function AdminUsersPage() {
                     const groupKeys = group.permissions.map((p) => p.key);
                     const allInGroupSelected = groupKeys.every((k) => roleFormData.permissions.includes(k));
                     return (
-                      <div key={group.category} className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-850">
+                      <div key={group.category} className="p-3.5 rounded-xl border border-slate-200 bg-slate-50">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="font-bold text-xs text-zinc-800 dark:text-zinc-200">{group.category}</span>
+                          <span className="font-bold text-xs text-slate-800">{group.category}</span>
                           <button
                             type="button"
                             onClick={() => handleToggleGroup(groupKeys)}
-                            className="text-[10px] font-bold text-purple-600 dark:text-purple-400 hover:underline cursor-pointer"
+                            className="text-[10px] font-bold text-purple-600 hover:underline cursor-pointer"
                           >
                             {allInGroupSelected ? "Deselect All" : "Select All"}
                           </button>
@@ -1300,8 +1300,8 @@ export default function AdminUsersPage() {
                                 key={p.key}
                                 className={`flex items-center gap-2 p-2 rounded-lg border text-xs cursor-pointer transition-colors ${
                                   isChecked
-                                    ? "bg-purple-50 dark:bg-purple-950/40 border-purple-200 dark:border-purple-800 text-purple-900 dark:text-purple-200 font-bold"
-                                    : "border-zinc-200 dark:border-zinc-700/60 text-zinc-600 dark:text-zinc-400"
+                                    ? "bg-purple-50 border-purple-200 text-purple-900 font-bold"
+                                    : "border-slate-200 bg-white text-slate-600"
                                 }`}
                               >
                                 <input
@@ -1321,18 +1321,18 @@ export default function AdminUsersPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-zinc-100 dark:border-zinc-800 shrink-0">
+              <div className="flex items-center justify-end gap-2.5 pt-4 border-t border-slate-100 shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsRoleModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-bold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmittingRole}
-                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold transition-all shadow-md shadow-purple-600/20 disabled:opacity-60 cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold transition-all shadow-xs disabled:opacity-60 cursor-pointer"
                 >
                   {isSubmittingRole ? "Saving..." : editingRole ? "Update Role" : "Create Role"}
                 </button>
@@ -1362,7 +1362,7 @@ export default function AdminUsersPage() {
         onClose={() => setIsResetDefaultsModalOpen(false)}
         onConfirm={handleConfirmResetDefaults}
         title="Reset Users & Roles to Canonical Defaults?"
-        message={`This will restore canonical DigiVigee team members (Vipul Gajjar - Super Admin, Disha Parmar - Content Manager, Krunal Vyas - SEO Specialist, Meet Patel - Lead Manager) and all default system roles.\n\nAll changes will immediately sync across live Cloud Firestore and memory caches.`}
+        message={`This will restore canonical clinical team members (Dr. Noopur Patel - Super Admin, Clinical Care Coordinator - Content & Care Manager, Patient Appointments Lead - Appointments Manager) and all default system roles.\n\nAll changes will immediately sync across live Cloud Firestore and memory caches.`}
         confirmLabel="Yes, Reset to Defaults"
         isDestructive={false}
         isLoading={isResettingDefaults}

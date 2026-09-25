@@ -3,7 +3,68 @@ import { COLLECTIONS } from "@/config/firebase";
 import { OfferItem, OfferTargeting, OfferStatus } from "@/types";
 import { cachedFirestoreRead, invalidateFirestoreCache } from "@/lib/utils/firestoreCache";
 
-export const CANONICAL_OFFERS: OfferItem[] = [];
+export const CANONICAL_OFFERS: OfferItem[] = [
+  {
+    id: "offer-seed-1",
+    title: "Pink October: Annual Mammogram & Clinical Breast Screening Drive",
+    description: "Special screening awareness slots available at Marengo CIMS Hospital, Ahmedabad. Early detection saves lives.",
+    type: "banner",
+    badgeText: "AWARENESS DRIVE",
+    ctaText: "Book Screening Slot",
+    ctaLink: "/contact?intent=screening",
+    isActive: true,
+    targetPages: "all",
+    priority: 10,
+    displayFrequency: "once_per_session",
+    createdAt: new Date(Date.now() - 86400000 * 10).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+  },
+  {
+    id: "offer-seed-2",
+    title: "Urgent Breast Biopsy or Second Opinion Consultation",
+    description: "Received an abnormal mammogram or ultrasound report? Consult Dr. Noopur Patel for prompt surgical second opinions within 24-48 hours.",
+    type: "floating_bar",
+    badgeText: "PRIORITY CARE",
+    ctaText: "Request Second Opinion",
+    ctaLink: "/contact?intent=second-opinion",
+    isActive: true,
+    targetPages: "services_only",
+    priority: 8,
+    displayFrequency: "once_per_session",
+    createdAt: new Date(Date.now() - 86400000 * 15).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 5).toISOString(),
+  },
+  {
+    id: "offer-seed-3",
+    title: "Download Free Guide: Monthly Breast Self-Examination Checklist",
+    description: "Learn step-by-step techniques to detect unusual lumps, skin dimpling, or nipple discharge at home.",
+    type: "popup",
+    badgeText: "PATIENT GUIDE",
+    ctaText: "Download Guide",
+    ctaLink: "/contact?intent=guide",
+    isActive: false,
+    targetPages: "home_only",
+    priority: 5,
+    displayFrequency: "once_per_session",
+    createdAt: new Date(Date.now() - 86400000 * 20).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 8).toISOString(),
+  },
+  {
+    id: "offer-seed-4",
+    title: "Oncoplastic & Scar-Sparing Breast Surgery Clinic",
+    description: "Learn about breast-conserving surgery options combining complete oncologic tumor excision with aesthetic reconstruction.",
+    type: "banner",
+    badgeText: "SURGICAL EXCELLENCE",
+    ctaText: "Explore Treatments",
+    ctaLink: "/services/oncoplastic-breast-surgery",
+    isActive: true,
+    targetPages: "all",
+    priority: 7,
+    displayFrequency: "once_per_session",
+    createdAt: new Date(Date.now() - 86400000 * 25).toISOString(),
+    updatedAt: new Date(Date.now() - 86400000 * 12).toISOString(),
+  },
+];
 
 export const DEFAULT_SEED_OFFERS = CANONICAL_OFFERS;
 
