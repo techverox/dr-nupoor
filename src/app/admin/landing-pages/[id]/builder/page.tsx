@@ -74,35 +74,35 @@ const PRESET_BLOCKS: PresetBlock[] = [
   },
   {
     type: "features",
-    name: "Bento Role Pillars",
+    name: "Specialized Clinical Pillars",
     icon: "💎",
-    badge: "Homepage OS",
-    description: "2x3 or 3x1 sleek bento cards with tag badges, bold titles, and checkmark tags.",
+    badge: "Clinical Care",
+    description: "Sleek bento cards with treatment tags, clinical descriptions, and patient benefit markers.",
     createSection: () => ({
       id: `sec-features-${Date.now()}`,
       type: "features",
       order: 1,
       isVisible: true,
       content: {
-        badge: "Agency Workflow Automation",
-        sectionTitle: "Scale 10x retainers. Burn out 0 teams.",
+        badge: "Comprehensive Breast Care",
+        sectionTitle: "Advanced Surgical Oncology & Breast Reconstruction",
         sectionSubtitle:
-          "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee AI handles in seconds.",
+          "Combining cutting-edge oncologic safety with aesthetically refined oncoplastic reconstructive surgery.",
         features: [
           {
-            tag: "Autonomous Ops",
-            title: "Agency AI Agents",
-            desc: "Build autonomous marketing workflows with Digivigee agents and let them handle campaign pacing, weekly reporting, and client follow-ups.",
+            tag: "Cosmetic & Oncologic",
+            title: "Oncoplastic Breast Surgery",
+            desc: "Preserve breast contour and symmetry using advanced tissue rearrangement techniques during tumor excision.",
           },
           {
-            tag: "Revenue Intelligence",
-            title: "Full-Funnel Attribution",
-            desc: "Connect your media buying ad accounts directly with client CRM telemetry to prove bottom-line pipeline revenue.",
+            tag: "Precision Oncology",
+            title: "Sentinel Node Biopsy",
+            desc: "Accurate axillary staging with minimal tissue trauma, reducing risks of postoperative lymphedema.",
           },
           {
-            tag: "Client Experience",
-            title: "Live White-Label Portals",
-            desc: "Give every enterprise client a branded real-time telemetry dashboard with custom domain and automatic exports.",
+            tag: "Preventive Care",
+            title: "High-Risk Screening & Genetics",
+            desc: "Tailored surveillance protocols, BRCA risk assessments, and clinical genetic counseling for families.",
           },
         ],
       },
@@ -180,10 +180,10 @@ const PRESET_BLOCKS: PresetBlock[] = [
   },
   {
     type: "testimonials",
-    name: "Dynamic Testimonials Wall",
+    name: "Patient Recovery Stories",
     icon: "💬",
-    badge: "Homepage OS",
-    description: "Star ratings, verified client quote, author avatar badge, role, and company.",
+    badge: "Clinical Care",
+    description: "Verified patient testimonials with recovery timeline, outcome rating, and caregiver feedback.",
     createSection: () => ({
       id: `sec-testi-${Date.now()}`,
       type: "testimonials",
@@ -191,9 +191,9 @@ const PRESET_BLOCKS: PresetBlock[] = [
       isVisible: true,
       content: {
         quote:
-          "DigiVigee transformed our customer acquisition economics. Inquiries surged by 180% within 90 days and CAC dropped by 42%.",
-        author: "Rajesh Patel",
-        role: "Managing Director, Kalpvruksh Group",
+          "Dr. Noopur Patel's calm explanation gave me immense confidence before my surgery. Her oncoplastic approach preserved my natural appearance completely.",
+        author: "Meenakshi Shah",
+        role: "Breast Conservation Patient, Ahmedabad",
       },
       styling: {
         backgroundColor: "#ffffff",
@@ -204,10 +204,10 @@ const PRESET_BLOCKS: PresetBlock[] = [
   },
   {
     type: "faq",
-    name: "FAQ Objection Clearance",
+    name: "Patient FAQ Accordion",
     icon: "❓",
-    badge: "Homepage OS",
-    description: "Clean modern FAQ accordion resolving client purchase hesitations.",
+    badge: "Clinical Care",
+    description: "Clear, reassuring answers addressing common breast lumps, biopsy doubts, and OPD queries.",
     createSection: () => ({
       id: `sec-faq-${Date.now()}`,
       type: "faq",
@@ -217,19 +217,19 @@ const PRESET_BLOCKS: PresetBlock[] = [
         sectionTitle: "Frequently Asked Questions",
         items: [
           {
-            question: "How quickly do we see results from DigiVigee?",
+            question: "When should I consult a breast surgeon for a lump?",
             answer:
-              "Most campaigns deliver measurable lead spikes and verified attribution data within the first 14 to 21 days of launching ad sprints.",
+              "Any new palpable lump, nipple discharge, skin dimpling, or persistent breast pain warrants prompt clinical evaluation and sonomammography.",
           },
           {
-            question: "Do you require long-term lock-in contracts?",
+            question: "Does breast cancer surgery always mean mastectomy?",
             answer:
-              "No. We operate on performance milestones and rolling monthly retainers because our results retain our partners.",
+              "No. Most patients eligible for breast conservation surgery (lumpectomy) achieve equivalent survival with breast preservation and oncoplastic shaping.",
           },
           {
-            question: "Can we use our own custom domain and branding?",
+            question: "Where are Dr. Noopur Patel's OPD consultations held?",
             answer:
-              "Yes, full 100% white-label support is included for agency clients and enterprise portals.",
+              "OPD sessions are held Monday through Saturday at Marengo CIMS Hospital, Science City Road, Sola, Ahmedabad.",
           },
         ],
       },
@@ -242,19 +242,19 @@ const PRESET_BLOCKS: PresetBlock[] = [
   },
   {
     type: "form",
-    name: "Lead Capture Form",
+    name: "OPD Consultation Booking Form",
     icon: "📋",
-    badge: "Homepage OS",
-    description: "Sleek inquiry form card with attribution tags and instant response guarantees.",
+    badge: "Clinical Care",
+    description: "Confidential patient consultation inquiry form with triage urgency and clinic desk routing.",
     createSection: () => ({
       id: `sec-form-${Date.now()}`,
       type: "form",
       order: 6,
       isVisible: true,
       content: {
-        headline: "Claim Your Custom Marketing Growth Blueprint",
+        headline: "Request an OPD Consultation with Dr. Noopur Patel",
         subheadline:
-          "Complete the inquiry form below to speak directly with an agency strategist within 24 hours.",
+          "Our clinic desk will contact you within 2 hours to confirm your preferred appointment slot at Marengo CIMS Hospital.",
       },
       styling: {
         backgroundColor: "#ffffff",
@@ -265,23 +265,23 @@ const PRESET_BLOCKS: PresetBlock[] = [
   },
   {
     type: "cta",
-    name: "Final Conversion Banner",
+    name: "Emergency & Second Opinion Banner",
     icon: "🚀",
-    badge: "Homepage OS",
-    description: "Deep emerald gradient card with award trust badges and high-urgency button.",
+    badge: "Clinical Care",
+    description: "Reassuring rose-themed banner with hospital credentials and direct clinic desk dial button.",
     createSection: () => ({
       id: `sec-cta-${Date.now()}`,
       type: "cta",
       order: 7,
       isVisible: true,
       content: {
-        headline: "Ready to Scale Your Agency 10x With Zero Burnout?",
-        subheadline: "Join 2,350+ ambitious brands and agency founders growing with DigiVigee today.",
-        buttonLabel: "Claim Your Free Proposal Now",
+        headline: "Seeking an Expert Second Opinion on Your Biopsy or Scan?",
+        subheadline: "Schedule a thorough, transparent consultation with Dr. Noopur Patel at Marengo CIMS Hospital today.",
+        buttonLabel: "Book Your Consultation Now",
         buttonTarget: "#lead-form",
       },
       styling: {
-        backgroundColor: "linear-gradient(135deg, #064e3b 0%, #022c22 100%)",
+        backgroundColor: "linear-gradient(135deg, #be123c 0%, #881337 100%)",
         textColor: "#ffffff",
         paddingY: "xl",
       },
@@ -848,7 +848,7 @@ export default function LandingPageBuilderPage({
                     </span>
                   </div>
                   <p className="text-[11px] text-emerald-900/80 dark:text-emerald-300/80 mb-3 leading-relaxed">
-                    Instantly load the exact components, copy, badges, and layout of the DigiVigee Home Page.
+                    Instantly load the exact components, copy, badges, and layout of Dr. Noopur Patel's Clinical Homepage.
                   </p>
                   <button
                     type="button"
@@ -1780,20 +1780,20 @@ export default function LandingPageBuilderPage({
               {/* Quiet Top Public Header */}
               <div className="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-100 px-6 py-3 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white font-black text-xs flex items-center justify-center">
-                    DV
+                  <div className="w-7 h-7 rounded-lg bg-rose-600 text-white font-black text-xs flex items-center justify-center">
+                    NP
                   </div>
                   <span className="font-black text-sm tracking-tight text-slate-900">
-                    DigiVigee
+                    Dr. Noopur Patel
                   </span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   <a
                     href="#lead-form"
-                    className="px-3.5 py-1.5 rounded-lg bg-emerald-600 text-white font-bold text-xs shadow-xs"
+                    className="px-3.5 py-1.5 rounded-lg bg-rose-600 text-white font-bold text-xs shadow-xs"
                   >
-                    {page.cta?.primaryCtaLabel || "Get Free Proposal"}
+                    {page.cta?.primaryCtaLabel || "Book OPD Consultation"}
                   </a>
                 </div>
               </div>
