@@ -42,15 +42,15 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
     slug: "",
     excerpt: "",
     content: "",
-    featuredImage: "/images/blog/social-media-tips.jpg",
-    featuredImageAlt: "",
-    categoryName: "Social Media",
-    categoryId: "social-media",
+    featuredImage: "/images/blog/breast-cancer-myths.jpg",
+    featuredImageAlt: "Dr. Noopur Patel Health Guide",
+    categoryName: "Breast Health",
+    categoryId: "breast-health",
     tagsText: "",
-    authorName: "DigiVigee Team",
-    authorRole: "Digital Marketing Specialist",
-    authorBio: "",
-    authorAvatar: "/images/team/disha-parmar.jpg",
+    authorName: "Dr. Noopur Patel",
+    authorRole: "Consultant Breast Oncoplastic Surgeon",
+    authorBio: "Breast cancer specialist and surgical oncologist at Marengo CIMS Hospital, Ahmedabad.",
+    authorAvatar: "/images/team/dr-noopur-patel.jpg",
     isFeatured: false,
     status: "draft",
     metaTitle: "",
@@ -75,15 +75,15 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
             slug: p.slug || "",
             excerpt: p.excerpt || "",
             content: p.content || "",
-            featuredImage: p.featuredImage || "/images/blog/social-media-tips.jpg",
+            featuredImage: p.featuredImage || "/images/blog/breast-cancer-myths.jpg",
             featuredImageAlt: p.featuredImageAlt || "",
-            categoryName: p.categoryName || "General",
-            categoryId: p.categoryId || "general",
+            categoryName: p.categoryName || "Breast Health",
+            categoryId: p.categoryId || "breast-health",
             tagsText: (p.tags || []).join(", "),
-            authorName: p.author?.name || "DigiVigee Team",
-            authorRole: p.author?.role || "Digital Strategist",
-            authorBio: p.author?.bio || "",
-            authorAvatar: p.author?.avatar || "/images/team/disha-parmar.jpg",
+            authorName: p.author?.name || "Dr. Noopur Patel",
+            authorRole: p.author?.role || "Consultant Breast Oncoplastic Surgeon",
+            authorBio: p.author?.bio || "Breast cancer specialist and surgical oncologist at Marengo CIMS Hospital, Ahmedabad.",
+            authorAvatar: p.author?.avatar || "/images/team/dr-noopur-patel.jpg",
             isFeatured: Boolean(p.isFeatured),
             status: p.status || "draft",
             metaTitle: p.seo?.title || p.title || "",
@@ -98,16 +98,17 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
           setFeedback({ message: data.error || "Failed to load post data.", type: "error" });
         }
       } catch (e) {
-        console.error("[EditBlog] Load error:", e);
-        setFeedback({ message: "Network error loading post data.", type: "error" });
+        console.error("[EditBlog] Fetch error:", e);
+        setFeedback({ message: "Network error loading post.", type: "error" });
       } finally {
         setIsLoading(false);
       }
     }
+
     loadPost();
   }, [postId]);
 
-  // Compile BlogPost object for preview/SEO analysis
+  // Derived audit object for live checker
   const currentPostForAudit: Partial<BlogPost> = {
     id: postId,
     title: formData.title,
@@ -145,19 +146,13 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
     const finalStatus = statusOverride || formData.status;
 
     if (!formData.title.trim()) {
-      setFeedback({ message: "Article title is required.", type: "error" });
+      setFeedback({ message: "Article title cannot be empty.", type: "error" });
       setActiveTab("content");
       return;
     }
 
     if (!formData.slug.trim()) {
-      setFeedback({ message: "URL slug is required.", type: "error" });
-      setActiveTab("content");
-      return;
-    }
-
-    if (!formData.content.trim()) {
-      setFeedback({ message: "Article body content cannot be empty.", type: "error" });
+      setFeedback({ message: "URL slug cannot be empty.", type: "error" });
       setActiveTab("content");
       return;
     }
@@ -185,11 +180,11 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
           type: "success",
         });
       } else {
-        setFeedback({ message: data.error || "Failed to save changes.", type: "error" });
+        setFeedback({ message: data.error || "Failed to update article.", type: "error" });
       }
     } catch (e) {
       console.error("[EditBlog] Save error:", e);
-      setFeedback({ message: "Network error saving changes.", type: "error" });
+      setFeedback({ message: "Network error saving article.", type: "error" });
     } finally {
       setIsSaving(false);
     }
@@ -197,9 +192,11 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
 
   if (isLoading) {
     return (
-      <div className="py-24 text-center bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-zinc-900 dark:border-zinc-100 mb-3" />
-        <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">Loading article editor...</p>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 rounded-full border-2 border-rose-600 border-t-transparent animate-spin" />
+          <p className="text-xs font-medium text-slate-500">Loading article editor...</p>
+        </div>
       </div>
     );
   }
@@ -212,46 +209,51 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
           <div className="flex items-center gap-2 mb-2 text-sm">
             <Link
               href="/admin/blog"
-              className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center gap-1 font-medium transition-colors"
+              className="text-slate-500 hover:text-slate-900 flex items-center gap-1 font-medium transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               All Articles
             </Link>
-            <span className="text-zinc-300 dark:text-zinc-600">/</span>
-            <span
-              className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
-                formData.status === "published"
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800"
-                  : "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
-              }`}
-            >
-              {formData.status === "published" ? "PUBLISHED" : "DRAFT"}
+            <span className="text-slate-300">/</span>
+            <span className="font-semibold text-slate-900 truncate max-w-xs sm:max-w-md">
+              {formData.title || "Edit Article"}
             </span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
-            <FileText className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
-            Edit Article: {formData.title || "Untitled"}
-          </h1>
+
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900">
+              Edit Health Article
+            </h1>
+            <span
+              className={`px-2.5 py-0.5 rounded-full text-xs font-bold border tracking-wide uppercase ${
+                formData.status === "published"
+                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                  : formData.status === "scheduled"
+                  ? "bg-blue-50 text-blue-700 border-blue-200"
+                  : "bg-slate-100 text-slate-700 border-slate-200"
+              }`}
+            >
+              {formData.status}
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center gap-2.5 flex-wrap">
           <Link
             href={`/admin/blog/preview/${postId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/60 shadow-sm transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-sm transition-colors"
           >
-            <Eye className="w-4 h-4 text-zinc-400" />
-            Live Preview
+            <Eye className="w-4 h-4 text-slate-500" />
+            Preview
           </Link>
 
           <button
             type="button"
             onClick={() => handleSave(formData.status)}
             disabled={isSaving}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/60 shadow-sm transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-semibold rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-sm transition-colors disabled:opacity-50"
           >
-            <Save className="w-4 h-4 text-zinc-500" />
+            <Save className="w-4 h-4 text-slate-500" />
             {isSaving ? "Saving..." : "Save Changes"}
           </button>
 
@@ -260,17 +262,17 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
               type="button"
               onClick={() => handleSave("published")}
               disabled={isSaving}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 shadow-sm transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold rounded-lg bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition-all disabled:opacity-50"
             >
               <Send className="w-4 h-4" />
-              Publish Article
+              Publish
             </button>
           ) : (
             <button
               type="button"
               onClick={() => handleSave("draft")}
               disabled={isSaving}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold rounded-lg border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-100 transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-semibold rounded-lg border border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 shadow-sm transition-colors disabled:opacity-50"
             >
               <Archive className="w-4 h-4" />
               Unpublish to Draft
@@ -284,21 +286,21 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
         <div
           className={`flex items-center justify-between p-4 rounded-xl border text-sm animate-in fade-in duration-200 ${
             feedback.type === "success"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
-              : "bg-red-50 dark:bg-red-950/30 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800"
+              ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+              : "bg-rose-50 text-rose-800 border-rose-200"
           }`}
         >
           <div className="flex items-center gap-2.5">
             {feedback.type === "success" ? (
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             ) : (
-              <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
             )}
             <span className="font-medium">{feedback.message}</span>
           </div>
           <button
             onClick={() => setFeedback(null)}
-            className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+            className="p-1 rounded-md text-slate-400 hover:text-slate-700"
           >
             <X className="w-4 h-4" />
           </button>
@@ -306,14 +308,14 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
       )}
 
       {/* Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="flex items-center gap-2 border-b border-slate-200">
         <button
           type="button"
           onClick={() => setActiveTab("content")}
           className={`pb-3 px-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === "content"
-              ? "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
-              : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600"
+              : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
           1. Article Content & Body
@@ -323,8 +325,8 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
           onClick={() => setActiveTab("seo")}
           className={`pb-3 px-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === "seo"
-              ? "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
-              : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600"
+              : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
           2. SEO & Social Metadata
@@ -334,8 +336,8 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
           onClick={() => setActiveTab("audit")}
           className={`pb-3 px-3 text-sm font-semibold border-b-2 flex items-center gap-1.5 transition-all ${
             activeTab === "audit"
-              ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
-              : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600"
+              : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
@@ -347,28 +349,28 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
       {activeTab === "content" && (
         <div className="space-y-6">
           {/* Main Title, Slug & Category */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                Article Title <span className="text-red-500">*</span>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Article Title <span className="text-rose-500">*</span>
               </label>
               <input
                 type="text"
                 required
                 value={formData.title}
                 onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
-                placeholder="e.g. 10 Proven Social Media Tactics to Skyrocket Organic Growth"
-                className="w-full px-4 py-2.5 text-base font-semibold bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="e.g. Understanding Breast Lumps: Normal Changes vs When to Consult a Specialist"
+                className="w-full px-4 py-2.5 text-base font-semibold bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                  URL Slug <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  URL Slug <span className="text-rose-500">*</span>
                 </label>
-                <div className="flex rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800">
-                  <span className="px-3 py-2 text-xs font-medium text-zinc-400 bg-zinc-100 dark:bg-zinc-800/80 border-r border-zinc-200 dark:border-zinc-700 select-none">
+                <div className="flex rounded-lg overflow-hidden border border-slate-200 bg-slate-50">
+                  <span className="px-3 py-2 text-xs font-medium text-slate-500 bg-slate-100 border-r border-slate-200 select-none">
                     /blog/
                   </span>
                   <input
@@ -376,15 +378,14 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
                     required
                     value={formData.slug}
                     onChange={(e) => setFormData((prev) => ({ ...prev, slug: generateSlug(e.target.value) }))}
-                    placeholder="e.g. 10-proven-social-media-tactics"
-                    className="w-full px-3 py-2 text-sm bg-transparent text-zinc-900 dark:text-zinc-100 focus:outline-none"
+                    className="w-full px-3 py-2 text-sm bg-transparent text-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                  Category <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Category <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -397,50 +398,48 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
                       categoryId: generateSlug(e.target.value),
                     }))
                   }
-                  placeholder="e.g. Social Media, Performance Marketing, SEO"
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                Short Excerpt <span className="text-red-500">*</span>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Short Excerpt <span className="text-rose-500">*</span>
               </label>
               <textarea
                 rows={2}
                 required
                 value={formData.excerpt}
                 onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))}
-                placeholder="A concise 1-2 sentence summary explaining the core value of this article..."
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
 
           {/* Rich Content Editor Card */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-4 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-zinc-400" />
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <h2 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <FileText className="w-4 h-4 text-slate-400" />
               Main Article Content
             </h2>
             <BlogEditor
               value={formData.content}
               onChange={(content) => setFormData((prev) => ({ ...prev, content }))}
-              minHeight="500px"
+              minHeight="550px"
             />
           </div>
 
           {/* Featured Image and Tags */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-              <ImageIcon className="w-4 h-4 text-zinc-400" />
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <ImageIcon className="w-4 h-4 text-slate-400" />
               Media & Featured Asset
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Featured Image URL
                 </label>
                 <div className="flex gap-2">
@@ -448,13 +447,12 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
                     type="text"
                     value={formData.featuredImage}
                     onChange={(e) => setFormData((prev) => ({ ...prev, featuredImage: e.target.value }))}
-                    placeholder="/images/blog/your-image.jpg"
-                    className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                    className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                   />
                   <button
                     type="button"
                     onClick={() => setIsMediaPickerOpen(true)}
-                    className="px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-xs font-semibold shrink-0 transition-colors"
+                    className="px-3.5 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 text-xs font-semibold shrink-0 transition-colors"
                   >
                     Select
                   </button>
@@ -462,75 +460,75 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Image Alt Text (Accessibility)
                 </label>
                 <input
                   type="text"
                   value={formData.featuredImageAlt}
                   onChange={(e) => setFormData((prev) => ({ ...prev, featuredImageAlt: e.target.value }))}
-                  placeholder="e.g. Digital Marketing Strategy Infographic"
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  placeholder="e.g. Dr. Noopur Patel Breast Care Guide"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Tags / Keywords (Comma-separated)
               </label>
               <input
                 type="text"
                 value={formData.tagsText}
                 onChange={(e) => setFormData((prev) => ({ ...prev, tagsText: e.target.value }))}
-                placeholder="Social Media, Instagram, Growth Hacking"
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="Breast Cancer, Early Detection, Oncology Care, Ahmedabad"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
 
           {/* Author Details & Spotlight */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-              <User className="w-4 h-4 text-zinc-400" />
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <User className="w-4 h-4 text-slate-400" />
               Author Attribution & Visibility
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Author Name
                 </label>
                 <input
                   type="text"
                   value={formData.authorName}
                   onChange={(e) => setFormData((prev) => ({ ...prev, authorName: e.target.value }))}
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Author Role
                 </label>
                 <input
                   type="text"
                   value={formData.authorRole}
                   onChange={(e) => setFormData((prev) => ({ ...prev, authorRole: e.target.value }))}
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Author Short Bio
               </label>
               <textarea
                 rows={2}
                 value={formData.authorBio}
                 onChange={(e) => setFormData((prev) => ({ ...prev, authorBio: e.target.value }))}
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
@@ -539,9 +537,9 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
                 type="checkbox"
                 checked={formData.isFeatured}
                 onChange={(e) => setFormData((prev) => ({ ...prev, isFeatured: e.target.checked }))}
-                className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-zinc-300 dark:border-zinc-700"
+                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300"
               />
-              <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+              <span className="text-sm font-semibold text-slate-900">
                 Feature this article on Homepage & Spotlight Sections
               </span>
             </label>
@@ -551,14 +549,14 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
 
       {/* TAB 2: SEO & OPEN GRAPH METADATA */}
       {activeTab === "seo" && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-          <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-zinc-400" />
+        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+          <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-slate-400" />
             Search Engine & Open Graph Optimization
           </h2>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
               Custom SEO Title
             </label>
             <input
@@ -566,12 +564,12 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
               value={formData.metaTitle}
               onChange={(e) => setFormData((prev) => ({ ...prev, metaTitle: e.target.value }))}
               placeholder="Defaults to article title if empty"
-              className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
               Custom Meta Description
             </label>
             <textarea
@@ -579,26 +577,26 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
               value={formData.metaDescription}
               onChange={(e) => setFormData((prev) => ({ ...prev, metaDescription: e.target.value }))}
               placeholder="Defaults to article excerpt if empty"
-              className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Canonical URL (Optional)
               </label>
               <input
                 type="url"
                 value={formData.canonicalUrl}
                 onChange={(e) => setFormData((prev) => ({ ...prev, canonicalUrl: e.target.value }))}
-                placeholder="https://digivigee.com/blog/..."
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="https://drnoopurpatel.com/blog/..."
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Open Graph Image URL (Optional)
               </label>
               <input
@@ -606,33 +604,33 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
                 value={formData.ogImage}
                 onChange={(e) => setFormData((prev) => ({ ...prev, ogImage: e.target.value }))}
                 placeholder="Defaults to featured image"
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Open Graph Title (Optional)
               </label>
               <input
                 type="text"
                 value={formData.ogTitle}
                 onChange={(e) => setFormData((prev) => ({ ...prev, ogTitle: e.target.value }))}
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Open Graph Description (Optional)
               </label>
               <input
                 type="text"
                 value={formData.ogDescription}
                 onChange={(e) => setFormData((prev) => ({ ...prev, ogDescription: e.target.value }))}
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
@@ -645,10 +643,10 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
       )}
 
       {/* Bottom Action Bar */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm flex items-center justify-between">
+      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm flex items-center justify-between">
         <Link
           href="/admin/blog"
-          className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
         >
           Cancel
         </Link>
@@ -658,7 +656,7 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
             type="button"
             onClick={() => handleSave(formData.status)}
             disabled={isSaving}
-            className="px-4 py-2 text-xs font-semibold rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-xs font-semibold rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50"
           >
             {isSaving ? "Saving..." : "Save Changes"}
           </button>
@@ -667,7 +665,7 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
               type="button"
               onClick={() => handleSave("published")}
               disabled={isSaving}
-              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 shadow-sm transition-all disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition-all disabled:opacity-50"
             >
               <Send className="w-3.5 h-3.5" />
               Publish Article
@@ -677,7 +675,7 @@ export default function EditBlogPostPage({ params }: EditPageProps) {
               type="button"
               onClick={() => handleSave("draft")}
               disabled={isSaving}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-amber-300 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 hover:bg-amber-100 transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 transition-colors disabled:opacity-50"
             >
               <Archive className="w-4 h-4" />
               Unpublish to Draft

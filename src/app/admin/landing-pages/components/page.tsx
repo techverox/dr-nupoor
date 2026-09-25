@@ -361,7 +361,7 @@ export default function ReusableComponentsLibraryPage() {
       if (data.success && data.components) {
         setComponents(data.components);
         setFeedback({
-          message: "Restored all 11 canonical DigiVigee homepage-grade master components successfully!",
+          message: "Restored all 11 canonical Dr. Noopur Patel clinical practice components successfully!",
           type: "success",
         });
         setIsResetModalOpen(false);
@@ -1760,8 +1760,8 @@ export default function ReusableComponentsLibraryPage() {
          ========================================================================= */}
       <ConfirmDialog
         isOpen={isResetModalOpen}
-        title="Reset All Components to Homepage Defaults?"
-        message="This will restore all 11 canonical DigiVigee homepage-grade master components (Hero + Enterprise Logos, Bento Role Pillars, Capabilities Suite, Proof Counter, Testimonial Wall, Case Studies, 3-Tier Pricing, FAQ Accordions, Lead Form Card, Final CTA Banner, and 4-Step Process) with 100% verified real agency data. Any modified master blocks will be safely restored."
+        title="Reset All Components to Clinical Defaults?"
+        message="This will restore all 11 canonical Dr. Noopur Patel clinical practice master components (Clinical Hero & Hospital Credentials, Patient Testimonials, Case Studies, FAQ Accordions, Consultation Booking Card, Final CTA Banner, and Clinical Care Pathway) with verified oncology practice data. Any modified master blocks will be safely restored."
         confirmLabel={isResetting ? "Restoring Defaults..." : "Yes, Reset to Defaults"}
         isDestructive={false}
         isLoading={isResetting}

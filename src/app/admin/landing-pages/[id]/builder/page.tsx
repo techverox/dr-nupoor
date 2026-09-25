@@ -41,33 +41,33 @@ interface PresetBlock {
   createSection: () => LandingPageSection;
 }
 
-// 8 Homepage-Grade Canonical Blocks matching DigiVigee Home Page 1:1
+// 8 Clinical Practice Canonical Blocks matching Dr. Noopur Patel Practice
 const PRESET_BLOCKS: PresetBlock[] = [
   {
     type: "hero",
-    name: "Homepage Hero + Logos Ribbon",
+    name: "Clinical Hero + Hospital Credentials",
     icon: "🌟",
-    badge: "Homepage OS",
-    description: "Ambient emerald glow, floating eyebrow badge, dual CTAs, and enterprise logos.",
+    badge: "Clinical Care",
+    description: "Rose accent badge, clinical credentials, dual consultation CTAs, and Marengo CIMS hospital accreditation.",
     createSection: () => ({
       id: `sec-hero-${Date.now()}`,
       type: "hero",
       order: 0,
       isVisible: true,
       content: {
-        eyebrow: "Enterprise Agency Growth OS",
-        headline: "Scale 10x Client Retainers. Burn Out 0 Teams.",
+        eyebrow: "Consultant Breast Surgeon & Surgical Oncologist",
+        headline: "Compassionate, Advanced Breast Cancer Surgery in Ahmedabad",
         description:
-          "Stop wasting your best agency talent on manual reporting and fragmented spreadsheets that Digivigee handles in seconds.",
-        primaryCtaLabel: "Claim Your Free Proposal",
+          "Evidence-based oncoplastic breast conservation, sentinel lymph node biopsy, and personalized multidisciplinary cancer care at Marengo CIMS Hospital.",
+        primaryCtaLabel: "Book OPD Consultation",
         primaryCtaTarget: "#lead-form",
-        secondaryCtaLabel: "Explore Capabilities",
+        secondaryCtaLabel: "Explore Clinical Services",
         secondaryCtaTarget: "#features",
-        logosHeading: "Trusted by 2,350+ Scaling Agencies & Enterprises",
+        logosHeading: "Affiliated with Leading Healthcare Institutions & Clinical Boards",
       },
       styling: {
-        backgroundColor: "#0f172a",
-        textColor: "#ffffff",
+        backgroundColor: "#ffffff",
+        textColor: "#0f172a",
         paddingY: "xl",
       },
     }),

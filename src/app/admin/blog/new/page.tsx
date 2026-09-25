@@ -36,15 +36,15 @@ export default function CreateNewBlogPostPage() {
     slug: "",
     excerpt: "",
     content: "",
-    featuredImage: "/images/blog/social-media-tips.jpg",
-    featuredImageAlt: "",
-    categoryName: "Social Media",
-    categoryId: "social-media",
-    tagsText: "Social Media, Growth, Marketing",
-    authorName: "Disha Parmar",
-    authorRole: "Social Media Strategist",
-    authorBio: "Specializes in visual storytelling, viral reels production, and community engagement.",
-    authorAvatar: "/images/team/disha-parmar.jpg",
+    featuredImage: "/images/blog/breast-cancer-myths.jpg",
+    featuredImageAlt: "Dr. Noopur Patel Clinical Health Guide",
+    categoryName: "Breast Health",
+    categoryId: "breast-health",
+    tagsText: "Breast Cancer, Early Detection, Surgical Oncology",
+    authorName: "Dr. Noopur Patel",
+    authorRole: "Consultant Breast Oncoplastic Surgeon",
+    authorBio: "Breast cancer specialist and surgical oncologist at Marengo CIMS Hospital, Ahmedabad.",
+    authorAvatar: "/images/team/dr-noopur-patel.jpg",
     isFeatured: false,
     status: "draft",
     metaTitle: "",
@@ -170,20 +170,22 @@ export default function CreateNewBlogPostPage() {
           <div className="flex items-center gap-2 mb-2 text-sm">
             <Link
               href="/admin/blog"
-              className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center gap-1 font-medium transition-colors"
+              className="text-slate-500 hover:text-slate-900 flex items-center gap-1 font-medium transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               All Articles
             </Link>
-            <span className="text-zinc-300 dark:text-zinc-600">/</span>
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100">Create New</span>
+            <span className="text-slate-300">/</span>
+            <span className="font-semibold text-slate-900">Create New</span>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
-            <FileText className="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2.5">
+            <div className="p-2 rounded-xl bg-rose-50 border border-rose-200 text-rose-600">
+              <FileText className="w-6 h-6" />
+            </div>
             Create Blog Article
           </h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            Author and publish search-optimized articles to power your content engine.
+          <p className="text-sm text-slate-500 mt-1">
+            Author and publish patient education articles and clinical insights for Dr. Noopur Patel's practice.
           </p>
         </div>
 
@@ -192,9 +194,9 @@ export default function CreateNewBlogPostPage() {
             type="button"
             onClick={() => handleSave("draft")}
             disabled={isSaving}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/60 shadow-sm transition-colors disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-sm transition-colors disabled:opacity-50"
           >
-            <Save className="w-4 h-4 text-zinc-500" />
+            <Save className="w-4 h-4 text-slate-500" />
             {isSaving ? "Saving..." : "Save Draft"}
           </button>
 
@@ -202,7 +204,7 @@ export default function CreateNewBlogPostPage() {
             type="button"
             onClick={() => handleSave("published")}
             disabled={isSaving}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 shadow-sm transition-all disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold rounded-lg bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition-all disabled:opacity-50"
           >
             <Send className="w-4 h-4" />
             Publish Article
@@ -215,21 +217,21 @@ export default function CreateNewBlogPostPage() {
         <div
           className={`flex items-center justify-between p-4 rounded-xl border text-sm animate-in fade-in duration-200 ${
             feedback.type === "success"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
-              : "bg-red-50 dark:bg-red-950/30 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800"
+              ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+              : "bg-rose-50 text-rose-800 border-rose-200"
           }`}
         >
           <div className="flex items-center gap-2.5">
             {feedback.type === "success" ? (
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             ) : (
-              <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
             )}
             <span className="font-medium">{feedback.message}</span>
           </div>
           <button
             onClick={() => setFeedback(null)}
-            className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+            className="p-1 rounded-md text-slate-400 hover:text-slate-700"
           >
             <X className="w-4 h-4" />
           </button>
@@ -237,14 +239,14 @@ export default function CreateNewBlogPostPage() {
       )}
 
       {/* Navigation Tabs */}
-      <div className="flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="flex items-center gap-2 border-b border-slate-200">
         <button
           type="button"
           onClick={() => setActiveTab("content")}
           className={`pb-3 px-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === "content"
-              ? "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
-              : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600"
+              : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
           1. Article Content & Body
@@ -254,8 +256,8 @@ export default function CreateNewBlogPostPage() {
           onClick={() => setActiveTab("seo")}
           className={`pb-3 px-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === "seo"
-              ? "border-zinc-900 text-zinc-900 dark:border-zinc-100 dark:text-zinc-100"
-              : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600"
+              : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
           2. SEO & Social Metadata
@@ -265,8 +267,8 @@ export default function CreateNewBlogPostPage() {
           onClick={() => setActiveTab("audit")}
           className={`pb-3 px-3 text-sm font-semibold border-b-2 flex items-center gap-1.5 transition-all ${
             activeTab === "audit"
-              ? "border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400"
-              : "border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600"
+              : "border-transparent text-slate-500 hover:text-slate-900"
           }`}
         >
           <Sparkles className="w-3.5 h-3.5" />
@@ -278,28 +280,28 @@ export default function CreateNewBlogPostPage() {
       {activeTab === "content" && (
         <div className="space-y-6">
           {/* Main Title, Slug & Category */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                Article Title <span className="text-red-500">*</span>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Article Title <span className="text-rose-500">*</span>
               </label>
               <input
                 type="text"
                 required
                 value={formData.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
-                placeholder="e.g. 10 Proven Social Media Tactics to Skyrocket Organic Growth"
-                className="w-full px-4 py-2.5 text-base font-semibold bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="e.g. Understanding Breast Lumps: Normal Changes vs When to Consult a Specialist"
+                className="w-full px-4 py-2.5 text-base font-semibold bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                  URL Slug <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  URL Slug <span className="text-rose-500">*</span>
                 </label>
-                <div className="flex rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800">
-                  <span className="px-3 py-2 text-xs font-medium text-zinc-400 bg-zinc-100 dark:bg-zinc-800/80 border-r border-zinc-200 dark:border-zinc-700 select-none">
+                <div className="flex rounded-lg overflow-hidden border border-slate-200 bg-slate-50">
+                  <span className="px-3 py-2 text-xs font-medium text-slate-500 bg-slate-100 border-r border-slate-200 select-none">
                     /blog/
                   </span>
                   <input
@@ -307,15 +309,15 @@ export default function CreateNewBlogPostPage() {
                     required
                     value={formData.slug}
                     onChange={(e) => setFormData((prev) => ({ ...prev, slug: generateSlug(e.target.value) }))}
-                    placeholder="e.g. 10-proven-social-media-tactics"
-                    className="w-full px-3 py-2 text-sm bg-transparent text-zinc-900 dark:text-zinc-100 focus:outline-none"
+                    placeholder="e.g. understanding-breast-lumps"
+                    className="w-full px-3 py-2 text-sm bg-transparent text-slate-900 focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                  Category <span className="text-red-500">*</span>
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                  Category <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -328,31 +330,31 @@ export default function CreateNewBlogPostPage() {
                       categoryId: generateSlug(e.target.value),
                     }))
                   }
-                  placeholder="e.g. Social Media, Performance Marketing, SEO"
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  placeholder="e.g. Breast Health, Surgical Oncology, Early Detection"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
-                Short Excerpt <span className="text-red-500">*</span>
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
+                Short Excerpt <span className="text-rose-500">*</span>
               </label>
               <textarea
                 rows={2}
                 required
                 value={formData.excerpt}
                 onChange={(e) => handleExcerptChange(e.target.value)}
-                placeholder="A concise 1-2 sentence summary explaining the core value of this article..."
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="A concise clinical summary explaining the key findings or guidance in this health guide..."
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
 
           {/* Rich Content Editor Card */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-4 flex items-center gap-2">
-              <FileText className="w-4 h-4 text-zinc-400" />
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+            <h2 className="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+              <FileText className="w-4 h-4 text-slate-400" />
               Main Article Content
             </h2>
             <BlogEditor
@@ -363,15 +365,15 @@ export default function CreateNewBlogPostPage() {
           </div>
 
           {/* Featured Image and Tags */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-              <ImageIcon className="w-4 h-4 text-zinc-400" />
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <ImageIcon className="w-4 h-4 text-slate-400" />
               Media & Featured Asset
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Featured Image URL
                 </label>
                 <div className="flex gap-2">
@@ -380,12 +382,12 @@ export default function CreateNewBlogPostPage() {
                     value={formData.featuredImage}
                     onChange={(e) => setFormData((prev) => ({ ...prev, featuredImage: e.target.value }))}
                     placeholder="/images/blog/your-image.jpg"
-                    className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                    className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                   />
                   <button
                     type="button"
                     onClick={() => setIsMediaPickerOpen(true)}
-                    className="px-3.5 py-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 text-xs font-semibold shrink-0 transition-colors"
+                    className="px-3.5 py-2 rounded-lg border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 text-xs font-semibold shrink-0 transition-colors"
                   >
                     Select
                   </button>
@@ -393,75 +395,75 @@ export default function CreateNewBlogPostPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Image Alt Text (Accessibility)
                 </label>
                 <input
                   type="text"
                   value={formData.featuredImageAlt}
                   onChange={(e) => setFormData((prev) => ({ ...prev, featuredImageAlt: e.target.value }))}
-                  placeholder="e.g. Digital Marketing Strategy Infographic"
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  placeholder="e.g. Dr. Noopur Patel Breast Care Guide"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Tags / Keywords (Comma-separated)
               </label>
               <input
                 type="text"
                 value={formData.tagsText}
                 onChange={(e) => setFormData((prev) => ({ ...prev, tagsText: e.target.value }))}
-                placeholder="Social Media, Instagram, Growth Hacking"
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="Breast Cancer, Early Detection, Oncology Care, Ahmedabad"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
 
           {/* Author Details & Spotlight */}
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-            <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-              <User className="w-4 h-4 text-zinc-400" />
+          <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+            <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+              <User className="w-4 h-4 text-slate-400" />
               Author Attribution & Visibility
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Author Name
                 </label>
                 <input
                   type="text"
                   value={formData.authorName}
                   onChange={(e) => setFormData((prev) => ({ ...prev, authorName: e.target.value }))}
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                   Author Role
                 </label>
                 <input
                   type="text"
                   value={formData.authorRole}
                   onChange={(e) => setFormData((prev) => ({ ...prev, authorRole: e.target.value }))}
-                  className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                  className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Author Short Bio
               </label>
               <textarea
                 rows={2}
                 value={formData.authorBio}
                 onChange={(e) => setFormData((prev) => ({ ...prev, authorBio: e.target.value }))}
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
@@ -470,9 +472,9 @@ export default function CreateNewBlogPostPage() {
                 type="checkbox"
                 checked={formData.isFeatured}
                 onChange={(e) => setFormData((prev) => ({ ...prev, isFeatured: e.target.checked }))}
-                className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-zinc-300 dark:border-zinc-700"
+                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300"
               />
-              <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+              <span className="text-sm font-semibold text-slate-900">
                 Feature this article on Homepage & Spotlight Sections
               </span>
             </label>
@@ -482,14 +484,14 @@ export default function CreateNewBlogPostPage() {
 
       {/* TAB 2: SEO & OPEN GRAPH METADATA */}
       {activeTab === "seo" && (
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm space-y-4">
-          <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-            <Globe className="w-4 h-4 text-zinc-400" />
+        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
+          <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
+            <Globe className="w-4 h-4 text-slate-400" />
             Search Engine & Open Graph Optimization
           </h2>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
               Custom SEO Title
             </label>
             <input
@@ -497,12 +499,12 @@ export default function CreateNewBlogPostPage() {
               value={formData.metaTitle}
               onChange={(e) => setFormData((prev) => ({ ...prev, metaTitle: e.target.value }))}
               placeholder="Defaults to article title if empty"
-              className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
               Custom Meta Description
             </label>
             <textarea
@@ -510,26 +512,26 @@ export default function CreateNewBlogPostPage() {
               value={formData.metaDescription}
               onChange={(e) => setFormData((prev) => ({ ...prev, metaDescription: e.target.value }))}
               placeholder="Defaults to article excerpt if empty"
-              className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+              className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Canonical URL (Optional)
               </label>
               <input
                 type="url"
                 value={formData.canonicalUrl}
                 onChange={(e) => setFormData((prev) => ({ ...prev, canonicalUrl: e.target.value }))}
-                placeholder="https://digivigee.com/blog/..."
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                placeholder="https://drnoopurpatel.com/blog/..."
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Open Graph Image URL (Optional)
               </label>
               <input
@@ -537,33 +539,33 @@ export default function CreateNewBlogPostPage() {
                 value={formData.ogImage}
                 onChange={(e) => setFormData((prev) => ({ ...prev, ogImage: e.target.value }))}
                 placeholder="Defaults to featured image"
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Open Graph Title (Optional)
               </label>
               <input
                 type="text"
                 value={formData.ogTitle}
                 onChange={(e) => setFormData((prev) => ({ ...prev, ogTitle: e.target.value }))}
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Open Graph Description (Optional)
               </label>
               <input
                 type="text"
                 value={formData.ogDescription}
                 onChange={(e) => setFormData((prev) => ({ ...prev, ogDescription: e.target.value }))}
-                className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:bg-white"
               />
             </div>
           </div>
@@ -576,10 +578,10 @@ export default function CreateNewBlogPostPage() {
       )}
 
       {/* Bottom Sticky Action Bar */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 shadow-sm flex items-center justify-between">
+      <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm flex items-center justify-between">
         <Link
           href="/admin/blog"
-          className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors"
+          className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
         >
           Cancel
         </Link>
@@ -589,7 +591,7 @@ export default function CreateNewBlogPostPage() {
             type="button"
             onClick={() => handleSave("draft")}
             disabled={isSaving}
-            className="px-4 py-2 text-xs font-semibold rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
+            className="px-4 py-2 text-xs font-semibold rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors disabled:opacity-50"
           >
             {isSaving ? "Saving..." : "Save Draft"}
           </button>
@@ -597,7 +599,7 @@ export default function CreateNewBlogPostPage() {
             type="button"
             onClick={() => handleSave("published")}
             disabled={isSaving}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 shadow-sm transition-all disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-rose-600 hover:bg-rose-700 text-white shadow-sm transition-all disabled:opacity-50"
           >
             <Send className="w-3.5 h-3.5" />
             Publish Article
