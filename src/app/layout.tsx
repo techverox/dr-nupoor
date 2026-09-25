@@ -8,6 +8,7 @@ import { AnalyticsScripts, GoogleTagManagerNoScript } from "@/components/analyti
 import { GlobalStructuredData } from "@/components/seo/StructuredData";
 import { getCmsSiteSettings } from "@/lib/services/cmsService";
 import { CustomCodeInjector } from "@/components/analytics/CustomCodeInjector";
+import { LiveSyncListener } from "@/components/sync/LiveSyncListener";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default async function RootLayout({
         <GlobalStructuredData />
       </head>
       <body className="bg-white text-slate-900 antialiased font-sans selection:bg-[#D84C70]/20 selection:text-[#9B2846]">
+        <LiveSyncListener />
         <CustomCodeInjector initialScripts={initialScripts} />
         <GoogleTagManagerNoScript />
         <AnalyticsScripts />

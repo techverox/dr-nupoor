@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { BlogPost, BlogStatus } from "@/types";
 import { formatDate } from "@/utils/formatters";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   Sparkles,
   CheckCircle2,
@@ -31,31 +32,28 @@ import {
   Filter,
 } from "lucide-react";
 
-// Canonical showcase presets for 10-year-old child simplicity
+// Canonical clinical presets for Dr. Noopur Patel Clinic
 const PRESET_IMAGES = [
-  { label: "Keynote Strategy", url: "/images/showcase/collaborate_keynote.jpg" },
-  { label: "ROAS Command", url: "/images/showcase/pillar_roas_command.jpg" },
-  { label: "Retainer Scale", url: "/images/showcase/pillar_high_ticket_retainers.jpg" },
-  { label: "Local SEO Grid", url: "/images/showcase/pillar_local_seo_grid.jpg" },
-  { label: "Web Design UX", url: "/images/showcase/pillar_vipul_web_design.jpg" },
-  { label: "Email Retention", url: "/images/showcase/pillar_sophie_retention_flow.jpg" },
+  { label: "Early Screening & Mammography", url: "/images/doctor/assets/service-1.png" },
+  { label: "Oncoplastic Breast Surgery", url: "/images/doctor/assets/service-2.png" },
+  { label: "Benign Breast Evaluation", url: "/images/doctor/assets/condition-benign.png" },
+  { label: "Ductal Assessment", url: "/images/doctor/assets/condition-ductal.png" },
+  { label: "Breast Anatomy Normal", url: "/images/doctor/assets/condition-normal.png" },
+  { label: "Dr. Noopur Patel Clinical", url: "/images/doctor/assets/hero-doctor.png" },
 ];
 
 const PRESET_CATEGORIES = [
-  "Agency OS & Operations",
-  "Performance Marketing",
-  "Content Strategy & Retainers",
-  "Multi-Location Local SEO",
-  "High-Converting Web Design",
-  "Retention & Email Systems",
+  "Screening & Early Detection",
+  "Oncoplastic Surgery",
+  "Breast Cancer Care",
+  "Benign Breast Conditions",
+  "Survivorship & Recovery",
+  "Patient Education & Awareness",
 ];
 
 const PRESET_AUTHORS = [
-  { name: "Marcus Vance", role: "Managing Partner", avatar: "/images/showcase/marcus_vance.jpg" },
-  { name: "Elena Rostova", role: "Head of Performance Media", avatar: "/images/showcase/elena_rostova.jpg" },
-  { name: "Vipul Gajjar", role: "Principal Experience Architect", avatar: "/images/showcase/vipul_gajjar.jpg" },
-  { name: "Sophie Laurent", role: "Lifecycle & Retention Director", avatar: "/images/showcase/sophie_laurent.jpg" },
-  { name: "Zenith Growth Pod", role: "Search Infrastructure Team", avatar: "/images/team/disha-parmar.jpg" },
+  { name: "Dr. Noopur Patel", role: "Breast Cancer Surgeon & Oncoplastic Specialist", avatar: "/images/doctor/assets/hero-doctor.png" },
+  { name: "Clinical Oncology Team", role: "Marengo CIMS Hospital", avatar: "/images/doctor/assets/hero-doctor.png" },
 ];
 
 export default function AdminBlogManagementPage() {
@@ -143,11 +141,12 @@ export default function AdminBlogManagementPage() {
       });
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("blogs", post.id);
         setPosts((prev) =>
           prev.map((p) => (p.id === post.id ? { ...p, status: nextStatus } : p))
         );
         setFeedback({
-          message: `Playbook "${post.title.substring(0, 35)}..." status set to ${nextStatus.toUpperCase()}!`,
+          message: `Article "${post.title.substring(0, 35)}..." status set to ${nextStatus.toUpperCase()}!`,
           type: "success",
         });
       } else {
@@ -261,9 +260,9 @@ export default function AdminBlogManagementPage() {
         isFeatured: formData.isFeatured,
         tags: formData.tagsText.split(",").map((t) => t.trim()).filter(Boolean),
         seo: {
-          title: `${formData.title} | DigiVigee Agency Playbooks`,
+          title: `${formData.title} | Dr. Noopur Patel Clinical Blog`,
           description: formData.excerpt,
-          canonicalUrl: `https://digivigee.com/blog/${formData.slug.trim()}`,
+          canonicalUrl: `/blog/${formData.slug.trim()}`,
           ogTitle: formData.title,
           ogDescription: formData.excerpt,
           ogImage: formData.featuredImage,
@@ -279,8 +278,9 @@ export default function AdminBlogManagementPage() {
       const data = await res.json();
 
       if (data.success) {
+        notifyLiveSync("blogs", data.id || payload.id);
         setFeedback({
-          message: `Playbook "${formData.title.substring(0, 30)}..." published live & synchronized!`,
+          message: `Article "${formData.title.substring(0, 30)}..." saved live & synchronized!`,
           type: "success",
         });
         setIsEditorOpen(false);
@@ -307,8 +307,9 @@ export default function AdminBlogManagementPage() {
       });
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("blogs", "all");
         setFeedback({
-          message: "All 6 Canonical Agency Playbooks restored to factory defaults!",
+          message: "All clinical articles restored to canonical defaults!",
           type: "success",
         });
         setIsResetOpen(false);
@@ -334,9 +335,10 @@ export default function AdminBlogManagementPage() {
       });
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("blogs", deleteTarget.id);
         setPosts((prev) => prev.filter((p) => p.id !== deleteTarget.id));
         setFeedback({
-          message: `Playbook "${deleteTarget.title.substring(0, 30)}..." permanently deleted.`,
+          message: `Article "${deleteTarget.title.substring(0, 30)}..." permanently deleted.`,
           type: "success",
         });
         setDeleteTarget(null);

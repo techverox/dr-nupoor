@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { TeamMember } from "@/types";
 import { Card } from "@/components/ui/Card";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   Users,
   Search,
@@ -178,6 +179,7 @@ export default function AdminTeamPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("team", data.id || payload.id);
         setFeedback({
           message: editingItem ? "Team specialist updated & synced live!" : "New team specialist created & published live!",
           type: "success",
@@ -219,6 +221,7 @@ export default function AdminTeamPage() {
       });
 
       if (res.ok) {
+        notifyLiveSync("team", member.id);
         setFeedback({
           message: `"${member.name}" is now ${nextStatus ? "Published Live" : "Unpublished (Draft)"}.`,
           type: "success",
@@ -244,6 +247,7 @@ export default function AdminTeamPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("team", deleteTarget.id);
         setFeedback({ message: `Team member "${deleteTarget.name}" removed successfully.`, type: "success" });
         setDeleteTarget(null);
         fetchTeam();
@@ -270,6 +274,7 @@ export default function AdminTeamPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("team", "all");
         setFeedback({
           message: "All 5 team specialists successfully reset to live canonical defaults!",
           type: "success",

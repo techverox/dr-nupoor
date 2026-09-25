@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { ServiceItem } from "@/types";
 import { Card } from "@/components/ui/Card";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   Briefcase,
   Search,
@@ -153,7 +154,7 @@ export default function AdminServicesPage() {
         isPublished: formData.isPublished,
         deliverables,
         seo: {
-          title: `${formData.title.trim()} | DigiVigee Engine`,
+          title: `${formData.title.trim()} | Dr. Noopur Patel Clinic`,
           description: formData.shortDescription.trim(),
         },
       };
@@ -166,6 +167,7 @@ export default function AdminServicesPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("services", data.id || payload.id);
         setFeedback({
           message: `Service "${formData.title}" saved successfully & live on website!`,
           type: "success",
@@ -199,6 +201,7 @@ export default function AdminServicesPage() {
       });
 
       if (res.ok) {
+        notifyLiveSync("services", service.id);
         setServices((prev) =>
           prev.map((s) => (s.id === service.id ? { ...s, isPublished: newStatus } : s))
         );
@@ -223,6 +226,7 @@ export default function AdminServicesPage() {
       });
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("services", "all");
         setFeedback({
           message: "All 7 services successfully reset to canonical website defaults!",
           type: "success",
@@ -252,6 +256,7 @@ export default function AdminServicesPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("services", deleteTarget.id);
         setFeedback({ message: `Service "${deleteTarget.title}" deleted.`, type: "success" });
         setDeleteTarget(null);
         await fetchServices();

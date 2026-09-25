@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { PortfolioItem } from "@/types";
 import { Card } from "@/components/ui/Card";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   FolderGit2,
   Search,
@@ -176,7 +177,7 @@ export default function AdminPortfolioPage() {
         isPublished: formData.isPublished,
         metrics,
         seo: {
-          title: `${formData.title.trim()} | DigiVigee Case Study`,
+          title: `${formData.title.trim()} | Dr. Noopur Patel Patient Care Journey`,
           description: formData.shortDescription.trim(),
         },
       };
@@ -189,15 +190,16 @@ export default function AdminPortfolioPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("portfolio", data.id || payload.id);
         setFeedback({
-          message: `Case study "${formData.title}" saved successfully & live on website!`,
+          message: `Patient journey "${formData.title}" saved successfully & live on website!`,
           type: "success",
         });
         setIsModalOpen(false);
         await fetchPortfolio();
         setTimeout(() => setFeedback(null), 4000);
       } else {
-        setFeedback({ message: data.error || "Failed to save case study.", type: "error" });
+        setFeedback({ message: data.error || "Failed to save patient journey.", type: "error" });
       }
     } catch (e) {
       console.error("[AdminPortfolio] Save error:", e);
@@ -222,11 +224,12 @@ export default function AdminPortfolioPage() {
       });
 
       if (res.ok) {
+        notifyLiveSync("portfolio", item.id);
         setItems((prev) =>
           prev.map((p) => (p.id === item.id ? { ...p, isPublished: newStatus } : p))
         );
         setFeedback({
-          message: `Case study "${item.clientName}" is now ${newStatus ? "Published (Live)" : "Draft (Hidden)"}.`,
+          message: `Patient journey "${item.clientName}" is now ${newStatus ? "Published (Live)" : "Draft (Hidden)"}.`,
           type: "success",
         });
         setTimeout(() => setFeedback(null), 3000);
@@ -246,8 +249,9 @@ export default function AdminPortfolioPage() {
       });
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("portfolio", "all");
         setFeedback({
-          message: "All 6 case studies successfully reset to canonical website defaults!",
+          message: "All patient care journeys successfully reset to canonical website defaults!",
           type: "success",
         });
         setIsResetConfirmOpen(false);
@@ -258,7 +262,7 @@ export default function AdminPortfolioPage() {
       }
     } catch (e) {
       console.error("[AdminPortfolio] Reset error:", e);
-      setFeedback({ message: "Failed to reset case studies.", type: "error" });
+      setFeedback({ message: "Failed to reset patient care journeys.", type: "error" });
     } finally {
       setIsResetting(false);
     }
@@ -275,7 +279,8 @@ export default function AdminPortfolioPage() {
 
       const data = await res.json();
       if (data.success) {
-        setFeedback({ message: `Case study "${deleteTarget.title}" deleted.`, type: "success" });
+        notifyLiveSync("portfolio", deleteTarget.id);
+        setFeedback({ message: `Patient journey "${deleteTarget.title}" deleted.`, type: "success" });
         setDeleteTarget(null);
         await fetchPortfolio();
         setTimeout(() => setFeedback(null), 3000);

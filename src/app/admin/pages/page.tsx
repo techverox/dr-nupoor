@@ -4,6 +4,12 @@ import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { HomePageContent, AboutPageContent, ContactPageContent } from "@/types";
 import { AdminRevisionDrawer } from "@/components/admin/AdminRevisionDrawer";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
+import {
+  DEFAULT_HOME_PAGE_CONTENT,
+  DEFAULT_ABOUT_PAGE_CONTENT,
+  DEFAULT_CONTACT_PAGE_CONTENT,
+} from "@/data/pagesContent";
 import {
   Home,
   Building2,
@@ -24,77 +30,11 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-// Canonical Live Defaults for Instant 1-Click Sync
+// Canonical Live Clinical Defaults for Dr. Noopur Patel Clinic
 const CANONICAL_DEFAULTS = {
-  home: {
-    id: "home",
-    heroBadge: "AI-POWERED AGENCY OPERATING SYSTEM",
-    heroHeadline: "Run Your Entire Agency From One",
-    heroHeadlineHighlight: "Platform.",
-    heroSubheadline:
-      "Digivigee is the trusted work delivery platform for digital marketing agencies and AI agents — with full client transparency, automated campaigns, and real-time ROAS at every step.",
-    primaryCtaText: "Start 14-day free trial",
-    primaryCtaLink: "/dashboard",
-    secondaryCtaText: "Digivigee in 3 minutes",
-    secondaryCtaLink: "#platform",
-    stat1Value: "4.8x",
-    stat1Label: "Avg Blended ROAS",
-    stat2Value: "$84.2M+",
-    stat2Label: "Verified Ad Spend Managed",
-    stat3Value: "65+ Hrs",
-    stat3Label: "Monthly Reporting Saved",
-    stat4Value: "0%",
-    stat4Label: "Ad Spend Overrun Tolerance",
-    whyUsTitle: "Scale 10x retainers. Burn out 0 teams.",
-    whyUsSubtitle:
-      "Eliminate operational chaos with purpose-built agency workflows, automated pacing alerts, and white-label client reporting portals.",
-    ctaSectionHeadline: "Ready to Run Your Entire Agency From One Platform?",
-    ctaSectionSubtitle:
-      "Join 420+ high-growth performance, social, and search agencies scaling retainers with 100% operational transparency.",
-  },
-  about: {
-    id: "about",
-    heroBadge: "ESTABLISHED 2016",
-    heroHeadline: "Your Digital Partner for",
-    heroHeadlineHighlight: "Technology, Tools & Business Growth.",
-    heroSubheadline:
-      "Digivigee is a digital technology and business solutions company helping businesses build, automate, market and grow with the right digital tools, technology and expertise.",
-    storyTitle: "Built from Ground Realities Since 2016",
-    storyParagraph1:
-      "Founded in 2016 by Vipul Gajjar, DigiVigee has evolved from a digital marketing agency into a technology-driven solutions company. We saw businesses struggling with disconnected software, confusing marketing dashboards, and inconsistent operations.",
-    storyParagraph2:
-      "Today, we build and run proprietary digital products like RestroMitra (Restaurant SaaS) and Maru Gujarat (Local Discovery Directory), while acting as an Official Meta Partner delivering high-ticket performance marketing.",
-    missionTitle: "Our Mission",
-    missionDescription:
-      "To empower businesses with practical digital tools, automated operations, and performance-driven marketing that produce real, measurable commercial results.",
-    visionTitle: "Our Vision",
-    visionDescription:
-      "To become India's most trusted digital technology and business ecosystem, bridging grassroots businesses to modern digital scale.",
-    stat1Value: "10+",
-    stat1Label: "Years Innovation",
-    stat2Value: "420+",
-    stat2Label: "Active Client Retainers",
-    stat3Value: "100%",
-    stat3Label: "Operational Transparency",
-  },
-  contact: {
-    id: "contact",
-    heroBadge: "DIRECT ACCESS",
-    heroHeadline: "Let's Build Something Exceptional",
-    heroHeadlineHighlight: "Together.",
-    heroSubheadline:
-      "Direct access to senior growth architects and software engineers. No junior middlemen, zero sales fluff, 100% transparent execution.",
-    formTitle: "Schedule Priority Strategy Session",
-    formSubtitle:
-      "Direct calendar routing to our senior engineering and media buying pods. Responses within 4 business hours.",
-    infoTitle: "Direct Channel Access",
-    phone: "+91 90811 45178",
-    email: "support@digivigee.com",
-    whatsapp: "+91 90811 45178",
-    address:
-      "Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Gujarat, 385210, India",
-    workingHours: "24/7 Strategy Desk • Priority Response within 4 Hours",
-  },
+  home: DEFAULT_HOME_PAGE_CONTENT,
+  about: DEFAULT_ABOUT_PAGE_CONTENT,
+  contact: DEFAULT_CONTACT_PAGE_CONTENT,
 };
 
 export default function AdminPagesContentPage() {
@@ -164,6 +104,7 @@ export default function AdminPagesContentPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("pages", activeTab);
         setFeedback({
           message: `${activeTab.toUpperCase()} content saved & live on website.`,
           type: "success",

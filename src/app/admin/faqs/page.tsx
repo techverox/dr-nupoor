@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { FAQItem } from "@/types";
 import { Card } from "@/components/ui/Card";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   HelpCircle,
   Search,
@@ -24,12 +25,12 @@ import {
 } from "lucide-react";
 
 const CATEGORY_PRESETS = [
-  "General",
-  "Services",
-  "Support",
-  "Pricing",
-  "Performance",
-  "Onboarding",
+  "General Awareness",
+  "Symptoms & Diagnosis",
+  "Oncoplastic Surgery",
+  "Screening & Mammography",
+  "Consultation & Booking",
+  "Recovery & Post-Op",
 ];
 
 export default function AdminFaqsPage() {
@@ -148,6 +149,7 @@ export default function AdminFaqsPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("faqs", data.id || payload.id);
         setFeedback({
           message: editingItem ? "FAQ updated & synced live!" : "New FAQ created & published live!",
           type: "success",
@@ -188,6 +190,7 @@ export default function AdminFaqsPage() {
       });
 
       if (res.ok) {
+        notifyLiveSync("faqs", faq.id);
         setFeedback({
           message: `"${faq.question.slice(0, 35)}..." is now ${nextStatus ? "Published Live" : "Unpublished (Draft)"}.`,
           type: "success",
@@ -213,6 +216,7 @@ export default function AdminFaqsPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("faqs", deleteTarget.id);
         setFeedback({ message: `FAQ "${deleteTarget.question.slice(0, 35)}..." deleted.`, type: "success" });
         setDeleteTarget(null);
         fetchFaqs();
@@ -239,8 +243,9 @@ export default function AdminFaqsPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("faqs", "all");
         setFeedback({
-          message: "All 6 canonical FAQs successfully reset to live factory defaults!",
+          message: "All 6 canonical clinical FAQs successfully reset to live factory defaults!",
           type: "success",
         });
         setIsResetConfirmOpen(false);

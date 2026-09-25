@@ -4,6 +4,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { TestimonialItem } from "@/types";
 import { Card } from "@/components/ui/Card";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   MessageSquareQuote,
   Search,
@@ -161,6 +162,7 @@ export default function AdminTestimonialsPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("testimonials", data.id || payload.id);
         setFeedback({
           message: editingItem ? "Testimonial updated & synced live!" : "New testimonial created & published live!",
           type: "success",
@@ -199,6 +201,7 @@ export default function AdminTestimonialsPage() {
       });
 
       if (res.ok) {
+        notifyLiveSync("testimonials", item.id);
         setFeedback({
           message: `"${item.clientName}" is now ${nextStatus ? "Published Live" : "Unpublished (Draft)"}.`,
           type: "success",
@@ -224,6 +227,7 @@ export default function AdminTestimonialsPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("testimonials", deleteTarget.id);
         setFeedback({ message: `Testimonial "${deleteTarget.clientName}" deleted successfully.`, type: "success" });
         setDeleteTarget(null);
         fetchTestimonials();
@@ -250,8 +254,9 @@ export default function AdminTestimonialsPage() {
 
       const data = await res.json();
       if (data.success) {
+        notifyLiveSync("testimonials", "all");
         setFeedback({
-          message: "All 5 client testimonials successfully reset to live canonical defaults!",
+          message: "All patient testimonials successfully reset to live canonical defaults!",
           type: "success",
         });
         setIsResetConfirmOpen(false);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { SiteSettings } from "@/types";
 import { ConfirmDialog } from "@/components/admin/ConfirmDialog";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
   Settings,
   Building2,
@@ -118,6 +119,7 @@ export default function AdminSettingsPage() {
   // Broadcast to other tabs & public site in real-time
   const broadcastCmsUpdate = () => {
     try {
+      notifyLiveSync("siteSettings", "global", "SETTINGS_UPDATE");
       if (typeof window !== "undefined" && "BroadcastChannel" in window) {
         const channel = new BroadcastChannel("digivigee-cms-sync");
         channel.postMessage({ type: "CMS_UPDATED", timestamp: Date.now() });
