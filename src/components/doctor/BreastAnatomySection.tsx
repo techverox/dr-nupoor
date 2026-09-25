@@ -82,13 +82,14 @@ export default function BreastAnatomySection() {
                   key={idx}
                   className="bg-[#FFF8F9] hover:bg-[#FDF2F4] border border-[#F5D6DE] rounded-xl p-3 text-center transition-all hover:shadow-xs group"
                 >
-                  <div className="relative w-full aspect-[4/3] rounded-lg overflow-hidden mb-2 bg-white border border-[#F5D6DE]/40">
+                  <div className="relative w-full aspect-[2.05/1] rounded-lg overflow-hidden mb-2.5 bg-white border border-[#F5D6DE]/60 shadow-[0_2px_8px_rgba(216,76,112,0.05)]">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className="object-contain p-1 group-hover:scale-105 transition-transform"
-                      sizes="130px"
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 45vw, (max-width: 1024px) 25vw, 320px"
+                      quality={95}
                     />
                   </div>
                   <span className="text-[12.5px] font-bold text-slate-800 block leading-tight">
