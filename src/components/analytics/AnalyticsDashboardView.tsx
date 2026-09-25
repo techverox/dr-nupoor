@@ -254,25 +254,25 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
       )}
 
       {/* Main Top Header Card */}
-      <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 sm:p-8 shadow-sm">
+      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900/60 text-blue-600 dark:text-blue-400 font-black text-[11px] tracking-wider uppercase">
-                Marketing Intelligence
+              <span className="px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-bold text-[11px] tracking-wider uppercase">
+                Clinical Telemetry & Inquiries
               </span>
-              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900/60 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
+              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Live Data Connection: Active</span>
               </div>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-zinc-50 tracking-tight">
-              Advanced Analytics & Reporting
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Practice Telemetry & Analytics
             </h1>
 
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-2xl">
-              Real-time visitor telemetry, lead conversions, campaign attribution, and marketing funnel insights for DigiVigee Platform.
+            <p className="text-sm text-slate-500 max-w-2xl">
+              Real-time patient traffic telemetry, consultation inquiries, referral attribution, and patient care funnel insights for Dr. Noopur Patel's clinical practice.
             </p>
           </div>
 
@@ -285,19 +285,19 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
                 showToast("🔄 Data Refreshed with latest live website events!");
               }}
               disabled={isLoading}
-              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 font-bold text-xs hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors cursor-pointer disabled:opacity-50"
+              className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 font-bold text-xs hover:bg-slate-100 transition-colors cursor-pointer disabled:opacity-50"
               title="Refresh telemetry"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin text-blue-600" : ""}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? "animate-spin text-rose-600" : ""}`} />
               <span>Refresh</span>
             </button>
 
             {/* 1-Click Reset to Defaults Button */}
             <button
               onClick={() => setShowResetModal(true)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50 dark:bg-amber-950/40 text-amber-800 dark:text-amber-300 font-bold text-xs hover:bg-amber-100 dark:hover:bg-amber-900/60 shadow-sm transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-amber-200 bg-amber-50 text-amber-800 font-bold text-xs hover:bg-amber-100 shadow-sm transition-all cursor-pointer"
             >
-              <RotateCcw className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <RotateCcw className="w-3.5 h-3.5 text-amber-600" />
               <span>Reset to Defaults</span>
             </button>
 
@@ -305,7 +305,7 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
             <a
               href={getExportUrl("summary")}
               download
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
@@ -313,10 +313,10 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           </div>
         </div>
 
-        {/* Child-Friendly Date Range Selector Bar */}
-        <div className="mt-8 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        {/* Date Range Selector Bar */}
+        <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-xs font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mr-2">
+            <span className="text-xs font-black uppercase tracking-wider text-slate-400 mr-2">
               TIMEFRAME:
             </span>
             {TIMEFRAME_PRESETS.map((preset) => {
@@ -328,8 +328,8 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
                   disabled={isLoading}
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                     isActive
-                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm"
-                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                      ? "bg-slate-900 text-white shadow-sm"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   <span>{preset.icon}</span>
@@ -340,12 +340,12 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           </div>
 
           <div className="flex items-center gap-3">
-            <label className="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-zinc-700 dark:text-zinc-300 select-none">
+            <label className="inline-flex items-center gap-2 cursor-pointer text-xs font-bold text-slate-700 select-none">
               <input
                 type="checkbox"
                 checked={filterState.compare}
                 onChange={handleToggleCompare}
-                className="w-4 h-4 rounded text-blue-600 focus:ring-blue-500 border-zinc-300 dark:border-zinc-700 cursor-pointer"
+                className="w-4 h-4 rounded text-rose-600 focus:ring-rose-500 border-slate-300 cursor-pointer"
               />
               <span>Compare with Previous Period</span>
             </label>
@@ -353,12 +353,12 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
         </div>
 
         {/* Selected Period Info */}
-        <div className="mt-3 flex items-center gap-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-          <Calendar className="w-3.5 h-3.5 text-zinc-400" />
-          <span>Active Window: <strong className="text-zinc-800 dark:text-zinc-200">{report.filter.label}</strong></span>
+        <div className="mt-3 flex items-center gap-2 text-xs font-medium text-slate-500">
+          <Calendar className="w-3.5 h-3.5 text-slate-400" />
+          <span>Active Window: <strong className="text-slate-800">{report.filter.label}</strong></span>
           {hasComp && (
-            <span className="text-zinc-400">
-              vs <strong className="text-zinc-700 dark:text-zinc-300">{report.filter.comparisonLabel}</strong>
+            <span className="text-slate-400">
+              vs <strong className="text-slate-700">{report.filter.comparisonLabel}</strong>
             </span>
           )}
         </div>
@@ -366,19 +366,19 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
 
       {/* Loading & Error Indicators */}
       {isLoading && (
-        <div className="p-4 rounded-2xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 flex items-center gap-3 text-blue-700 dark:text-blue-300 font-bold text-xs animate-pulse">
+        <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 flex items-center gap-3 text-blue-800 font-bold text-xs animate-pulse">
           <RefreshCw className="w-4 h-4 animate-spin text-blue-600" />
-          <span>Updating telemetry across DigiVigee channels & real pages...</span>
+          <span>Updating telemetry across clinic channels &amp; patient pages...</span>
         </div>
       )}
 
       {errorMessage && (
-        <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900/50 text-rose-700 dark:text-rose-300 font-bold text-xs">
+        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 font-bold text-xs">
           ⚠️ {errorMessage}
         </div>
       )}
 
-      {/* Primary 8-Card Bento Metric Grid (Simple & Clean for Anyone to Understand) */}
+      {/* Primary 8-Card Bento Metric Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Metric 1: Page Views */}
         <BentoKpiCard
@@ -390,9 +390,9 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.pageViews.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Total times website pages were viewed"
+          helperText="Total clinical pages viewed by patients"
           icon={<Eye className="w-5 h-5 text-blue-500" />}
-          accentColor="text-blue-600 dark:text-blue-400"
+          accentColor="text-blue-600"
         />
 
         {/* Metric 2: Unique Visitors */}
@@ -405,9 +405,9 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.uniqueVisitors.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Distinct people who visited the site"
+          helperText="Distinct patients & families visiting portal"
           icon={<Users className="w-5 h-5 text-indigo-500" />}
-          accentColor="text-indigo-600 dark:text-indigo-400"
+          accentColor="text-indigo-600"
         />
 
         {/* Metric 3: Browsing Sessions */}
@@ -420,14 +420,14 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.sessions.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Total user visits and browsing sessions"
+          helperText="Total website browsing sessions"
           icon={<Clock className="w-5 h-5 text-amber-500" />}
-          accentColor="text-zinc-900 dark:text-zinc-100"
+          accentColor="text-slate-900"
         />
 
         {/* Metric 4: Verified Leads */}
         <BentoKpiCard
-          title="Verified Inquiries"
+          title="Consultation Inquiries"
           current={kpis.leads.current}
           previous={kpis.leads.previous}
           formattedChange={kpis.leads.formattedChange}
@@ -435,9 +435,9 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.leads.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Qualified high-intent client inquiries"
+          helperText="Qualified patient consultation requests"
           icon={<UserCheck className="w-5 h-5 text-emerald-500" />}
-          accentColor="text-emerald-600 dark:text-emerald-400"
+          accentColor="text-emerald-600"
         />
 
         {/* Metric 5: Form Submissions */}
@@ -450,14 +450,14 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.formSubmissions.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Completed contact & audit forms"
+          helperText="Completed appointment booking forms"
           icon={<FileText className="w-5 h-5 text-purple-500" />}
-          accentColor="text-purple-600 dark:text-purple-400"
+          accentColor="text-purple-600"
         />
 
         {/* Metric 6: Conversion Rate */}
         <BentoKpiCard
-          title="Visitor Conversion Rate"
+          title="Inquiry Conversion Rate"
           current={`${kpis.overallConversionRate.current}%`}
           previous={`${kpis.overallConversionRate.previous}%`}
           formattedChange={kpis.overallConversionRate.formattedChange}
@@ -465,14 +465,14 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.overallConversionRate.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Visitors who became active client inquiries"
+          helperText="Visitors converted to direct inquiries"
           icon={<Target className="w-5 h-5 text-emerald-500" />}
-          accentColor="text-emerald-600 dark:text-emerald-400"
+          accentColor="text-emerald-600"
         />
 
         {/* Metric 7: WhatsApp Inquiries */}
         <BentoKpiCard
-          title="WhatsApp Clicks"
+          title="WhatsApp Consultations"
           current={kpis.whatsappClicks.current}
           previous={kpis.whatsappClicks.previous}
           formattedChange={kpis.whatsappClicks.formattedChange}
@@ -480,14 +480,14 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.whatsappClicks.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="1-click direct WhatsApp strategy chats"
+          helperText="1-click direct patient WhatsApp chats"
           icon={<MessageSquare className="w-5 h-5 text-[#25D366]" />}
           accentColor="text-[#25D366]"
         />
 
         {/* Metric 8: Active Subscribers */}
         <BentoKpiCard
-          title="Newsletter Subscribers"
+          title="Health Newsletter"
           current={kpis.subscribers.current}
           previous={kpis.subscribers.previous}
           formattedChange={kpis.subscribers.formattedChange}
@@ -495,100 +495,100 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           isPositive={kpis.subscribers.isPositive}
           comparisonLabel={compLabel}
           hasComparison={hasComp}
-          helperText="Weekly Growth Insights email subscribers"
+          helperText="Breast health updates & awareness subscribers"
           icon={<Mail className="w-5 h-5 text-blue-500" />}
-          accentColor="text-blue-600 dark:text-blue-400"
+          accentColor="text-blue-600"
         />
       </div>
 
       {/* Tab Navigation Strip */}
-      <div className="flex items-center gap-2 border-b border-zinc-200 dark:border-zinc-800 overflow-x-auto pb-px">
+      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto pb-px">
         <button
           onClick={() => setActiveTab("overview")}
           className={`flex items-center gap-2 px-5 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === "overview"
-              ? "border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600 bg-white"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <TrendingUp className="w-4 h-4" />
-          <span>Executive Overview</span>
+          <span>Practice Overview</span>
         </button>
 
         <button
           onClick={() => setActiveTab("pages")}
           className={`flex items-center gap-2 px-5 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === "pages"
-              ? "border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600 bg-white"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <Layers className="w-4 h-4" />
-          <span>Top Pages & Performance ({report.topPages.length})</span>
+          <span>Top Pages &amp; Performance ({report.topPages.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab("campaigns")}
           className={`flex items-center gap-2 px-5 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === "campaigns"
-              ? "border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600 bg-white"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <Target className="w-4 h-4" />
-          <span>Campaigns & Channels ({report.campaigns.length})</span>
+          <span>Campaigns &amp; Channels ({report.campaigns.length})</span>
         </button>
 
         <button
           onClick={() => setActiveTab("forms")}
           className={`flex items-center gap-2 px-5 py-3 text-sm font-bold border-b-2 whitespace-nowrap transition-colors cursor-pointer ${
             activeTab === "forms"
-              ? "border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400"
-              : "border-transparent text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
+              ? "border-rose-600 text-rose-600 bg-white"
+              : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
           <FileText className="w-4 h-4" />
-          <span>Forms & CRM Pipeline ({report.formPerformance.length})</span>
+          <span>Forms &amp; Consultation Pipeline ({report.formPerformance.length})</span>
         </button>
       </div>
 
       {/* TAB 1: EXECUTIVE OVERVIEW */}
       {activeTab === "overview" && (
         <div className="space-y-6">
-          {/* Executive Growth Insights Banner */}
+          {/* Practice Insights Banner */}
           {report.insights && report.insights.length > 0 && (
-            <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm">
+            <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4">
                 <Sparkles className="w-5 h-5 text-amber-500" />
-                <h2 className="text-base font-black text-zinc-900 dark:text-zinc-100">
-                  Key Growth Insights & Measured Facts
+                <h2 className="text-base font-black text-slate-900">
+                  Key Practice Insights &amp; Inquiries Telemetry
                 </h2>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 text-[10px] font-black uppercase">
-                  100% Real
+                <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black uppercase">
+                  Verified Data
                 </span>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {report.insights.map((insight) => {
-                  let badgeBg = "bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-900/60";
+                  let badgeBg = "bg-blue-50 text-blue-700 border-blue-200";
                   let tag = "INSIGHT";
                   if (insight.sentiment === "positive") {
-                    badgeBg = "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-900/60";
+                    badgeBg = "bg-emerald-50 text-emerald-800 border-emerald-200";
                     tag = "GROWTH";
                   } else if (insight.sentiment === "negative") {
-                    badgeBg = "bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-900/60";
-                    tag = "ACTION NEEDED";
+                    badgeBg = "bg-rose-50 text-rose-800 border-rose-200";
+                    tag = "ATTENTION";
                   }
 
                   return (
                     <div
                       key={insight.id}
-                      className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-100 dark:border-zinc-800 flex items-start gap-3"
+                      className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3"
                     >
                       <span className={`px-2 py-0.5 rounded-md font-black text-[10px] uppercase border shrink-0 mt-0.5 ${badgeBg}`}>
                         {tag}
                       </span>
-                      <p className="text-xs text-zinc-700 dark:text-zinc-300 font-medium leading-relaxed">
+                      <p className="text-xs text-slate-700 font-medium leading-relaxed">
                         {insight.text}
                       </p>
                     </div>
@@ -602,13 +602,13 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             <AnalyticsTrendChart
               timeline={report.timeline}
-              title="Daily Traffic & Visitor Trend"
+              title="Daily Patient Traffic & Inquiries"
               subtitle="Daily volume of total pageviews and unique visitors over the selected period"
             />
             <AnalyticsFunnelChart
               funnel={report.funnel}
-              title="Marketing Conversion Funnel"
-              subtitle="Visitor progression from first arrival to signed client partnership"
+              title="Clinical Consultation Funnel"
+              subtitle="Patient progression from initial inquiry to confirmed OPD consultation"
             />
           </div>
         </div>
@@ -616,33 +616,33 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
 
       {/* TAB 2: TOP PAGES & PERFORMANCE */}
       {activeTab === "pages" && (
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm space-y-4">
+        <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
-                Page Performance & Attribution Matrix
+              <h2 className="text-lg font-black text-slate-900">
+                Page Performance &amp; Attribution Matrix
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Traffic volume, distinct visitors, and verified leads attributed to each URL path on DigiVigee.
+              <p className="text-xs text-slate-500">
+                Patient traffic volume, distinct visitors, and verified consultation inquiries attributed to each URL path on Dr. Noopur Patel's portal.
               </p>
             </div>
 
             <div className="flex items-center gap-3">
               <div className="relative">
-                <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="text"
                   placeholder="Filter pages..."
                   value={pageSearch}
                   onChange={(e) => setPageSearch(e.target.value)}
-                  className="pl-9 pr-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 w-48 sm:w-64"
+                  className="pl-9 pr-4 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 w-48 sm:w-64"
                 />
               </div>
 
               <a
                 href={getExportUrl("pages")}
                 download
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 font-bold text-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>CSV</span>
@@ -653,14 +653,14 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 font-bold uppercase tracking-wider">
-                  <th className="pb-3 pr-4">Page Route & Title</th>
+                <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider">
+                  <th className="pb-3 pr-4">Page Route &amp; Title</th>
                   <th
                     onClick={() => {
                       if (pageSortKey === "views") setPageSortAsc(!pageSortAsc);
                       else { setPageSortKey("views"); setPageSortAsc(false); }
                     }}
-                    className="pb-3 px-3 text-right cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-200 select-none"
+                    className="pb-3 px-3 text-right cursor-pointer hover:text-slate-700 select-none"
                   >
                     Views {pageSortKey === "views" ? (pageSortAsc ? "▲" : "▼") : ""}
                   </th>
@@ -669,7 +669,7 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
                       if (pageSortKey === "uniqueVisitors") setPageSortAsc(!pageSortAsc);
                       else { setPageSortKey("uniqueVisitors"); setPageSortAsc(false); }
                     }}
-                    className="pb-3 px-3 text-right cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-200 select-none"
+                    className="pb-3 px-3 text-right cursor-pointer hover:text-slate-700 select-none"
                   >
                     Visitors {pageSortKey === "uniqueVisitors" ? (pageSortAsc ? "▲" : "▼") : ""}
                   </th>
@@ -678,54 +678,54 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
                       if (pageSortKey === "leadsAttributed") setPageSortAsc(!pageSortAsc);
                       else { setPageSortKey("leadsAttributed"); setPageSortAsc(false); }
                     }}
-                    className="pb-3 px-3 text-right cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-200 select-none"
+                    className="pb-3 px-3 text-right cursor-pointer hover:text-slate-700 select-none"
                   >
-                    Leads Won {pageSortKey === "leadsAttributed" ? (pageSortAsc ? "▲" : "▼") : ""}
+                    Inquiries {pageSortKey === "leadsAttributed" ? (pageSortAsc ? "▲" : "▼") : ""}
                   </th>
                   <th
                     onClick={() => {
                       if (pageSortKey === "conversionRate") setPageSortAsc(!pageSortAsc);
                       else { setPageSortKey("conversionRate"); setPageSortAsc(false); }
                     }}
-                    className="pb-3 pl-3 text-right cursor-pointer hover:text-zinc-700 dark:hover:text-zinc-200 select-none"
+                    className="pb-3 pl-3 text-right cursor-pointer hover:text-slate-700 select-none"
                   >
                     CVR % {pageSortKey === "conversionRate" ? (pageSortAsc ? "▲" : "▼") : ""}
                   </th>
                   <th className="pb-3 pl-4 text-center">Live Preview</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+              <tbody className="divide-y divide-slate-100">
                 {filteredPages.map((page) => (
-                  <tr key={page.path} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40 transition-colors">
+                  <tr key={page.path} className="hover:bg-slate-50 transition-colors">
                     <td className="py-3.5 pr-4">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-zinc-900 dark:text-zinc-100 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded-md text-[11px]">
+                        <span className="font-mono font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded-md text-[11px]">
                           {page.path}
                         </span>
                         {page.isHighTrafficLowConversion && (
-                          <span className="px-2 py-0.5 rounded text-[10px] font-black bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 border border-rose-200 dark:border-rose-900">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-black bg-rose-50 text-rose-700 border border-rose-200">
                             Low CVR
                           </span>
                         )}
                       </div>
                       {page.pageTitle && (
-                        <div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-1 font-medium truncate max-w-sm">
+                        <div className="text-[11px] text-slate-500 mt-1 font-medium truncate max-w-sm">
                           {page.pageTitle}
                         </div>
                       )}
                     </td>
-                    <td className="py-3.5 px-3 text-right font-black text-zinc-900 dark:text-zinc-100">
+                    <td className="py-3.5 px-3 text-right font-black text-slate-900">
                       {page.views.toLocaleString()}
                     </td>
-                    <td className="py-3.5 px-3 text-right font-medium text-zinc-600 dark:text-zinc-400">
+                    <td className="py-3.5 px-3 text-right font-medium text-slate-600">
                       {page.uniqueVisitors.toLocaleString()}
                     </td>
                     <td className="py-3.5 px-3 text-right font-black">
-                      <span className={page.leadsAttributed > 0 ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-400"}>
+                      <span className={page.leadsAttributed > 0 ? "text-emerald-700 font-bold" : "text-slate-400"}>
                         {page.leadsAttributed}
                       </span>
                     </td>
-                    <td className="py-3.5 pl-3 text-right font-bold text-zinc-800 dark:text-zinc-200">
+                    <td className="py-3.5 pl-3 text-right font-bold text-slate-800">
                       {page.conversionRate}%
                     </td>
                     <td className="py-3.5 pl-4 text-center">
@@ -733,7 +733,7 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
                         href={page.path}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-[11px] font-bold text-blue-600 dark:text-blue-400 hover:underline"
+                        className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-600 hover:underline"
                       >
                         <span>Open</span>
                         <ExternalLink className="w-3 h-3" />
@@ -751,30 +751,30 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
       {activeTab === "campaigns" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           {/* Traffic Sources Breakdown */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm space-y-4">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
             <div>
-              <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
+              <h2 className="text-lg font-black text-slate-900">
                 Traffic Acquisition Channels
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Breakdown of traffic volume, percentage share, and lead conversions by channel.
+              <p className="text-xs text-slate-500">
+                Breakdown of traffic volume, percentage share, and consultation inquiries by channel.
               </p>
             </div>
 
             <div className="space-y-3.5">
               {report.trafficSources.map((source) => (
-                <div key={source.source} className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 space-y-2">
+                <div key={source.source} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-bold text-zinc-900 dark:text-zinc-100">
+                    <span className="font-bold text-slate-900">
                       {source.source}
                     </span>
-                    <span className="text-zinc-500 dark:text-zinc-400 font-medium">
-                      <strong className="text-zinc-900 dark:text-zinc-100">{source.count}</strong> events ({source.percentage}%) • <strong className="text-emerald-600">{source.leads || 0}</strong> leads
+                    <span className="text-slate-500 font-medium">
+                      <strong className="text-slate-900">{source.count}</strong> events ({source.percentage}%) • <strong className="text-emerald-700">{source.leads || 0}</strong> inquiries
                     </span>
                   </div>
-                  <div className="w-full h-2 rounded-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
                     <div
-                      className="h-full bg-blue-600 rounded-full transition-all duration-500"
+                      className="h-full bg-rose-600 rounded-full transition-all duration-500"
                       style={{ width: `${Math.min(100, Math.max(4, source.percentage))}%` }}
                     />
                   </div>
@@ -783,22 +783,22 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
             </div>
           </div>
 
-          {/* UTM Campaigns Matrix */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm space-y-4">
+          {/* Referral & Campaigns Matrix */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
-                  UTM Campaigns Matrix
+                <h2 className="text-lg font-black text-slate-900">
+                  Referral &amp; Outreach Matrix
                 </h2>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  Tracking multi-channel marketing campaigns.
+                <p className="text-xs text-slate-500">
+                  Tracking multi-channel health outreach &amp; awareness campaigns.
                 </p>
               </div>
 
               <a
                 href={getExportUrl("campaigns")}
                 download
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 font-bold text-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>CSV</span>
@@ -808,32 +808,32 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 font-bold uppercase tracking-wider">
-                    <th className="pb-3 pr-3">Campaign</th>
+                  <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider">
+                    <th className="pb-3 pr-3">Campaign / Source</th>
                     <th className="pb-3 px-2">Channel</th>
                     <th className="pb-3 px-2 text-right">Clicks</th>
-                    <th className="pb-3 px-2 text-right">Leads</th>
+                    <th className="pb-3 px-2 text-right">Inquiries</th>
                     <th className="pb-3 pl-2 text-right">CVR %</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+                <tbody className="divide-y divide-slate-100">
                   {filteredCampaigns.map((camp) => (
-                    <tr key={camp.campaign} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                      <td className="py-3 pr-3 font-bold text-zinc-900 dark:text-zinc-100">
+                    <tr key={camp.campaign} className="hover:bg-slate-50">
+                      <td className="py-3 pr-3 font-bold text-slate-900">
                         {camp.campaign}
                       </td>
                       <td className="py-3 px-2">
-                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
                           {camp.source} / {camp.medium}
                         </span>
                       </td>
-                      <td className="py-3 px-2 text-right font-black">
+                      <td className="py-3 px-2 text-right font-black text-slate-900">
                         {camp.clicksOrViews}
                       </td>
-                      <td className="py-3 px-2 text-right font-black text-emerald-600 dark:text-emerald-400">
+                      <td className="py-3 px-2 text-right font-black text-emerald-700">
                         {camp.conversions}
                       </td>
-                      <td className="py-3 pl-2 text-right font-bold">
+                      <td className="py-3 pl-2 text-right font-bold text-slate-800">
                         {camp.conversionRate}%
                       </td>
                     </tr>
@@ -845,25 +845,25 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
         </div>
       )}
 
-      {/* TAB 4: FORMS & CRM PIPELINE */}
+      {/* TAB 4: FORMS & CONSULTATION PIPELINE */}
       {activeTab === "forms" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           {/* Form Leaderboard */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm space-y-4">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
-                  Form Funnels & Submission Rate
+                <h2 className="text-lg font-black text-slate-900">
+                  Form Funnels &amp; Submission Rate
                 </h2>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  Direct submissions and inquiry conversion for all 6 DigiVigee forms.
+                <p className="text-xs text-slate-500">
+                  Direct submissions and inquiry conversion for all clinical forms.
                 </p>
               </div>
 
               <a
                 href={getExportUrl("forms")}
                 download
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 font-bold text-xs transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition-colors"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>CSV</span>
@@ -873,31 +873,31 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400 font-bold uppercase tracking-wider">
+                  <tr className="border-b border-slate-200 text-slate-400 font-bold uppercase tracking-wider">
                     <th className="pb-3 pr-3">Form Name</th>
                     <th className="pb-3 px-3 text-right">Submissions</th>
-                    <th className="pb-3 px-3 text-right">Verified Leads</th>
+                    <th className="pb-3 px-3 text-right">Inquiries</th>
                     <th className="pb-3 pl-3 text-right">CVR %</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+                <tbody className="divide-y divide-slate-100">
                   {report.formPerformance.map((f) => (
-                    <tr key={f.formId} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
+                    <tr key={f.formId} className="hover:bg-slate-50">
                       <td className="py-3.5 pr-3">
-                        <div className="font-bold text-zinc-900 dark:text-zinc-100">
+                        <div className="font-bold text-slate-900">
                           {f.formName}
                         </div>
-                        <div className="text-[10px] text-zinc-400 font-mono">
+                        <div className="text-[10px] text-slate-400 font-mono">
                           {f.formId}
                         </div>
                       </td>
-                      <td className="py-3.5 px-3 text-right font-black text-zinc-800 dark:text-zinc-200">
+                      <td className="py-3.5 px-3 text-right font-black text-slate-900">
                         {f.submissions}
                       </td>
-                      <td className="py-3.5 px-3 text-right font-black text-emerald-600 dark:text-emerald-400">
+                      <td className="py-3.5 px-3 text-right font-black text-emerald-700">
                         {f.leadsGenerated}
                       </td>
-                      <td className="py-3.5 pl-3 text-right font-bold text-zinc-700 dark:text-zinc-300">
+                      <td className="py-3.5 pl-3 text-right font-bold text-slate-800">
                         {f.conversionRate}%
                       </td>
                     </tr>
@@ -907,41 +907,41 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
             </div>
           </div>
 
-          {/* CRM Lead Lifecycle Pipeline */}
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm space-y-4">
+          {/* Patient Consultation Lifecycle Pipeline */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-4">
             <div>
-              <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
-                CRM Lead Lifecycle Pipeline
+              <h2 className="text-lg font-black text-slate-900">
+                Patient Consultation Lifecycle
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                Progression of all acquired client leads across CRM deal stages.
+              <p className="text-xs text-slate-500">
+                Progression of all incoming patient inquiries across clinical workflow stages.
               </p>
             </div>
 
             <div className="space-y-3.5">
               {[
-                { key: "new", label: "New Inquiries (Fresh)", color: "bg-blue-500" },
-                { key: "contacted", label: "Initial Contact Made", color: "bg-sky-500" },
-                { key: "qualified", label: "Budget & Scope Qualified", color: "bg-amber-500" },
-                { key: "proposal_sent", label: "Strategy Proposal Delivered", color: "bg-purple-500" },
-                { key: "converted", label: "Won / Active Client Partnership", color: "bg-emerald-500" },
-                { key: "closed_lost", label: "Closed / Lost Opportunity", color: "bg-zinc-400" },
+                { key: "new", label: "New Patient Inquiries (Fresh)", color: "bg-blue-500" },
+                { key: "contacted", label: "Patient Outreach Completed", color: "bg-sky-500" },
+                { key: "qualified", label: "Clinical Symptoms & Scope Triaged", color: "bg-amber-500" },
+                { key: "proposal_sent", label: "OPD Appointment Slot Offered", color: "bg-purple-500" },
+                { key: "converted", label: "Confirmed Consultation / Scheduled", color: "bg-emerald-500" },
+                { key: "closed_lost", label: "Archived / Non-Clinical Queries", color: "bg-slate-400" },
               ].map((stage) => {
                 const count = report.leadDistribution[stage.key] || 0;
                 const totalLeads = kpis.leads.current;
                 const pct = totalLeads > 0 ? Math.round((count / totalLeads) * 100) : 0;
 
                 return (
-                  <div key={stage.key} className="p-3.5 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800 space-y-2">
+                  <div key={stage.key} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-zinc-900 dark:text-zinc-100">
+                      <span className="font-bold text-slate-900">
                         {stage.label}
                       </span>
-                      <span className="font-black text-zinc-800 dark:text-zinc-200">
-                        {count} <span className="text-zinc-400 font-normal">({pct}%)</span>
+                      <span className="font-black text-slate-800">
+                        {count} <span className="text-slate-400 font-normal">({pct}%)</span>
                       </span>
                     </div>
-                    <div className="w-full h-2 rounded-full bg-zinc-200 dark:bg-zinc-700 overflow-hidden">
+                    <div className="w-full h-2 rounded-full bg-slate-200 overflow-hidden">
                       <div
                         className={`h-full rounded-full transition-all duration-500 ${stage.color}`}
                         style={{ width: `${Math.min(100, Math.max(count > 0 ? 6 : 0, pct))}%` }}
@@ -960,41 +960,41 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
         isOpen={showResetModal}
         onClose={() => setShowResetModal(false)}
         onConfirm={handleResetToDefaults}
-        title="Restore Canonical Analytics Baseline?"
-        message={`This will reset analytics telemetry to DigiVigee's verified canonical 90-day baseline across all pages, campaigns, forms, and funnel stages.\n\nAll historical graphs, channels, and conversion metrics will be immediately synchronized.`}
+        title="Restore Canonical Clinical Analytics?"
+        message={`This will reset analytics telemetry to Dr. Noopur Patel's verified canonical baseline across all clinical pages, consultation channels, forms, and funnel stages.\n\nAll historical graphs, channels, and conversion metrics will be immediately synchronized.`}
         confirmLabel="Reset Analytics Data"
         isLoading={isResetting}
       />
 
       {/* Custom Date Range Modal */}
       {showCustomModal && (
-        <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 max-w-sm w-full shadow-2xl space-y-4">
-            <h3 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
+        <div className="fixed inset-0 z-[300] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 max-w-sm w-full shadow-2xl space-y-4">
+            <h3 className="text-lg font-black text-slate-900">
               Select Custom Date Window
             </h3>
             <form onSubmit={handleApplyCustomDate} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   Start Date
                 </label>
                 <input
                   type="date"
                   value={customStart}
                   onChange={(e) => setCustomStart(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-medium"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 mb-1">
+                <label className="block text-xs font-bold text-slate-700 mb-1">
                   End Date
                 </label>
                 <input
                   type="date"
                   value={customEnd}
                   onChange={(e) => setCustomEnd(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-medium"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"
                 />
               </div>
 
@@ -1006,13 +1006,13 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
                 <button
                   type="button"
                   onClick={() => setShowCustomModal(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 shadow-sm cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-700 shadow-sm cursor-pointer"
                 >
                   Apply Filter
                 </button>
@@ -1025,7 +1025,7 @@ export function AnalyticsDashboardView({ initialReport }: AnalyticsDashboardView
   );
 }
 
-// Reusable Bento KPI Card with comparison pill & child-friendly caption
+// Reusable Bento KPI Card with comparison pill & clear caption
 interface BentoKpiCardProps {
   title: string;
   current: number | string;
@@ -1054,12 +1054,12 @@ function BentoKpiCard({
   accentColor,
 }: BentoKpiCardProps) {
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-5 shadow-sm flex flex-col justify-between gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all">
+    <div className="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between gap-3 hover:border-slate-300 transition-all">
       <div className="flex items-start justify-between">
-        <span className="text-[11px] font-black uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+        <span className="text-[11px] font-black uppercase tracking-wider text-slate-400">
           {title}
         </span>
-        <div className="p-2 rounded-2xl bg-zinc-50 dark:bg-zinc-800/80 border border-zinc-100 dark:border-zinc-800">
+        <div className="p-2 rounded-2xl bg-slate-50 border border-slate-100">
           {icon}
         </div>
       </div>
@@ -1074,23 +1074,23 @@ function BentoKpiCard({
             <span
               className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md font-black ${
                 trend === "neutral"
-                  ? "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
+                  ? "bg-slate-100 text-slate-600"
                   : isPositive
-                  ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900"
-                  : "bg-rose-50 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400 border border-rose-200 dark:border-rose-900"
+                  ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                  : "bg-rose-50 text-rose-800 border border-rose-200"
               }`}
             >
               {trend === "up" && <TrendingUp className="w-3 h-3" />}
               {trend === "down" && <TrendingDown className="w-3 h-3" />}
               <span>{formattedChange}</span>
             </span>
-            <span className="text-zinc-400 font-medium">
+            <span className="text-slate-400 font-medium">
               vs {typeof previous === "number" ? previous.toLocaleString() : previous}
             </span>
           </div>
         )}
 
-        <p className="text-[11px] text-zinc-400 dark:text-zinc-500 mt-2 line-clamp-1">
+        <p className="text-[11px] text-slate-500 mt-2 line-clamp-1">
           {helperText}
         </p>
       </div>
