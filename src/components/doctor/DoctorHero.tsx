@@ -27,16 +27,56 @@ export default function DoctorHero({
   secondaryCtaLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}`,
 }: DoctorHeroProps) {
   return (
-    <section className="relative w-full overflow-hidden bg-white border-b border-rose-100/60 lg:min-h-[580px] xl:min-h-[640px] flex items-center">
+    <section className="w-full bg-white py-4 sm:py-8 lg:py-10">
       {/* =========================================================================
-          FOREGROUND CONTENT CONTAINER
+          CONTAINED HERO WRAPPER
           ========================================================================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-10 lg:py-12 my-auto">
-        {/* The hero row that controls BOTH text and image alignment */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* THE HERO BOX: Controls max-width, rounding, and clips the background */}
+        {/* Changed to flex-col for mobile stacking, while preserving lg:flex-row layout */}
+        <div className="relative w-full overflow-hidden bg-[#FDF8F9] lg:bg-rose-50/20 border border-rose-100/50 rounded-3xl lg:rounded-[40px] lg:min-h-[580px] xl:min-h-[640px] flex flex-col lg:flex-row lg:items-center shadow-sm">
           
-          {/* LEFT SIDE: Clean, Premium Specialist Copy */}
-          <div className="lg:col-span-7 xl:col-span-6 space-y-4 sm:space-y-5 max-w-xl lg:max-w-none">
+          {/* =========================================================================
+              MOBILE ONLY: Top Image Block (Seamless blend)
+              ========================================================================= */}
+          <div className="relative w-full h-[400px] sm:h-[480px] lg:hidden shrink-0">
+            <Image
+              src="/images/doctor/assets/hero-image.png"
+              alt="Dr. Noopur Patel, Breast Cancer Surgeon"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw"
+              className="object-cover object-[75%_top]"
+            />
+            {/* Seamless transition from the image into the solid background color */}
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#FDF8F9] via-[#FDF8F9]/90 to-transparent" />
+          </div>
+
+          {/* =========================================================================
+              DESKTOP ONLY: Contained Background Image Layer
+              ========================================================================= */}
+          <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none select-none">
+            <Image
+              src="/images/doctor/assets/hero-image.png"
+              alt="Dr. Noopur Patel, Breast Cancer Surgeon"
+              fill
+              priority
+              sizes="1280px"
+              className="object-cover object-[85%_center] xl:object-[right_center]"
+            />
+
+            {/* Desktop: smooth gradient from left (white) to right (transparent) */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white via-white/95 to-transparent w-[75%] xl:w-[60%]" />
+          </div>
+
+          {/* =========================================================================
+              FOREGROUND CONTENT CONTAINER
+              ========================================================================= */}
+          <div className="relative z-10 w-full pt-4 pb-10 sm:pb-12 px-5 sm:px-8 lg:py-12 lg:px-12 xl:px-16 my-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-12">
+              
+              {/* LEFT SIDE: Clean, Premium Specialist Copy */}
+              <div className="lg:col-span-7 xl:col-span-7 space-y-4 sm:space-y-5 max-w-xl lg:max-w-none relative z-20">
             
             {/* 1. Top Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FDF2F4] border border-[#F5D6DE] text-[#D84C70] text-[11px] sm:text-[12px] font-bold tracking-widest uppercase shadow-2xs">
@@ -106,25 +146,10 @@ export default function DoctorHero({
 
           </div>
 
-          {/* =========================================================================
-              RIGHT SIDE: IMAGE WRAPPER (Desktop & Mobile)
-              Image is perfectly vertically aligned with the text via the grid's items-center.
-              ========================================================================= */}
-          <div className="w-full lg:col-span-5 xl:col-span-6 pt-4 lg:pt-0">
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] xl:aspect-[3/4] max-h-[600px] rounded-3xl lg:rounded-[40px] overflow-hidden shadow-2xl border border-[#F5D6DE] bg-gradient-to-tr from-[#FCE7EC] via-[#FDF2F4] to-[#FFF5F7]">
-              <Image
-                src="/images/doctor/assets/hero-image.png"
-                alt="Dr. Noopur Patel, Breast Cancer Surgeon"
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-[78%_center] lg:object-[center_top]"
-              />
-            </div>
-          </div>
-
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
   );
 }
