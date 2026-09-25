@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       status: 200,
       headers: {
         "Content-Type": "text/csv; charset=utf-8",
-        "Content-Disposition": `attachment; filename="digivigee-subscribers-${Date.now()}.csv"`,
+        "Content-Disposition": `attachment; filename="dr-noopur-patel-subscribers-${Date.now()}.csv"`,
       },
     });
   }
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         success: true,
         subscribers,
-        message: "Audience contacts have been successfully reset to canonical DigiVigee defaults.",
+        message: "Audience contacts have been successfully reset to Dr. Noopur Patel's clinical subscribers baseline.",
       });
     }
 
