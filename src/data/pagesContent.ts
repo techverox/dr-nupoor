@@ -8,14 +8,14 @@ import { SITE_CONFIG } from "@/config/site";
 
 export const DEFAULT_HOME_PAGE_CONTENT: HomePageContent = {
   id: "home",
-  heroBadge: "SPECIALISED BREAST CARE IN AHMEDABAD",
-  heroHeadline: "Expert Care for",
-  heroHeadlineHighlight: "Every Woman",
+  heroBadge: "SPECIALISED BREAST CANCER CARE · AHMEDABAD",
+  heroHeadline: "Specialised",
+  heroHeadlineHighlight: "Breast Cancer Care, With a Patient-First Approach",
   heroSubheadline:
-    "Compassionate, evidence-based and personalised breast care — from diagnosis to recovery and beyond.",
+    "Compassionate, evidence-based surgical care for women with breast conditions and breast cancer — with a focus on personalised treatment and informed decisions.",
   primaryCtaText: "Book an Appointment",
   primaryCtaLink: "/appointments",
-  secondaryCtaText: "Consult on WhatsApp",
+  secondaryCtaText: "WhatsApp",
   secondaryCtaLink: "https://wa.me/919876543210",
   stat1Value: "1 in 8",
   stat1Label: "Women may develop breast cancer",

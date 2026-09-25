@@ -69,14 +69,14 @@ export default async function Home() {
       <main className="flex-1">
         {/* 2. Hero Section */}
         <DoctorHero
-          badge={homeContent.heroBadge}
-          headline={homeContent.heroHeadline}
-          headlineHighlight={homeContent.heroHeadlineHighlight}
-          subheadline={homeContent.heroSubheadline}
-          primaryCtaText={homeContent.primaryCtaText}
-          primaryCtaLink={homeContent.primaryCtaLink}
-          secondaryCtaText={homeContent.secondaryCtaText}
-          secondaryCtaLink={homeContent.secondaryCtaLink}
+          badge="SPECIALISED BREAST CANCER CARE · AHMEDABAD"
+          headline="Specialised"
+          headlineHighlight="Breast Cancer Care, With a Patient-First Approach"
+          subheadline="Compassionate, evidence-based surgical care for women with breast conditions and breast cancer — with a focus on personalised treatment and informed decisions."
+          primaryCtaText="Book an Appointment"
+          primaryCtaLink="/appointments"
+          secondaryCtaText="WhatsApp"
+          secondaryCtaLink={`https://wa.me/919876543210`}
         />
 
         {/* 3. Why Breast Health Matters / Early Detection Strip */}
