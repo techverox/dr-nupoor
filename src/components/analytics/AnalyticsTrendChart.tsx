@@ -77,14 +77,14 @@ export function AnalyticsTrendChart({
   const step = Math.max(1, Math.floor(timeline.length / 6));
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-sm flex flex-col gap-4">
+    <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm flex flex-col gap-4">
       {/* Header & Legend */}
       <div className="flex flex-wrap justify-between items-start gap-3">
         <div>
-          <h3 className="text-base font-black text-zinc-900 dark:text-zinc-100">
+          <h3 className="text-base font-black text-slate-900">
             {title}
           </h3>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+          <p className="text-xs text-slate-500 mt-0.5">
             {subtitle}
           </p>
         </div>
@@ -93,11 +93,11 @@ export function AnalyticsTrendChart({
         <div className="flex items-center gap-4 text-xs">
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-sm bg-orange-500" />
-            <span className="font-bold text-zinc-700 dark:text-zinc-300">Page Views</span>
+            <span className="font-bold text-slate-700">Page Views</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-2.5 h-2.5 rounded-sm bg-blue-500" />
-            <span className="font-bold text-zinc-700 dark:text-zinc-300">Unique Visitors</span>
+            <span className="font-bold text-slate-700">Unique Visitors</span>
           </div>
         </div>
       </div>
@@ -133,7 +133,6 @@ export function AnalyticsTrendChart({
                   stroke="#e2e8f0"
                   strokeDasharray="4 4"
                   strokeWidth="1"
-                  className="dark:stroke-zinc-800"
                 />
                 <text
                   x={padding.left - 8}
@@ -217,24 +216,24 @@ export function AnalyticsTrendChart({
         {/* Hover Tooltip Overlay */}
         {hoverIndex !== null && activePoint && (
           <div
-            className="absolute top-2.5 z-20 pointer-events-none whitespace-nowrap bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 px-3.5 py-2.5 rounded-2xl shadow-xl border border-zinc-800 dark:border-zinc-200 text-xs font-medium -translate-x-1/2 transition-all duration-75"
+            className="absolute top-2.5 z-20 pointer-events-none whitespace-nowrap bg-slate-900 text-white px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-800 text-xs font-medium -translate-x-1/2 transition-all duration-75"
             style={{
               left: `${Math.min(85, Math.max(15, (getX(hoverIndex) / width) * 100))}%`,
             }}
           >
-            <div className="font-bold border-b border-white/20 dark:border-zinc-200 pb-1 mb-1.5 text-[11px] text-zinc-300 dark:text-zinc-600">
+            <div className="font-bold border-b border-white/20 pb-1 mb-1.5 text-[11px] text-slate-300">
               📅 {activePoint.date}
             </div>
-            <div className="flex justify-between gap-4 text-orange-400 dark:text-orange-600">
+            <div className="flex justify-between gap-4 text-orange-400">
               <span>Page Views:</span>
               <span className="font-black">{activePoint.pageViews || 0}</span>
             </div>
-            <div className="flex justify-between gap-4 text-blue-400 dark:text-blue-600">
+            <div className="flex justify-between gap-4 text-blue-400">
               <span>Unique Visitors:</span>
               <span className="font-black">{activePoint.visitors || 0}</span>
             </div>
             {typeof activePoint.leads === "number" && activePoint.leads > 0 && (
-              <div className="flex justify-between gap-4 text-emerald-400 dark:text-emerald-600 mt-0.5">
+              <div className="flex justify-between gap-4 text-emerald-400 mt-0.5">
                 <span>Leads Captured:</span>
                 <span className="font-black">{activePoint.leads}</span>
               </div>

@@ -7,7 +7,7 @@ import { AnalyticsTimeframe } from "@/types/analytics";
 import { AnalyticsDashboardView } from "@/components/analytics/AnalyticsDashboardView";
 
 export const metadata = {
-  title: "Advanced Analytics & Reporting | DigiVigee Admin",
+  title: "Practice Telemetry & Analytics | Dr. Noopur Patel Admin",
   robots: { index: false, follow: false },
 };
 
