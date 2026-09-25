@@ -85,7 +85,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "Testimonials",
+        label: "Reviews & Stories",
         href: "/admin/testimonials",
         isImplemented: true,
         permission: "testimonials.view",

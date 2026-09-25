@@ -64,9 +64,9 @@ export function ContentOverviewGrid({ metrics }: ContentOverviewGridProps) {
       ),
     },
     {
-      title: "Client Testimonials",
+      title: "Patient Reviews & Stories",
       count: metrics.totalTestimonials,
-      desc: "Verified Client Reviews",
+      desc: "Patient Reflections & QR Submissions",
       href: "/admin/testimonials",
       color: "#ec4899",
       icon: (

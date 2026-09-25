@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { 
@@ -10,20 +10,119 @@ import {
   Sparkles, 
   Star, 
   Play, 
-  ChevronLeft, 
-  ChevronRight, 
   Quote, 
   Ribbon,
-  Calendar,
-  MessageCircle,
-  ArrowRight
+  QrCode,
+  ArrowRight,
+  X,
+  ExternalLink,
+  MessageCircleHeart,
+  RefreshCw,
 } from "lucide-react";
 import DoctorNavbar from "@/components/doctor/DoctorNavbar";
 import DoctorFooter from "@/components/doctor/DoctorFooter";
 import TrustStrip from "@/components/doctor/TrustStrip";
+import PatientStoryQRCode from "@/components/doctor/PatientStoryQRCode";
+import { TestimonialItem } from "@/types";
+import { subscribeLiveSync } from "@/lib/sync/clientSync";
+
+const DEFAULT_STORIES: Array<{
+  id: string;
+  category: string;
+  avatar: string;
+  quote: string;
+  patient: string;
+  tag: string;
+  rating: number;
+  city?: string;
+}> = [
+  {
+    id: "story-1",
+    category: "Early Detection",
+    avatar: "/images/doctor/assets/patient-avatar-1.png",
+    quote:
+      "I was diagnosed with breast cancer at an early stage. Dr. Noopur Patel explained everything so clearly and supported me at every step. Today I am healthy and back to my normal life.",
+    patient: "Patient from Ahmedabad",
+    tag: "Early Detection",
+    rating: 5,
+    city: "Ahmedabad",
+  },
+  {
+    id: "story-2",
+    category: "Benign Conditions",
+    avatar: "/images/doctor/assets/patient-avatar-2.png",
+    quote:
+      "I had a breast lump and was very worried. Dr. Noopur Patel guided me with the right tests and the treatment was simple. I am grateful for her calm and kind approach.",
+    patient: "Patient from Gandhinagar",
+    tag: "Benign Breast Condition",
+    rating: 5,
+    city: "Gandhinagar",
+  },
+  {
+    id: "story-3",
+    category: "Oncoplastic Surgery",
+    avatar: "/images/doctor/assets/patient-avatar-3.png",
+    quote:
+      "After my surgery, I was concerned about how I would look. Dr. Noopur Patel explained the oncoplastic options and the results have been truly life-changing.",
+    patient: "Patient from Palanpur",
+    tag: "Oncoplastic Surgery",
+    rating: 5,
+    city: "Palanpur",
+  },
+  {
+    id: "story-4",
+    category: "Breast Reconstruction",
+    avatar: "/images/doctor/assets/patient-avatar-1.png",
+    quote:
+      "From the first consultation to the final reconstructive follow-up, the surgical precision and empathy shown by Dr. Patel gave my family immense peace of mind.",
+    patient: "Patient from Rajkot",
+    tag: "Breast Reconstruction",
+    rating: 5,
+    city: "Rajkot",
+  },
+  {
+    id: "story-5",
+    category: "Breast Cancer",
+    avatar: "/images/doctor/assets/patient-avatar-2.png",
+    quote:
+      "The multidisciplinary care at Marengo CIMS Hospital under Dr. Noopur Patel was exceptional. Every question was answered with scientific clarity and patience.",
+    patient: "Patient from Surat",
+    tag: "Breast Cancer Surgery",
+    rating: 5,
+    city: "Surat",
+  },
+];
+
+const DEFAULT_VIDEOS = [
+  {
+    title: "My Breast Cancer Journey and Recovery",
+    duration: "02:45",
+    patient: "Patient from Ahmedabad",
+    image: "/images/doctor/assets/patient-avatar-1.png",
+    videoUrl: "https://www.youtube.com",
+  },
+  {
+    title: "How Early Detection Saved My Life",
+    duration: "04:12",
+    patient: "Patient from Mehsana",
+    image: "/images/doctor/assets/patient-avatar-2.png",
+    videoUrl: "https://www.youtube.com",
+  },
+  {
+    title: "Life After Oncoplastic Surgery",
+    duration: "05:08",
+    patient: "Patient from Palanpur",
+    image: "/images/doctor/assets/patient-avatar-3.png",
+    videoUrl: "https://www.youtube.com",
+  },
+];
 
 export default function PatientStoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState("All Stories");
+  const [stories, setStories] = useState<typeof DEFAULT_STORIES>(DEFAULT_STORIES);
+  const [isQrModalOpen, setIsQrModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeVideoModal, setActiveVideoModal] = useState<string | null>(null);
 
   const categories = [
     "All Stories",
@@ -34,78 +133,52 @@ export default function PatientStoriesPage() {
     "Early Detection",
   ];
 
-  const stories = [
-    {
-      id: 1,
-      category: "Early Detection",
-      avatar: "/images/doctor/assets/patient-avatar-1.png",
-      quote:
-        "I was diagnosed with breast cancer at an early stage. Dr. Noopur Patel explained everything so clearly and supported me at every step. Today I am healthy and back to my normal life.",
-      patient: "Patient from Ahmedabad",
-      tag: "Early Detection",
-    },
-    {
-      id: 2,
-      category: "Benign Conditions",
-      avatar: "/images/doctor/assets/patient-avatar-2.png",
-      quote:
-        "I had a breast lump and was very worried. Dr. Noopur Patel guided me with the right tests and the treatment was simple. I am grateful for her calm and kind approach.",
-      patient: "Patient from Gandhinagar",
-      tag: "Benign Breast Condition",
-    },
-    {
-      id: 3,
-      category: "Oncoplastic Surgery",
-      avatar: "/images/doctor/assets/patient-avatar-3.png",
-      quote:
-        "After my surgery, I was concerned about how I would look. Dr. Noopur Patel explained the oncoplastic options and the results have been truly life-changing.",
-      patient: "Patient from Palanpur",
-      tag: "Oncoplastic Surgery",
-    },
-    {
-      id: 4,
-      category: "Breast Reconstruction",
-      avatar: "/images/doctor/assets/patient-avatar-1.png",
-      quote:
-        "From the first consultation to the final reconstructive follow-up, the surgical precision and empathy shown by Dr. Patel gave my family immense peace of mind.",
-      patient: "Patient from Rajkot",
-      tag: "Breast Reconstruction",
-    },
-    {
-      id: 5,
-      category: "Breast Cancer",
-      avatar: "/images/doctor/assets/patient-avatar-2.png",
-      quote:
-        "The multidisciplinary care at Marengo CIMS Hospital under Dr. Noopur Patel was exceptional. Every question was answered with scientific clarity and patience.",
-      patient: "Patient from Surat",
-      tag: "Breast Cancer Surgery",
-    },
-  ];
+  // Fetch approved patient stories
+  const loadApprovedStories = useCallback(async () => {
+    try {
+      const res = await fetch("/api/stories");
+      const data = await res.json();
+      if (data.success && Array.isArray(data.stories) && data.stories.length > 0) {
+        const mapped = data.stories.map((s: TestimonialItem, idx: number) => ({
+          id: s.id || `story-${idx}`,
+          category: s.category || s.clientRole || "Breast Cancer",
+          avatar: s.clientAvatar || `/images/doctor/assets/patient-avatar-${(idx % 3) + 1}.png`,
+          quote: s.testimonial,
+          patient: s.clientName || "Patient from Ahmedabad",
+          tag: s.clientRole || s.category || "Verified Patient",
+          rating: s.rating || 5,
+          city: s.city || "",
+        }));
+        setStories(mapped);
+      }
+    } catch (err) {
+      console.error("[PatientStoriesPage] Load error:", err);
+    }
+  }, []);
 
-  const filteredStories = selectedCategory === "All Stories"
-    ? stories
-    : stories.filter((s) => s.category === selectedCategory || s.tag.toLowerCase().includes(selectedCategory.toLowerCase()));
+  useEffect(() => {
+    loadApprovedStories();
 
-  const videoStories = [
-    {
-      title: "My Breast Cancer Journey and Recovery",
-      duration: "02:45",
-      patient: "Patient from Ahmedabad",
-      image: "/images/doctor/assets/patient-avatar-1.png",
-    },
-    {
-      title: "How Early Detection Saved My Life",
-      duration: "04:12",
-      patient: "Patient from Mehsana",
-      image: "/images/doctor/assets/patient-avatar-2.png",
-    },
-    {
-      title: "Life After Oncoplastic Surgery",
-      duration: "05:08",
-      patient: "Patient from Palanpur",
-      image: "/images/doctor/assets/patient-avatar-3.png",
-    },
-  ];
+    // Subscribe to live sync for real-time review approval
+    const unsubscribe = subscribeLiveSync((event) => {
+      if (event.collection === "testimonials" || event.type === "CMS_MUTATION") {
+        loadApprovedStories();
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [loadApprovedStories]);
+
+  const filteredStories =
+    selectedCategory === "All Stories"
+      ? stories
+      : stories.filter(
+          (s) =>
+            s.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
+            s.tag.toLowerCase().includes(selectedCategory.toLowerCase())
+        );
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -126,37 +199,59 @@ export default function PatientStoriesPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
               <div className="lg:col-span-7 space-y-6">
-                <span className="text-[11px] sm:text-[12px] font-bold tracking-widest uppercase text-[#D84C70] block">
-                  PATIENT STORIES
-                </span>
-                <h1 className="font-serif text-[42px] sm:text-[54px] font-bold text-[#1A202C] leading-[1.15]">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF0F3] border border-[#F5D6DE] text-[11px] font-bold text-[#D84C70] uppercase tracking-wider">
+                  <Heart className="w-3.5 h-3.5 fill-[#D84C70]" />
+                  <span>Real Patient Journeys</span>
+                </div>
+                <h1 className="font-serif text-[40px] sm:text-[52px] font-bold text-[#1A202C] leading-[1.15]">
                   Real Stories.{" "}
                   <span className="italic font-serif text-[#D84C70] block sm:inline">
                     Real Strength.
                   </span>
                 </h1>
                 <p className="text-slate-600 text-[16px] sm:text-[17px] leading-relaxed max-w-2xl">
-                  Every woman&apos;s journey is unique. Here are some real stories from our patients who trusted us with their care.
+                  Every woman&apos;s journey is unique. Here are genuine reflections from patients who trusted 
+                  Dr. Noopur Patel with their breast cancer surgery, reconstruction, and care.
                 </p>
 
                 {/* 4 Feature Badges */}
                 <div className="flex flex-wrap items-center gap-3 pt-2">
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF8F9] border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700 shadow-xs">
                     <Heart className="w-4 h-4 text-[#D84C70]" />
-                    <span>Trusted Care</span>
+                    <span>Compassionate Care</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF8F9] border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700 shadow-xs">
                     <Users className="w-4 h-4 text-[#D84C70]" />
-                    <span>Real Experiences</span>
+                    <span>Verified Consent</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF8F9] border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700 shadow-xs">
                     <ShieldCheck className="w-4 h-4 text-[#D84C70]" />
                     <span>Positive Outcomes</span>
                   </div>
-                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF8F9] border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700">
+                  <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F5D6DE] text-[12.5px] font-medium text-slate-700 shadow-xs">
                     <Sparkles className="w-4 h-4 text-[#D84C70]" />
                     <span>Hope for Tomorrow</span>
                   </div>
+                </div>
+
+                {/* Action CTAs: Share Story & Scan QR */}
+                <div className="flex flex-wrap items-center gap-3 pt-3">
+                  <Link
+                    href="/share-story"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[14px] font-semibold text-white bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] hover:opacity-95 shadow-md hover:shadow-lg transition-all"
+                  >
+                    <Heart className="w-4 h-4 fill-white" />
+                    <span>Share Your Story</span>
+                  </Link>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsQrModalOpen(true)}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full text-[14px] font-semibold text-[#8B2346] bg-white border border-[#F5D6DE] hover:bg-[#FFF0F3] shadow-xs transition-colors cursor-pointer"
+                  >
+                    <QrCode className="w-4 h-4 text-[#D84C70]" />
+                    <span>Scan QR Code to Review</span>
+                  </button>
                 </div>
               </div>
 
@@ -207,7 +302,46 @@ export default function PatientStoriesPage() {
           </div>
         </section>
 
-        {/* 2. JOURNEYS OF HOPE — STORIES THAT INSPIRE */}
+        {/* 2. SCAN & SHARE HIGHLIGHT BANNER */}
+        <section className="w-full bg-[#FFF0F3]/60 py-6 border-b border-[#F5D6DE]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#F5D6DE] shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#FFF0F3] border border-[#F5D6DE] flex items-center justify-center flex-shrink-0">
+                  <QrCode className="w-6 h-6 text-[#D84C70]" />
+                </div>
+                <div>
+                  <h3 className="font-serif text-[17px] font-bold text-slate-900 leading-tight">
+                    Have you been treated by Dr. Noopur Patel?
+                  </h3>
+                  <p className="text-[13px] text-slate-600">
+                    Scan our QR code on your mobile or click to submit your healing journey directly.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 w-full md:w-auto">
+                <button
+                  type="button"
+                  onClick={() => setIsQrModalOpen(true)}
+                  className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-semibold text-[#8B2346] bg-[#FFF0F3] hover:bg-rose-100 border border-[#F5D6DE] transition-colors cursor-pointer"
+                >
+                  <QrCode className="w-4 h-4 text-[#D84C70]" />
+                  <span>Show QR Code</span>
+                </button>
+                <Link
+                  href="/share-story"
+                  className="flex-1 md:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold text-white bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] hover:opacity-95 shadow-xs transition-all"
+                >
+                  <span>Share Story Online</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. JOURNEYS OF HOPE — STORIES THAT INSPIRE */}
         <section className="w-full py-16 lg:py-24 bg-white border-b border-rose-100/60" id="stories">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -224,9 +358,18 @@ export default function PatientStoriesPage() {
                 </p>
               </div>
 
-              <div>
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setIsQrModalOpen(true)}
+                  className="inline-flex items-center gap-2 text-slate-700 hover:text-[#D84C70] text-[13px] font-semibold px-4 py-2.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-all shadow-xs cursor-pointer"
+                >
+                  <QrCode className="w-4 h-4 text-[#D84C70]" />
+                  <span>Scan to Review</span>
+                </button>
+
                 <Link
-                  href="/appointments"
+                  href="/share-story"
                   className="inline-flex items-center gap-2 text-[#D84C70] hover:text-[#BE3A5C] text-[14px] font-semibold px-5 py-2.5 rounded-full border border-[#F5D6DE] bg-[#FFF8F9] hover:bg-[#FDF2F4] transition-all shadow-xs"
                 >
                   <Heart className="w-4 h-4 text-[#D84C70]" />
@@ -261,26 +404,42 @@ export default function PatientStoriesPage() {
                   className="bg-[#FFF8F9]/40 rounded-2xl p-6 sm:p-7 border border-[#F5D6DE] hover:border-[#D84C70] shadow-xs hover:shadow-md transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    {/* Top Row: Avatar & Stars */}
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-[#F5D6DE] bg-white flex-shrink-0 shadow-xs">
-                        <Image
-                          src={story.avatar}
-                          alt={story.patient}
-                          fill
-                          className="object-cover"
-                          sizes="56px"
-                        />
-                      </div>
-                      <div>
-                        <div className="mb-1">
-                          <span className="text-[10.5px] font-semibold uppercase tracking-wider text-[#D84C70] bg-[#FFF0F3] px-2 py-0.5 rounded-full border border-[#F5D6DE]">
-                            Verified Consent
+                    {/* Top Row: Avatar, Consent & Stars */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-12 h-12 rounded-2xl overflow-hidden border border-[#F5D6DE] bg-white flex-shrink-0 shadow-xs">
+                          <Image
+                            src={story.avatar}
+                            alt={story.patient}
+                            fill
+                            className="object-cover"
+                            sizes="48px"
+                          />
+                        </div>
+                        <div>
+                          <div className="mb-0.5">
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#D84C70] bg-[#FFF0F3] px-2 py-0.5 rounded-full border border-[#F5D6DE]">
+                              Verified Consent
+                            </span>
+                          </div>
+                          <span className="text-[13px] font-bold text-slate-900 block leading-tight">
+                            {story.patient}
                           </span>
                         </div>
-                        <span className="text-[13px] font-bold text-slate-900 block leading-tight">
-                          {story.patient}
-                        </span>
+                      </div>
+
+                      {/* Star Rating */}
+                      <div className="flex items-center gap-0.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star
+                            key={star}
+                            className={`w-3.5 h-3.5 ${
+                              star <= (story.rating || 5)
+                                ? "text-amber-400 fill-amber-400"
+                                : "text-slate-200 fill-slate-100"
+                            }`}
+                          />
+                        ))}
                       </div>
                     </div>
 
@@ -290,10 +449,15 @@ export default function PatientStoriesPage() {
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-[#F5D6DE]/60">
+                  <div className="pt-3 border-t border-[#F5D6DE]/60 flex items-center justify-between">
                     <span className="inline-block px-3 py-1 rounded-full bg-white border border-[#F5D6DE] text-[11px] font-semibold text-[#D84C70]">
                       {story.tag}
                     </span>
+                    {story.city && (
+                      <span className="text-[11px] text-slate-400 font-medium">
+                        {story.city}
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -302,7 +466,7 @@ export default function PatientStoriesPage() {
           </div>
         </section>
 
-        {/* 3. BEYOND TREATMENT — A NEW CHAPTER OF CONFIDENCE */}
+        {/* 4. BEYOND TREATMENT — A NEW CHAPTER OF CONFIDENCE */}
         <section className="w-full py-16 bg-[#FFF8F9]/50 border-b border-rose-100/60">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white rounded-3xl border border-[#F5D6DE] p-8 sm:p-10 shadow-xs">
@@ -359,7 +523,7 @@ export default function PatientStoriesPage() {
           </div>
         </section>
 
-        {/* 4. VIDEO STORIES — HEAR FROM OUR PATIENTS */}
+        {/* 5. VIDEO STORIES — HEAR FROM OUR PATIENTS */}
         <section className="w-full py-16 lg:py-24 bg-white border-b border-rose-100/60" id="video-stories">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
@@ -391,7 +555,7 @@ export default function PatientStoriesPage() {
 
             {/* Video Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {videoStories.map((v, idx) => (
+              {DEFAULT_VIDEOS.map((v, idx) => (
                 <div
                   key={idx}
                   className="group bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
@@ -430,32 +594,81 @@ export default function PatientStoriesPage() {
           </div>
         </section>
 
-        {/* 5. BOTTOM INSPIRATION CTA BANNER */}
-        <section className="w-full bg-gradient-to-r from-[#D84C70] via-[#C83E62] to-[#B83054] text-white py-14">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-            <h2 className="font-serif text-[28px] sm:text-[36px] font-bold">
-              Your Story Can Inspire Others
+        {/* 6. BOTTOM INSPIRATION CTA BANNER WITH DIRECT QR BUTTON */}
+        <section className="w-full bg-gradient-to-r from-[#D84C70] via-[#C83E62] to-[#B83054] text-white py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+            <h2 className="font-serif text-[28px] sm:text-[38px] font-bold">
+              Your Story Can Inspire Hope in Another Woman
             </h2>
-            <p className="text-white/90 text-[15px] sm:text-[16px] max-w-xl mx-auto">
-              If you are comfortable, share your experience to help and support other women on their breast health journey.
+            <p className="text-white/90 text-[15px] sm:text-[16px] max-w-xl mx-auto leading-relaxed">
+              If you have been treated by Dr. Noopur Patel, share your experience to help and comfort other patients embarking on their breast health journey.
             </p>
-            <div className="pt-3">
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
               <Link
-                href="/appointments"
-                className="inline-flex items-center gap-2 bg-white text-[#D84C70] hover:bg-slate-50 font-bold text-[14px] px-7 py-3.5 rounded-full shadow-lg transition-all active:scale-95"
+                href="/share-story"
+                className="inline-flex items-center gap-2 bg-white text-[#D84C70] hover:bg-slate-50 font-bold text-[14px] px-8 py-3.5 rounded-full shadow-lg transition-all active:scale-95"
               >
-                <Heart className="w-4 h-4 text-[#D84C70]" />
-                <span>Share Your Story</span>
+                <Heart className="w-4 h-4 fill-[#D84C70]" />
+                <span>Share Your Story Online</span>
               </Link>
+              <button
+                type="button"
+                onClick={() => setIsQrModalOpen(true)}
+                className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white font-semibold text-[14px] px-6 py-3.5 rounded-full border border-white/40 shadow-sm transition-all cursor-pointer"
+              >
+                <QrCode className="w-4 h-4" />
+                <span>Scan QR Code with Phone</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* 6. TRUST STRIP & FOOTER */}
+        {/* 7. TRUST STRIP & FOOTER */}
         <TrustStrip />
       </main>
 
       <DoctorFooter />
+
+      {/* POPUP QR CODE SCAN MODAL */}
+      {isQrModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="relative max-w-md w-full bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-rose-100">
+            <button
+              type="button"
+              onClick={() => setIsQrModalOpen(false)}
+              className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <PatientStoryQRCode
+              size={220}
+              showCardWrapper={false}
+              className="flex flex-col items-center"
+            />
+
+            <div className="text-center mt-4">
+              <h3 className="font-serif text-[20px] font-bold text-slate-900 mb-1">
+                Scan to Share Your Journey
+              </h3>
+              <p className="text-[13px] text-slate-600 mb-5 leading-relaxed">
+                Aim your phone camera at this QR code to open the private patient review portal.
+              </p>
+
+              <div className="flex items-center justify-center gap-3">
+                <Link
+                  href="/share-story"
+                  onClick={() => setIsQrModalOpen(false)}
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 px-5 rounded-2xl text-[13px] font-semibold text-white bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] hover:opacity-95 shadow-sm transition-all"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>Open Form in Browser</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -123,6 +123,33 @@ export default function PatientStoriesSection({
           ))}
         </div>
 
+        {/* Interactive QR Code & Share Story CTA Strip */}
+        <div className="mt-12 bg-white rounded-2xl p-5 sm:p-6 border border-[#F5D6DE] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="w-11 h-11 rounded-xl bg-[#FFF0F3] border border-[#F5D6DE] flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0">
+              <Star className="w-5 h-5 text-[#D84C70] fill-[#D84C70]" />
+            </div>
+            <div>
+              <p className="font-serif text-[15px] sm:text-[16px] font-bold text-slate-900 leading-tight">
+                Treated by Dr. Noopur Patel? Share Your Healing Journey
+              </p>
+              <p className="text-[12px] sm:text-[12.5px] text-slate-500">
+                Your reflection guides and comforts other women facing breast health decisions.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+            <Link
+              href="/share-story"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold text-white bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] hover:opacity-95 shadow-xs transition-all"
+            >
+              <span>Scan QR / Submit Review</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+
         {/* Consent & Ethics Advisory */}
         <div className="mt-8 text-center">
           <p className="text-[11.5px] text-slate-500 max-w-xl mx-auto leading-relaxed">

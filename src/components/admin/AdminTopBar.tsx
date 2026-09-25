@@ -19,7 +19,7 @@ const SECTION_TITLES: Record<string, string> = {
   "/admin/pages": "Website Pages CMS",
   "/admin/services": "Services CMS",
   "/admin/portfolio": "Portfolio CMS",
-  "/admin/testimonials": "Testimonials CMS",
+  "/admin/testimonials": "Patient Reviews & Stories",
   "/admin/faqs": "FAQs Management CMS",
   "/admin/team": "Team Specialists CMS",
   "/admin/blog": "Blog CMS & Playbooks",

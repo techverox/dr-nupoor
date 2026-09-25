@@ -54,11 +54,45 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    // 1-Click Moderation Actions: approve, reject, toggle
+    if (body.action === "approve" && body.id) {
+      const result = await saveCmsItem(COLLECTIONS.TESTIMONIALS, {
+        status: "approved",
+        isPublished: true,
+      }, body.id);
+      return NextResponse.json(result);
+    }
+
+    if (body.action === "reject" && body.id) {
+      const result = await saveCmsItem(COLLECTIONS.TESTIMONIALS, {
+        status: "rejected",
+        isPublished: false,
+      }, body.id);
+      return NextResponse.json(result);
+    }
+
+    if (body.action === "togglePublish" && body.id) {
+      const nextPublished = Boolean(body.isPublished);
+      const result = await saveCmsItem(COLLECTIONS.TESTIMONIALS, {
+        isPublished: nextPublished,
+        status: nextPublished ? "approved" : "pending",
+      }, body.id);
+      return NextResponse.json(result);
+    }
+
+    if (body.action === "toggleFeatured" && body.id) {
+      const result = await saveCmsItem(COLLECTIONS.TESTIMONIALS, {
+        isFeatured: Boolean(body.isFeatured),
+      }, body.id);
+      return NextResponse.json(result);
+    }
+
     const { id, ...data } = body;
 
-    if (!data.clientName || !data.testimonial) {
+    // For new creation, name and testimonial are required
+    if (!id && (!data.clientName || !data.testimonial)) {
       return NextResponse.json(
-        { success: false, error: "Client name and testimonial quote are required." },
+        { success: false, error: "Patient name and story/review text are required." },
         { status: 400 }
       );
     }
