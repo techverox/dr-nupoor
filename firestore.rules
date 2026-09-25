@@ -18,19 +18,19 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    // Public read-only collections (Website content)
+    // Public read-only collections (Website content for 100% live realtime sync)
     match /services/{serviceId} {
-      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
     match /portfolio/{portfolioId} {
-      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
     match /blogs/{blogId} {
-      allow read: if resource == null || resource.data.status == 'published' || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
@@ -45,17 +45,17 @@ service cloud.firestore {
     }
 
     match /testimonials/{testimonialId} {
-      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
     match /faqs/{faqId} {
-      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
     match /team/{memberId} {
-      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
@@ -100,7 +100,7 @@ service cloud.firestore {
 
     // Dynamic Forms (Phase 3 Step 14)
     match /forms/{formId} {
-      allow read: if resource == null || resource.data.status == 'active' || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
@@ -113,7 +113,7 @@ service cloud.firestore {
 
     // Landing Pages, Reusable Components & Templates (Phase 3)
     match /landingPages/{pageId} {
-      allow read: if resource == null || resource.data.isPublished == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 
@@ -127,7 +127,7 @@ service cloud.firestore {
 
     // Offers & Redirects
     match /offers/{offerId} {
-      allow read: if resource == null || resource.data.isActive == true || isAdmin();
+      allow read: if true;
       allow write: if isAdmin();
     }
 

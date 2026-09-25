@@ -61,6 +61,7 @@ scratch*.js
 scratch*.ts
 *.tmp
 *.temp
+.kilo/
 
 # vercel
 .vercel
