@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, MessageCircle, ArrowRight, ShieldCheck, Heart } from "lucide-react";
+import { Calendar, MessageCircle, ArrowRight, ShieldCheck, Heart, Phone } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 
 export default function HopeCtaBanner() {
@@ -32,14 +32,11 @@ export default function HopeCtaBanner() {
               </div>
 
               <h2 id="hope-cta-heading" className="font-serif text-[28px] sm:text-[38px] lg:text-[44px] font-bold leading-[1.15] text-white">
-                Take the First Step Towards{" "}
-                <span className="italic font-normal block sm:inline">
-                  Better Breast Health
-                </span>
+                Have a Breast Health Concern?
               </h2>
 
               <p className="text-white/90 text-[15px] sm:text-[16.5px] leading-relaxed max-w-2xl font-normal">
-                Whether you need a routine clinical check-up, second opinion on a lump, or specialized oncoplastic surgery — Dr. Noopur Patel is here to guide you with clarity and empathy.
+                If you have a breast lump, breast-related symptoms, a recent diagnosis, or questions about breast cancer surgery, schedule a consultation to discuss your condition and treatment options.
               </p>
 
               <div className="flex items-center gap-4 text-[12.5px] text-white/80 pt-1 font-medium">
@@ -59,18 +56,16 @@ export default function HopeCtaBanner() {
                 className="inline-flex items-center justify-center gap-2 bg-white text-[#8B2346] hover:bg-rose-50 text-[14.5px] font-bold py-3.5 px-7 rounded-full shadow-lg transition-all active:scale-95"
               >
                 <Calendar className="w-4 h-4 text-[#D94B72]" />
-                <span>Book Consultation</span>
+                <span>Book an Appointment</span>
                 <ArrowRight className="w-4 h-4 ml-auto sm:ml-0" />
               </Link>
 
               <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`tel:${SITE_CONFIG.contact.phone.replace(/\s+/g, "")}`}
                 className="inline-flex items-center justify-center gap-2 border-1.5 border-white/80 hover:bg-white/15 text-white text-[14.5px] font-semibold py-3.5 px-6 rounded-full transition-all active:scale-95"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Consult on WhatsApp</span>
+                <Phone className="w-4 h-4" />
+                <span>Call the Clinic</span>
               </a>
             </div>
 

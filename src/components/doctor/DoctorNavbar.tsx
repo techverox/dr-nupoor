@@ -52,9 +52,11 @@ export default function DoctorNavbar() {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Services", href: "/services" },
-    { label: "Patient Guide", href: "/patient-guide" },
+    { label: "Breast Cancer", href: "/breast-cancer-surgery" },
+    { label: "Treatments", href: "/services" },
+    { label: "Breast Conditions", href: "/#conditions" },
     { label: "Patient Stories", href: "/patient-stories" },
+    { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
   ];
 

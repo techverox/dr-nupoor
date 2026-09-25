@@ -1,85 +1,126 @@
 "use client";
 
 import React from "react";
-import { Calendar, Ribbon, FileText, Activity, HeartHandshake } from "lucide-react";
+import {
+  Calendar,
+  Stethoscope,
+  Microscope,
+  FileCheck2,
+  GitBranch,
+  Activity,
+  HeartHandshake,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
+
+export interface JourneyStep {
+  num: string;
+  title: string;
+  subtitle: string;
+  icon: React.ReactNode;
+}
 
 export default function CareJourneyTimeline() {
-  const steps = [
+  const steps: JourneyStep[] = [
     {
-      num: 1,
-      title: "Book Appointment",
-      subtitle: "Online or via WhatsApp",
-      icon: <Calendar className="w-5 h-5 text-[#D84C70]" />,
-    },
-    {
-      num: 2,
+      num: "01",
       title: "Consultation",
-      subtitle: "Discuss your concerns",
-      icon: <Ribbon className="w-5 h-5 text-[#D84C70]" />,
+      subtitle: "Confidential discussion of symptoms & health history",
+      icon: <Calendar className="w-5 h-5 text-[#9B2846]" />,
     },
     {
-      num: 3,
-      title: "Diagnosis & Plan",
-      subtitle: "Personalised treatment plan",
-      icon: <FileText className="w-5 h-5 text-[#D84C70]" />,
+      num: "02",
+      title: "Clinical Evaluation",
+      subtitle: "Gentle physical breast exam with female chaperone",
+      icon: <Stethoscope className="w-5 h-5 text-[#9B2846]" />,
     },
     {
-      num: 4,
-      title: "Treatment & Care",
-      subtitle: "Expert surgical care",
-      icon: <Activity className="w-5 h-5 text-[#D84C70]" />,
+      num: "03",
+      title: "Imaging / Biopsy",
+      subtitle: "High-resolution ultrasound, mammogram or core biopsy",
+      icon: <Microscope className="w-5 h-5 text-[#9B2846]" />,
     },
     {
-      num: 5,
-      title: "Follow-up",
-      subtitle: "We're with you always",
-      icon: <HeartHandshake className="w-5 h-5 text-[#D84C70]" />,
+      num: "04",
+      title: "Diagnosis & Staging",
+      subtitle: "Clear histopathology review & TNM cancer staging",
+      icon: <FileCheck2 className="w-5 h-5 text-[#9B2846]" />,
+    },
+    {
+      num: "05",
+      title: "Treatment Planning",
+      subtitle: "Multidisciplinary tumor board customized roadmap",
+      icon: <GitBranch className="w-5 h-5 text-[#9B2846]" />,
+    },
+    {
+      num: "06",
+      title: "Surgery / Treatment",
+      subtitle: "Precision oncoplastic excision or mastectomy",
+      icon: <Activity className="w-5 h-5 text-[#9B2846]" />,
+    },
+    {
+      num: "07",
+      title: "Follow-Up & Recovery",
+      subtitle: "Rehabilitation, lymphedema care & long-term support",
+      icon: <HeartHandshake className="w-5 h-5 text-[#9B2846]" />,
     },
   ];
 
   return (
-    <section className="w-full py-16 lg:py-24 bg-[#FFF8F9]/50 border-b border-rose-100/60" id="journey">
+    <section className="w-full py-16 lg:py-24 bg-white border-b border-[#F5E6EA]" id="treatment-journey">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[11px] sm:text-[12px] font-bold tracking-widest uppercase text-[#D84C70] block mb-2">
-            YOUR CARE JOURNEY
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-[#9B2846] block mb-2 bg-[#FCE8ED] px-3.5 py-1.5 rounded-full border border-[#F5CAD5] inline-block">
+            STEP-BY-STEP PATIENT PATHWAY
           </span>
-          <h2 className="font-serif text-[32px] sm:text-[40px] font-bold text-[#1A202C] leading-tight">
-            A Simple &amp; Supportive Process
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight mt-1">
+            Your Breast Cancer Care Journey
           </h2>
+          <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
+            Understanding what comes next reduces fear and builds confidence. Here is how Dr. Noopur Patel guides each patient through a structured, supportive care pathway.
+          </p>
         </div>
 
-        {/* 5-Step Process Timeline */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-4 relative">
+        {/* 7-Step Interactive Journey Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-5 sm:gap-4 relative">
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="flex flex-col items-center text-center relative group"
+              className="flex flex-col items-center text-center relative group p-4 rounded-2xl bg-[#FAF7F8] border border-[#F0D5DC] hover:bg-white hover:shadow-lg hover:border-[#9B2846]/40 transition-all duration-300"
             >
               {/* Step Circle with Icon */}
               <div className="relative mb-4">
-                <div className="w-16 h-16 rounded-full bg-white border border-[#F5D6DE] shadow-xs flex items-center justify-center group-hover:border-[#D84C70] group-hover:shadow-md transition-all duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-white border border-[#EED7DC] shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:border-[#9B2846] transition-all duration-300">
                   {step.icon}
                 </div>
                 {/* Step Number Badge */}
-                <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-[#D84C70] text-white text-[12px] font-bold flex items-center justify-center shadow-xs">
+                <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-gradient-to-r from-[#9B2846] to-[#88213B] text-white text-[11px] font-bold flex items-center justify-center shadow-xs">
                   {step.num}
                 </div>
               </div>
 
               {/* Step Title & Subtitle */}
-              <h3 className="font-serif text-[17px] font-bold text-[#1A202C] mb-1">
+              <h3 className="font-serif text-base font-bold text-slate-900 mb-1 group-hover:text-[#9B2846] transition-colors">
                 {step.title}
               </h3>
-              <p className="text-[12.5px] text-slate-500 leading-normal max-w-[170px]">
+              <p className="text-xs text-slate-600 leading-normal">
                 {step.subtitle}
               </p>
             </div>
           ))}
         </div>
 
+        {/* Reassurance Banner */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/appointments"
+            className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#88213B] text-white text-xs sm:text-sm font-bold hover:bg-[#731930] transition-colors shadow-sm"
+          >
+            <span>Begin Your Consultation at Step 01</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </section>
   );
