@@ -305,4 +305,275 @@ Dr. Patel and her clinical care team provide dedicated follow-up visits to suppo
     createdAt: "2026-01-14T00:00:00Z",
     updatedAt: "2026-01-14T00:00:00Z",
   },
+  {
+    id: "blog-7",
+    title: "Is Every Breast Lump Cancerous? A Doctor's Guide to Benign Lumps",
+    slug: "is-every-breast-lump-cancerous",
+    excerpt:
+      "Discovering a breast lump causes immediate anxiety, but over 80% of lumps are completely benign. Learn how specialists distinguish harmless lumps from malignancies.",
+    featuredImage: "/images/doctor/assets/service-5.png",
+    featuredImageAlt: "Doctor explaining breast lump characteristics",
+    author: {
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
+    },
+    status: "published",
+    publishedAt: "2026-02-20T00:00:00Z",
+    categoryId: "benign-conditions",
+    categoryName: "Educational",
+    tags: ["Breast Lump", "Benign Lumps", "Fibroadenoma", "Breast Health"],
+    readingTimeMinutes: 6,
+    isFeatured: true,
+    relatedPostSlugs: ["fibroadenoma-vs-breast-cancer", "breast-surgery-mediclaim-coverage"],
+    content: `
+## Why You Shouldn't Panic, But Must Seek Medical Evaluation
+
+Finding a breast lump during a shower or routine self-examination can be terrifying. The immediate thought for most women is: *"Do I have breast cancer?"*
+
+Here is the most important clinical reality to remember: **More than 8 out of 10 breast lumps (over 80%) evaluated in outpatient clinics turn out to be completely benign (non-cancerous).**
+
+However, because a malignant lump can feel very similar in its early stages, **every newly discovered breast lump requires prompt, structured clinical evaluation.**
+
+---
+
+### Common Benign Causes of Breast Lumps
+
+1. **Fibroadenomas**: Smooth, firm, and rubbery masses that move freely under your fingertips (often called a 'breast mouse'). These are extremely common in women between 15 and 35 years old.
+2. **Simple Breast Cysts**: Fluid-filled sacs that can appear quickly, often becoming tender or larger just before your menstrual period.
+3. **Fibrocystic Breast Changes**: Generalized lumpiness or cord-like glandular thickening influenced by monthly hormonal surges.
+4. **Fat Necrosis**: A firm lump that forms when fatty breast tissue is injured, often after a seatbelt injury, fall, or prior surgery.
+5. **Infections and Abscesses**: Painful, warm, red swellings frequently seen during breastfeeding (lactational mastitis).
+
+---
+
+### Comparing Benign vs Malignant Lump Characteristics
+
+| Characteristic | Typically Benign Lump | Suspicious / Malignant Lump |
+| :--- | :--- | :--- |
+| **Texture** | Soft to firm, rubbery, smooth edges | Hard, stony, irregular or jagged edges |
+| **Mobility** | Freely mobile beneath skin | Fixed to chest wall or skin |
+| **Pain** | Often tender or changes with period | Usually completely painless |
+| **Skin Changes** | Normal overlying skin | Dimpling, puckering, or orange-peel texture |
+| **Nipple** | Normal position | Retraction, deviation, or bloody discharge |
+
+*Note: You cannot diagnose a lump based on touch alone. Only imaging and biopsy provide definitive confirmation.*
+
+---
+
+### The Triple Assessment: Gold Standard in Diagnosis
+
+To achieve 100% diagnostic accuracy without guesswork, breast surgeons follow the internationally recognized **Triple Assessment**:
+
+1. **Clinical Examination**: Gentle palpation and visual check by an experienced breast specialist.
+2. **Bilateral Imaging**: High-frequency breast ultrasound for women under 40, or digital mammography + ultrasound for women 40 and older.
+3. **Pathology (Core Needle Biopsy)**: If imaging shows any indeterminate or suspicious features, a small image-guided core biopsy confirms the cellular nature safely.
+
+---
+
+### When to See Dr. Noopur Patel Immediately
+
+Never adopt a "wait and watch" approach on your own. Schedule a clinical examination if you notice:
+- A new lump that persists after your menstrual cycle
+- Any lump in a post-menopausal woman
+- Skin redness, dimpling, or nipple discharge
+- A palpable swelling in your armpit (axilla)
+
+Peace of mind comes from accurate medical clarity. Book a consultation today for a compassionate and private evaluation.
+    `,
+    seo: {
+      title: "Is Every Breast Lump Cancerous? | Doctor's Guide to Benign Lumps",
+      description: "Over 80% of breast lumps are non-cancerous. Learn the differences between benign lumps and cancer, diagnostic steps, and when to consult a specialist.",
+      slug: "is-every-breast-lump-cancerous",
+    },
+    createdAt: "2026-02-20T00:00:00Z",
+    updatedAt: "2026-02-20T00:00:00Z",
+  },
+  {
+    id: "blog-8",
+    title: "Fibroadenoma vs Breast Cancer: Causes, Symptoms & Diagnosis",
+    slug: "fibroadenoma-vs-breast-cancer",
+    excerpt:
+      "A detailed comparison between benign fibroadenomas and breast cancer, including age group breakdown, lump mobility, diagnostic tests, and treatment approaches.",
+    featuredImage: "/images/doctor/assets/service-1.png",
+    featuredImageAlt: "Comparison between fibroadenoma and breast cancer cells",
+    author: {
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
+    },
+    status: "published",
+    publishedAt: "2026-02-22T00:00:00Z",
+    categoryId: "educational",
+    categoryName: "Educational",
+    tags: ["Fibroadenoma", "Breast Cancer", "Diagnosis", "Benign Pathology"],
+    readingTimeMinutes: 7,
+    isFeatured: true,
+    relatedPostSlugs: ["is-every-breast-lump-cancerous", "breast-surgery-mediclaim-coverage"],
+    content: `
+## Understanding the Vital Differences
+
+When a woman discovers a palpable mass in her breast, the two most common diagnostic considerations are **fibroadenoma** and **breast cancer**. 
+
+While both present as breast lumps, their biological nature, health implications, and treatment paths are completely different.
+
+---
+
+### What is a Fibroadenoma?
+
+A fibroadenoma is a strictly benign (non-cancerous) tumor composed of glandular (epithelial) and stromal (connective) breast tissue. 
+- It is extraordinarily common in adolescents and young women between **15 and 35 years old**.
+- It is hormone-responsive and may become slightly larger during pregnancy or menstrual cycles.
+- It moves easily under your fingers when examined, which is why surgeons often call it a "breast mouse".
+- It **does not spread** to other organs or invade surrounding tissues.
+
+---
+
+### What is Breast Cancer?
+
+Breast cancer is a malignant condition that arises when breast cells undergo genetic mutations and divide uncontrollably.
+- Most commonly diagnosed in women **over 40 years of age**, although it can occasionally occur in younger women.
+- Feels firm, hard, or rock-like, with irregular or ill-defined margins.
+- Typically fixed to the skin or underlying pectoralis muscle and cannot be pushed around freely.
+- Has the potential to spread through the lymphatic system to underarm lymph nodes and distant organs if not treated promptly.
+
+---
+
+### Comprehensive Comparison Table
+
+| Feature | Fibroadenoma | Breast Cancer |
+| :--- | :--- | :--- |
+| **Typical Age** | 15 – 35 years | Usually 40+ years (can occur earlier) |
+| **Nature** | 100% Benign (non-malignant) | Malignant carcinoma |
+| **Feel / Consistency** | Smooth, rubbery, well-circumscribed | Hard, craggy, irregular borders |
+| **Mobility** | Highly mobile (slips under fingers) | Fixed / tethered to surrounding tissue |
+| **Growth Rate** | Slow or stable | Can grow progressively |
+| **Ultrasound Appearance** | Well-defined oval mass, wider than tall | Taller than wide, posterior acoustic shadowing |
+| **Metastasis Risk** | Zero (cannot metastasize) | Potential to spread to nodes and organs |
+| **Primary Treatment** | Observation, VABB, or cosmetic excision | Surgery (BCS / MRM), chemo, radiation, hormone therapy |
+
+---
+
+### Can a Fibroadenoma Turn into Breast Cancer?
+
+A simple fibroadenoma **does not become cancerous**. It does not increase your personal risk of developing breast cancer in the future. 
+
+In rare cases, a complex fibroadenoma (which contains microcalcifications, cysts, or sclerosing adenosis) or a benign phyllodes tumor may require closer surveillance or complete surgical excision with clear margins.
+
+---
+
+### How Specialists Confirm the Diagnosis
+
+Never rely on palpation alone. Dr. Noopur Patel performs:
+1. **High-Resolution Ultrasound**: Clearly visualizes the sharp, smooth margins of a fibroadenoma versus the irregular shadowing of a malignancy.
+2. **Digital Mammography**: For women over 40 to evaluate microcalcifications.
+3. **Core Needle Biopsy (Tru-Cut)**: Safely extracts a small tissue sample under local anesthesia to examine cellular architecture with 99%+ accuracy.
+
+If you have detected a lump, consult Dr. Noopur Patel at Marengo CIMS Hospital for accurate diagnosis and gentle treatment.
+    `,
+    seo: {
+      title: "Fibroadenoma vs Breast Cancer: Causes, Symptoms & Diagnosis",
+      description: "Compare fibroadenoma and breast cancer: age breakdown, lump mobility, ultrasound findings, biopsy accuracy, and treatment options with Dr. Noopur Patel.",
+      slug: "fibroadenoma-vs-breast-cancer",
+    },
+    createdAt: "2026-02-22T00:00:00Z",
+    updatedAt: "2026-02-22T00:00:00Z",
+  },
+  {
+    id: "blog-9",
+    title: "Is Breast Lump Surgery Covered by Mediclaim in India?",
+    slug: "breast-surgery-mediclaim-coverage",
+    excerpt:
+      "A complete guide to health insurance coverage for breast surgeries in India: cashless TPA procedures, pre-authorization documents, daycare vs hospitalization terms.",
+    featuredImage: "/images/doctor/assets/service-2.png",
+    featuredImageAlt: "Health insurance and cashless Mediclaim for breast surgery",
+    author: {
+      id: "author-dr-noopur",
+      name: "Dr. Noopur Patel",
+      role: "Associate Consultant – Surgical Breast Oncology",
+      avatar: "/images/doctor/assets/hero-doctor.png",
+      bio: "Dr. Noopur Patel is a dedicated Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad.",
+    },
+    status: "published",
+    publishedAt: "2026-02-24T00:00:00Z",
+    categoryId: "financial",
+    categoryName: "Insurance & Pricing",
+    tags: ["Mediclaim", "Health Insurance", "Surgery Cost", "Cashless TPA"],
+    readingTimeMinutes: 6,
+    isFeatured: true,
+    relatedPostSlugs: ["is-every-breast-lump-cancerous", "fibroadenoma-vs-breast-cancer"],
+    content: `
+## Navigating Health Insurance for Breast Procedures in India
+
+When faced with the need for breast surgery—whether for a benign fibroadenoma, diagnostic biopsy, or oncologic breast cancer surgery—financial clarity is just as essential as clinical excellence.
+
+Many patients ask: *"Will my health insurance or corporate Mediclaim cover the surgery?"*
+
+The short answer is: **Yes, medically indicated breast surgeries are widely covered under health insurance policies in India, including both cashless hospitalization and reimbursement.**
+
+---
+
+### Which Breast Surgeries are Covered by Mediclaim?
+
+Under Insurance Regulatory and Development Authority of India (IRDAI) guidelines, health insurance covers treatments deemed **medically necessary** by a qualified medical specialist:
+
+1. **Breast Cancer Surgeries (100% Covered)**:
+   - Modified Radical Mastectomy (MRM)
+   - Breast Conservation Surgery (BCS / Lumpectomy)
+   - Sentinel Lymph Node Biopsy (SLNB) and Axillary Clearance
+   - Chemo Port (Port-a-Cath) insertion
+2. **Benign Breast Lump Excision (Covered if Medically Indicated)**:
+   - Excision of growing fibroadenomas causing symptoms, pain, or diagnostic ambiguity
+   - Vacuum-Assisted Breast Biopsy (VABB) when indicated for diagnostic clearance
+   - Drainage of breast abscesses and excision of intraductal papillomas
+3. **Reconstructive Breast Surgery**:
+   - Post-mastectomy breast reconstruction is increasingly recognized as restorative cancer therapy rather than cosmetic, but individual pre-authorization is required.
+
+*Important Note: Purely cosmetic procedures (e.g. elective breast augmentation or cosmetic mastopexy without medical indication) are excluded by standard health insurance policies.*
+
+---
+
+### Daycare Surgeries vs 24-Hour Hospitalization
+
+Historically, policies required a mandatory 24-hour hospital stay to approve claims. Modern IRDAI regulations have eliminated this requirement for advanced surgical procedures.
+
+Because procedures like fibroadenoma excision, chemo port placement, and core needle biopsies are performed using modern anesthesia and minimally invasive techniques, **they are fully approved under "Daycare Procedure" coverage.**
+
+---
+
+### Step-by-Step Cashless TPA Process at Marengo CIMS Hospital
+
+At Marengo CIMS Hospital, Ahmedabad, our dedicated insurance desk facilitates end-to-end cashless approvals:
+
+1. **Specialist Consultation**: Dr. Noopur Patel performs an evaluation, reviews imaging/biopsy, and writes an admission recommendation outlining medical necessity.
+2. **Pre-Authorization Request**: The hospital TPA desk submits your insurance card, photo ID, consultation notes, and investigation reports to your insurance company or Third Party Administrator (TPA).
+3. **Initial Approval (Within 2-4 Hours)**: The insurer issues an initial financial approval before the planned procedure.
+4. **Day of Surgery**: You undergo the procedure without paying advance deposits for approved items.
+5. **Final Discharge Approval**: The hospital submits the final bill and discharge summary to the insurer for final clearance before you leave.
+
+---
+
+### Key Documents Required for Smooth Insurance Approval
+
+- Health insurance policy card and current active policy document
+- Government Photo ID (Aadhaar Card / PAN Card / Passport) of patient and policyholder
+- Specialist consultation sheet indicating diagnosis and surgical advice
+- Diagnostic imaging reports (Mammogram, Breast Ultrasound, Biopsy / Histopathology)
+- Any previous related medical records or hospital discharge summaries
+
+For personalized cost estimates and insurance verification, contact our clinic team. We ensure complete transparency so you can focus entirely on your recovery.
+    `,
+    seo: {
+      title: "Is Breast Lump Surgery Covered by Mediclaim in India?",
+      description: "Learn about health insurance coverage for breast surgeries in India: cashless TPA process, daycare coverage, required documents, and Mediclaim approvals.",
+      slug: "breast-surgery-mediclaim-coverage",
+    },
+    createdAt: "2026-02-24T00:00:00Z",
+    updatedAt: "2026-02-24T00:00:00Z",
+  },
 ];
+

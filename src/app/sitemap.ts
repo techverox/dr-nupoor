@@ -6,6 +6,8 @@ import {
 } from "@/lib/services/cmsService";
 import { getAllLandingPagesAdmin } from "@/lib/services/landingPageService";
 import { SITE_CONFIG } from "@/config/site";
+import { getAllSeoPages } from "@/data/seoKeywordMap";
+import { BLOG_POSTS_DATA } from "@/data/blog";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Revalidate at most once every hour
@@ -94,10 +96,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
+  // 2. Authoritative 26-Keyword SEO Master Map Pages
+  const seoMapRoutes: MetadataRoute.Sitemap = getAllSeoPages()
+    .filter((page) => page.slug !== "" && page.slug !== "home")
+    .map((page) => {
+      let priority = 0.85;
+      if (page.silo === "High-Conversion Core" || page.silo === "Surgical Oncology") {
+        priority = 0.95;
+      } else if (page.silo === "Pricing / Cost") {
+        priority = 0.9;
+      } else if (page.silo === "Hyper-Local SEO") {
+        priority = 0.88;
+      }
+
+      return {
+        url: `${baseUrl}/${page.slug}`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority,
+      };
+    });
+
   const dynamicRoutes: MetadataRoute.Sitemap = [];
 
   try {
-    // 2. Fetch CMS Dynamic Content concurrently
+    // 3. Fetch CMS Dynamic Content concurrently
     const [services, portfolio, blogs, landingPages] = await Promise.all([
       getAllCmsServicesAdmin().catch(() => []),
       getAllCmsPortfolioAdmin().catch(() => []),
@@ -129,9 +152,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
-    // CMS Blog Posts
-    for (const post of blogs) {
-      if (post.status === "published" && post.slug) {
+    // CMS Blog Posts or fallback
+    const allBlogs = blogs && blogs.length > 0 ? blogs : BLOG_POSTS_DATA;
+    for (const post of allBlogs) {
+      if ((post.status === "published" || !post.status) && post.slug) {
         dynamicRoutes.push({
           url: `${baseUrl}/blog/${post.slug}`,
           lastModified: post.updatedAt ? new Date(post.updatedAt) : now,
@@ -156,5 +180,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn("[sitemap.ts] Error resolving dynamic routes:", error);
   }
 
-  return [...staticRoutes, ...dynamicRoutes];
+  // Deduplicate URLs
+  const seenUrls = new Set<string>();
+  const combined = [...staticRoutes, ...seoMapRoutes, ...dynamicRoutes].filter((item) => {
+    if (seenUrls.has(item.url)) return false;
+    seenUrls.add(item.url);
+    return true;
+  });
+
+  return combined;
 }
+

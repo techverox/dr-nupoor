@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import DoctorNavbar from "@/components/doctor/DoctorNavbar";
 import DoctorHero from "@/components/doctor/DoctorHero";
 import EarlyDetectionSection from "@/components/doctor/EarlyDetectionSection";
@@ -24,8 +25,45 @@ import {
 import { SERVICES_DATA } from "@/data/services";
 import { TESTIMONIALS_DATA } from "@/data/testimonials";
 import { FAQS_DATA } from "@/data/faqs";
+import { getSeoPageData } from "@/data/seoKeywordMap";
+import { SITE_CONFIG } from "@/config/site";
 
 export const revalidate = 60;
+
+export async function generateMetadata(): Promise<Metadata> {
+  const homeSeo = getSeoPageData("home");
+  const title = homeSeo?.metaTitle || "Best Breast Surgeon in Ahmedabad | Dr. Noopur Patel";
+  const description =
+    homeSeo?.metaDescription ||
+    "Dr. Noopur Patel is a Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad. Specialised breast cancer surgery and compassionate care.";
+
+  return {
+    title: {
+      absolute: title,
+    },
+    description,
+    keywords: homeSeo ? [homeSeo.targetKeyword, ...homeSeo.secondaryKeywords] : [],
+    alternates: {
+      canonical: SITE_CONFIG.url,
+    },
+    openGraph: {
+      title,
+      description,
+      url: SITE_CONFIG.url,
+      siteName: SITE_CONFIG.name,
+      images: [
+        {
+          url: `${SITE_CONFIG.url}/images/doctor/assets/hero-doctor.png`,
+          width: 1200,
+          height: 630,
+          alt: "Dr. Noopur Patel - Best Breast Surgeon in Ahmedabad",
+        },
+      ],
+      type: "website",
+    },
+  };
+}
+
 
 export default async function Home() {
   let services = SERVICES_DATA;
