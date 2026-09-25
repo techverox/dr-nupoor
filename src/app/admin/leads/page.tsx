@@ -26,41 +26,52 @@ import {
   ShieldCheck,
   AlertCircle,
   ArrowUpRight,
-  Layers
+  Layers,
+  Stethoscope
 } from "lucide-react";
 
 const STATUS_CONFIG: Record<LeadStatus, { label: string; badgeClass: string; dotClass: string }> = {
   new: {
     label: "New Inquiry",
-    badgeClass: "bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-400 border border-blue-200 dark:border-blue-800",
+    badgeClass: "bg-blue-50 text-blue-800 border border-blue-200",
     dotClass: "bg-blue-500",
   },
   contacted: {
     label: "Contacted",
-    badgeClass: "bg-indigo-100 text-indigo-800 dark:bg-indigo-950/60 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800",
+    badgeClass: "bg-indigo-50 text-indigo-800 border border-indigo-200",
     dotClass: "bg-indigo-500",
   },
   follow_up: {
     label: "Follow-up",
-    badgeClass: "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-400 border border-amber-200 dark:border-amber-800",
+    badgeClass: "bg-amber-50 text-amber-800 border border-amber-200",
     dotClass: "bg-amber-500",
   },
   qualified: {
     label: "Qualified",
-    badgeClass: "bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-400 border border-teal-200 dark:border-teal-800",
+    badgeClass: "bg-teal-50 text-teal-800 border border-teal-200",
     dotClass: "bg-teal-500",
   },
   converted: {
-    label: "Converted Client",
-    badgeClass: "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800",
+    label: "Confirmed Consultation",
+    badgeClass: "bg-emerald-50 text-emerald-800 border border-emerald-200",
     dotClass: "bg-emerald-500",
   },
   lost: {
-    label: "Archived / Lost",
-    badgeClass: "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-400 border border-rose-200 dark:border-rose-800",
-    dotClass: "bg-rose-500",
+    label: "Archived",
+    badgeClass: "bg-slate-100 text-slate-700 border border-slate-200",
+    dotClass: "bg-slate-500",
   },
 };
+
+const CLINICAL_SERVICES_OPTIONS = [
+  "Breast Cancer Consultation & Diagnosis",
+  "Oncoplastic Breast Surgery",
+  "Breast Conservation Surgery (BCS)",
+  "Breast Reconstruction Consultation",
+  "Benign Breast Lumps & Pain Evaluation",
+  "High-Risk Screening & Genetic Surveillance",
+  "General Clinical Appointment",
+];
 
 export default function AdminLeadsPage() {
   const [leads, setLeads] = useState<LeadItem[]>([]);
@@ -78,9 +89,8 @@ export default function AdminLeadsPage() {
   const [newLeadName, setNewLeadName] = useState("");
   const [newLeadEmail, setNewLeadEmail] = useState("");
   const [newLeadPhone, setNewLeadPhone] = useState("");
-  const [newLeadService, setNewLeadService] = useState("Performance Marketing & Paid Ads");
+  const [newLeadService, setNewLeadService] = useState(CLINICAL_SERVICES_OPTIONS[0]);
   const [newLeadMessage, setNewLeadMessage] = useState("");
-  const [newLeadStatus, setNewLeadStatus] = useState<LeadStatus>("new");
   const [isSubmittingNewLead, setIsSubmittingNewLead] = useState(false);
   const [addLeadError, setAddLeadError] = useState("");
 
@@ -102,12 +112,10 @@ export default function AdminLeadsPage() {
       const data = await res.json();
       if (data.success && Array.isArray(data.leads)) {
         setLeads(data.leads);
-      } else {
-        setFeedback({ message: data.error || "Failed to load leads.", type: "error" });
       }
-    } catch (err) {
-      console.error("Error loading leads:", err);
-      setFeedback({ message: "Network error loading inquiries.", type: "error" });
+    } catch (e) {
+      console.error("[AdminLeads] Fetch error:", e);
+      setFeedback({ message: "Failed to load consultation inquiries.", type: "error" });
     } finally {
       setIsLoading(false);
     }
@@ -117,71 +125,39 @@ export default function AdminLeadsPage() {
     fetchLeads();
   }, [fetchLeads]);
 
-  // Update lead status, follow up date, or internal note
-  const handleUpdateLead = async (
-    leadId: string,
-    updates: { status?: LeadStatus; followUpDate?: string; note?: string }
-  ) => {
+  const handleUpdateLead = async (leadId: string, updates: Partial<LeadItem> & { note?: string }) => {
     setIsUpdatingLead(true);
     try {
-      const res = await fetch(`/api/admin/leads/${leadId}`, {
+      const res = await fetch("/api/admin/leads", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updates),
+        body: JSON.stringify({ id: leadId, ...updates }),
       });
-
       const data = await res.json();
+
       if (data.success && data.lead) {
         setLeads((prev) => prev.map((l) => (l.id === leadId ? data.lead : l)));
-        if (activeLead?.id === leadId) {
+        if (activeLead && activeLead.id === leadId) {
           setActiveLead(data.lead);
         }
-        if (updates.note) {
-          setNewNoteText("");
-        }
-        setFeedback({ message: "Lead updated in real-time.", type: "success" });
+        setNewNoteText("");
+        setFeedback({ message: "Patient inquiry updated successfully.", type: "success" });
+        setTimeout(() => setFeedback(null), 3000);
       } else {
-        setFeedback({ message: data.error || "Failed to update lead.", type: "error" });
+        setFeedback({ message: data.error || "Failed to update record.", type: "error" });
       }
-    } catch {
-      setFeedback({ message: "Network error updating lead.", type: "error" });
+    } catch (e) {
+      console.error("[AdminLeads] Update error:", e);
+      setFeedback({ message: "An unexpected error occurred.", type: "error" });
     } finally {
       setIsUpdatingLead(false);
     }
   };
 
-  // 1-Click Reset to Defaults
-  const handleResetToDefaults = async () => {
-    setIsResetting(true);
-    try {
-      const res = await fetch("/api/admin/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ action: "reset" }),
-      });
-      const data = await res.json();
-      if (data.success && Array.isArray(data.leads)) {
-        setLeads(data.leads);
-        setFeedback({
-          message: data.message || "All 6 canonical inquiries have been reset to defaults!",
-          type: "success",
-        });
-        setIsResetModalOpen(false);
-      } else {
-        setFeedback({ message: data.error || "Failed to reset inquiries.", type: "error" });
-      }
-    } catch {
-      setFeedback({ message: "Network error resetting inquiries.", type: "error" });
-    } finally {
-      setIsResetting(false);
-    }
-  };
-
-  // Submit Quick Add Lead
   const handleCreateLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newLeadName.trim() || !newLeadEmail.trim()) {
-      setAddLeadError("Name and valid email are required.");
+      setAddLeadError("Please provide patient name and email.");
       return;
     }
 
@@ -194,11 +170,12 @@ export default function AdminLeadsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: newLeadName.trim(),
-          email: newLeadEmail.trim(),
+          email: newLeadEmail.trim().toLowerCase(),
           phone: newLeadPhone.trim(),
           serviceInterestedIn: newLeadService,
           message: newLeadMessage.trim(),
-          status: newLeadStatus,
+          source: "Manual Clinic Intake",
+          status: "new",
         }),
       });
 
@@ -210,182 +187,199 @@ export default function AdminLeadsPage() {
         setNewLeadEmail("");
         setNewLeadPhone("");
         setNewLeadMessage("");
-        setFeedback({
-          message: `Inquiry for "${data.lead.name}" added successfully.`,
-          type: "success",
-        });
+        setFeedback({ message: "New consultation inquiry added successfully!", type: "success" });
+        setTimeout(() => setFeedback(null), 3000);
       } else {
-        setAddLeadError(data.error || "Failed to create lead.");
+        setAddLeadError(data.error || "Failed to add inquiry.");
       }
-    } catch {
-      setAddLeadError("Network error adding lead.");
+    } catch (e) {
+      console.error("[AdminLeads] Add lead error:", e);
+      setAddLeadError("Network error. Please try again.");
     } finally {
       setIsSubmittingNewLead(false);
     }
   };
 
-  // Confirm delete
+  const handleResetToDefaults = async () => {
+    setIsResetting(true);
+    try {
+      const res = await fetch("/api/admin/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reset" }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        await fetchLeads();
+        setIsResetModalOpen(false);
+        setFeedback({ message: "Inquiries reset to canonical clinical defaults.", type: "success" });
+        setTimeout(() => setFeedback(null), 3500);
+      } else {
+        setFeedback({ message: data.error || "Reset failed.", type: "error" });
+      }
+    } catch (e) {
+      console.error("[AdminLeads] Reset error:", e);
+      setFeedback({ message: "Failed to reset inquiries.", type: "error" });
+    } finally {
+      setIsResetting(false);
+    }
+  };
+
   const confirmDelete = async () => {
     if (!deleteTarget) return;
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/admin/leads/${deleteTarget.id}`, {
+      const res = await fetch(`/api/admin/leads?id=${encodeURIComponent(deleteTarget.id)}`, {
         method: "DELETE",
       });
       const data = await res.json();
+
       if (data.success) {
         setLeads((prev) => prev.filter((l) => l.id !== deleteTarget.id));
-        if (activeLead?.id === deleteTarget.id) {
+        if (activeLead && activeLead.id === deleteTarget.id) {
           setActiveLead(null);
         }
         setDeleteTarget(null);
-        setFeedback({ message: "Inquiry deleted successfully.", type: "success" });
+        setFeedback({ message: `Inquiry for "${deleteTarget.name}" deleted.`, type: "success" });
+        setTimeout(() => setFeedback(null), 3000);
       } else {
-        setFeedback({ message: data.error || "Failed to delete lead.", type: "error" });
+        setFeedback({ message: data.error || "Delete failed.", type: "error" });
       }
-    } catch {
-      setFeedback({ message: "Network error deleting lead.", type: "error" });
+    } catch (e) {
+      console.error("[AdminLeads] Delete error:", e);
+      setFeedback({ message: "Network error during delete.", type: "error" });
     } finally {
       setIsDeleting(false);
     }
   };
 
+  // Filtered Leads
   const filteredLeads = useMemo(() => {
     return leads.filter((l) => {
-      const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
-        !q ||
-        l.name.toLowerCase().includes(q) ||
-        l.email.toLowerCase().includes(q) ||
-        (l.phone && l.phone.toLowerCase().includes(q)) ||
-        (l.serviceInterestedIn && l.serviceInterestedIn.toLowerCase().includes(q)) ||
-        (l.source && l.source.toLowerCase().includes(q));
+        l.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        l.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (l.phone || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (l.serviceInterestedIn || "").toLowerCase().includes(searchQuery.toLowerCase());
 
-      const matchesStatus = selectedStatus === "all" || l.status === selectedStatus;
-      return matchesSearch && matchesStatus;
+      if (!matchesSearch) return false;
+      if (selectedStatus === "all") return true;
+      return l.status === selectedStatus;
     });
   }, [leads, searchQuery, selectedStatus]);
 
+  // Counts
   const totalLeads = leads.length;
   const newLeads = leads.filter((l) => l.status === "new").length;
   const qualifiedLeads = leads.filter((l) => l.status === "qualified").length;
   const convertedLeads = leads.filter((l) => l.status === "converted").length;
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-12">
-      {/* Top Header Card */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 sm:p-6 shadow-sm">
-        <div>
-          <div className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <span>Growth & Operations</span>
-            <span>/</span>
-            <span className="text-zinc-900 dark:text-zinc-100 font-bold">Leads & Inquiries</span>
+    <div className="flex flex-col gap-6 max-w-7xl mx-auto w-full pb-16 font-sans">
+      {/* Top Header Bar */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-200/90 shadow-xs">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-50 border border-emerald-200/80 text-emerald-700 rounded-xl flex items-center justify-center shrink-0">
+            <Stethoscope className="w-6 h-6" />
           </div>
-
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
-              <Users className="w-5 h-5" />
-            </div>
-            <div>
-              <h1 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight flex items-center gap-2">
-                Leads & Inquiries
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-                  Live Telemetry
-                </span>
+          <div>
+            <div className="flex items-center gap-2.5">
+              <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight leading-none">
+                Consultation Bookings &amp; Inquiries
               </h1>
-              <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Real-time CRM pipeline captured from website forms, landing pages, and marketing audits.
-              </p>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                100% Real-Time Sync
+              </span>
             </div>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              Manage patient consultation requests, triage inquiries, and coordinate clinical appointments.
+            </p>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap">
-          {/* 1-Click Reset to Defaults */}
+        <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap w-full md:w-auto">
           <button
             type="button"
-            id="reset-leads-defaults-btn"
             onClick={() => setIsResetModalOpen(true)}
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50/50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-950/40 shadow-sm transition-all active:scale-95"
-            title="Restore all 6 canonical DigiVigee prospective inquiries"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl border border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 shadow-2xs transition-all"
+            title="Restore canonical prospective patient inquiries"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-rose-500" />
-            <span>Reset to Defaults</span>
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Reset Defaults</span>
           </button>
 
-          {/* Manage Forms link */}
           <Link
             href="/admin/forms"
-            className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-all shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 transition-all shadow-2xs"
           >
-            <FileText className="w-3.5 h-3.5 text-zinc-500" />
-            <span>Manage Forms</span>
+            <FileText className="w-3.5 h-3.5 text-slate-500" />
+            <span>Patient Forms</span>
           </Link>
 
-          {/* Export CSV */}
           <a
             href="/api/admin/leads?format=csv"
             download
-            className="inline-flex items-center gap-2 px-3.5 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-all shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-2xs"
           >
-            <Download className="w-3.5 h-3.5 text-zinc-500" />
+            <Download className="w-3.5 h-3.5 text-slate-500" />
             <span>Export CSV</span>
           </a>
 
-          {/* Quick Add Lead Button */}
           <button
             onClick={() => {
               setAddLeadError("");
               setIsAddModalOpen(true);
             }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-black transition-all shadow-md active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm active:scale-95 cursor-pointer"
           >
-            <Plus className="w-4 h-4 text-emerald-400 dark:text-emerald-600" />
+            <Plus className="w-4 h-4" />
             <span>Add Inquiry</span>
           </button>
         </div>
       </div>
 
-      {/* Bento KPI Metric Cards */}
+      {/* Bento Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-2xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
             <Users className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-zinc-900 dark:text-zinc-100">{totalLeads} Inquiries</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">All-time Pipeline</div>
+            <div className="text-xl font-extrabold text-slate-900">{totalLeads} Inquiries</div>
+            <div className="text-xs text-slate-500 font-medium">All-time Inquiries</div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-2xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 border border-blue-200/60 flex items-center justify-center shrink-0">
             <UserPlus className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-blue-600 dark:text-blue-400">{newLeads} New</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Awaiting Outreach</div>
+            <div className="text-xl font-extrabold text-blue-700">{newLeads} New</div>
+            <div className="text-xs text-slate-500 font-medium">Awaiting Outreach</div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-2xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 border border-teal-200/60 flex items-center justify-center shrink-0">
             <CheckCircle2 className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-teal-600 dark:text-teal-400">{qualifiedLeads} Qualified</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">High Intent Budget</div>
+            <div className="text-xl font-extrabold text-teal-700">{qualifiedLeads} Qualified</div>
+            <div className="text-xs text-slate-500 font-medium">Clinical Triage Done</div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4.5 shadow-2xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/60 flex items-center justify-center shrink-0">
             <Trophy className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-emerald-600 dark:text-emerald-400">{convertedLeads} Converted</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Closed Retainers</div>
+            <div className="text-xl font-extrabold text-emerald-700">{convertedLeads} Confirmed</div>
+            <div className="text-xs text-slate-500 font-medium">OPD / Surgery Scheduled</div>
           </div>
         </div>
       </div>
@@ -393,10 +387,10 @@ export default function AdminLeadsPage() {
       {/* Feedback Banner */}
       {feedback && (
         <div
-          className={`flex items-center justify-between p-4 rounded-xl border text-xs sm:text-sm animate-in fade-in duration-200 shadow-sm ${
+          className={`flex items-center justify-between p-4 rounded-xl border text-xs sm:text-sm animate-in fade-in duration-200 shadow-2xs ${
             feedback.type === "success"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
-              : "bg-rose-50 dark:bg-rose-950/30 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800"
+              ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+              : "bg-rose-50 text-rose-800 border-rose-200"
           }`}
         >
           <div className="flex items-center gap-2.5">
@@ -409,7 +403,7 @@ export default function AdminLeadsPage() {
           </div>
           <button
             onClick={() => setFeedback(null)}
-            className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+            className="p-1 rounded-md text-slate-400 hover:text-slate-700 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -417,21 +411,21 @@ export default function AdminLeadsPage() {
       )}
 
       {/* Search & Status Filter Strip */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm">
+      <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-2xs">
         <div className="flex flex-col lg:flex-row gap-3 items-center justify-between">
           <div className="relative w-full lg:max-w-md">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Search by client name, email, phone, or service..."
+              placeholder="Search by patient name, email, phone, or service..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all"
+              className="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 p-0.5"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -439,7 +433,7 @@ export default function AdminLeadsPage() {
           </div>
 
           <div className="flex items-center gap-1.5 flex-wrap w-full lg:w-auto">
-            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mr-2">
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-2">
               Status:
             </span>
             {(["all", "new", "contacted", "follow_up", "qualified", "converted", "lost"] as const).map((st) => {
@@ -450,14 +444,14 @@ export default function AdminLeadsPage() {
                 <button
                   key={st}
                   onClick={() => setSelectedStatus(st)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold capitalize whitespace-nowrap transition-all flex items-center gap-1.5 ${
+                  className={`px-3 py-1 rounded-full text-xs font-bold capitalize whitespace-nowrap transition-all flex items-center gap-1.5 cursor-pointer ${
                     isSelected
-                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm"
-                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                      ? "bg-slate-900 text-white shadow-xs"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   <span>{st.replace("_", " ")}</span>
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? "bg-white/20 text-white dark:bg-zinc-900/20 dark:text-zinc-900" : "bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400"}`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? "bg-white/20 text-white" : "bg-slate-200 text-slate-600"}`}>
                     {count}
                   </span>
                 </button>
@@ -468,25 +462,25 @@ export default function AdminLeadsPage() {
       </div>
 
       {/* Leads Table Container */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-slate-200/90 rounded-2xl shadow-xs overflow-hidden">
         {isLoading ? (
           <div className="py-24 text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-zinc-900 dark:border-zinc-100 border-t-transparent mb-3" />
-            <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">Loading inquiry telemetry...</p>
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-slate-200 border-t-emerald-600 mb-3" />
+            <p className="text-sm font-bold text-slate-500">Loading consultation telemetry...</p>
           </div>
         ) : filteredLeads.length === 0 ? (
           <div className="py-20 text-center px-4">
-            <Users className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">No matching inquiries found</h3>
-            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto mt-1">
-              Try adjusting your filter or click &ldquo;Reset to Defaults&rdquo; to populate the 6 canonical inquiries.
+            <Users className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <h3 className="text-base font-bold text-slate-900">No matching inquiries found</h3>
+            <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto mt-1">
+              Try adjusting your filter or click &ldquo;Reset Defaults&rdquo; to restore canonical test inquiries.
             </p>
             <button
               onClick={() => {
                 setSearchQuery("");
                 setSelectedStatus("all");
               }}
-              className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 transition-colors"
+              className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
             >
               Clear Filters
             </button>
@@ -495,16 +489,16 @@ export default function AdminLeadsPage() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse whitespace-nowrap">
               <thead>
-                <tr className="bg-zinc-50/80 dark:bg-zinc-800/40 border-b border-zinc-200 dark:border-zinc-800 text-[11px] uppercase tracking-wider font-bold text-zinc-400">
-                  <th className="px-6 py-4">Prospective Client</th>
-                  <th className="px-6 py-4">Service & Scope</th>
-                  <th className="px-6 py-4">Acquisition Funnel</th>
-                  <th className="px-6 py-4">Captured At</th>
+                <tr className="bg-slate-50/80 border-b border-slate-200/90 text-[11px] uppercase tracking-wider font-bold text-slate-500">
+                  <th className="px-6 py-4">Patient / Contact</th>
+                  <th className="px-6 py-4">Clinical Concern &amp; Scope</th>
+                  <th className="px-6 py-4">Acquisition Channel</th>
+                  <th className="px-6 py-4">Submitted At</th>
                   <th className="px-6 py-4">Workflow Status</th>
                   <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+              <tbody className="divide-y divide-slate-100">
                 {filteredLeads.map((lead) => {
                   const statusConf = STATUS_CONFIG[lead.status] || STATUS_CONFIG.new;
                   const initials = lead.name
@@ -517,26 +511,26 @@ export default function AdminLeadsPage() {
                   return (
                     <tr
                       key={lead.id}
-                      className="hover:bg-zinc-50/60 dark:hover:bg-zinc-800/40 transition-colors group cursor-pointer"
+                      className="hover:bg-slate-50/70 transition-colors group cursor-pointer"
                       onClick={() => setActiveLead(lead)}
                     >
-                      {/* Client Contact */}
+                      {/* Patient Contact */}
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-blue-500 text-white flex items-center justify-center font-bold text-xs shadow-sm shrink-0">
+                          <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center font-bold text-xs shadow-2xs shrink-0">
                             {initials}
                           </div>
                           <div>
-                            <div className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+                            <div className="font-bold text-sm text-slate-900">
                               {lead.name}
                             </div>
-                            <div className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5 mt-0.5">
-                              <Mail className="w-3 h-3 text-zinc-400" />
+                            <div className="text-xs text-slate-500 flex items-center gap-1.5 mt-0.5">
+                              <Mail className="w-3 h-3 text-slate-400" />
                               <span>{lead.email}</span>
                             </div>
                             {lead.phone && (
-                              <div className="text-[11px] text-zinc-400 dark:text-zinc-500 flex items-center gap-1.5 mt-0.5">
-                                <Phone className="w-3 h-3 text-zinc-400" />
+                              <div className="text-[11px] text-slate-400 font-mono flex items-center gap-1.5 mt-0.5">
+                                <Phone className="w-3 h-3 text-slate-400" />
                                 <span>{lead.phone}</span>
                               </div>
                             )}
@@ -546,11 +540,11 @@ export default function AdminLeadsPage() {
 
                       {/* Service Interest */}
                       <td className="px-6 py-4">
-                        <div className="font-semibold text-xs text-zinc-900 dark:text-zinc-200">
-                          {lead.serviceInterestedIn || "Strategic Growth Review"}
+                        <div className="font-bold text-xs text-slate-900">
+                          {lead.serviceInterestedIn || "General Clinical Consultation"}
                         </div>
                         {lead.message && (
-                          <div className="text-[11px] text-zinc-400 line-clamp-1 max-w-xs mt-0.5">
+                          <div className="text-[11px] text-slate-500 line-clamp-1 max-w-xs mt-0.5">
                             {lead.message}
                           </div>
                         )}
@@ -558,14 +552,14 @@ export default function AdminLeadsPage() {
 
                       {/* Acquisition Source */}
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                           {lead.landingPageSlug ? `/landing/${lead.landingPageSlug}` : lead.source}
                         </span>
                       </td>
 
                       {/* Date & Follow-Up */}
                       <td className="px-6 py-4">
-                        <div className="text-xs font-medium text-zinc-600 dark:text-zinc-300">
+                        <div className="text-xs font-medium text-slate-600 font-mono">
                           {new Date(lead.createdAt).toLocaleDateString("en-IN", {
                             month: "short",
                             day: "numeric",
@@ -573,9 +567,9 @@ export default function AdminLeadsPage() {
                           })}
                         </div>
                         {lead.followUpDate && (
-                          <div className="text-[11px] text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1 mt-1">
+                          <div className="text-[11px] text-amber-700 font-bold flex items-center gap-1 mt-1">
                             <Clock className="w-3 h-3" />
-                            <span>Follow up: {lead.followUpDate}</span>
+                            <span>Follow-up: {lead.followUpDate}</span>
                           </div>
                         )}
                       </td>
@@ -603,7 +597,7 @@ export default function AdminLeadsPage() {
                               href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, "")}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-1.5 text-emerald-600 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-lg transition-colors"
+                              className="p-1.5 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                               title="Chat on WhatsApp"
                             >
                               <MessageCircle className="w-4 h-4" />
@@ -612,7 +606,7 @@ export default function AdminLeadsPage() {
 
                           <button
                             onClick={() => setActiveLead(lead)}
-                            className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
                             title="Inspect Details"
                           >
                             <ChevronRight className="w-4 h-4" />
@@ -620,7 +614,7 @@ export default function AdminLeadsPage() {
 
                           <button
                             onClick={() => setDeleteTarget(lead)}
-                            className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:text-rose-400 dark:hover:bg-rose-950/30 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
                             title="Delete Inquiry"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -643,13 +637,13 @@ export default function AdminLeadsPage() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/70 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
         >
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-2xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
             {/* Header */}
-            <div className="px-6 py-5 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-start bg-zinc-50/50 dark:bg-zinc-800/20">
+            <div className="px-6 py-5 border-b border-slate-200 flex justify-between items-start bg-slate-50/70">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 text-white flex items-center justify-center font-black text-base shadow-md">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center font-extrabold text-base shadow-2xs">
                   {activeLead.name
                     .split(" ")
                     .map((n) => n[0])
@@ -659,17 +653,17 @@ export default function AdminLeadsPage() {
                 </div>
                 <div>
                   <div className="flex items-center gap-2 mb-0.5">
-                    <h3 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
+                    <h3 className="text-lg font-bold text-slate-900">
                       {activeLead.name}
                     </h3>
                     <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${STATUS_CONFIG[activeLead.status]?.badgeClass}`}>
                       {STATUS_CONFIG[activeLead.status]?.label}
                     </span>
                   </div>
-                  <div className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-3">
-                    <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-zinc-400" /> {activeLead.email}</span>
+                  <div className="text-xs text-slate-500 flex items-center gap-3">
+                    <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-slate-400" /> {activeLead.email}</span>
                     {activeLead.phone && (
-                      <span className="flex items-center gap-1"><Phone className="w-3 h-3 text-zinc-400" /> {activeLead.phone}</span>
+                      <span className="flex items-center gap-1"><Phone className="w-3 h-3 text-slate-400" /> {activeLead.phone}</span>
                     )}
                   </div>
                 </div>
@@ -677,7 +671,7 @@ export default function AdminLeadsPage() {
 
               <button
                 onClick={() => setActiveLead(null)}
-                className="p-2 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="p-2 text-slate-400 hover:text-slate-900 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -689,9 +683,9 @@ export default function AdminLeadsPage() {
               <div className="flex flex-wrap gap-2">
                 <a
                   href={`mailto:${activeLead.email}`}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 shadow-sm transition-all"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 shadow-2xs transition-all"
                 >
-                  <Mail className="w-3.5 h-3.5 text-zinc-500" />
+                  <Mail className="w-3.5 h-3.5 text-slate-500" />
                   <span>Send Email</span>
                 </a>
 
@@ -699,17 +693,17 @@ export default function AdminLeadsPage() {
                   <>
                     <a
                       href={`tel:${activeLead.phone}`}
-                      className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 shadow-sm transition-all"
+                      className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 shadow-2xs transition-all"
                     >
-                      <Phone className="w-3.5 h-3.5 text-zinc-500" />
-                      <span>Call Client</span>
+                      <Phone className="w-3.5 h-3.5 text-slate-500" />
+                      <span>Call Patient</span>
                     </a>
 
                     <a
                       href={`https://wa.me/${activeLead.phone.replace(/[^0-9]/g, "")}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#25D366] text-white rounded-xl text-xs font-bold hover:bg-[#20bd5a] shadow-sm transition-all"
+                      className="inline-flex items-center gap-2 px-3.5 py-2 bg-[#25D366] text-white rounded-xl text-xs font-bold hover:bg-[#20bd5a] shadow-2xs transition-all"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
                       <span>WhatsApp Chat</span>
@@ -719,15 +713,15 @@ export default function AdminLeadsPage() {
               </div>
 
               {/* Status & Follow-Up Strip */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-800">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-2xl bg-slate-50 border border-slate-200">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                     Workflow Stage
                   </label>
                   <select
                     value={activeLead.status}
                     onChange={(e) => handleUpdateLead(activeLead.id, { status: e.target.value as LeadStatus })}
-                    className="w-full px-3.5 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-zinc-100"
+                    className="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-900 cursor-pointer"
                   >
                     {(Object.keys(STATUS_CONFIG) as LeadStatus[]).map((st) => (
                       <option key={st} value={st}>
@@ -738,14 +732,14 @@ export default function AdminLeadsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
                     Follow-up Date
                   </label>
                   <input
                     type="date"
                     value={activeLead.followUpDate || ""}
                     onChange={(e) => handleUpdateLead(activeLead.id, { followUpDate: e.target.value })}
-                    className="w-full px-3.5 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-zinc-100"
+                    className="w-full px-3.5 py-2 bg-white border border-slate-200 rounded-xl text-xs font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-900 cursor-pointer"
                   />
                 </div>
               </div>
@@ -753,35 +747,35 @@ export default function AdminLeadsPage() {
               {/* Client Message */}
               {activeLead.message && (
                 <div>
-                  <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
-                    Inquiry Scope & Challenges
+                  <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                    Clinical Symptoms &amp; Inquiry Scope
                   </h4>
-                  <div className="p-4 rounded-2xl bg-zinc-50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-800 text-xs text-zinc-800 dark:text-zinc-200 leading-relaxed">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs text-slate-800 leading-relaxed">
                     {activeLead.message}
                   </div>
                 </div>
               )}
 
               {/* Attribution Card */}
-              <div className="p-4 rounded-2xl bg-zinc-50/80 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 space-y-2">
-                <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                   Attribution Telemetry
                 </h4>
                 <div className="grid grid-cols-2 gap-2 text-xs">
                   <div>
-                    <span className="text-zinc-400">Source:</span>{" "}
-                    <strong className="text-zinc-800 dark:text-zinc-200">{activeLead.source}</strong>
+                    <span className="text-slate-500">Source:</span>{" "}
+                    <strong className="text-slate-900">{activeLead.source}</strong>
                   </div>
                   {activeLead.landingPageSlug && (
                     <div>
-                      <span className="text-zinc-400">Landing Page:</span>{" "}
-                      <strong className="text-zinc-800 dark:text-zinc-200">/landing/{activeLead.landingPageSlug}</strong>
+                      <span className="text-slate-500">Landing Page:</span>{" "}
+                      <strong className="text-slate-900">/landing/{activeLead.landingPageSlug}</strong>
                     </div>
                   )}
                   {activeLead.serviceInterestedIn && (
                     <div className="col-span-2">
-                      <span className="text-zinc-400">Service:</span>{" "}
-                      <strong className="text-zinc-800 dark:text-zinc-200">{activeLead.serviceInterestedIn}</strong>
+                      <span className="text-slate-500">Service:</span>{" "}
+                      <strong className="text-slate-900">{activeLead.serviceInterestedIn}</strong>
                     </div>
                   )}
                 </div>
@@ -789,21 +783,21 @@ export default function AdminLeadsPage() {
 
               {/* Internal Notes Timeline */}
               <div>
-                <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2.5">
-                  Internal Agency Notes ({activeLead.notes?.length || 0})
+                <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                  Clinical Care Notes ({activeLead.notes?.length || 0})
                 </h4>
 
                 <div className="space-y-2 mb-3">
                   {(activeLead.notes || []).map((note) => (
                     <div
                       key={note.id}
-                      className="p-3 rounded-xl bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs"
+                      className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs"
                     >
-                      <div className="flex justify-between items-center text-[11px] text-zinc-400 mb-1">
-                        <strong>{note.author}</strong>
-                        <span>{new Date(note.createdAt).toLocaleDateString()}</span>
+                      <div className="flex justify-between items-center text-[11px] text-slate-400 mb-1">
+                        <strong className="text-slate-700">{note.author}</strong>
+                        <span className="font-mono">{new Date(note.createdAt).toLocaleDateString()}</span>
                       </div>
-                      <p className="text-zinc-700 dark:text-zinc-200 leading-relaxed">{note.note}</p>
+                      <p className="text-slate-800 leading-relaxed">{note.note}</p>
                     </div>
                   ))}
                 </div>
@@ -812,7 +806,7 @@ export default function AdminLeadsPage() {
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Add an internal progress note..."
+                    placeholder="Add a clinical triage or follow-up note..."
                     value={newNoteText}
                     onChange={(e) => setNewNoteText(e.target.value)}
                     onKeyDown={(e) => {
@@ -820,7 +814,7 @@ export default function AdminLeadsPage() {
                         handleUpdateLead(activeLead.id, { note: newNoteText.trim() });
                       }
                     }}
-                    className="flex-1 px-3.5 py-2 text-xs bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white"
                   />
                   <button
                     onClick={() => {
@@ -829,7 +823,7 @@ export default function AdminLeadsPage() {
                       }
                     }}
                     disabled={!newNoteText.trim() || isUpdatingLead}
-                    className="px-4 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl text-xs font-bold disabled:opacity-40 transition-all"
+                    className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold disabled:opacity-40 transition-all cursor-pointer"
                   >
                     Save
                   </button>
@@ -838,11 +832,11 @@ export default function AdminLeadsPage() {
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex justify-between items-center text-xs text-zinc-400">
-              <span>Created {new Date(activeLead.createdAt).toLocaleString()}</span>
+            <div className="px-6 py-4 border-t border-slate-200 bg-slate-50/70 flex justify-between items-center text-xs text-slate-500">
+              <span className="font-mono">Created {new Date(activeLead.createdAt).toLocaleString()}</span>
               <button
                 onClick={() => setActiveLead(null)}
-                className="px-4 py-1.5 rounded-xl border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="px-4 py-1.5 rounded-xl border border-slate-200 text-slate-700 font-bold hover:bg-slate-100 cursor-pointer"
               >
                 Close Drawer
               </button>
@@ -855,108 +849,107 @@ export default function AdminLeadsPage() {
       {/* QUICK ADD LEAD MODAL */}
       {/* ========================================================================= */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-lg flex flex-col shadow-2xl overflow-hidden">
-            <div className="px-6 py-5 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center bg-zinc-50/50 dark:bg-zinc-800/20">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg flex flex-col shadow-2xl overflow-hidden">
+            <div className="px-6 py-5 border-b border-slate-200 flex justify-between items-center bg-slate-50/70">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center justify-center">
                   <UserPlus className="w-4 h-4" />
                 </div>
-                <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
-                  Add Client Inquiry
+                <h2 className="text-lg font-bold text-slate-900">
+                  Add Patient Consultation
                 </h2>
               </div>
               <button
                 onClick={() => setIsAddModalOpen(false)}
-                className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-slate-400 hover:text-slate-700 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="p-6">
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-5 leading-relaxed">
-                Record an inquiry manually from a phone call, WhatsApp conversation, or offline agency meeting.
+              <p className="text-xs text-slate-500 mb-5 leading-relaxed">
+                Record a consultation request manually from a phone call, WhatsApp conversation, or walk-in appointment.
               </p>
 
               {addLeadError && (
-                <div className="mb-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 text-xs border border-rose-200 dark:border-rose-800 flex items-center gap-2">
+                <div className="mb-4 p-3 rounded-xl bg-rose-50 text-rose-700 text-xs border border-rose-200 flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0" /> {addLeadError}
                 </div>
               )}
 
               <form onSubmit={handleCreateLeadSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                    Client Name <span className="text-rose-500">*</span>
+                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                    Patient Name <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Ramesh Patel"
+                    placeholder="e.g. Anjali Sharma"
                     value={newLeadName}
                     onChange={(e) => setNewLeadName(e.target.value)}
-                    className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                       Email Address <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="email"
                       required
-                      placeholder="ramesh@brand.com"
+                      placeholder="anjali@example.com"
                       value={newLeadEmail}
                       onChange={(e) => setNewLeadEmail(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                       Phone / WhatsApp
                     </label>
                     <input
                       type="text"
-                      placeholder="+91 98765..."
+                      placeholder="+91 98765 43210"
                       value={newLeadPhone}
                       onChange={(e) => setNewLeadPhone(e.target.value)}
-                      className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white font-mono"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                    Service of Interest
+                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                    Clinical Concern / Service
                   </label>
                   <select
                     value={newLeadService}
                     onChange={(e) => setNewLeadService(e.target.value)}
-                    className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white cursor-pointer"
                   >
-                    <option value="Performance Marketing & Paid Ads">Performance Marketing & Paid Ads</option>
-                    <option value="Social Media Marketing (SMM)">Social Media Marketing (SMM)</option>
-                    <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
-                    <option value="Custom Website & Landing Pages">Custom Website & Landing Pages</option>
-                    <option value="Omnichannel Growth Retainer">Omnichannel Growth Retainer</option>
-                    <option value="Enterprise Multi-State Scale">Enterprise Multi-State Scale</option>
+                    {CLINICAL_SERVICES_OPTIONS.map((srv) => (
+                      <option key={srv} value={srv}>
+                        {srv}
+                      </option>
+                    ))}
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                    Project Notes or Scope
+                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                    Clinical Symptoms / Background Notes
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Key objectives, budget discuss, or meeting summary..."
+                    placeholder="Chief complaints, prior imaging, or physician referral details..."
                     value={newLeadMessage}
                     onChange={(e) => setNewLeadMessage(e.target.value)}
-                    className="w-full px-3.5 py-2 text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white"
                   />
                 </div>
 
@@ -964,14 +957,14 @@ export default function AdminLeadsPage() {
                   <button
                     type="button"
                     onClick={() => setIsAddModalOpen(false)}
-                    className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold text-xs rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+                    className="px-4 py-2 bg-white border border-slate-200 text-slate-700 font-bold text-xs rounded-xl hover:bg-slate-50 transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmittingNewLead}
-                    className="inline-flex items-center gap-2 px-5 py-2 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-black text-xs rounded-xl hover:bg-zinc-800 dark:hover:bg-white disabled:opacity-50 transition-all shadow-md active:scale-95"
+                    className="inline-flex items-center gap-2 px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-xl disabled:opacity-50 transition-all shadow-sm active:scale-95 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>{isSubmittingNewLead ? "Saving..." : "Save Inquiry"}</span>
@@ -989,8 +982,8 @@ export default function AdminLeadsPage() {
       <ConfirmDialog
         isOpen={isResetModalOpen}
         title="Reset All Inquiries to Defaults?"
-        message="Are you sure you want to restore the official prospective client inquiries? This will repopulate the 6 canonical inquiries from the DigiVigee homepage, audit funnels, and enterprise expansion funnels. You can safely manage, test, and convert them."
-        confirmLabel="Yes, Reset to Defaults"
+        message="Are you sure you want to restore the official prospective patient inquiries? This will repopulate canonical clinical consultation requests."
+        confirmLabel="Yes, Reset Defaults"
         isDestructive
         isLoading={isResetting}
         onConfirm={handleResetToDefaults}
@@ -1002,8 +995,8 @@ export default function AdminLeadsPage() {
       {/* ========================================================================= */}
       <ConfirmDialog
         isOpen={!!deleteTarget}
-        title="Delete Client Inquiry?"
-        message={`Are you sure you want to delete the inquiry for "${deleteTarget?.name}"? This record will be permanently removed from the CRM pipeline.`}
+        title="Delete Patient Inquiry?"
+        message={`Are you sure you want to delete the inquiry for "${deleteTarget?.name}"? This record will be permanently removed.`}
         confirmLabel="Delete Inquiry"
         isDestructive
         isLoading={isDeleting}

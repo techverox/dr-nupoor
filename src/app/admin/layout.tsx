@@ -32,12 +32,35 @@ export default async function AdminRootLayout({
   try {
     const { authenticated, user } = await verifyAdminSessionCookie(sessionCookie);
 
-    if (authenticated && user) {
-      return <AdminShell user={user}>{children}</AdminShell>;
-    }
+    const content =
+      authenticated && user ? (
+        <AdminShell user={user}>{children}</AdminShell>
+      ) : (
+        <AdminClientGuard>{children}</AdminClientGuard>
+      );
+
+    return (
+      <div className="light bg-[#F8FAFC] text-slate-900 min-h-screen" style={{ colorScheme: "light" }}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');document.documentElement.style.colorScheme='light';`,
+          }}
+        />
+        {content}
+      </div>
+    );
   } catch (error) {
     console.error("[AdminRootLayout] Session verification error:", error);
   }
 
-  return <AdminClientGuard>{children}</AdminClientGuard>;
+  return (
+    <div className="light bg-[#F8FAFC] text-slate-900 min-h-screen" style={{ colorScheme: "light" }}>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');document.documentElement.style.colorScheme='light';`,
+        }}
+      />
+      <AdminClientGuard>{children}</AdminClientGuard>
+    </div>
+  );
 }

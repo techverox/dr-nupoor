@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import { Card } from "@/components/ui/Card";
 
 export interface StatCardProps {
   title: string;
@@ -20,38 +19,38 @@ export function StatCard({
   value,
   icon,
   subtitle,
-  accentColor = "var(--brand-primary)",
+  accentColor = "#059669",
   href,
   badge,
 }: StatCardProps) {
   const cardContent = (
-    <div className="flex flex-col justify-between h-full p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0E1422] border border-slate-200/80 dark:border-slate-800/80 shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition-all duration-200 group relative">
+    <div className="flex flex-col justify-between h-full p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-slate-300 hover:shadow-xs transition-all duration-200 group relative">
       <div>
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
             {title}
           </span>
           <div
-            className="w-8 h-8 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-105"
-            style={{ color: accentColor, backgroundColor: `color-mix(in srgb, ${accentColor} 10%, transparent)` }}
+            className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-2xs"
+            style={{ color: accentColor, backgroundColor: `color-mix(in srgb, ${accentColor} 12%, transparent)` }}
           >
             {icon}
           </div>
         </div>
 
         <div className="flex items-baseline gap-2">
-          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-none tabular-nums">
+          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-none tabular-nums">
             {value}
           </div>
 
           {badge && (
             <span
-              className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+              className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
                 badge.type === "success"
-                  ? "bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200/60 dark:border-emerald-800/40"
+                  ? "bg-emerald-50 text-emerald-700 border-emerald-200"
                   : badge.type === "info"
-                  ? "bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200/60 dark:border-blue-800/40"
-                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200/60 dark:border-slate-700/40"
+                  ? "bg-blue-50 text-blue-700 border-blue-200"
+                  : "bg-slate-100 text-slate-600 border-slate-200"
               }`}
             >
               {badge.text}
@@ -61,16 +60,8 @@ export function StatCard({
       </div>
 
       {subtitle && (
-        <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500 font-normal">
-          <span>{subtitle}</span>
-          {href && (
-            <span
-              className="text-xs font-bold transition-transform duration-200 group-hover:translate-x-1"
-              style={{ color: accentColor }}
-            >
-              →
-            </span>
-          )}
+        <div className="mt-3 text-xs text-slate-500 font-medium">
+          {subtitle}
         </div>
       )}
     </div>
@@ -78,7 +69,7 @@ export function StatCard({
 
   if (href) {
     return (
-      <Link href={href} className="block no-underline">
+      <Link href={href} className="block h-full transition-transform hover:-translate-y-0.5 focus:outline-none">
         {cardContent}
       </Link>
     );

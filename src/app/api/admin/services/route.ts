@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       }
       return NextResponse.json({
         success: true,
-        message: "All 7 service engines reset to live defaults successfully.",
+        message: `All ${resetResult.count} clinical oncology services reset to live defaults successfully.`,
         count: resetResult.count,
       });
     }

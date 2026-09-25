@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       }
       return NextResponse.json({
         success: true,
-        message: "All 6 case studies reset to live defaults successfully.",
+        message: `All ${resetResult.count} patient care journeys reset to live defaults successfully.`,
         count: resetResult.count,
       });
     }

@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { PortfolioItem } from "@/types";
 import { Card } from "@/components/ui/Card";
+import { AdminRevisionDrawer } from "@/components/admin/AdminRevisionDrawer";
 import { notifyLiveSync } from "@/lib/sync/clientSync";
 import {
-  FolderGit2,
+  Award,
   Search,
   Plus,
   Link as LinkIcon,
@@ -23,17 +24,19 @@ import {
   Sparkles,
   TrendingUp,
   ArrowRight,
-  BarChart3,
-  Building2,
-  Tag,
+  Layers,
+  HeartPulse,
+  Activity,
+  History,
+  ShieldCheck,
+  UserCheck,
 } from "lucide-react";
 
-const CATEGORY_TABS = [
-  { id: "all", label: "All Studies" },
-  { id: "performance", label: "Performance" },
-  { id: "social", label: "Social & Creative" },
-  { id: "localseo", label: "Local SEO" },
-  { id: "fullservice", label: "Full-Service" },
+const CLINICAL_CATEGORY_TABS = [
+  { id: "all", label: "All Journeys" },
+  { id: "oncoplastic", label: "Oncoplastic Surgery" },
+  { id: "benign", label: "Benign Breast Care" },
+  { id: "reconstruction", label: "Breast Reconstruction" },
 ];
 
 export default function AdminPortfolioPage() {
@@ -53,19 +56,27 @@ export default function AdminPortfolioPage() {
     title: "",
     slug: "",
     clientName: "",
-    industry: "",
-    category: "Ad Ops & Pacing Automation",
-    categoryKey: "performance",
+    industry: "Surgical Oncology",
+    category: "Oncoplastic Surgery",
+    categoryKey: "oncoplastic",
     shortDescription: "",
-    heroImage: "/images/showcase/pillar_roas_command.jpg",
-    metric1Label: "MRR Growth",
-    metric1Value: "+420%",
-    metric2Label: "Time Saved",
-    metric2Value: "14 hrs/wk",
+    heroImage: "/images/doctor/assets/service-2.png",
+    challenge: "",
+    strategy: "",
+    results: "",
+    testimonialQuote: "",
+    metric1Label: "Cancer Clearance",
+    metric1Value: "100%",
+    metric2Label: "Recovery Time",
+    metric2Value: "10 Days",
     order: 1,
     isFeatured: true,
     isPublished: true,
   });
+
+  // Revisions Drawer State
+  const [isRevisionOpen, setIsRevisionOpen] = useState(false);
+  const [revisionTarget, setRevisionTarget] = useState<{ id: string; title: string } | null>(null);
 
   // Reset to Defaults Confirmation Modal
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
@@ -113,15 +124,19 @@ export default function AdminPortfolioPage() {
       title: "",
       slug: "",
       clientName: "",
-      industry: "Performance Marketing Agency",
-      category: "Ad Ops & Pacing Automation",
-      categoryKey: "performance",
+      industry: "Surgical Oncology",
+      category: "Oncoplastic Surgery",
+      categoryKey: "oncoplastic",
       shortDescription: "",
-      heroImage: "/images/showcase/pillar_roas_command.jpg",
-      metric1Label: "MRR Growth",
-      metric1Value: "+350%",
-      metric2Label: "Time Saved",
-      metric2Value: "12 hrs/wk",
+      heroImage: "/images/doctor/assets/service-2.png",
+      challenge: "",
+      strategy: "",
+      results: "",
+      testimonialQuote: "",
+      metric1Label: "Cancer Clearance",
+      metric1Value: "100%",
+      metric2Label: "Recovery Time",
+      metric2Value: "10 Days",
       order: items.length + 1,
       isFeatured: true,
       isPublished: true,
@@ -131,19 +146,26 @@ export default function AdminPortfolioPage() {
 
   const openEditModal = (item: PortfolioItem) => {
     setEditingItem(item);
+    const m1 = item.metrics?.[0] || { label: "Cancer Clearance", value: "100%" };
+    const m2 = item.metrics?.[1] || { label: "Recovery Time", value: "10 Days" };
+
     setFormData({
       title: item.title,
       slug: item.slug,
-      clientName: item.clientName,
-      industry: item.industry || "General Agency",
-      category: item.category || "Ad Ops & Pacing Automation",
-      categoryKey: item.categoryKey || "performance",
+      clientName: item.clientName || "",
+      industry: item.industry || "Surgical Oncology",
+      category: item.category || "Oncoplastic Surgery",
+      categoryKey: item.categoryKey || "oncoplastic",
       shortDescription: item.shortDescription || "",
-      heroImage: item.heroImage || "/images/showcase/pillar_roas_command.jpg",
-      metric1Label: item.metrics?.[0]?.label || "Metric 1",
-      metric1Value: item.metrics?.[0]?.value || "+300%",
-      metric2Label: item.metrics?.[1]?.label || "Metric 2",
-      metric2Value: item.metrics?.[1]?.value || "10 hrs/wk",
+      heroImage: item.heroImage || "/images/doctor/assets/service-2.png",
+      challenge: item.challenge || "",
+      strategy: item.strategy || "",
+      results: item.results || "",
+      testimonialQuote: item.testimonialQuote || "",
+      metric1Label: m1.label,
+      metric1Value: m1.value,
+      metric2Label: m2.label,
+      metric2Value: m2.value,
       order: item.order || 1,
       isFeatured: item.isFeatured !== false,
       isPublished: item.isPublished !== false,
@@ -169,15 +191,22 @@ export default function AdminPortfolioPage() {
         clientName: formData.clientName.trim(),
         industry: formData.industry.trim(),
         category: formData.category.trim(),
-        categoryKey: formData.categoryKey,
+        categoryKey: formData.categoryKey.trim(),
         shortDescription: formData.shortDescription.trim(),
-        heroImage: formData.heroImage.trim(),
+        heroImage: formData.heroImage,
+        challenge: formData.challenge.trim(),
+        strategy: formData.strategy.trim(),
+        results: formData.results.trim(),
+        testimonialQuote: formData.testimonialQuote.trim(),
+        metrics,
         order: Number(formData.order) || 1,
         isFeatured: formData.isFeatured,
         isPublished: formData.isPublished,
-        metrics,
+        authorName: "Dr. Noopur Patel",
+        authorRole: "Breast Cancer Surgeon",
+        authorAvatar: "/images/doctor/assets/hero-doctor.png",
         seo: {
-          title: `${formData.title.trim()} | Dr. Noopur Patel Patient Care Journey`,
+          title: `${formData.title.trim()} | Dr. Noopur Patel Clinic`,
           description: formData.shortDescription.trim(),
         },
       };
@@ -229,7 +258,7 @@ export default function AdminPortfolioPage() {
           prev.map((p) => (p.id === item.id ? { ...p, isPublished: newStatus } : p))
         );
         setFeedback({
-          message: `Patient journey "${item.clientName}" is now ${newStatus ? "Published (Live)" : "Draft (Hidden)"}.`,
+          message: `Journey "${item.title}" is now ${newStatus ? "Published (Live)" : "Draft (Hidden)"}.`,
           type: "success",
         });
         setTimeout(() => setFeedback(null), 3000);
@@ -251,7 +280,7 @@ export default function AdminPortfolioPage() {
       if (data.success) {
         notifyLiveSync("portfolio", "all");
         setFeedback({
-          message: "All patient care journeys successfully reset to canonical website defaults!",
+          message: `All ${data.count || 3} clinical case stories reset to canonical website defaults!`,
           type: "success",
         });
         setIsResetConfirmOpen(false);
@@ -262,7 +291,7 @@ export default function AdminPortfolioPage() {
       }
     } catch (e) {
       console.error("[AdminPortfolio] Reset error:", e);
-      setFeedback({ message: "Failed to reset patient care journeys.", type: "error" });
+      setFeedback({ message: "Failed to reset case studies.", type: "error" });
     } finally {
       setIsResetting(false);
     }
@@ -280,7 +309,7 @@ export default function AdminPortfolioPage() {
       const data = await res.json();
       if (data.success) {
         notifyLiveSync("portfolio", deleteTarget.id);
-        setFeedback({ message: `Patient journey "${deleteTarget.title}" deleted.`, type: "success" });
+        setFeedback({ message: `Patient journey "${deleteTarget.title}" deleted successfully.`, type: "success" });
         setDeleteTarget(null);
         await fetchPortfolio();
         setTimeout(() => setFeedback(null), 3000);
@@ -302,7 +331,8 @@ export default function AdminPortfolioPage() {
         p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.slug.toLowerCase().includes(searchQuery.toLowerCase()) ||
         p.clientName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (p.industry || "").toLowerCase().includes(searchQuery.toLowerCase());
+        (p.industry || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (p.shortDescription || "").toLowerCase().includes(searchQuery.toLowerCase());
 
       if (!matchesSearch) return false;
 
@@ -315,60 +345,82 @@ export default function AdminPortfolioPage() {
   const draftCount = useMemo(() => items.filter((p) => p.isPublished === false).length, [items]);
 
   return (
-    <div className="flex flex-col gap-6 max-w-7xl mx-auto w-full pb-12 font-sans">
+    <div className="flex flex-col gap-6 max-w-7xl mx-auto w-full pb-16 font-sans">
       {/* Header Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-6 rounded-2xl border border-slate-200/90 shadow-xs">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-[#008744] rounded-xl flex items-center justify-center shrink-0">
-            <FolderGit2 className="w-6 h-6" />
+          <div className="w-12 h-12 bg-emerald-50 border border-emerald-200/80 text-emerald-700 rounded-xl flex items-center justify-center shrink-0">
+            <Award className="w-6 h-6" />
           </div>
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight leading-none">
-                Portfolio &amp; Case Studies CMS
+              <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight leading-none">
+                Patient Stories &amp; Clinical Cases CMS
               </h1>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                Live Sync Active
+                100% Real-Time Sync
               </span>
             </div>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-              Manage audited agency client results and metrics. Changes immediately reflect on /portfolio and homepage.
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+              Manage verified patient care journeys, oncologic milestones, and recovery outcomes. Changes immediately reflect live on /portfolio and the homepage.
             </p>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center gap-3 w-full md:w-auto">
+        <div className="flex items-center gap-2.5 flex-wrap w-full md:w-auto">
+          <Link
+            href="/portfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs"
+          >
+            <span>View Live Stories</span>
+            <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+          </Link>
+
           <button
             type="button"
             onClick={() => setIsResetConfirmOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-700/60 hover:text-zinc-900 transition-all shadow-2xs cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-amber-50 hover:text-amber-700 hover:border-amber-200 transition-all shadow-2xs cursor-pointer"
             title="Restore canonical website copy"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-zinc-500" />
-            <span>Reset to Defaults</span>
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Reset Defaults</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setRevisionTarget({ id: "all", title: "All Patient Stories" });
+              setIsRevisionOpen(true);
+            }}
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
+          >
+            <History className="w-3.5 h-3.5 text-slate-400" />
+            <span>Revisions</span>
           </button>
 
           <button
             type="button"
             onClick={openCreateModal}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white text-xs font-bold transition-all shadow-sm active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-sm active:scale-[0.98] cursor-pointer"
           >
             <Plus className="w-4 h-4" />
-            <span>Add New Case Study</span>
+            <span>Add Patient Story</span>
           </button>
         </div>
       </div>
 
-      {/* Notification Banner */}
+      {/* Real-Time Notification Banner */}
       {feedback && (
         <div className="animate-in fade-in slide-in-from-top-2 duration-300">
           <div
             className={`flex items-center justify-between p-4 rounded-xl border ${
               feedback.type === "success"
-                ? "bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-300"
-                : "bg-red-50 border-red-200 text-red-800 dark:bg-red-950/40 dark:border-red-800 dark:text-red-300"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                : "bg-red-50 border-red-200 text-red-800"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -381,7 +433,7 @@ export default function AdminPortfolioPage() {
             </div>
             <button
               onClick={() => setFeedback(null)}
-              className="p-1 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
+              className="p-1 rounded-md hover:bg-black/5 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -391,66 +443,62 @@ export default function AdminPortfolioPage() {
 
       {/* Metrics Bar */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
+        <div className="bg-white p-4.5 rounded-xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">Total Case Studies</div>
-            <div className="text-2xl font-black text-zinc-900 dark:text-zinc-100 mt-0.5">{items.length}</div>
+            <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Case Stories</div>
+            <div className="text-2xl font-black text-slate-900 mt-0.5">{items.length}</div>
           </div>
-          <div className="w-9 h-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-500">
-            <BarChart3 className="w-4 h-4" />
+          <div className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
+            <Layers className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
+        <div className="bg-white p-4.5 rounded-xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
-              Published &amp; Live
-            </div>
-            <div className="text-2xl font-black text-emerald-700 dark:text-emerald-400 mt-0.5">{publishedCount}</div>
+            <div className="text-xs font-bold text-emerald-600 uppercase tracking-wider">Published &amp; Live</div>
+            <div className="text-2xl font-black text-emerald-700 mt-0.5">{publishedCount}</div>
           </div>
-          <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 flex items-center justify-center">
-            <Eye className="w-4 h-4" />
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-200/60 flex items-center justify-center">
+            <Eye className="w-5 h-5" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-800 flex items-center justify-between">
+        <div className="bg-white p-4.5 rounded-xl border border-slate-200/90 shadow-2xs flex items-center justify-between">
           <div>
-            <div className="text-xs font-semibold text-amber-600 dark:text-amber-400 uppercase tracking-wider">
-              Hidden / Draft
-            </div>
-            <div className="text-2xl font-black text-amber-700 dark:text-amber-400 mt-0.5">{draftCount}</div>
+            <div className="text-xs font-bold text-amber-600 uppercase tracking-wider">Hidden / Draft</div>
+            <div className="text-2xl font-black text-amber-700 mt-0.5">{draftCount}</div>
           </div>
-          <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 flex items-center justify-center">
-            <EyeOff className="w-4 h-4" />
+          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 border border-amber-200/60 flex items-center justify-center">
+            <EyeOff className="w-5 h-5" />
           </div>
         </div>
       </div>
 
       {/* Case Studies Table Card */}
-      <Card padding="none" className="bg-white dark:bg-zinc-900 border-zinc-200/80 dark:border-zinc-800 shadow-sm rounded-2xl overflow-hidden flex flex-col">
+      <Card padding="none" className="bg-white border-slate-200/90 shadow-xs rounded-2xl overflow-hidden flex flex-col">
         {/* Search & Category Tabs */}
-        <div className="p-4 sm:p-5 border-b border-zinc-200/80 dark:border-zinc-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-zinc-50/50 dark:bg-zinc-800/30">
+        <div className="p-4 sm:p-5 border-b border-slate-200/90 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-slate-50/60">
           <div className="relative w-full sm:max-w-md">
-            <Search className="h-4 w-4 text-zinc-400 absolute inset-y-0 my-auto left-3 pointer-events-none" />
+            <Search className="h-4 w-4 text-slate-400 absolute inset-y-0 my-auto left-3 pointer-events-none" />
             <input
               type="text"
-              placeholder="Search by client, title, or industry..."
+              placeholder="Search by patient moniker, clinical title, or procedure..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full pl-9 pr-3 py-2 text-xs border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all"
+              className="block w-full pl-9 pr-3 py-2 text-xs border border-slate-200 rounded-xl bg-white text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all"
             />
           </div>
 
-          <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-xl border border-zinc-200/70 dark:border-zinc-700 overflow-x-auto scrollbar-none">
-            {CATEGORY_TABS.map((tab) => (
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200/80 overflow-x-auto scrollbar-none">
+            {CLINICAL_CATEGORY_TABS.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
                 onClick={() => setCategoryFilter(tab.id)}
-                className={`px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors cursor-pointer ${
+                className={`px-3 py-1 rounded-lg text-xs font-bold whitespace-nowrap transition-colors cursor-pointer ${
                   categoryFilter === tab.id
-                    ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-2xs"
-                    : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                    ? "bg-white text-slate-900 shadow-2xs"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 {tab.label}
@@ -459,102 +507,107 @@ export default function AdminPortfolioPage() {
           </div>
         </div>
 
-        {/* Table Body */}
+        {/* Table Content */}
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 text-zinc-500">
-            <div className="animate-spin w-8 h-8 border-2 border-zinc-300 border-t-zinc-900 dark:border-zinc-700 dark:border-t-zinc-100 rounded-full mb-3" />
-            <p className="text-xs font-semibold">Loading case studies...</p>
+          <div className="flex flex-col items-center justify-center py-20 text-slate-500">
+            <div className="animate-spin w-8 h-8 border-2 border-slate-200 border-t-emerald-600 rounded-full mb-3" />
+            <p className="text-xs font-bold">Loading patient care journeys...</p>
           </div>
         ) : filteredItems.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-            <div className="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center mb-3 text-zinc-400">
-              <FolderGit2 className="w-6 h-6" />
+            <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-3 text-slate-400">
+              <Award className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100 mb-1">No case studies found</h3>
-            <p className="text-xs text-zinc-500 max-w-sm mx-auto mb-4">
-              {searchQuery ? "Try adjusting your search query." : "Create your first case study or reset to defaults."}
+            <h3 className="text-base font-bold text-slate-900 mb-1">No patient stories found</h3>
+            <p className="text-xs text-slate-500 max-w-sm mx-auto mb-4">
+              {searchQuery ? "Try adjusting your search query or category filters." : "Create your first clinical case or reset to canonical defaults."}
             </p>
             <button
               onClick={() => setIsResetConfirmOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              Reset to Live Defaults
+              Reset to Canonical Defaults
             </button>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[880px]">
+            <table className="w-full text-left border-collapse min-w-[840px]">
               <thead>
-                <tr className="bg-zinc-50/70 dark:bg-zinc-800/40 border-b border-zinc-200/80 dark:border-zinc-800 text-[11px] font-bold text-zinc-500 uppercase tracking-wider">
-                  <th className="px-5 py-3 w-16 text-center">Order</th>
-                  <th className="px-5 py-3">Client &amp; Case Study</th>
-                  <th className="px-5 py-3">Industry &amp; Category</th>
-                  <th className="px-5 py-3">Audited Metrics</th>
-                  <th className="px-5 py-3">Website Status</th>
-                  <th className="px-5 py-3 text-right">Actions</th>
+                <tr className="bg-slate-50/80 border-b border-slate-200/90 text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                  <th className="px-5 py-3.5 w-16 text-center">Order</th>
+                  <th className="px-5 py-3.5">Patient &amp; Case Study</th>
+                  <th className="px-5 py-3.5">Clinical Speciality</th>
+                  <th className="px-5 py-3.5">Verified Outcome</th>
+                  <th className="px-5 py-3.5">Website Status</th>
+                  <th className="px-5 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200/70 dark:divide-zinc-800 text-xs">
+              <tbody className="divide-y divide-slate-100 text-xs">
                 {filteredItems.map((item, idx) => {
-                  const topMetric = item.metrics?.[0];
+                  const m1 = item.metrics?.[0];
                   return (
                     <tr
                       key={item.id || item.slug || idx}
-                      className="hover:bg-zinc-50/60 dark:hover:bg-zinc-800/30 transition-colors group"
+                      className="hover:bg-slate-50/70 transition-colors group"
                     >
-                      <td className="px-5 py-3.5 text-center">
-                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 font-mono font-bold text-[11px] text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
+                      <td className="px-5 py-4 text-center">
+                        <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-md bg-slate-100 font-mono font-bold text-[11px] text-slate-700 border border-slate-200">
                           #{String(item.order || idx + 1).padStart(2, "0")}
                         </span>
                       </td>
 
-                      <td className="px-5 py-3.5">
-                        <div className="font-bold text-zinc-900 dark:text-zinc-100 text-sm leading-snug">
-                          {item.clientName}
-                        </div>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 mt-0.5">
-                          {item.title}
-                        </div>
-                        <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 font-mono mt-1">
-                          <LinkIcon className="w-3 h-3 text-zinc-400" />
-                          <span>/portfolio/{item.slug}</span>
-                        </div>
-                      </td>
-
-                      <td className="px-5 py-3.5">
-                        <div className="flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300 font-medium">
-                          <Building2 className="w-3.5 h-3.5 text-zinc-400" />
-                          <span>{item.industry || "Agency"}</span>
-                        </div>
-                        <div className="inline-flex items-center gap-1 mt-1 text-[10px] font-semibold text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">
-                          <Tag className="w-2.5 h-2.5" />
-                          <span>{item.category || "General"}</span>
+                      <td className="px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200/70 text-emerald-700 flex items-center justify-center shrink-0">
+                            <HeartPulse className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <div className="text-[11px] font-bold text-emerald-700">
+                              {item.clientName || "Verified Patient"}
+                            </div>
+                            <div className="font-bold text-slate-900 text-sm leading-snug line-clamp-1">
+                              {item.title}
+                            </div>
+                            <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-mono mt-0.5">
+                              <LinkIcon className="w-3 h-3 text-slate-400" />
+                              <span>/portfolio/{item.slug}</span>
+                            </div>
+                          </div>
                         </div>
                       </td>
 
-                      <td className="px-5 py-3.5">
-                        {topMetric ? (
-                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200/80 dark:border-emerald-800/60 text-[#008744]">
-                            <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
-                            <span className="font-bold text-xs">{topMetric.value}</span>
-                            <span className="text-[10px] text-zinc-500">({topMetric.label})</span>
+                      <td className="px-5 py-4">
+                        <div className="font-semibold text-slate-800 text-xs mb-1">
+                          {item.industry || "Surgical Oncology"}
+                        </div>
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                          {item.category || "Clinical Case"}
+                        </span>
+                      </td>
+
+                      <td className="px-5 py-4">
+                        {m1 ? (
+                          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold text-xs">
+                            <TrendingUp className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                            <span>{m1.value}</span>
+                            <span className="text-[10px] text-emerald-700/80 font-medium">({m1.label})</span>
                           </div>
                         ) : (
-                          <span className="text-zinc-400 italic text-[11px]">No metrics set</span>
+                          <span className="text-slate-400 italic text-xs">No metrics set</span>
                         )}
                       </td>
 
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <button
                           type="button"
                           onClick={() => handleTogglePublish(item)}
                           className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-bold tracking-wide transition-all cursor-pointer ${
                             item.isPublished !== false
-                              ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800"
-                              : "bg-zinc-100 text-zinc-500 hover:bg-zinc-200 border border-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:border-zinc-700"
+                              ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200"
+                              : "bg-slate-100 text-slate-500 hover:bg-slate-200 border border-slate-200"
                           }`}
-                          title="Click to toggle publish status"
+                          title="Click to toggle website publish status"
                         >
                           {item.isPublished !== false ? (
                             <>
@@ -563,27 +616,38 @@ export default function AdminPortfolioPage() {
                             </>
                           ) : (
                             <>
-                              <EyeOff className="w-3.5 h-3.5 text-zinc-400" />
+                              <EyeOff className="w-3.5 h-3.5 text-slate-400" />
                               <span>Draft (Hidden)</span>
                             </>
                           )}
                         </button>
                       </td>
 
-                      <td className="px-5 py-3.5 text-right">
+                      <td className="px-5 py-4 text-right">
                         <div className="flex items-center justify-end gap-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
                           <Link
                             href={`/portfolio/${item.slug}`}
                             target="_blank"
-                            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                            title="View case study on live website"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                            title="Open live case story in new tab"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
                           </Link>
                           <button
                             type="button"
+                            onClick={() => {
+                              setRevisionTarget({ id: item.id, title: item.title });
+                              setIsRevisionOpen(true);
+                            }}
+                            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
+                            title="View Revisions"
+                          >
+                            <History className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            type="button"
                             onClick={() => openEditModal(item)}
-                            className="p-1.5 rounded-lg text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors cursor-pointer"
                             title="Edit Case Study"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
@@ -591,7 +655,7 @@ export default function AdminPortfolioPage() {
                           <button
                             type="button"
                             onClick={() => setDeleteTarget(item)}
-                            className="p-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-red-500 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
                             title="Delete Case Study"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -611,22 +675,22 @@ export default function AdminPortfolioPage() {
       {/* SIDE-BY-SIDE LIVE PREVIEW EDITOR MODAL */}
       {/* ========================================================================= */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200 overflow-y-auto">
           <div
-            className="bg-white dark:bg-zinc-900 rounded-3xl w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden animate-in slide-in-from-bottom-4 duration-300 my-auto"
+            className="bg-white rounded-3xl w-full max-w-5xl max-h-[92vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-in slide-in-from-bottom-4 duration-300 my-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200/80 dark:border-zinc-800 shrink-0 bg-zinc-50/50 dark:bg-zinc-800/30">
+            {/* Modal Top Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 shrink-0 bg-slate-50/70">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-[#008744] flex items-center justify-center border border-emerald-500/20">
-                  <FolderGit2 className="w-4 h-4" />
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center border border-emerald-200/80">
+                  <Award className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
-                    {editingItem ? `Edit: ${editingItem.clientName}` : "Create New Case Study"}
+                  <h3 className="text-base font-bold text-slate-900">
+                    {editingItem ? `Edit: ${editingItem.title}` : "Create New Patient Care Journey"}
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <p className="text-xs text-slate-500">
                     Interactive split-screen editor with real-time website card preview.
                   </p>
                 </div>
@@ -634,7 +698,7 @@ export default function AdminPortfolioPage() {
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:text-zinc-200 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -642,78 +706,86 @@ export default function AdminPortfolioPage() {
 
             {/* Split Screen Modal Body */}
             <div className="overflow-y-auto flex-1 p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 custom-scrollbar">
-              {/* Left Form (7 cols) */}
+              {/* Left Column: Form Controls (7 cols) */}
               <div className="lg:col-span-7">
                 <form id="portfolio-form" onSubmit={handleSave} className="space-y-4">
-                  {/* Client Name & Category Key */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                        Client / Agency Name <span className="text-emerald-600">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.clientName}
-                        onChange={(e) => {
-                          const client = e.target.value;
-                          setFormData((prev) => ({
-                            ...prev,
-                            clientName: client,
-                            slug: editingItem
-                              ? prev.slug
-                              : client
-                                  .toLowerCase()
-                                  .replace(/[^a-z0-9]+/g, "-")
-                                  .replace(/^-|-$/g, ""),
-                          }));
-                        }}
-                        placeholder="e.g. Apex Digital Media"
-                        required
-                        className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                        Category Tab Filter
-                      </label>
-                      <select
-                        value={formData.categoryKey}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, categoryKey: e.target.value }))}
-                        className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
-                      >
-                        <option value="performance">Performance &amp; Paid Media</option>
-                        <option value="social">Social Media &amp; Creative</option>
-                        <option value="localseo">Local SEO &amp; GBP</option>
-                        <option value="fullservice">Full-Service Retainers</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Case Study Title */}
+                  {/* Title */}
                   <div>
-                    <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                      Case Study Headline / Title <span className="text-emerald-600">*</span>
+                    <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                      Case Study Title <span className="text-emerald-600">*</span>
                     </label>
                     <input
                       type="text"
                       value={formData.title}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, title: e.target.value }))}
-                      placeholder="e.g. How Apex Scaled from 15 to 68 Enterprise Retainers"
+                      onChange={(e) => {
+                        const title = e.target.value;
+                        setFormData((prev) => ({
+                          ...prev,
+                          title,
+                          slug: editingItem
+                            ? prev.slug
+                            : title
+                                .toLowerCase()
+                                .replace(/[^a-z0-9]+/g, "-")
+                                .replace(/^-|-$/g, ""),
+                        }));
+                      }}
+                      placeholder="e.g. Early Stage Breast Cancer Treated with Oncoplastic Breast Conservation"
                       required
-                      className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
+                      className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all"
                     />
                   </div>
 
-                  {/* Slug & Order */}
+                  {/* Patient Moniker & Category */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                        Patient Moniker / Age <span className="text-emerald-600">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.clientName}
+                        onChange={(e) => setFormData((prev) => ({ ...prev, clientName: e.target.value }))}
+                        placeholder="e.g. Patient M.S., 42"
+                        required
+                        className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                        Clinical Category
+                      </label>
+                      <select
+                        value={formData.categoryKey}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          const found = CLINICAL_CATEGORY_TABS.find((t) => t.id === val);
+                          setFormData((prev) => ({
+                            ...prev,
+                            categoryKey: val,
+                            category: found?.label || "Oncoplastic Surgery",
+                          }));
+                        }}
+                        className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all cursor-pointer"
+                      >
+                        <option value="oncoplastic">Oncoplastic Surgery</option>
+                        <option value="benign">Benign Breast Care</option>
+                        <option value="reconstruction">Breast Reconstruction</option>
+                        <option value="surgical-oncology">Surgical Oncology</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Slug & Order Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                         URL Slug <span className="text-emerald-600">*</span>
                       </label>
                       <div className="relative">
-                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-xs text-zinc-400 font-mono">
-                          /portfolio/
+                        <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-xs text-slate-400 font-mono">
+                          /
                         </span>
                         <input
                           type="text"
@@ -724,15 +796,15 @@ export default function AdminPortfolioPage() {
                               slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ""),
                             }))
                           }
-                          placeholder="apex-digital-media"
+                          placeholder="oncoplastic-bcs-patient-care-journey"
                           required
-                          className="block w-full pl-22 pr-3 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
+                          className="block w-full pl-6 pr-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                      <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
                         Display Order
                       </label>
                       <input
@@ -741,114 +813,104 @@ export default function AdminPortfolioPage() {
                         max={99}
                         value={formData.order}
                         onChange={(e) => setFormData((prev) => ({ ...prev, order: Number(e.target.value) }))}
-                        className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
+                        className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all"
                       />
                     </div>
                   </div>
 
-                  {/* Industry & Sub-Category */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                        Industry / Team Size
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.industry}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, industry: e.target.value }))}
-                        placeholder="e.g. Performance Ad Agency (45 FTEs)"
-                        className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
-                      />
+                  {/* Metrics Grid */}
+                  <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
+                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wider block">
+                      Verified Clinical Outcomes (Key Metrics)
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-600 mb-1">Primary Metric Label</label>
+                        <input
+                          type="text"
+                          value={formData.metric1Label}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, metric1Label: e.target.value }))}
+                          placeholder="e.g. Cancer Clearance"
+                          className="block w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-600 mb-1">Primary Metric Value</label>
+                        <input
+                          type="text"
+                          value={formData.metric1Value}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, metric1Value: e.target.value }))}
+                          placeholder="e.g. 100%"
+                          className="block w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-emerald-700"
+                        />
+                      </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                        Category Tag
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.category}
-                        onChange={(e) => setFormData((prev) => ({ ...prev, category: e.target.value }))}
-                        placeholder="e.g. Ad Ops & Pacing Automation"
-                        className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
-                      />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-600 mb-1">Secondary Metric Label</label>
+                        <input
+                          type="text"
+                          value={formData.metric2Label}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, metric2Label: e.target.value }))}
+                          placeholder="e.g. Recovery Time"
+                          className="block w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-600 mb-1">Secondary Metric Value</label>
+                        <input
+                          type="text"
+                          value={formData.metric2Value}
+                          onChange={(e) => setFormData((prev) => ({ ...prev, metric2Value: e.target.value }))}
+                          placeholder="e.g. 10 Days"
+                          className="block w-full px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-emerald-700"
+                        />
+                      </div>
                     </div>
                   </div>
 
                   {/* Short Summary */}
                   <div>
-                    <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
-                      Executive Summary / Short Description
+                    <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                      Clinical Summary / Brief Narrative
                     </label>
                     <textarea
                       rows={2}
                       value={formData.shortDescription}
                       onChange={(e) => setFormData((prev) => ({ ...prev, shortDescription: e.target.value }))}
-                      placeholder="Automated ad pacing guardrails and live CAPI telemetry enabled 45 media buyers to manage $14M+ monthly spend."
-                      className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#008744] dark:text-zinc-100"
+                      placeholder="Brief overview of the patient diagnosis, surgical intervention, and oncologic result."
+                      className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all"
                     />
                   </div>
 
-                  {/* Top Metric Highlight (Pair) */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-3 bg-zinc-50 dark:bg-zinc-800/40 rounded-xl border border-zinc-200/80 dark:border-zinc-700">
-                    <div>
-                      <label className="block text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase mb-1">
-                        Primary Metric Value &amp; Label
-                      </label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={formData.metric1Value}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, metric1Value: e.target.value }))}
-                          placeholder="+420%"
-                          className="w-1/2 px-2.5 py-2 text-xs font-bold bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-emerald-600 focus:outline-none"
-                        />
-                        <input
-                          type="text"
-                          value={formData.metric1Label}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, metric1Label: e.target.value }))}
-                          placeholder="MRR Growth"
-                          className="w-1/2 px-2.5 py-2 text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:outline-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-zinc-700 dark:text-zinc-300 uppercase mb-1">
-                        Secondary Metric Value &amp; Label
-                      </label>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={formData.metric2Value}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, metric2Value: e.target.value }))}
-                          placeholder="14 hrs/wk"
-                          className="w-1/2 px-2.5 py-2 text-xs font-bold bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-emerald-600 focus:outline-none"
-                        />
-                        <input
-                          type="text"
-                          value={formData.metric2Label}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, metric2Label: e.target.value }))}
-                          placeholder="Time Saved"
-                          className="w-1/2 px-2.5 py-2 text-xs bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:outline-none"
-                        />
-                      </div>
-                    </div>
+                  {/* Reassurance Quote */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                      Patient Testimonial / Reassurance Quote
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={formData.testimonialQuote}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, testimonialQuote: e.target.value }))}
+                      placeholder="Direct words from the patient regarding reassurance, care experience, and surgical recovery."
+                      className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white text-slate-900 transition-all italic"
+                    />
                   </div>
 
-                  {/* Status Toggle */}
-                  <div className="p-3.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-200/80 dark:border-zinc-700 flex items-center justify-between">
+                  {/* Publish Status Toggle */}
+                  <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
                     <div>
-                      <div className="text-xs font-bold text-zinc-900 dark:text-zinc-100">Live Website Visibility</div>
-                      <div className="text-[11px] text-zinc-500">
-                        {formData.isPublished ? "Visible on /portfolio archive and homepage showcase." : "Hidden from public view (Draft mode)."}
+                      <div className="text-xs font-bold text-slate-900">Live Website Visibility</div>
+                      <div className="text-[11px] text-slate-500">
+                        {formData.isPublished ? "Visible to patients on /portfolio and homepage." : "Hidden from public view (Draft mode)."}
                       </div>
                     </div>
                     <button
                       type="button"
                       onClick={() => setFormData((prev) => ({ ...prev, isPublished: !prev.isPublished }))}
                       className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                        formData.isPublished ? "bg-emerald-600" : "bg-zinc-300 dark:bg-zinc-700"
+                        formData.isPublished ? "bg-emerald-600" : "bg-slate-300"
                       }`}
                     >
                       <span
@@ -864,91 +926,87 @@ export default function AdminPortfolioPage() {
               {/* Right Column: Live Card Preview (5 cols) */}
               <div className="lg:col-span-5 flex flex-col">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                    Live Website Preview
+                    Live Website Card Preview
                   </span>
-                  <span className="text-[10px] font-mono text-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
-                    Real-time
+                  <span className="text-[10px] font-mono font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    Real-Time Sync
                   </span>
                 </div>
 
-                {/* Simulated Public Card (matches PortfolioClientView) */}
-                <div className="rounded-3xl bg-white dark:bg-zinc-900 p-6 border border-slate-200/90 dark:border-zinc-700 shadow-sm flex flex-col justify-between text-left relative overflow-hidden">
+                {/* Simulated Public Clinical Case Card */}
+                <div className="rounded-2xl bg-white p-6 border border-slate-200 shadow-sm flex flex-col justify-between text-left relative overflow-hidden">
                   <div>
-                    {/* Visual Media Header with Floating Metric */}
-                    <div className="relative w-full h-44 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-zinc-800 border border-slate-200/70 dark:border-zinc-700">
-                      <Image
-                        src={formData.heroImage || "/images/showcase/pillar_roas_command.jpg"}
-                        alt="Preview"
-                        fill
-                        className="object-cover object-center"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-
-                      {/* Primary Metric Badge */}
-                      <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-200/90 shadow-md flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-[#008744]" />
-                        <div>
-                          <div className="text-sm font-black text-slate-900 leading-none">
-                            {formData.metric1Value || "+420%"}
-                          </div>
-                          <div className="text-[10px] font-medium text-slate-500">
-                            {formData.metric1Label || "Growth"}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Meta: Client & Industry */}
-                    <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 dark:text-emerald-400 mb-1.5">
-                      <span>{formData.clientName || "Client Name"}</span>
-                      <span className="text-slate-300">•</span>
-                      <span className="text-slate-500 text-[11px] font-normal truncate">
-                        {formData.industry || "Agency"}
+                    {/* Top Row: Category Pill & Order */}
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        {formData.category || "Clinical Case"}
+                      </span>
+                      <span className="text-[11px] font-mono font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200">
+                        CASE #{String(formData.order || 1).padStart(2, "0")}
                       </span>
                     </div>
 
-                    {/* Headline */}
-                    <h3 className="text-base font-extrabold text-[#0C1628] dark:text-zinc-100 tracking-tight leading-snug mb-2 line-clamp-2">
-                      {formData.title || "Case study headline preview goes here"}
+                    {/* Patient Moniker */}
+                    <div className="text-xs font-bold text-emerald-700 mb-1">
+                      {formData.clientName || "Verified Patient"}
+                    </div>
+
+                    {/* Dynamic Title */}
+                    <h3 className="text-lg font-extrabold text-slate-900 tracking-tight mb-2 leading-snug">
+                      {formData.title || "Patient Care Journey Title Preview"}
                     </h3>
 
-                    {/* Short Description */}
-                    <p className="text-xs text-slate-500 dark:text-zinc-400 line-clamp-2 leading-relaxed mb-4">
-                      {formData.shortDescription || "Short summary of the agency's verified results."}
+                    {/* Tagline / Summary */}
+                    <p className="text-xs font-medium text-slate-500 leading-relaxed mb-4">
+                      {formData.shortDescription || "Clinical summary of oncologic surgical care and patient management."}
                     </p>
+
+                    {/* Metrics Strip */}
+                    <div className="grid grid-cols-2 gap-2 pt-3.5 border-t border-slate-100 mb-4">
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                        <div className="text-[10px] font-semibold text-slate-500 truncate">{formData.metric1Label}</div>
+                        <div className="text-sm font-extrabold text-emerald-700">{formData.metric1Value}</div>
+                      </div>
+                      <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                        <div className="text-[10px] font-semibold text-slate-500 truncate">{formData.metric2Label}</div>
+                        <div className="text-sm font-extrabold text-emerald-700">{formData.metric2Value}</div>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Card Bottom CTA */}
-                  <div className="pt-3 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#008744] flex items-center gap-1">
-                      Read Audited Case Study
+                  {/* Card Bottom Link */}
+                  <div className="pt-3.5 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                      <div className="text-xs font-black text-slate-900">Dr. Noopur Patel</div>
+                      <div className="text-[10px] font-medium text-slate-400">Breast Cancer Surgeon</div>
+                    </div>
+
+                    <div className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700">
+                      <span>Read Full Journey</span>
                       <ArrowRight className="w-3.5 h-3.5" />
-                    </span>
-                    <span className="text-[10px] font-mono text-slate-400 bg-slate-50 dark:bg-zinc-800 px-2 py-0.5 rounded border border-slate-200 dark:border-zinc-700">
-                      POD #{String(formData.order || 1).padStart(2, "0")}
-                    </span>
+                    </div>
                   </div>
                 </div>
 
-                <p className="text-[11px] text-zinc-400 mt-3 text-center">
-                  Preview mirrors card styles on <span className="font-mono">/portfolio</span> and homepage.
+                <p className="text-[11px] text-slate-400 mt-3 text-center">
+                  Preview mirrors card aesthetics and clinical typography on <span className="font-mono">/portfolio</span>.
                 </p>
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="flex items-center justify-between px-6 py-4 border-t border-zinc-200/80 dark:border-zinc-800 shrink-0 bg-zinc-50/50 dark:bg-zinc-800/30">
-              <span className="text-xs text-zinc-400">
-                Tip: Press <kbd className="px-1.5 py-0.5 rounded bg-zinc-200 dark:bg-zinc-700 text-[10px] font-mono">Ctrl+S</kbd> to save immediately
+            <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 shrink-0 bg-slate-50/70">
+              <span className="text-xs text-slate-400">
+                Tip: Press <kbd className="px-1.5 py-0.5 rounded bg-slate-200 text-[10px] font-mono">Ctrl+S</kbd> to save immediately
               </span>
 
               <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -956,7 +1014,7 @@ export default function AdminPortfolioPage() {
                   type="submit"
                   form="portfolio-form"
                   disabled={isSaving}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#008744] hover:bg-[#00743a] text-white text-xs font-bold transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-sm active:scale-[0.98] disabled:opacity-50 cursor-pointer"
                 >
                   {isSaving ? (
                     <>
@@ -980,17 +1038,17 @@ export default function AdminPortfolioPage() {
       {/* 1-CLICK RESET TO DEFAULTS CONFIRMATION MODAL */}
       {/* ========================================================================= */}
       {isResetConfirmOpen && (
-        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-md p-6 shadow-2xl border border-zinc-200 dark:border-zinc-800 animate-in zoom-in-95 duration-200">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 border border-amber-200 dark:border-amber-800 flex items-center justify-center mb-4">
+        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-200">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center mb-4">
               <RotateCcw className="w-6 h-6" />
             </div>
 
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight mb-2">
-              Reset All 6 Case Studies to Live Defaults?
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight mb-2">
+              Reset Patient Stories to Canonical Defaults?
             </h3>
-            <p className="text-xs text-zinc-500 leading-relaxed mb-6">
-              This will safely restore all 6 canonical agency case studies (Apex, Vanguard, Catalyst, Acuity, OmniScale, and Zenith) to their exact original live copy, metrics, and order.
+            <p className="text-xs text-slate-500 leading-relaxed mb-6">
+              This will safely restore all clinical recovery stories to their canonical medical defaults, order, and outcomes.
             </p>
 
             <div className="flex items-center justify-end gap-3">
@@ -998,7 +1056,7 @@ export default function AdminPortfolioPage() {
                 type="button"
                 onClick={() => setIsResetConfirmOpen(false)}
                 disabled={isResetting}
-                className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -1029,17 +1087,17 @@ export default function AdminPortfolioPage() {
       {/* DELETE CONFIRMATION MODAL */}
       {/* ========================================================================= */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-md p-6 shadow-2xl border border-zinc-200 dark:border-zinc-800 animate-in zoom-in-95 duration-200">
-            <div className="w-12 h-12 rounded-2xl bg-red-50 dark:bg-red-950/50 text-red-600 border border-red-200 dark:border-red-800 flex items-center justify-center mb-4">
+        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 shadow-2xl border border-slate-200 animate-in zoom-in-95 duration-200">
+            <div className="w-12 h-12 rounded-2xl bg-red-50 text-red-600 border border-red-200 flex items-center justify-center mb-4">
               <Trash2 className="w-6 h-6" />
             </div>
 
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 tracking-tight mb-2">
-              Delete Case Study?
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight mb-2">
+              Delete Patient Story?
             </h3>
-            <p className="text-xs text-zinc-500 leading-relaxed mb-6">
-              Are you sure you want to delete <span className="font-bold text-zinc-900 dark:text-zinc-100">&quot;{deleteTarget.title}&quot;</span>? You can restore canonical case studies anytime with &quot;Reset to Defaults&quot;.
+            <p className="text-xs text-slate-500 leading-relaxed mb-6">
+              Are you sure you want to delete <span className="font-bold text-slate-900">&quot;{deleteTarget.title}&quot;</span>? You can restore canonical stories anytime with &quot;Reset to Defaults&quot;.
             </p>
 
             <div className="flex items-center justify-end gap-3">
@@ -1047,7 +1105,7 @@ export default function AdminPortfolioPage() {
                 type="button"
                 onClick={() => setDeleteTarget(null)}
                 disabled={isDeleting}
-                className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -1062,6 +1120,23 @@ export default function AdminPortfolioPage() {
             </div>
           </div>
         </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* REVISIONS DRAWER */}
+      {/* ========================================================================= */}
+      {isRevisionOpen && revisionTarget && (
+        <AdminRevisionDrawer
+          isOpen={isRevisionOpen}
+          onClose={() => setIsRevisionOpen(false)}
+          resourceType="portfolio"
+          resourceId={revisionTarget.id}
+          resourceTitle={revisionTarget.title}
+          onRestored={() => {
+            fetchPortfolio();
+            notifyLiveSync("portfolio", revisionTarget.id);
+          }}
+        />
       )}
     </div>
   );

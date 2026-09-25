@@ -8,12 +8,13 @@ import { RecentLeadsTable } from "@/components/admin/RecentLeadsTable";
 import { ContentOverviewGrid } from "@/components/admin/ContentOverviewGrid";
 import { QuickActionsCard } from "@/components/admin/QuickActionsCard";
 import { SystemStatusCard } from "@/components/admin/SystemStatusCard";
+import { Stethoscope } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Dashboard | DigiVigee Admin",
+  title: "Practice Dashboard | Dr. Noopur Patel Admin",
   robots: {
     index: false,
     follow: false,
@@ -91,23 +92,23 @@ export default async function AdminDashboardPage() {
   });
 
   return (
-    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto">
+    <div className="flex flex-col gap-6 w-full max-w-7xl mx-auto font-sans pb-16">
       {/* Dashboard Top Welcome Banner */}
-      <div className="flex flex-wrap items-end justify-between gap-4 pb-5 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="flex flex-wrap items-end justify-between gap-4 pb-5 border-b border-slate-200/90">
         <div>
-          <div className="text-[13px] font-medium text-zinc-500 mb-1">
+          <div className="text-xs font-semibold text-slate-500 mb-1">
             {currentDate}
           </div>
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-white tracking-tight m-0">
-            Dashboard Overview
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight m-0">
+            Practice Management Dashboard
           </h1>
-          <p className="text-sm text-zinc-500 mt-1">
-            Overview of your DigiVigee agency website, real-time leads, and content operations.
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Overview of Dr. Noopur Patel&apos;s practice portal, patient appointment inquiries, and clinical content operations.
           </p>
         </div>
 
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 text-[13px] text-zinc-700 dark:text-zinc-300 font-semibold shadow-sm">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
+        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-700 font-bold shadow-2xs">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>Authenticated as {user.email}</span>
         </div>
       </div>
@@ -115,10 +116,10 @@ export default async function AdminDashboardPage() {
       {/* Primary KPI / Statistics Cards Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
         <StatCard
-          title="Total Leads"
+          title="Consultations"
           value={summary.metrics.totalLeads}
-          subtitle="All-time verified inquiries captured"
-          accentColor="var(--brand-primary)"
+          subtitle="All patient inquiries received"
+          accentColor="#059669"
           href="/admin/leads"
           icon={
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -133,12 +134,12 @@ export default async function AdminDashboardPage() {
         <StatCard
           title="New Inquiries"
           value={summary.metrics.newLeads}
-          subtitle="Uncontacted client submissions"
-          accentColor="#eab308"
+          subtitle="Awaiting response"
+          accentColor="#d97706"
           href="/admin/leads"
           badge={{
             text: summary.metrics.newLeads > 0 ? "ACTION NEEDED" : "CLEAR",
-            type: summary.metrics.newLeads > 0 ? "success" : "neutral",
+            type: summary.metrics.newLeads > 0 ? "info" : "neutral",
           }}
           icon={
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -149,25 +150,19 @@ export default async function AdminDashboardPage() {
         />
 
         <StatCard
-          title="Active Services"
+          title="Clinical Services"
           value={summary.metrics.totalServices}
-          subtitle="Core marketing offerings live"
-          accentColor="#3b82f6"
+          subtitle="Surgical & breast procedures"
+          accentColor="#0284c7"
           href="/admin/services"
-          icon={
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polygon points="12 2 2 7 12 12 22 7 12 2" />
-              <polyline points="2 17 12 22 22 17" />
-              <polyline points="2 12 12 17 22 12" />
-            </svg>
-          }
+          icon={<Stethoscope className="w-5 h-5" />}
         />
 
         <StatCard
-          title="Published Blogs"
+          title="Health Articles"
           value={summary.metrics.publishedBlogs}
-          subtitle="Live SEO insights & guides"
-          accentColor="#8b5cf6"
+          subtitle="Patient guides & insights"
+          accentColor="#7c3aed"
           href="/admin/blog"
           icon={
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -178,10 +173,10 @@ export default async function AdminDashboardPage() {
         />
 
         <StatCard
-          title="Page Views"
+          title="Patient Views"
           value={summary.metrics.totalPageViews || 0}
-          subtitle={`${summary.metrics.uniqueVisitors || 0} unique visitors tracked`}
-          accentColor="#0284c7"
+          subtitle={`${summary.metrics.uniqueVisitors || 0} visitors tracked`}
+          accentColor="#0891b2"
           href="/admin/analytics"
           icon={
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -195,8 +190,8 @@ export default async function AdminDashboardPage() {
         <StatCard
           title="Subscribers"
           value={summary.metrics.totalSubscribers || 0}
-          subtitle="Active audience mailing list"
-          accentColor="#059669"
+          subtitle="Patient health bulletin list"
+          accentColor="#16a34a"
           href="/admin/subscribers"
           icon={
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -205,12 +200,11 @@ export default async function AdminDashboardPage() {
             </svg>
           }
         />
-
       </div>
 
       {/* Main 2-Column Responsive Dashboard Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left Column: Recent Leads & Content Collections */}
+        {/* Left Column: Recent Consultations & Content Collections */}
         <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
           <RecentLeadsTable leads={summary.recentLeads} />
           <ContentOverviewGrid metrics={summary.metrics} />

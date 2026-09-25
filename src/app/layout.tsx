@@ -43,7 +43,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${plusJakarta.variable} ${playfair.variable} scroll-smooth`}>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${plusJakarta.variable} ${playfair.variable} scroll-smooth`}>
       <head>
         <GlobalStructuredData />
       </head>

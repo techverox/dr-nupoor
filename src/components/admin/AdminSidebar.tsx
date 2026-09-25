@@ -60,7 +60,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "Services",
+        label: "Treatments & Services",
         href: "/admin/services",
         isImplemented: true,
         permission: "services.view",
@@ -73,7 +73,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "Portfolio",
+        label: "Patient Stories & Cases",
         href: "/admin/portfolio",
         isImplemented: true,
         permission: "portfolio.view",
@@ -85,7 +85,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "Reviews & Stories",
+        label: "Patient Reviews",
         href: "/admin/testimonials",
         isImplemented: true,
         permission: "testimonials.view",
@@ -96,7 +96,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "FAQs",
+        label: "Clinical FAQs",
         href: "/admin/faqs",
         isImplemented: true,
         permission: "faqs.view",
@@ -109,7 +109,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "Team Members",
+        label: "Medical Team",
         href: "/admin/team",
         isImplemented: true,
         permission: "team.view",
@@ -123,7 +123,7 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
         ),
       },
       {
-        label: "Blog Posts",
+        label: "Health Insights & Blog",
         href: "/admin/blog",
         isImplemented: true,
         permission: "blogs.view",
@@ -506,10 +506,10 @@ export function AdminSidebar({
             <>
               <div className="flex items-center gap-1.5 pl-10 text-slate-600">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse shrink-0" />
-                <span className="font-semibold text-xs text-slate-700">DigiVigee CMS</span>
+                <span className="font-bold text-xs text-slate-800">Dr. Noopur Patel</span>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0">
-                Live Sync
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+                Live Practice
               </span>
             </>
           ) : (
