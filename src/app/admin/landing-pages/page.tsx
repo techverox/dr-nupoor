@@ -427,7 +427,7 @@ export default function AdminLandingPagesPage() {
                 onClick={() => setSelectedStatus(status)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold capitalize transition-all cursor-pointer whitespace-nowrap ${
                   active
-                    ? "bg-slate-900 text-white shadow-xs"
+                    ? "bg-rose-600 text-white shadow-xs"
                     : "text-slate-600 hover:bg-slate-100"
                 }`}
               >
@@ -526,9 +526,9 @@ export default function AdminLandingPagesPage() {
                   {/* Primary Visual Builder Button */}
                   <Link
                     href={`/admin/landing-pages/${page.id}/builder`}
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-[#D84C70] text-white font-bold text-xs transition-all shadow-xs"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 hover:text-rose-800 border border-rose-200 hover:border-rose-300 font-bold text-xs transition-all shadow-xs"
                   >
-                    <Sparkles className="w-4 h-4 text-rose-300" />
+                    <Sparkles className="w-4 h-4 text-rose-600" />
                     Open Visual Builder
                     <ArrowRight className="w-3.5 h-3.5 opacity-70 group-hover:translate-x-0.5 transition-transform" />
                   </Link>
