@@ -72,12 +72,12 @@ export function BlogSeoChecker({ post }: BlogSeoCheckerProps) {
                 fontWeight: 900,
               }}
             >
-              DV
+              NP
             </div>
             <div style={{ fontSize: "0.75rem", color: "#202124", lineHeight: 1.2 }}>
-              <div>DigiVigee Digital Marketing Agency</div>
+              <div>Dr. Noopur Patel | Breast Surgical Oncologist</div>
               <div style={{ color: "#5f6368", fontSize: "0.6875rem" }}>
-                https://digivigee.com/blog/{slug}
+                https://drnoopurpatel.com/blog/{slug}
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ export function BlogSeoChecker({ post }: BlogSeoCheckerProps) {
               cursor: "pointer",
             }}
           >
-            {title} — DigiVigee
+            {title} — Dr. Noopur Patel
           </div>
 
           <div

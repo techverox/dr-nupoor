@@ -38,7 +38,7 @@ export default function AdminLoginPage() {
     if (typeof window !== "undefined") {
       document.documentElement.classList.remove("dark");
       try {
-        localStorage.setItem("digivigee_theme", "light");
+        localStorage.setItem("dr_noopur_theme", "light");
       } catch {}
     }
   }, []);

@@ -98,23 +98,21 @@ export function MediaDetailsModal({
   const handleDelete = async (force: boolean = false) => {
     setIsDeleting(true);
     try {
-      const res = await onDeleteAsset(item.id, force);
-      if (res.success) {
+      const result = await onDeleteAsset(item.id, force);
+      if (result.success) {
         setIsConfirmDeleteOpen(false);
         onClose();
-      } else if (res.inUseWarning) {
-        setUsageReferences(res.inUseWarning);
+      } else if (result.inUseWarning && !force) {
+        setUsageReferences(result.inUseWarning);
         setFeedback({
-          message: "Asset is currently in use across your website content. Please review references before deleting.",
-          type: "error",
+          message: "Asset is currently in use on the website. Delete again to force removal.",
+          type: "error"
         });
-        setIsConfirmDeleteOpen(false);
       } else {
-        setFeedback({ message: res.error || "Failed to delete asset.", type: "error" });
-        setIsConfirmDeleteOpen(false);
+        setFeedback({ message: result.error || "Failed to delete asset.", type: "error" });
       }
     } catch {
-      setFeedback({ message: "Network error deleting asset.", type: "error" });
+      setFeedback({ message: "An error occurred while deleting.", type: "error" });
     } finally {
       setIsDeleting(false);
     }
@@ -129,71 +127,70 @@ export function MediaDetailsModal({
 
   return (
     <div
-      className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-zinc-900/80 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
-        className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden animate-in zoom-in-95 duration-200"
+        className="bg-white rounded-2xl w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 shrink-0 bg-zinc-50 dark:bg-zinc-900/50">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 shrink-0 bg-slate-50">
           <div className="flex items-center gap-3">
-            <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 m-0 flex items-center gap-2">
-              <ImageIcon className="w-5 h-5 text-zinc-400" />
-              Media Asset Details
+            <h2 className="text-lg font-bold text-slate-900 m-0 flex items-center gap-2">
+              <ImageIcon className="w-5 h-5 text-rose-600" />
+              Clinical Asset Details
             </h2>
-            <span className="px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-zinc-200 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-400">
+            <span className="px-2 py-0.5 rounded text-xs font-bold tracking-wider bg-slate-200 text-slate-700">
               {item.mimeType?.replace("image/", "").toUpperCase() || "IMAGE"}
             </span>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors focus:outline-none"
+            className="p-1.5 rounded-full text-slate-400 hover:text-slate-900 hover:bg-slate-200 transition-colors focus:outline-none cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Body: 2 Columns */}
-        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto p-6">
           <div className="flex flex-col lg:flex-row gap-8">
             
             {/* Left Column: Visual Preview & Technical Specs */}
             <div className="w-full lg:w-5/12 flex flex-col gap-6">
               {/* Visual Box */}
-              <div className="w-full h-64 bg-zinc-100 dark:bg-zinc-800/50 rounded-xl border border-zinc-200 dark:border-zinc-700/50 flex items-center justify-center p-4 overflow-hidden relative group">
-                <div className="absolute inset-0 bg-[url('/checkers.png')] opacity-10 pointer-events-none"></div>
+              <div className="w-full h-64 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-center p-4 overflow-hidden relative group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={item.url}
                   alt={item.altText || item.name}
-                  className="max-w-full max-h-full object-contain relative z-10 drop-shadow-md group-hover:scale-105 transition-transform duration-500"
+                  className="max-w-full max-h-full object-contain relative z-10 drop-shadow-xs group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
               {/* Technical Specs List */}
-              <div className="p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800/60 text-sm flex flex-col gap-3 text-zinc-600 dark:text-zinc-400">
-                <div className="flex justify-between border-b border-zinc-200/50 dark:border-zinc-700/50 pb-2">
-                  <strong className="font-semibold text-zinc-900 dark:text-zinc-300">File Name:</strong> 
-                  <code className="text-xs bg-zinc-200 dark:bg-zinc-800 px-1.5 py-0.5 rounded font-mono truncate max-w-[200px]" title={item.fileName}>{item.fileName}</code>
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 text-sm flex flex-col gap-3 text-slate-600">
+                <div className="flex justify-between border-b border-slate-200/80 pb-2">
+                  <strong className="font-semibold text-slate-900">File Name:</strong> 
+                  <code className="text-xs bg-slate-200 px-1.5 py-0.5 rounded font-mono truncate max-w-[200px]" title={item.fileName}>{item.fileName}</code>
                 </div>
-                <div className="flex justify-between border-b border-zinc-200/50 dark:border-zinc-700/50 pb-2">
-                  <strong className="font-semibold text-zinc-900 dark:text-zinc-300">File Size:</strong> 
+                <div className="flex justify-between border-b border-slate-200/80 pb-2">
+                  <strong className="font-semibold text-slate-900">File Size:</strong> 
                   <span>{formatFileSize(item.fileSize)}</span>
                 </div>
-                <div className="flex justify-between border-b border-zinc-200/50 dark:border-zinc-700/50 pb-2">
-                  <strong className="font-semibold text-zinc-900 dark:text-zinc-300">MIME Type:</strong> 
+                <div className="flex justify-between border-b border-slate-200/80 pb-2">
+                  <strong className="font-semibold text-slate-900">MIME Type:</strong> 
                   <span>{item.mimeType}</span>
                 </div>
-                <div className="flex justify-between border-b border-zinc-200/50 dark:border-zinc-700/50 pb-2">
-                  <strong className="font-semibold text-zinc-900 dark:text-zinc-300">Uploaded:</strong> 
+                <div className="flex justify-between border-b border-slate-200/80 pb-2">
+                  <strong className="font-semibold text-slate-900">Uploaded:</strong> 
                   <span>{formatDate(item.uploadedAt)}</span>
                 </div>
                 {item.width && item.height && (
                   <div className="flex justify-between">
-                    <strong className="font-semibold text-zinc-900 dark:text-zinc-300">Dimensions:</strong> 
+                    <strong className="font-semibold text-slate-900">Dimensions:</strong> 
                     <span>{item.width} &times; {item.height} px</span>
                   </div>
                 )}
@@ -201,8 +198,8 @@ export function MediaDetailsModal({
 
               {/* Public URL Box */}
               <div>
-                <label className="text-sm font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5 mb-2">
-                  <LinkIcon className="w-4 h-4 text-zinc-400" />
+                <label className="text-sm font-bold text-slate-900 flex items-center gap-1.5 mb-2">
+                  <LinkIcon className="w-4 h-4 text-slate-400" />
                   Public Asset URL
                 </label>
                 <div className="flex gap-2 relative">
@@ -210,14 +207,14 @@ export function MediaDetailsModal({
                     type="text"
                     readOnly
                     value={item.url}
-                    className="flex-1 w-full pl-3 pr-2 py-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50 text-xs font-mono text-zinc-600 dark:text-zinc-400 focus:outline-none"
+                    className="flex-1 w-full pl-3 pr-2 py-2 rounded-lg border border-slate-200 bg-slate-50 text-xs font-mono text-slate-600 focus:outline-none"
                   />
                   <button 
                     onClick={handleCopy}
-                    className={`shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg border transition-colors ${
+                    className={`shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg border transition-colors cursor-pointer ${
                       copied 
-                        ? "bg-zinc-900 border-zinc-900 text-white dark:bg-white dark:border-white dark:text-zinc-900" 
-                        : "bg-white border-zinc-200 text-zinc-700 hover:bg-zinc-50 dark:bg-zinc-800 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                        ? "bg-rose-600 border-rose-600 text-white" 
+                        : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
                     }`}
                   >
                     {copied ? <><Check className="w-3.5 h-3.5" /> Copied</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
@@ -228,19 +225,19 @@ export function MediaDetailsModal({
               {/* In-Use Dependency Warnings */}
               <div className="mt-2">
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-sm font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                    <Info className="w-4 h-4 text-zinc-400" />
+                  <label className="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                    <Info className="w-4 h-4 text-slate-400" />
                     Website Usage & References
                   </label>
                   {isCheckingUsage && (
-                    <span className="text-xs font-medium text-blue-500 animate-pulse">Scanning...</span>
+                    <span className="text-xs font-medium text-rose-600 animate-pulse">Scanning...</span>
                   )}
                 </div>
 
                 {usageReferences.length > 0 ? (
-                  <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-900/30 text-sm text-amber-800 dark:text-amber-500">
+                  <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-800">
                     <div className="font-bold mb-2 flex items-center gap-1.5">
-                      <AlertTriangle className="w-4 h-4" />
+                      <AlertTriangle className="w-4 h-4 text-amber-600" />
                       In use by {usageReferences.length} website item(s):
                     </div>
                     <ul className="list-disc pl-6 space-y-1 text-xs opacity-90">
@@ -252,121 +249,128 @@ export function MediaDetailsModal({
                     </ul>
                   </div>
                 ) : (
-                  <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-200 dark:border-emerald-900/30 text-xs font-medium text-emerald-700 dark:text-emerald-500 flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4" />
+                  <div className="p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-medium text-emerald-700 flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                     Not currently detected in active website records.
                   </div>
                 )}
               </div>
+
             </div>
 
-            {/* Right Column: Editable Metadata & Alt Text */}
-            <form onSubmit={handleSave} className="w-full lg:w-7/12 flex flex-col gap-5 h-full relative">
-              {feedback && (
-                <div className={`p-3 rounded-lg text-sm font-medium flex items-center gap-2 border ${
-                  feedback.type === 'success' 
-                    ? 'bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-900/20 dark:border-emerald-900/50 dark:text-emerald-400' 
-                    : 'bg-red-50 border-red-200 text-red-700 dark:bg-red-900/20 dark:border-red-900/50 dark:text-red-400'
-                }`}>
-                  {feedback.type === 'success' ? <CheckCircle2 className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
-                  {feedback.message}
-                </div>
-              )}
-
-              <div>
-                <label className="block text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-1.5">
-                  Accessible Alt Text <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  value={altText}
-                  onChange={(e) => setAltText(e.target.value)}
-                  rows={3}
-                  placeholder="Describe what is visible in the image concisely..."
-                  required
-                  className="block w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 dark:text-zinc-100 transition-shadow resize-y"
-                />
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-2 leading-relaxed">
-                  Screen readers announce this to visually impaired visitors and search bots use it for Google Image indexing.
-                </p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-1.5">
-                  Asset Title / Display Name
-                </label>
-                <input
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Descriptive title..."
-                  className="block w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 dark:text-zinc-100 transition-shadow"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-1.5">
-                  Caption / Editorial Notes (Optional)
-                </label>
-                <textarea
-                  value={caption}
-                  onChange={(e) => setCaption(e.target.value)}
-                  rows={4}
-                  placeholder="Optional caption or internal editorial usage instructions..."
-                  className="block w-full px-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 dark:text-zinc-100 transition-shadow resize-y"
-                />
-              </div>
-
-              {/* Form Actions */}
-              <div className="flex items-center justify-between mt-auto pt-6 border-t border-zinc-100 dark:border-zinc-800">
-                <button
-                  type="button"
-                  onClick={() => setIsConfirmDeleteOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-bold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-500"
-                >
-                  <Trash2 className="w-4 h-4" />
-                  Delete Asset
-                </button>
-
-                <div className="flex gap-3">
-                  <button 
-                    type="button" 
-                    onClick={onClose}
-                    className="px-4 py-2 text-sm font-bold rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+            {/* Right Column: Editable Metadata Form */}
+            <div className="w-full lg:w-7/12 flex flex-col justify-between">
+              <form onSubmit={handleSave} className="flex flex-col gap-5">
+                {feedback && (
+                  <div
+                    className={`p-3 rounded-xl border text-xs font-medium flex items-center gap-2 ${
+                      feedback.type === "success"
+                        ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                        : "bg-red-50 border-red-200 text-red-800"
+                    }`}
                   >
-                    Cancel
+                    {feedback.type === "success" ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <AlertTriangle className="w-4 h-4 text-red-600" />}
+                    <span>{feedback.message}</span>
+                  </div>
+                )}
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Display Title
+                  </label>
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="e.g. Dr. Noopur Patel Clinical Portrait"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
+                  />
+                  <p className="text-[11px] text-slate-400 mt-1">Human-friendly name shown inside the admin media library.</p>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      Alt Text (SEO & Accessibility) <span className="text-rose-500">*</span>
+                    </label>
+                    <span className="text-[11px] font-semibold text-slate-400">
+                      {altText.length} characters
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    value={altText}
+                    onChange={(e) => setAltText(e.target.value)}
+                    placeholder="Describe what is seen in the image for Google rankings and screen readers..."
+                    required
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
+                  />
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    Google Image Search uses this text to understand oncology and clinical specialties.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Caption (Optional)
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={caption}
+                    onChange={(e) => setCaption(e.target.value)}
+                    placeholder="Optional clinical context, hospital photo credit, or doctor citation..."
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all resize-y"
+                  />
+                </div>
+
+                {/* Form Buttons */}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-4 mt-auto">
+                  <button
+                    type="button"
+                    onClick={() => setIsConfirmDeleteOpen(true)}
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-colors cursor-pointer"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Delete Asset
                   </button>
-                  <button 
-                    type="submit" 
+
+                  <button
+                    type="submit"
                     disabled={isSaving}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-2 rounded-lg font-bold text-sm bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all shadow-sm active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed min-w-[140px]"
+                    className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                   >
                     {isSaving ? (
-                      <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                      <>
+                        <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Saving...</span>
+                      </>
                     ) : (
-                      <Save className="w-4 h-4" />
+                      <>
+                        <Save className="w-4 h-4" />
+                        <span>Save Metadata</span>
+                      </>
                     )}
-                    Save Changes
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Delete Confirmation Dialog */}
+      {/* Delete Confirmation Modal */}
       <ConfirmDialog
         isOpen={isConfirmDeleteOpen}
         onClose={() => setIsConfirmDeleteOpen(false)}
         onConfirm={() => handleDelete(usageReferences.length > 0)}
-        title="Delete Media Asset?"
+        title="Permanently Delete Media Asset?"
         message={
           usageReferences.length > 0
-            ? `WARNING: This media asset is currently in use in ${usageReferences.length} website item(s). Deleting it will cause broken image links on your public site. Are you sure you wish to proceed?`
-            : `Are you sure you want to permanently delete "${item.name || item.fileName}"? This action cannot be undone.`
+            ? `WARNING: This asset is currently used in ${usageReferences.length} live website content item(s). Deleting it will result in broken images on those pages. Are you sure you want to force deletion?`
+            : "Are you sure you want to permanently delete this media asset? This cannot be undone."
         }
-        confirmLabel={usageReferences.length > 0 ? "Delete Anyway (Force)" : "Delete Asset"}
-        isDestructive
+        confirmLabel={usageReferences.length > 0 ? "Force Delete Anyway" : "Yes, Delete Permanently"}
+        isDestructive={true}
         isLoading={isDeleting}
       />
     </div>

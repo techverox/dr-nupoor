@@ -146,7 +146,7 @@ export function UtmCampaignBuilderModal({ isOpen, onClose }: UtmCampaignBuilderM
                   type="text"
                   value={customBaseUrl}
                   onChange={(e) => setCustomBaseUrl(e.target.value)}
-                  placeholder="https://digivigee.com/landing/blueprint"
+                  placeholder="https://drnoopurpatel.com/consultation"
                   style={{
                     width: "100%",
                     padding: "0.6rem 0.85rem",

@@ -18,7 +18,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
   // Restore desktop collapsed state from localStorage
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("digivigee_admin_sidebar_collapsed");
+      const saved = localStorage.getItem("drn_admin_sidebar_collapsed");
       if (saved === "true") {
         setIsDesktopCollapsed(true);
       }
@@ -35,7 +35,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
       setIsDesktopCollapsed((prev) => {
         const next = !prev;
         try {
-          localStorage.setItem("digivigee_admin_sidebar_collapsed", String(next));
+          localStorage.setItem("drn_admin_sidebar_collapsed", String(next));
         } catch {}
         return next;
       });
@@ -89,7 +89,7 @@ export function AdminShell({ user, children }: AdminShellProps) {
     if (typeof window !== "undefined") {
       document.documentElement.classList.remove("dark");
       try {
-        localStorage.setItem("digivigee_theme", "light");
+        localStorage.setItem("dr_noopur_theme", "light");
       } catch {}
     }
   }, []);

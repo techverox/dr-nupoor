@@ -288,7 +288,7 @@ export function EditPageSeoModal({
                       fontSize: "0.875rem",
                       outline: "none",
                     }}
-                    placeholder="e.g. Performance Marketing Agency | DigiVigee"
+                    placeholder="e.g. Dr. Noopur Patel | Breast Cancer Surgeon Ahmedabad"
                   />
                   <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.25rem" }}>
                     Recommended 40–60 characters. This appears as the blue clickable headline in Google SERPs.
@@ -632,7 +632,7 @@ export function EditPageSeoModal({
                     </div>
                     <div style={{ padding: "0.85rem 1rem" }}>
                       <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase" }}>
-                        digivigee.com
+                        drnoopurpatel.com
                       </div>
                       <div style={{ fontSize: "0.9375rem", fontWeight: 700, color: "var(--brand-navy)", marginTop: "0.25rem" }}>
                         {ogTitle || title || page.pageName}

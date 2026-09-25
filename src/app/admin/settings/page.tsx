@@ -121,11 +121,11 @@ export default function AdminSettingsPage() {
     try {
       notifyLiveSync("siteSettings", "global", "SETTINGS_UPDATE");
       if (typeof window !== "undefined" && "BroadcastChannel" in window) {
-        const channel = new BroadcastChannel("digivigee-cms-sync");
+        const channel = new BroadcastChannel("drn-cms-sync");
         channel.postMessage({ type: "CMS_UPDATED", timestamp: Date.now() });
         channel.close();
       }
-      localStorage.setItem("digivigee_cms_updated", Date.now().toString());
+      localStorage.setItem("drn_cms_updated", Date.now().toString());
     } catch {}
   };
 
@@ -260,7 +260,7 @@ export default function AdminSettingsPage() {
         broadcastCmsUpdate();
         setIsResetModalOpen(false);
         setFeedback({
-          message: "All global website settings reset to canonical DigiVigee production defaults!",
+          message: "All global clinic settings reset to Dr. Noopur Patel's practice defaults!",
           type: "success",
         });
         setTimeout(() => setFeedback(null), 5000);
@@ -290,7 +290,7 @@ export default function AdminSettingsPage() {
         setTimeout(() => setFeedback(null), 5000);
         if (data.stats) {
           setSyncDetails(
-            `Synchronized: ${data.stats.services} Services, ${data.stats.portfolio} Portfolio Items, ${data.stats.blogs} Blog Posts, ${data.stats.testimonials} Testimonials, ${data.stats.faqs} FAQs, ${data.stats.team} Team Members, ${data.stats.pages} Static Pages, Global Settings, ${data.stats.offers} Offers, and ${data.stats.roles} RBAC Roles.`
+            `Synchronized: ${data.stats.services} Services, ${data.stats.portfolio} Portfolio Cases, ${data.stats.blogs} Blog Insights, ${data.stats.testimonials} Testimonials, ${data.stats.faqs} FAQs, ${data.stats.team} Medical Team, ${data.stats.pages} Static Pages, Global Practice Settings, ${data.stats.offers} Announcements, and ${data.stats.roles} RBAC Roles.`
           );
         }
       } else {
@@ -306,9 +306,9 @@ export default function AdminSettingsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-zinc-500 dark:text-zinc-400">
-        <div className="animate-spin w-9 h-9 border-3 border-emerald-500 border-t-transparent rounded-full mb-4"></div>
-        <p className="text-sm font-semibold tracking-wide">Loading Global Website Settings...</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-500">
+        <div className="animate-spin w-9 h-9 border-3 border-rose-600 border-t-transparent rounded-full mb-4"></div>
+        <p className="text-sm font-semibold tracking-wide">Loading Global Practice Settings...</p>
       </div>
     );
   }
@@ -316,23 +316,23 @@ export default function AdminSettingsPage() {
   return (
     <div className="flex flex-col gap-6 max-w-6xl mx-auto w-full pb-16">
       {/* 1. Header Bar with Real-Time Badges */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs">
         <div className="flex items-center gap-4">
-          <div className="w-13 h-13 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/60 dark:border-emerald-800/60 rounded-2xl flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 shadow-sm">
-            <Settings className="w-7 h-7" />
+          <div className="w-12 h-12 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-rose-600 shrink-0 shadow-2xs">
+            <Settings className="w-6 h-6" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight leading-none">
-                Global Website Settings
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
+                Practice & Website Settings
               </h1>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                🟢 Live Settings Cloud: Connected (Turant Sync)
+                Live Settings Cloud: Connected (Instant Sync)
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
-              Control official brand identity, direct phone & WhatsApp coordinates, social networks, and top announcement banner.
+            <p className="text-xs sm:text-sm text-slate-500 font-normal">
+              Manage Dr. Noopur Patel's clinical practice identity, OPD hours, contact coordinates, and hospital affiliations.
             </p>
           </div>
         </div>
@@ -342,7 +342,7 @@ export default function AdminSettingsPage() {
           <button
             type="button"
             onClick={() => setIsResetModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-bold hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset to Defaults</span>
@@ -352,7 +352,7 @@ export default function AdminSettingsPage() {
             type="button"
             onClick={() => handleSave()}
             disabled={isSaving}
-            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-md shadow-emerald-600/20 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition-all shadow-xs active:scale-[0.98] disabled:opacity-70 cursor-pointer"
           >
             {isSaving ? (
               <>
@@ -372,80 +372,80 @@ export default function AdminSettingsPage() {
       {/* 2. Top Bento KPI Cards (Visual Overview) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
         {/* Brand Card */}
-        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
-              Brand Identity
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              Practice Brand
             </span>
-            <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
               <Building2 className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-zinc-900 dark:text-zinc-100 truncate">
-              {formData.siteName || "DigiVigee"}
+            <div className="text-lg sm:text-xl font-bold text-slate-900 truncate">
+              {formData.siteName || "Dr. Noopur Patel"}
             </div>
-            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 mt-1">
-              <CheckCircle2 className="w-3 h-3" /> Official Logo Active
+            <p className="text-[11px] text-emerald-600 font-semibold flex items-center gap-1 mt-1">
+              <CheckCircle2 className="w-3 h-3" /> Official Practice Logo
             </p>
           </div>
         </div>
 
         {/* Contact Coordinates Card */}
-        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
-              Direct Contact
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              OPD Coordinates
             </span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <Phone className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-zinc-900 dark:text-zinc-100">
+            <div className="text-lg sm:text-xl font-bold text-slate-900">
               100% Configured
             </div>
-            <p className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium truncate mt-1">
-              Phone, WhatsApp & Chhapi HQ
+            <p className="text-[11px] text-slate-500 font-medium truncate mt-1">
+              Phone, WhatsApp & Marengo CIMS
             </p>
           </div>
         </div>
 
         {/* Social Channels Card */}
-        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Social Channels
             </span>
-            <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
               <Globe className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-zinc-900 dark:text-zinc-100">
-              6 Active Links
+            <div className="text-lg sm:text-xl font-bold text-slate-900">
+              5 Active Channels
             </div>
-            <p className="text-[11px] text-blue-600 dark:text-blue-400 font-bold flex items-center gap-1 mt-1">
-              <CheckCircle2 className="w-3 h-3" /> LinkedIn, X, IG, YT & More
+            <p className="text-[11px] text-blue-600 font-semibold flex items-center gap-1 mt-1">
+              <CheckCircle2 className="w-3 h-3" /> LinkedIn, YouTube, Instagram
             </p>
           </div>
         </div>
 
         {/* Website Sync Status Card */}
-        <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Live Cloud Sync
             </span>
-            <div className="w-8 h-8 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
               <Zap className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-lg sm:text-xl font-black text-zinc-900 dark:text-zinc-100">
+            <div className="text-lg sm:text-xl font-bold text-slate-900">
               Instant Sync
             </div>
-            <p className="text-[11px] text-amber-600 dark:text-amber-400 font-bold flex items-center gap-1 mt-1">
+            <p className="text-[11px] text-amber-600 font-semibold flex items-center gap-1 mt-1">
               <Sparkles className="w-3 h-3" /> Auto-Broadcast to Open Tabs
             </p>
           </div>
@@ -456,23 +456,23 @@ export default function AdminSettingsPage() {
       {feedback && (
         <div className="animate-in fade-in slide-in-from-top-2 duration-300">
           <div
-            className={`flex items-center justify-between p-4 rounded-xl border shadow-sm ${
+            className={`flex items-center justify-between p-4 rounded-xl border shadow-2xs ${
               feedback.type === "success"
-                ? "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-200"
-                : "bg-red-50 border-red-200 text-red-900 dark:bg-red-950/40 dark:border-red-800 dark:text-red-200"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                : "bg-red-50 border-red-200 text-red-900"
             }`}
           >
             <div className="flex items-center gap-3">
               {feedback.type === "success" ? (
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
               ) : (
-                <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
+                <XCircle className="w-5 h-5 text-red-600 shrink-0" />
               )}
               <span className="font-semibold text-sm">{feedback.message}</span>
             </div>
             <button
               onClick={() => setFeedback(null)}
-              className="p-1 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              className="p-1 rounded-md hover:bg-black/5 transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -481,10 +481,10 @@ export default function AdminSettingsPage() {
       )}
 
       {/* 3. Visual Navigation Tabs */}
-      <div className="flex flex-wrap items-center gap-2 p-1.5 bg-zinc-100 dark:bg-zinc-800/80 rounded-2xl border border-zinc-200 dark:border-zinc-800">
+      <div className="flex flex-wrap items-center gap-1.5 p-1.5 bg-slate-100/90 rounded-2xl border border-slate-200/80">
         {[
           { id: "brand", label: "Brand & Logo", icon: Building2 },
-          { id: "contact", label: "Contact Coordinates & HQ", icon: Phone },
+          { id: "contact", label: "Hospital Coordinates & OPD", icon: Phone },
           { id: "socials", label: "Social Channels", icon: Globe },
           { id: "footer", label: "Footer & Legal Notice", icon: FileText },
           { id: "scripts", label: "Custom Code & Tracking", icon: Code2 },
@@ -498,13 +498,13 @@ export default function AdminSettingsPage() {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 isActive
-                  ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm border border-zinc-200/80 dark:border-zinc-700"
-                  : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-white/50 dark:hover:bg-zinc-900/50"
+                  ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-white/50"
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600 dark:text-emerald-400" : "text-zinc-400"}`} />
+              <Icon className={`w-4 h-4 ${isActive ? "text-rose-600" : "text-slate-400"}`} />
               <span>{tab.label}</span>
             </button>
           );
@@ -517,73 +517,73 @@ export default function AdminSettingsPage() {
         {activeTab === "brand" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
             {/* Identity Card */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 flex items-center gap-2">
-                <Building2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                Brand Identity & Core Details
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <Building2 className="w-5 h-5 text-rose-600" />
+                Practice Identity & Doctor Profile
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                Yeh details aapki website ke Header, Tab Title aur Meta tags par globally display hoti hain.
+              <p className="text-xs text-slate-500 mb-6">
+                These details display in the website navigation, page headers, search engine snippets, and meta tags.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                    Website / Brand Name <span className="text-red-500">*</span>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Surgeon / Practice Name <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
                     value={formData.siteName}
                     onChange={(e) => setFormData((prev) => ({ ...prev, siteName: e.target.value }))}
-                    placeholder="e.g. DigiVigee"
+                    placeholder="e.g. Dr. Noopur Patel"
                     required
-                    className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                    className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                   />
-                  <p className="text-[11px] text-zinc-400 mt-1">Website ka main brand name (default: DigiVigee).</p>
+                  <p className="text-[11px] text-slate-400 mt-1">Main practitioner title displayed across headers.</p>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                    Brand Tagline / Slogan
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Specialty & Tagline
                   </label>
                   <input
                     type="text"
                     value={formData.tagline}
                     onChange={(e) => setFormData((prev) => ({ ...prev, tagline: e.target.value }))}
-                    placeholder="e.g. Professional Solutions For Your Digital Growth"
-                    className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                    placeholder="e.g. Breast Surgeon & Oncoplastic Surgeon — Expert Care. Stronger Tomorrows."
+                    className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                   />
-                  <p className="text-[11px] text-zinc-400 mt-1">Header aur SEO title ke saath attach hota hai.</p>
+                  <p className="text-[11px] text-slate-400 mt-1">Appended to page titles and browser window headers.</p>
                 </div>
               </div>
             </div>
 
             {/* Visual Logo & Favicon Assets */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-rose-600" />
                 Visual Assets: Logo & Favicon
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                Website ke public header aur browser tab icon ke paths.
+              <p className="text-xs text-slate-500 mb-6">
+                Header logo asset and browser tab icon configurations.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Logo Path */}
-                <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-800/40 flex flex-col justify-between">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                       Header Brand Logo URL
                     </label>
                     <input
                       type="text"
                       value={formData.logoUrl}
                       onChange={(e) => setFormData((prev) => ({ ...prev, logoUrl: e.target.value }))}
-                      className="block w-full px-3.5 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-xs font-mono dark:text-zinc-100 mb-3"
+                      className="block w-full px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono text-slate-900 mb-3"
                     />
                   </div>
-                  <div className="p-3 bg-zinc-900 dark:bg-black rounded-lg flex items-center justify-between border border-zinc-800">
-                    <div className="relative h-9 w-32">
+                  <div className="p-3 bg-white rounded-lg flex items-center justify-between border border-slate-200">
+                    <div className="relative h-9 w-36">
                       <Image
                         src={formData.logoUrl || "/images/doctor/assets/logo.png"}
                         alt="Logo Preview"
@@ -592,31 +592,30 @@ export default function AdminSettingsPage() {
                         unoptimized
                       />
                     </div>
-                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wider">Live Preview</span>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Live Preview</span>
                   </div>
                 </div>
 
                 {/* Favicon Path */}
-                <div className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-700/80 bg-zinc-50/50 dark:bg-zinc-800/40 flex flex-col justify-between">
+                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                       Browser Favicon URL
                     </label>
                     <input
                       type="text"
                       value={formData.faviconUrl}
                       onChange={(e) => setFormData((prev) => ({ ...prev, faviconUrl: e.target.value }))}
-                      className="block w-full px-3.5 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-xs font-mono dark:text-zinc-100 mb-3"
+                      className="block w-full px-3.5 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono text-slate-900 mb-3"
                     />
                   </div>
-                  <div className="p-3 bg-white dark:bg-zinc-900 rounded-lg flex items-center gap-3 border border-zinc-200 dark:border-zinc-700">
-                    <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center p-1.5 border border-zinc-200 dark:border-zinc-700">
-                      {/* Favicon icon */}
-                      <span className="text-xs font-black text-emerald-600 dark:text-emerald-400">DV</span>
+                  <div className="p-3 bg-white rounded-lg flex items-center gap-3 border border-slate-200">
+                    <div className="w-8 h-8 rounded-lg bg-rose-50 flex items-center justify-center p-1.5 border border-rose-200">
+                      <span className="text-xs font-black text-rose-600">NP</span>
                     </div>
                     <div>
-                      <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200 block">Tab Favicon</span>
-                      <span className="text-[10px] text-zinc-400">{formData.faviconUrl}</span>
+                      <span className="text-xs font-bold text-slate-800 block">Tab Favicon</span>
+                      <span className="text-[10px] text-slate-400">{formData.faviconUrl}</span>
                     </div>
                   </div>
                 </div>
@@ -624,15 +623,15 @@ export default function AdminSettingsPage() {
             </div>
 
             {/* Announcement Bar Settings */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <Megaphone className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                    Top Announcement Bar (Offer Banner)
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <Megaphone className="w-5 h-5 text-rose-600" />
+                    Top Announcement Bar (Clinical Alert)
                   </h2>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                    Website ke bilkul top par special offer ya launch notification bar dikhata hai.
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Displays an urgent notification banner at the very top of all website pages.
                   </p>
                 </div>
                 {/* Toggle Switch */}
@@ -643,33 +642,33 @@ export default function AdminSettingsPage() {
                     onChange={(e) => setFormData((prev) => ({ ...prev, showAnnouncementBar: e.target.checked }))}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-zinc-200 peer-focus:outline-none rounded-full peer dark:bg-zinc-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-zinc-600 peer-checked:bg-emerald-600"></div>
+                  <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-rose-600"></div>
                 </label>
               </div>
 
               {formData.showAnnouncementBar && (
-                <div className="mt-4 pt-4 border-t border-zinc-100 dark:border-zinc-800 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="mt-4 pt-4 border-t border-slate-100 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="md:col-span-2">
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                       Announcement Bar Message
                     </label>
                     <input
                       type="text"
                       value={formData.announcementBarText}
                       onChange={(e) => setFormData((prev) => ({ ...prev, announcementBarText: e.target.value }))}
-                      className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                      Click Link / Destination
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Destination Link
                     </label>
                     <input
                       type="text"
                       value={formData.announcementLink}
                       onChange={(e) => setFormData((prev) => ({ ...prev, announcementLink: e.target.value }))}
-                      placeholder="/offers or /contact"
-                      className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      placeholder="/appointments or /contact"
+                      className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                     />
                   </div>
                 </div>
@@ -681,33 +680,33 @@ export default function AdminSettingsPage() {
         {/* TAB 2: Contact Coordinates & HQ */}
         {activeTab === "contact" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 flex items-center gap-2">
-                <Phone className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                Direct Communication Channels
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <Phone className="w-5 h-5 text-rose-600" />
+                Direct Clinical Consultation Channels
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                Aapke clients aur visitors in numbers aur emails se aapke saath seedha connect karte hain.
+              <p className="text-xs text-slate-500 mb-6">
+                Patient helpline, WhatsApp coordinator number, and consultation enquiry email.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {/* Official Phone */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Official Phone <span className="text-red-500">*</span>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      OPD Phone <span className="text-rose-500">*</span>
                     </label>
                     <button
                       type="button"
                       onClick={() => handleCopy(formData.phone, "phone")}
-                      className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1 cursor-pointer"
+                      className="text-[11px] font-bold text-rose-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
                       {copiedKey === "phone" ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                       {copiedKey === "phone" ? "Copied" : "Copy"}
                     </button>
                   </div>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                       <Phone className="w-4 h-4" />
                     </div>
                     <input
@@ -715,7 +714,7 @@ export default function AdminSettingsPage() {
                       value={formData.phone}
                       onChange={(e) => setFormData((prev) => ({ ...prev, phone: e.target.value }))}
                       required
-                      className="block w-full pl-10 pr-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                     />
                   </div>
                 </div>
@@ -723,14 +722,14 @@ export default function AdminSettingsPage() {
                 {/* WhatsApp */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      WhatsApp Number <span className="text-red-500">*</span>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      Care WhatsApp <span className="text-rose-500">*</span>
                     </label>
                     <a
                       href={`https://wa.me/${formData.whatsapp.replace(/\D/g, "")}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
+                      className="text-[11px] font-bold text-emerald-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
                       <span>Test Chat</span>
                       <ExternalLink className="w-3 h-3" />
@@ -745,7 +744,7 @@ export default function AdminSettingsPage() {
                       value={formData.whatsapp}
                       onChange={(e) => setFormData((prev) => ({ ...prev, whatsapp: e.target.value }))}
                       required
-                      className="block w-full pl-10 pr-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 text-slate-900 transition-all"
                     />
                   </div>
                 </div>
@@ -753,19 +752,19 @@ export default function AdminSettingsPage() {
                 {/* Email */}
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider">
-                      Official Email <span className="text-red-500">*</span>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+                      Clinic Email <span className="text-rose-500">*</span>
                     </label>
                     <a
                       href={`mailto:${formData.email}`}
-                      className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
+                      className="text-[11px] font-bold text-rose-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
                     >
                       <span>Test Mail</span>
                       <ExternalLink className="w-3 h-3" />
                     </a>
                   </div>
                   <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
+                    <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                       <Mail className="w-4 h-4" />
                     </div>
                     <input
@@ -773,7 +772,7 @@ export default function AdminSettingsPage() {
                       value={formData.email}
                       onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                       required
-                      className="block w-full pl-10 pr-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                     />
                   </div>
                 </div>
@@ -781,39 +780,39 @@ export default function AdminSettingsPage() {
             </div>
 
             {/* Headquarters & Business Hours */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                Physical Headquarters & Operational Hours
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-rose-600" />
+                Hospital Affiliation & OPD Operating Hours
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                Gujarat Headquarters address jo Contact page aur Google Maps embed me reflect hota hai.
+              <p className="text-xs text-slate-500 mb-6">
+                Official OPD practice address at Marengo CIMS Hospital, Ahmedabad.
               </p>
 
               <div className="flex flex-col gap-5">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                    Full Registered Office Address <span className="text-red-500">*</span>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Hospital Practice Address <span className="text-rose-500">*</span>
                   </label>
                   <textarea
                     rows={2}
                     value={formData.address}
                     onChange={(e) => setFormData((prev) => ({ ...prev, address: e.target.value }))}
                     required
-                    className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all resize-y"
+                    className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all resize-y"
                   />
-                  <p className="text-[11px] text-zinc-400 mt-1">
-                    Default: Orchid Complex, Office No. B, Door No. D-23, Approach Road / Pirojpura Road, Chhapi, Banaskantha, Gujarat - 385210
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    Default: Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad, Gujarat 380060
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                      Business Working Hours <span className="text-red-500">*</span>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      OPD Consultation Hours <span className="text-rose-500">*</span>
                     </label>
                     <div className="relative">
-                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400">
+                      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                         <Clock className="w-4 h-4" />
                       </div>
                       <input
@@ -821,20 +820,20 @@ export default function AdminSettingsPage() {
                         value={formData.businessHours}
                         onChange={(e) => setFormData((prev) => ({ ...prev, businessHours: e.target.value }))}
                         required
-                        className="block w-full pl-10 pr-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                        className="block w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                       Google Maps Embed URL
                     </label>
                     <input
                       type="text"
                       value={formData.googleMapsEmbedUrl}
                       onChange={(e) => setFormData((prev) => ({ ...prev, googleMapsEmbedUrl: e.target.value }))}
-                      className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-mono text-zinc-700 dark:text-zinc-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                      className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
                     />
                   </div>
                 </div>
@@ -846,41 +845,41 @@ export default function AdminSettingsPage() {
         {/* TAB 3: Social Media Channels */}
         {activeTab === "socials" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 flex items-center gap-2">
-                <Globe className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                Verified Social Media Profiles
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <Globe className="w-5 h-5 text-rose-600" />
+                Verified Clinical Social Media Profiles
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                Ye sabhi links website ke footer aur contact blocks me verified icons ke saath link hoti hain.
+              <p className="text-xs text-slate-500 mb-6">
+                Direct links connected to official doctor social channels and educational media.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
-                  { key: "linkedin" as const, label: "LinkedIn Company Profile", color: "bg-blue-600" },
-                  { key: "twitter" as const, label: "Twitter / X Profile", color: "bg-zinc-900 dark:bg-zinc-700" },
-                  { key: "instagram" as const, label: "Instagram Official Page", color: "bg-pink-600" },
-                  { key: "facebook" as const, label: "Facebook Page", color: "bg-blue-700" },
-                  { key: "youtube" as const, label: "YouTube Channel", color: "bg-red-600" },
-                  { key: "github" as const, label: "GitHub Organization", color: "bg-zinc-800" },
+                  { key: "linkedin" as const, label: "LinkedIn Professional Profile", color: "bg-blue-600" },
+                  { key: "youtube" as const, label: "YouTube Health Channel", color: "bg-red-600" },
+                  { key: "instagram" as const, label: "Instagram Medical Education", color: "bg-pink-600" },
+                  { key: "facebook" as const, label: "Facebook Practice Page", color: "bg-blue-700" },
+                  { key: "twitter" as const, label: "Twitter / X Medical Profile", color: "bg-slate-900" },
+                  { key: "github" as const, label: "Academic / Research Profile", color: "bg-slate-700" },
                 ].map(({ key, label, color }) => {
                   const url = formData[key];
                   return (
                     <div
                       key={key}
-                      className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-850 flex flex-col justify-between"
+                      className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between"
                     >
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
                           <span className={`w-2.5 h-2.5 rounded-full ${color}`}></span>
-                          <span className="text-xs font-bold text-zinc-800 dark:text-zinc-200">{label}</span>
+                          <span className="text-xs font-bold text-slate-800">{label}</span>
                         </div>
                         {url && (
                           <a
                             href={url}
                             target="_blank"
                             rel="noreferrer"
-                            className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline inline-flex items-center gap-1"
+                            className="text-[11px] font-bold text-rose-600 hover:underline inline-flex items-center gap-1 cursor-pointer"
                           >
                             <span>Open Link</span>
                             <ExternalLink className="w-3 h-3" />
@@ -888,15 +887,15 @@ export default function AdminSettingsPage() {
                         )}
                       </div>
                       <div className="relative">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-zinc-400">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
                           <LinkIcon className="w-3.5 h-3.5" />
                         </div>
                         <input
                           type="url"
                           value={formData[key]}
                           onChange={(e) => setFormData((prev) => ({ ...prev, [key]: e.target.value }))}
-                          placeholder={`https://${key}.com/digivigee`}
-                          className="block w-full pl-9 pr-3 py-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-lg text-xs font-mono dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                          placeholder={`https://${key}.com/drnoopurpatel`}
+                          className="block w-full pl-9 pr-3 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
                         />
                       </div>
                     </div>
@@ -910,55 +909,55 @@ export default function AdminSettingsPage() {
         {/* TAB 4: Footer & Legal Notice */}
         {activeTab === "footer" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1 flex items-center gap-2">
-                <FileText className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                Global Footer & Legal Notice
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-rose-600" />
+                Global Footer & Practice Legal Notice
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-6">
-                Website ke har page ke bottom me footer bio aur copyright notice customize karein.
+              <p className="text-xs text-slate-500 mb-6">
+                Footer practice summary, accreditation badge, and copyright notices.
               </p>
 
               <div className="flex flex-col gap-5">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                    Footer About Agency Blurb <span className="text-red-500">*</span>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Footer Practice Blurb <span className="text-rose-500">*</span>
                   </label>
                   <textarea
                     rows={3}
                     value={formData.aboutText}
                     onChange={(e) => setFormData((prev) => ({ ...prev, aboutText: e.target.value }))}
                     required
-                    className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all resize-y"
+                    className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all resize-y"
                   />
-                  <p className="text-[11px] text-zinc-400 mt-1">
-                    Footer ke left column me brand logo ke neeche display hone wala statement.
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    Displays under the logo in the primary footer column across all pages.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                      Copyright Line <span className="text-red-500">*</span>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Copyright Line <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="text"
                       value={formData.copyrightText}
                       onChange={(e) => setFormData((prev) => ({ ...prev, copyrightText: e.target.value }))}
                       required
-                      className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider mb-1.5">
-                      Platform Badge / Category
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                      Clinical Accreditation Badge
                     </label>
                     <input
                       type="text"
                       value={formData.badgeText}
                       onChange={(e) => setFormData((prev) => ({ ...prev, badgeText: e.target.value }))}
-                      className="block w-full px-4 py-2.5 bg-zinc-50 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:text-zinc-100 transition-all"
+                      className="block w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 transition-all"
                     />
                   </div>
                 </div>
@@ -967,26 +966,26 @@ export default function AdminSettingsPage() {
           </div>
         )}
 
-        {/* TAB 5: Custom Code & Script Injections (Header, Body, Footer) */}
+        {/* TAB 5: Custom Code & Script Injections */}
         {activeTab === "scripts" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
             {/* Master Control Card */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-zinc-100 dark:border-zinc-800">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                 <div className="flex items-start gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <div className="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0 mt-0.5">
                     <Code2 className="w-5 h-5" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100">
-                        Custom Code & Script Injection
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900">
+                        Custom Code & Tracking Injections
                       </h2>
                       <span
                         className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${
                           formData.customScriptsEnabled
-                            ? "bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300"
-                            : "bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300"
+                            ? "bg-emerald-100 text-emerald-700"
+                            : "bg-amber-100 text-amber-700"
                         }`}
                       >
                         <span
@@ -997,16 +996,15 @@ export default function AdminSettingsPage() {
                         {formData.customScriptsEnabled ? "Active & Live" : "Paused / Disabled"}
                       </span>
                     </div>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 max-w-2xl">
-                      Website ke Header (&lt;head&gt;), Body (&lt;body&gt; shuru me), aur Footer (before &lt;/body&gt;) me
-                      Google Analytics, Google Tag Manager, Meta Pixel ya Chatbots ko realtime me bina redeploy ke control karein.
+                    <p className="text-xs text-slate-500 mt-1 max-w-2xl">
+                      Manage Google Analytics, Tag Manager, or conversion tracking safely without redeploying code.
                     </p>
                   </div>
                 </div>
 
                 {/* Master Toggle */}
-                <div className="flex items-center gap-3 bg-zinc-50 dark:bg-zinc-800/60 p-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 self-start sm:self-auto">
-                  <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                <div className="flex items-center gap-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200 self-start sm:self-auto">
+                  <span className="text-xs font-bold text-slate-700">
                     Master Switch:
                   </span>
                   <button
@@ -1018,7 +1016,7 @@ export default function AdminSettingsPage() {
                       }))
                     }
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
-                      formData.customScriptsEnabled ? "bg-emerald-600" : "bg-zinc-300 dark:bg-zinc-700"
+                      formData.customScriptsEnabled ? "bg-rose-600" : "bg-slate-300"
                     }`}
                   >
                     <span
@@ -1033,23 +1031,23 @@ export default function AdminSettingsPage() {
               {/* Quick Preset Templates Accordion / Buttons */}
               <div className="mt-6">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase tracking-wider flex items-center gap-1.5">
+                  <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                     <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                     1-Click Ready Snippet Templates
                   </h3>
-                  <span className="text-[11px] text-zinc-400 font-medium">Click to insert standard code</span>
+                  <span className="text-[11px] text-slate-400 font-medium">Click to insert standard code</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                   {/* Preset 1: GA4 */}
-                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                  <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Google Analytics 4</span>
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300">Header</span>
+                        <span className="font-bold text-xs text-slate-900">Google Analytics 4</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">Header</span>
                       </div>
-                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
-                        Official gtag.js script for website traffic & conversion analytics.
+                      <p className="text-[11px] text-slate-500 line-clamp-2">
+                        Official gtag.js script for patient visit analytics.
                       </p>
                     </div>
                     <button
@@ -1062,7 +1060,7 @@ export default function AdminSettingsPage() {
                         }));
                         setFeedback({ message: "Google Analytics 4 template added to Header Code!", type: "success" });
                       }}
-                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                      className="mt-3 text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-3 h-3" />
                       Insert into Header
@@ -1070,13 +1068,13 @@ export default function AdminSettingsPage() {
                   </div>
 
                   {/* Preset 2: GTM */}
-                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                  <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Google Tag Manager</span>
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">Head + Body</span>
+                        <span className="font-bold text-xs text-slate-900">Google Tag Manager</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700">Head + Body</span>
                       </div>
-                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
+                      <p className="text-[11px] text-slate-500 line-clamp-2">
                         GTM container code for head and noscript iframe for body.
                       </p>
                     </div>
@@ -1092,7 +1090,7 @@ export default function AdminSettingsPage() {
                         }));
                         setFeedback({ message: "Google Tag Manager template added to Header and Body!", type: "success" });
                       }}
-                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                      className="mt-3 text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-3 h-3" />
                       Insert Head & Body
@@ -1100,14 +1098,14 @@ export default function AdminSettingsPage() {
                   </div>
 
                   {/* Preset 3: Meta Pixel */}
-                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                  <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Meta / FB Pixel</span>
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300">Header</span>
+                        <span className="font-bold text-xs text-slate-900">Meta Pixel</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-purple-100 text-purple-700">Header</span>
                       </div>
-                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
-                        Facebook & Instagram Pixel code for event tracking & ad retargeting.
+                      <p className="text-[11px] text-slate-500 line-clamp-2">
+                        Event tracking and patient awareness campaign measurement.
                       </p>
                     </div>
                     <button
@@ -1120,22 +1118,22 @@ export default function AdminSettingsPage() {
                         }));
                         setFeedback({ message: "Meta Pixel template added to Header Code!", type: "success" });
                       }}
-                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                      className="mt-3 text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-3 h-3" />
                       Insert into Header
                     </button>
                   </div>
 
-                  {/* Preset 4: Live Chat / Tawk.to */}
-                  <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/30 flex flex-col justify-between">
+                  {/* Preset 4: Patient Chat */}
+                  <div className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-1">
-                        <span className="font-bold text-xs text-zinc-900 dark:text-zinc-100">Live Chat Widget</span>
-                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300">Footer</span>
+                        <span className="font-bold text-xs text-slate-900">Clinic Chat Widget</span>
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-700">Footer</span>
                       </div>
-                      <p className="text-[11px] text-zinc-500 dark:text-zinc-400 line-clamp-2">
-                        Tawk.to, Crisp, Zendesk, or custom support chatbot widget.
+                      <p className="text-[11px] text-slate-500 line-clamp-2">
+                        Patient care coordinator live chat widget.
                       </p>
                     </div>
                     <button
@@ -1148,7 +1146,7 @@ export default function AdminSettingsPage() {
                         }));
                         setFeedback({ message: "Live Chat template added to Footer Code!", type: "success" });
                       }}
-                      className="mt-3 text-xs font-bold text-emerald-600 dark:text-emerald-400 hover:text-emerald-700 flex items-center gap-1 cursor-pointer"
+                      className="mt-3 text-xs font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
                     >
                       <Plus className="w-3 h-3" />
                       Insert into Footer
@@ -1159,26 +1157,26 @@ export default function AdminSettingsPage() {
             </div>
 
             {/* Editor 1: Header Code */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-rose-600" />
                     1. Header Code (&lt;head&gt; Injection)
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                    Yeh code public website ke &lt;head&gt; tag ke andar sabse pehle run hota hai (Google Analytics, Meta Pixel, Meta tags).
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Runs inside the &lt;head&gt; tag on all pages (Analytics, Verification tags).
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600">
                     {formData.customHeaderCode.length} chars
                   </span>
                   {formData.customHeaderCode.trim() && (
                     <button
                       type="button"
                       onClick={() => setFormData((prev) => ({ ...prev, customHeaderCode: "" }))}
-                      className="text-[11px] font-bold text-red-500 hover:underline cursor-pointer"
+                      className="text-[11px] font-bold text-rose-600 hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -1186,10 +1184,10 @@ export default function AdminSettingsPage() {
                 </div>
               </div>
 
-              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950">
-                <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/90 border-b border-zinc-800/80 text-[11px] text-zinc-400 font-mono">
+              <div className="relative rounded-xl overflow-hidden border border-slate-300 bg-slate-950">
+                <div className="flex items-center justify-between px-4 py-2 bg-slate-900 border-b border-slate-800 text-[11px] text-slate-400 font-mono">
                   <span>HTML / JavaScript &lt;head&gt;</span>
-                  <span>Auto-Formatted & Isolated</span>
+                  <span>Auto-Formatted & Safe Sandbox</span>
                 </div>
                 <textarea
                   value={formData.customHeaderCode}
@@ -1197,41 +1195,40 @@ export default function AdminSettingsPage() {
                   placeholder={`<!-- Paste your <script>, <meta>, or <link> tags here -->\n<script>\n  // Your custom header code\n</script>`}
                   rows={8}
                   spellCheck={false}
-                  className="w-full p-4 font-mono text-xs leading-relaxed bg-zinc-950 text-emerald-400 placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 resize-y"
+                  className="w-full p-4 font-mono text-xs leading-relaxed bg-slate-950 text-emerald-400 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-rose-500/50 resize-y"
                 />
               </div>
 
-              {/* Validation helper */}
               {formData.customHeaderCode.includes("<script") &&
                 formData.customHeaderCode.split("<script").length !== formData.customHeaderCode.split("</script>").length && (
-                  <div className="flex items-center gap-2 mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
+                  <div className="flex items-center gap-2 mt-2 text-xs text-amber-600 font-medium">
                     <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                    <span>Dhyan dein: &lt;script&gt; tag ka closing &lt;/script&gt; match nahi ho raha hai. Tag check karein.</span>
+                    <span>Please ensure every &lt;script&gt; tag has a matching closing &lt;/script&gt; tag.</span>
                   </div>
                 )}
             </div>
 
             {/* Editor 2: Body Code */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-blue-600" />
                     2. Body Code (&lt;body&gt; Start Injection)
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                    Yeh code &lt;body&gt; tag open hone ke turant baad run hota hai (Google Tag Manager &lt;noscript&gt; ya visual announcement snippets).
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Injected immediately after the opening &lt;body&gt; tag (e.g. GTM noscript).
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600">
                     {formData.customBodyCode.length} chars
                   </span>
                   {formData.customBodyCode.trim() && (
                     <button
                       type="button"
                       onClick={() => setFormData((prev) => ({ ...prev, customBodyCode: "" }))}
-                      className="text-[11px] font-bold text-red-500 hover:underline cursor-pointer"
+                      className="text-[11px] font-bold text-rose-600 hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -1239,8 +1236,8 @@ export default function AdminSettingsPage() {
                 </div>
               </div>
 
-              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950">
-                <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/90 border-b border-zinc-800/80 text-[11px] text-zinc-400 font-mono">
+              <div className="relative rounded-xl overflow-hidden border border-slate-300 bg-slate-950">
+                <div className="flex items-center justify-between px-4 py-2 bg-slate-900 border-b border-slate-800 text-[11px] text-slate-400 font-mono">
                   <span>HTML &lt;noscript&gt; / &lt;body&gt;</span>
                   <span>Immediately after opening body</span>
                 </div>
@@ -1250,32 +1247,32 @@ export default function AdminSettingsPage() {
                   placeholder={`<!-- Paste GTM <noscript> or body elements here -->\n<noscript>\n  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXX" height="0" width="0"></iframe>\n</noscript>`}
                   rows={6}
                   spellCheck={false}
-                  className="w-full p-4 font-mono text-xs leading-relaxed bg-zinc-950 text-blue-400 placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 resize-y"
+                  className="w-full p-4 font-mono text-xs leading-relaxed bg-slate-950 text-blue-400 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-blue-500/50 resize-y"
                 />
               </div>
             </div>
 
             {/* Editor 3: Footer Code */}
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <Terminal className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 flex items-center gap-2">
+                    <Terminal className="w-4 h-4 text-purple-600" />
                     3. Footer Code (Before &lt;/body&gt; Closing)
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                    Yeh code page ke end me run hota hai. Isse page load speed par koi farq nahi padta (Live Chat, WhatsApp widget, conversion trackers).
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Runs at the bottom of the page in deferred non-blocking mode.
                   </p>
                 </div>
                 <div className="flex items-center gap-2 text-xs">
-                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                  <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600">
                     {formData.customFooterCode.length} chars
                   </span>
                   {formData.customFooterCode.trim() && (
                     <button
                       type="button"
                       onClick={() => setFormData((prev) => ({ ...prev, customFooterCode: "" }))}
-                      className="text-[11px] font-bold text-red-500 hover:underline cursor-pointer"
+                      className="text-[11px] font-bold text-rose-600 hover:underline cursor-pointer"
                     >
                       Clear
                     </button>
@@ -1283,8 +1280,8 @@ export default function AdminSettingsPage() {
                 </div>
               </div>
 
-              <div className="relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950">
-                <div className="flex items-center justify-between px-4 py-2 bg-zinc-900/90 border-b border-zinc-800/80 text-[11px] text-zinc-400 font-mono">
+              <div className="relative rounded-xl overflow-hidden border border-slate-300 bg-slate-950">
+                <div className="flex items-center justify-between px-4 py-2 bg-slate-900 border-b border-slate-800 text-[11px] text-slate-400 font-mono">
                   <span>HTML / JavaScript before &lt;/body&gt;</span>
                   <span>Non-blocking / Deferred</span>
                 </div>
@@ -1294,75 +1291,66 @@ export default function AdminSettingsPage() {
                   placeholder={`<!-- Paste live chat widget or footer conversion scripts here -->\n<script>\n  // Live chat or footer script\n</script>`}
                   rows={8}
                   spellCheck={false}
-                  className="w-full p-4 font-mono text-xs leading-relaxed bg-zinc-950 text-indigo-400 placeholder:text-zinc-600 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 resize-y"
+                  className="w-full p-4 font-mono text-xs leading-relaxed bg-slate-950 text-indigo-400 placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-indigo-500/50 resize-y"
                 />
               </div>
-
-              {/* Validation helper */}
-              {formData.customFooterCode.includes("<script") &&
-                formData.customFooterCode.split("<script").length !== formData.customFooterCode.split("</script>").length && (
-                  <div className="flex items-center gap-2 mt-2 text-xs text-amber-600 dark:text-amber-400 font-medium">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-                    <span>Dhyan dein: &lt;script&gt; tag ka closing &lt;/script&gt; match nahi ho raha hai. Tag check karein.</span>
-                  </div>
-                )}
             </div>
 
             {/* Enterprise Safety Note */}
-            <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-800/80 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-200 text-xs flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+            <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-900 text-xs flex items-start gap-3">
+              <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold block mb-0.5">Enterprise Fail-Safe & Real-Time Sync</span>
-                Injected custom scripts automatically run inside isolated try/catch browser wrappers. Agar koi external script fail bhi hota hai, website ka core React navigation bilkul safe aur fast rahega. Save karne par saare open tabs aur visitors bina page reload ke update ho jayenge.
+                <span className="font-bold block mb-0.5">Fail-Safe Medical Platform Architecture</span>
+                Injected custom scripts automatically execute inside isolated try/catch browser wrappers. If any external script experiences connectivity issues, the clinical appointment forms, telephone call links, and doctor information remain fast, fluid, and uninterrupted.
               </div>
             </div>
           </div>
         )}
 
-        {/* TAB 6: Live Interactive Simulator (Side-by-Side Live Preview) */}
+        {/* TAB 6: Live Interactive Simulator */}
         {activeTab === "preview" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                    <Eye className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+                    <Eye className="w-5 h-5 text-rose-600" />
                     Live Website Visual Simulator
                   </h2>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                    Aap jo bhi changes settings me kar rahe hain, wo website par aisi real-time dikhengi (Turant Update).
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Real-time preview of how current settings render on the public oncology platform.
                   </p>
                 </div>
-                <span className="px-2.5 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950/80 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
-                  Real-Time Mockup
+                <span className="px-2.5 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">
+                  Live Preview Mode
                 </span>
               </div>
 
-              {/* Browser Mockup Window */}
-              <div className="rounded-2xl border border-zinc-300 dark:border-zinc-700 overflow-hidden bg-zinc-950 shadow-2xl">
+              {/* Browser Mockup Window - Light First */}
+              <div className="rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-md">
                 {/* Browser Top Bar */}
-                <div className="bg-zinc-900 px-4 py-2.5 flex items-center gap-3 border-b border-zinc-800">
+                <div className="bg-slate-100 px-4 py-2.5 flex items-center gap-3 border-b border-slate-200">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
-                    <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
-                    <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-rose-400 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
                   </div>
-                  <div className="flex-1 max-w-md mx-auto bg-zinc-800 px-3 py-1 rounded-md text-[11px] font-mono text-zinc-400 truncate text-center">
+                  <div className="flex-1 max-w-md mx-auto bg-white px-3 py-1 rounded-lg border border-slate-200 text-[11px] font-mono text-slate-600 truncate text-center shadow-2xs">
                     https://drnoopurpatel.com
                   </div>
                 </div>
 
                 {/* Simulated Announcement Bar */}
                 {formData.showAnnouncementBar && (
-                  <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white px-4 py-2 text-xs font-bold text-center tracking-wide flex items-center justify-center gap-2">
+                  <div className="bg-gradient-to-r from-rose-600 via-rose-500 to-rose-700 text-white px-4 py-2 text-xs font-bold text-center tracking-wide flex items-center justify-center gap-2">
                     <span>{formData.announcementBarText}</span>
                   </div>
                 )}
 
                 {/* Simulated Desktop Header Navigation */}
-                <div className="bg-zinc-900/90 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-zinc-800 text-white">
+                <div className="bg-white/95 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-100 text-slate-900">
                   <div className="flex items-center gap-3">
-                    <div className="relative h-8 w-28">
+                    <div className="relative h-8 w-32">
                       <Image
                         src={formData.logoUrl || "/images/doctor/assets/logo.png"}
                         alt={formData.siteName}
@@ -1371,15 +1359,15 @@ export default function AdminSettingsPage() {
                         unoptimized
                       />
                     </div>
-                    <span className="font-bold text-sm text-zinc-200 hidden sm:inline">{formData.siteName}</span>
+                    <span className="font-bold text-sm text-slate-900 hidden sm:inline">{formData.siteName}</span>
                   </div>
 
-                  <div className="hidden md:flex items-center gap-6 text-xs font-semibold text-zinc-300">
-                    <span className="hover:text-white cursor-pointer">Services</span>
-                    <span className="hover:text-white cursor-pointer">Case Studies</span>
-                    <span className="hover:text-white cursor-pointer">About</span>
-                    <span className="hover:text-white cursor-pointer">Blog</span>
-                    <span className="hover:text-white cursor-pointer">Contact</span>
+                  <div className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
+                    <span className="hover:text-rose-600 cursor-pointer">Treatments</span>
+                    <span className="hover:text-rose-600 cursor-pointer">Patient Stories</span>
+                    <span className="hover:text-rose-600 cursor-pointer">About Doctor</span>
+                    <span className="hover:text-rose-600 cursor-pointer">Breast Health Blog</span>
+                    <span className="hover:text-rose-600 cursor-pointer">Contact OPD</span>
                   </div>
 
                   <div className="flex items-center gap-3">
@@ -1387,50 +1375,50 @@ export default function AdminSettingsPage() {
                       href={`https://wa.me/${formData.whatsapp.replace(/\D/g, "")}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm"
+                      className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors flex items-center gap-1.5 shadow-2xs"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
-                      <span>WhatsApp</span>
+                      <span>WhatsApp Care</span>
                     </a>
                   </div>
                 </div>
 
                 {/* Simulated Hero Snippet */}
-                <div className="p-8 sm:p-12 text-center bg-gradient-to-b from-zinc-900 to-zinc-950 text-white border-b border-zinc-800">
-                  <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-emerald-950 text-emerald-400 border border-emerald-800 mb-4">
-                    {formData.badgeText || "Official Website"}
+                <div className="p-8 sm:p-12 text-center bg-gradient-to-b from-rose-50/50 to-white text-slate-900 border-b border-slate-100">
+                  <span className="inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-rose-50 text-rose-700 border border-rose-200 mb-4">
+                    {formData.badgeText || "Surgical Breast Oncology & Oncoplastic Surgery"}
                   </span>
-                  <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2">
-                    {formData.tagline || "Professional Solutions For Your Digital Growth"}
+                  <h3 className="text-2xl sm:text-3xl font-black tracking-tight mb-2 text-slate-900 font-serif">
+                    {formData.tagline || "Breast Surgeon & Oncoplastic Surgeon — Expert Care. Stronger Tomorrows."}
                   </h3>
-                  <p className="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto">
-                    Directly connected to Gujarat HQ at {formData.address.split(",")[0]}. Call us at {formData.phone}.
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-xl mx-auto">
+                    Practicing at Marengo CIMS Hospital, Ahmedabad. Call OPD helpline at {formData.phone}.
                   </p>
                 </div>
 
                 {/* Simulated Footer Snippet */}
-                <div className="bg-zinc-950 p-6 sm:p-8 text-zinc-400 text-xs border-t border-zinc-900">
+                <div className="bg-slate-50 p-6 sm:p-8 text-slate-600 text-xs border-t border-slate-200">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <span className="text-white font-bold text-sm block mb-1">{formData.siteName}</span>
-                      <p className="text-zinc-500 text-[11px] leading-relaxed max-w-md">{formData.aboutText}</p>
+                      <span className="text-slate-900 font-bold text-sm block mb-1">{formData.siteName}</span>
+                      <p className="text-slate-500 text-[11px] leading-relaxed max-w-md">{formData.aboutText}</p>
                     </div>
                     <div>
-                      <span className="text-white font-bold text-xs block mb-1">Direct Support</span>
-                      <p className="text-zinc-500 text-[11px]">
+                      <span className="text-slate-900 font-bold text-xs block mb-1">Direct Consultation Helpline</span>
+                      <p className="text-slate-600 text-[11px]">
                         📞 {formData.phone} • ✉️ {formData.email}
                       </p>
-                      <p className="text-zinc-500 text-[11px] mt-0.5">📍 {formData.address}</p>
+                      <p className="text-slate-500 text-[11px] mt-0.5">📍 {formData.address}</p>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-zinc-500">
+                  <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500">
                     <span>{formData.copyrightText}</span>
                     <div className="flex items-center gap-3">
-                      <span>Privacy</span>
+                      <span>Patient Privacy</span>
                       <span>•</span>
-                      <span>Terms</span>
+                      <span>Medical Disclaimer</span>
                       <span>•</span>
-                      <span>Security</span>
+                      <span>Marengo CIMS Hospital</span>
                     </div>
                   </div>
                 </div>
@@ -1439,22 +1427,22 @@ export default function AdminSettingsPage() {
           </div>
         )}
 
-        {/* TAB 6: Cloud Firestore Sync & Maintenance */}
+        {/* TAB 7: Cloud Firestore Sync & Maintenance */}
         {activeTab === "sync" && (
           <div className="flex flex-col gap-6 animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-zinc-900 p-6 sm:p-7 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
+            <div className="bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 shadow-2xs">
               <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
                 <div className="flex-1 min-w-0">
-                  <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-2 flex items-center gap-2">
+                  <h2 className="text-lg font-bold text-slate-900 mb-2 flex items-center gap-2">
                     <Zap className="w-5 h-5 text-amber-500" />
                     Cloud Firestore Master Database Synchronization
                   </h2>
-                  <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                    Synchronize and seed all 12 platform CMS collections (Services, Portfolio, Blogs, Testimonials, FAQs, Team Members, Page Content, Offers, Redirects, Site Settings, and RBAC Roles) directly to live Cloud Firestore with atomic batching.
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                    Synchronize and seed all 12 platform clinical collections (Treatments & Services, Patient Cases, Health Insights, Reviews, FAQs, Medical Team, Pages, Banners, URL Redirects, Practice Settings, and RBAC Roles) directly to live Cloud Firestore with atomic batching.
                   </p>
 
                   {syncDetails && (
-                    <div className="mt-4 p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-xs sm:text-sm font-medium text-emerald-800 dark:text-emerald-300 flex items-start gap-2.5">
+                    <div className="mt-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs sm:text-sm font-medium text-emerald-800 flex items-start gap-2.5">
                       <CheckCircle2 className="w-4 h-4 mt-0.5 text-emerald-600 shrink-0" />
                       <span>{syncDetails}</span>
                     </div>
@@ -1465,16 +1453,16 @@ export default function AdminSettingsPage() {
                   type="button"
                   onClick={handleSyncDatabase}
                   disabled={isSyncing}
-                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 text-xs font-bold hover:bg-zinc-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-zinc-900 transition-all disabled:opacity-70 cursor-pointer"
+                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border border-slate-300 bg-white text-slate-800 text-xs font-bold hover:bg-slate-50 transition-all disabled:opacity-70 cursor-pointer shadow-2xs"
                 >
                   {isSyncing ? (
                     <>
-                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <RefreshCw className="w-4 h-4 animate-spin text-rose-600" />
                       <span>Syncing Collections...</span>
                     </>
                   ) : (
                     <>
-                      <RefreshCw className="w-4 h-4" />
+                      <RefreshCw className="w-4 h-4 text-rose-600" />
                       <span>Sync All 12 Collections</span>
                     </>
                   )}
@@ -1483,21 +1471,21 @@ export default function AdminSettingsPage() {
             </div>
 
             {/* Admin Security & Password Management Card */}
-            <div className="bg-indigo-50/50 dark:bg-indigo-950/20 p-6 sm:p-7 rounded-2xl border border-indigo-200/80 dark:border-indigo-900/40 shadow-sm">
+            <div className="bg-indigo-50/60 p-6 sm:p-7 rounded-2xl border border-indigo-200 shadow-2xs">
               <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
                 <div>
-                  <h3 className="text-base font-bold text-indigo-950 dark:text-indigo-300 flex items-center gap-2 mb-1">
-                    <KeyRound className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
-                    Admin Account & Password Security
+                  <h3 className="text-base font-bold text-indigo-950 flex items-center gap-2 mb-1">
+                    <KeyRound className="w-4 h-4 text-indigo-600" />
+                    Master Administrator Account Security
                   </h3>
-                  <p className="text-xs text-indigo-800/80 dark:text-indigo-300/80 leading-relaxed max-w-xl">
-                    Apna admin password change karein. New password instant scrypt encryption ke sath secure Cloud Firestore aur Firebase Authentication dono jagah sync hota hai.
+                  <p className="text-xs text-indigo-900/80 leading-relaxed max-w-xl">
+                    Change Dr. Noopur Patel's administrator login credentials. New passwords are encrypted with standard scrypt hashing and synchronized to Firebase Authentication.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsPasswordModalOpen(true)}
-                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-600/20 transition-all cursor-pointer"
+                  className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
                 >
                   <KeyRound className="w-4 h-4" />
                   <span>Change Admin Password</span>
@@ -1506,21 +1494,21 @@ export default function AdminSettingsPage() {
             </div>
 
             {/* Dangerous Zone / Reset to Defaults Card */}
-            <div className="bg-red-50/50 dark:bg-red-950/20 p-6 sm:p-7 rounded-2xl border border-red-200/80 dark:border-red-900/40 shadow-sm">
+            <div className="bg-red-50/60 p-6 sm:p-7 rounded-2xl border border-red-200 shadow-2xs">
               <div className="flex flex-col sm:flex-row items-start justify-between gap-6">
                 <div>
-                  <h3 className="text-base font-bold text-red-950 dark:text-red-300 flex items-center gap-2 mb-1">
-                    <RotateCcw className="w-4 h-4 text-red-600 dark:text-red-400" />
-                    Reset Global Settings to Canonical Defaults
+                  <h3 className="text-base font-bold text-red-950 flex items-center gap-2 mb-1">
+                    <RotateCcw className="w-4 h-4 text-red-600" />
+                    Reset Global Settings to Practice Defaults
                   </h3>
-                  <p className="text-xs text-red-700/80 dark:text-red-400/80 leading-relaxed max-w-xl">
-                    Agar aap test data clear karna chahte hain aur DigiVigee ke verified production phone (+91 90811 45178), Banaskantha HQ address, aur official social links restore karna chahte hain, toh yahan click karein.
+                  <p className="text-xs text-red-800/80 leading-relaxed max-w-xl">
+                    Restore canonical contact details (+91 98765 43210), Marengo CIMS Hospital Ahmedabad address, verified social profiles, and patient consultation policies.
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => setIsResetModalOpen(true)}
-                  className="w-full sm:w-auto shrink-0 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold shadow-md shadow-red-600/20 transition-all cursor-pointer"
+                  className="w-full sm:w-auto shrink-0 px-5 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
                 >
                   Reset Settings Now
                 </button>
@@ -1530,15 +1518,15 @@ export default function AdminSettingsPage() {
         )}
 
         {/* Bottom Save Bar */}
-        <div className="flex items-center justify-between p-4 bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-          <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" />
-            <span>Changes are automatically recorded in the security audit log and revision history.</span>
+        <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-slate-200/80 shadow-2xs">
+          <div className="flex items-center gap-2 text-xs text-slate-500">
+            <ShieldCheck className="w-4 h-4 text-rose-600" />
+            <span>Changes are automatically recorded in clinical audit logging and revision history.</span>
           </div>
           <button
             type="submit"
             disabled={isSaving}
-            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold transition-all shadow-md shadow-emerald-600/20 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold transition-all shadow-xs active:scale-[0.98] disabled:opacity-70 cursor-pointer"
           >
             {isSaving ? (
               <>
@@ -1560,8 +1548,8 @@ export default function AdminSettingsPage() {
         isOpen={isResetModalOpen}
         onClose={() => setIsResetModalOpen(false)}
         onConfirm={handleResetToDefaults}
-        title="Reset Global Website Settings?"
-        message={`This will restore canonical DigiVigee branding (DigiVigee), Banaskantha Gujarat HQ address, official contact numbers (+91 90811 45178), all 6 verified social media profiles, top announcement bar, and footer statements.\n\nAll changes will immediately sync across live Cloud Firestore and open website tabs.`}
+        title="Reset Global Practice Settings?"
+        message={`This will restore canonical Dr. Noopur Patel branding, Marengo CIMS Hospital Ahmedabad address, official consultation numbers (+91 98765 43210), verified clinical social media profiles, top announcement bar, and footer statements.\n\nAll changes will immediately sync across live Cloud Firestore and open website tabs.`}
         confirmLabel="Yes, Reset to Defaults"
         isDestructive={false}
         isLoading={isResetting}

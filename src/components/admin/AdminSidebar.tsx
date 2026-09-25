@@ -410,7 +410,7 @@ export function AdminSidebar({
               </>
             ) : (
               <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80 flex items-center justify-center font-bold text-xs shrink-0 mx-auto">
-                DV
+                NP
               </div>
             )}
           </div>

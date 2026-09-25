@@ -136,7 +136,7 @@ export default function AdminMediaLibraryPage() {
             : null
         );
       }
-      setFeedback({ message: "✨ Asset metadata updated successfully!", type: "success" });
+      setFeedback({ message: "Asset metadata updated successfully!", type: "success" });
       setTimeout(() => setFeedback(null), 3000);
     } else {
       throw new Error(data.error || "Update failed");
@@ -154,7 +154,7 @@ export default function AdminMediaLibraryPage() {
     if (data.success) {
       setItems((prev) => prev.filter((item) => item.id !== id));
       setSelectedItem(null);
-      setFeedback({ message: "🗑️ Media asset deleted successfully.", type: "success" });
+      setFeedback({ message: "Media asset deleted successfully.", type: "success" });
       setTimeout(() => setFeedback(null), 3000);
       return { success: true };
     }
@@ -183,7 +183,7 @@ export default function AdminMediaLibraryPage() {
         setUploadFile(null);
         setUploadAltText("");
         setUploadTitle("");
-        setFeedback({ message: `✨ "${data.item.name}" uploaded successfully!`, type: "success" });
+        setFeedback({ message: `"${data.item.name}" uploaded successfully!`, type: "success" });
         setTimeout(() => setFeedback(null), 4000);
       } else {
         setFeedback({ message: data.error || "Upload failed.", type: "error" });
@@ -208,7 +208,7 @@ export default function AdminMediaLibraryPage() {
         setIsResetConfirmOpen(false);
         await loadMedia();
         setFeedback({
-          message: `🔄 Restored ${data.count || 37} canonical DigiVigee media assets successfully!`,
+          message: `Restored ${data.count || 37} canonical clinical media assets successfully!`,
           type: "success",
         });
         setTimeout(() => setFeedback(null), 5000);
@@ -291,7 +291,7 @@ export default function AdminMediaLibraryPage() {
     {
       key: "logos",
       label: `Brand & Logos (${items.filter((i) => getItemCategory(i) === "logos").length})`,
-      icon: <Tag className="w-3.5 h-3.5 text-emerald-600" />,
+      icon: <Tag className="w-3.5 h-3.5 text-rose-600" />,
     },
     {
       key: "hero",
@@ -300,27 +300,27 @@ export default function AdminMediaLibraryPage() {
     },
     {
       key: "blog",
-      label: `Blog Covers (${items.filter((i) => getItemCategory(i) === "blog").length})`,
+      label: `Health Blog (${items.filter((i) => getItemCategory(i) === "blog").length})`,
       icon: <BookOpen className="w-3.5 h-3.5 text-purple-600" />,
     },
     {
       key: "portfolio",
-      label: `Case Studies (${items.filter((i) => getItemCategory(i) === "portfolio").length})`,
+      label: `Clinical Cases (${items.filter((i) => getItemCategory(i) === "portfolio").length})`,
       icon: <Briefcase className="w-3.5 h-3.5 text-amber-600" />,
     },
     {
       key: "team",
-      label: `Team Photos (${items.filter((i) => getItemCategory(i) === "team").length})`,
+      label: `Medical Team (${items.filter((i) => getItemCategory(i) === "team").length})`,
       icon: <Users className="w-3.5 h-3.5 text-teal-600" />,
     },
     {
       key: "awards",
-      label: `Awards & Badges (${items.filter((i) => getItemCategory(i) === "awards").length})`,
+      label: `Hospital Accreditations (${items.filter((i) => getItemCategory(i) === "awards").length})`,
       icon: <Award className="w-3.5 h-3.5 text-rose-600" />,
     },
     {
       key: "showcase",
-      label: `Features & Cards (${items.filter((i) => getItemCategory(i) === "showcase").length})`,
+      label: `Features & Badges (${items.filter((i) => getItemCategory(i) === "showcase").length})`,
       icon: <Layers className="w-3.5 h-3.5 text-indigo-600" />,
     },
   ];
@@ -335,23 +335,23 @@ export default function AdminMediaLibraryPage() {
   return (
     <div className="flex flex-col gap-6 max-w-7xl mx-auto w-full pb-16">
       {/* 1. Header Banner */}
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs">
         <div className="flex items-start sm:items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/20 shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center shrink-0 shadow-2xs">
             <ImageIcon className="w-6 h-6" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <h1 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">
-                Media Library
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
+                Clinical Media Library
               </h1>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                🟢 Live Media Cloud: Connected (Turant Sync)
+                Live Media Cloud: Connected & Synced
               </span>
             </div>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              Upload, organize, inspect dimensions, and manage visual brand assets with real-time website sync.
+            <p className="text-xs sm:text-sm text-slate-500">
+              Manage doctor portraits, surgical illustrations, blog infographics, and hospital accreditation assets.
             </p>
           </div>
         </div>
@@ -361,16 +361,16 @@ export default function AdminMediaLibraryPage() {
           <button
             type="button"
             onClick={() => setIsResetConfirmOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors shadow-sm cursor-pointer"
-            title="Restore all canonical DigiVigee production assets"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
+            title="Restore all canonical Dr. Noopur Patel practice assets"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-zinc-500" />
+            <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             Reset to Defaults
           </button>
           <button
             type="button"
             onClick={() => setShowUploadModal(true)}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-md shadow-emerald-600/20 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-rose-600 text-white hover:bg-rose-700 transition-all shadow-xs cursor-pointer"
           >
             <Upload className="w-4 h-4" />
             Upload New Media
@@ -378,81 +378,81 @@ export default function AdminMediaLibraryPage() {
         </div>
       </div>
 
-      {/* 2. Bento KPI Cards (10-Year-Old Child Friendly) */}
+      {/* 2. Bento KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Total Assets */}
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Total Visual Assets</span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-900/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Total Visual Assets</span>
+            <div className="w-8 h-8 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center">
               <FileImage className="w-4 h-4" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">
+            <span className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               {items.length} Files
             </span>
-            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">100% Real Sync</span>
+            <span className="text-xs font-semibold text-emerald-600">100% Real Sync</span>
           </div>
-          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-2">
-            Logos, hero graphics, blog covers &amp; case study visuals.
+          <p className="text-[11px] text-slate-500 mt-2 font-normal">
+            Portraits, surgical diagrams, breast health covers & badges.
           </p>
         </div>
 
         {/* Card 2: Total Storage */}
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Storage Footprint</span>
-            <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-900/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Storage Footprint</span>
+            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center">
               <HardDrive className="w-4 h-4" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">
+            <span className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               {totalStorageMb} MB
             </span>
-            <span className="text-xs font-bold text-blue-600 dark:text-blue-400">Optimized</span>
+            <span className="text-xs font-semibold text-blue-600">WebP Optimized</span>
           </div>
-          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-2">
-            Compressed WebP, PNG &amp; JPG formats for rapid page loads.
+          <p className="text-[11px] text-slate-500 mt-2 font-normal">
+            High-fidelity compressed medical images for instantaneous loading.
           </p>
         </div>
 
         {/* Card 3: Alt Text SEO Health */}
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Alt Text SEO Health</span>
-            <div className="w-8 h-8 rounded-xl bg-purple-50 dark:bg-purple-950/60 border border-purple-200 dark:border-purple-900/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Alt Text SEO Health</span>
+            <div className="w-8 h-8 rounded-xl bg-purple-50 border border-purple-100 text-purple-600 flex items-center justify-center">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">
+            <span className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
               {seoCompliancePct}%
             </span>
-            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">
+            <span className="text-xs font-semibold text-emerald-600">
               {hasAltCount}/{items.length} Ready
             </span>
           </div>
-          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-2">
-            Accessible descriptions for Google Image Search &amp; screen readers.
+          <p className="text-[11px] text-slate-500 mt-2 font-normal">
+            Accessible descriptions for Google Medical Image indexing.
           </p>
         </div>
 
         {/* Card 4: Active Placements */}
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs relative overflow-hidden flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Website Integration</span>
-            <div className="w-8 h-8 rounded-xl bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-900/60 text-amber-600 dark:text-amber-400 flex items-center justify-center">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">Website Integration</span>
+            <div className="w-8 h-8 rounded-xl bg-amber-50 border border-amber-100 text-amber-600 flex items-center justify-center">
               <Sparkles className="w-4 h-4" />
             </div>
           </div>
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">Live Active</span>
-            <span className="text-xs font-bold text-amber-600 dark:text-amber-400">Turant Update</span>
+            <span className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Live Active</span>
+            <span className="text-xs font-semibold text-amber-600">Turant Update</span>
           </div>
-          <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-2">
-            Referenced in blogs, portfolio, services, team &amp; testimonials.
+          <p className="text-[11px] text-slate-500 mt-2 font-normal">
+            Referenced in treatments, cases, articles & patient reviews.
           </p>
         </div>
       </div>
@@ -461,19 +461,19 @@ export default function AdminMediaLibraryPage() {
       {feedback && (
         <div className="animate-in fade-in slide-in-from-top-2 duration-300">
           <div
-            className={`flex items-center justify-between p-4 rounded-xl border ${
+            className={`flex items-center justify-between p-4 rounded-xl border shadow-2xs ${
               feedback.type === "success"
-                ? "bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-900/20 dark:border-emerald-900/50 dark:text-emerald-400"
-                : "bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-900/50 dark:text-red-400"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+                : "bg-red-50 border-red-200 text-red-800"
             }`}
           >
             <div className="flex items-center gap-3">
-              {feedback.type === "success" ? <CheckCircle2 className="w-5 h-5" /> : <XCircle className="w-5 h-5" />}
-              <span className="font-medium text-sm">{feedback.message}</span>
+              {feedback.type === "success" ? <CheckCircle2 className="w-5 h-5 text-emerald-600" /> : <XCircle className="w-5 h-5 text-red-600" />}
+              <span className="font-semibold text-sm">{feedback.message}</span>
             </div>
             <button
               onClick={() => setFeedback(null)}
-              className="p-1 rounded-md hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer"
+              className="p-1 rounded-md hover:bg-black/5 transition-colors cursor-pointer text-slate-400"
             >
               <X className="w-4 h-4" />
             </button>
@@ -482,15 +482,15 @@ export default function AdminMediaLibraryPage() {
       )}
 
       {/* 3. Category Pills Row */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-200">
         {categories.map((cat) => (
           <button
             key={cat.key}
             onClick={() => setSelectedCategory(cat.key)}
-            className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+            className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
               selectedCategory === cat.key
-                ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm"
-                : "bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                ? "bg-slate-900 text-white shadow-2xs"
+                : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
             }`}
           >
             {cat.icon}
@@ -500,16 +500,16 @@ export default function AdminMediaLibraryPage() {
       </div>
 
       {/* 4. Filter and Search Bar */}
-      <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col md:flex-row gap-3 items-center justify-between">
         {/* Search Input */}
         <div className="relative flex-1 w-full">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
             placeholder="Search by image name, file name, or alt text..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-sm font-medium text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 border border-slate-200 rounded-xl bg-slate-50 text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all"
           />
         </div>
 
@@ -519,7 +519,7 @@ export default function AdminMediaLibraryPage() {
             <select
               value={altFilter}
               onChange={(e) => setAltFilter(e.target.value as "all" | "missing-alt" | "has-alt")}
-              className="w-full px-3 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 text-xs font-bold text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+              className="w-full px-3 py-2.5 border border-slate-200 rounded-xl bg-slate-50 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 cursor-pointer"
             >
               <option value="all">All Alt Status</option>
               <option value="has-alt">Alt Text Ready ({hasAltCount})</option>
@@ -528,14 +528,14 @@ export default function AdminMediaLibraryPage() {
           </div>
 
           {/* Grid / List View Toggle */}
-          <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl shrink-0">
+          <div className="flex items-center bg-slate-100 p-1 rounded-xl shrink-0 border border-slate-200 shadow-2xs">
             <button
               type="button"
               onClick={() => setViewMode("grid")}
-              className={`p-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 viewMode === "grid"
-                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-xs"
-                  : "text-zinc-400 hover:text-zinc-600"
+                  ? "bg-white text-slate-900 shadow-2xs"
+                  : "text-slate-400 hover:text-slate-600"
               }`}
               title="Grid View"
             >
@@ -544,10 +544,10 @@ export default function AdminMediaLibraryPage() {
             <button
               type="button"
               onClick={() => setViewMode("list")}
-              className={`p-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`p-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                 viewMode === "list"
-                  ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-xs"
-                  : "text-zinc-400 hover:text-zinc-600"
+                  ? "bg-white text-slate-900 shadow-2xs"
+                  : "text-slate-400 hover:text-slate-600"
               }`}
               title="List View"
             >
@@ -559,22 +559,22 @@ export default function AdminMediaLibraryPage() {
 
       {/* 5. Media Grid / Table View */}
       {isLoading ? (
-        <div className="flex flex-col items-center justify-center py-20 text-zinc-500 dark:text-zinc-400">
-          <div className="animate-spin w-8 h-8 border-3 border-emerald-500 border-t-transparent rounded-full mb-4"></div>
-          <p className="text-sm font-bold">Connecting to DigiVigee Media Cloud...</p>
+        <div className="flex flex-col items-center justify-center py-20 text-slate-400">
+          <div className="animate-spin w-8 h-8 border-3 border-rose-600 border-t-transparent rounded-full mb-4"></div>
+          <p className="text-sm font-semibold text-slate-600">Connecting to Clinical Media Cloud...</p>
         </div>
       ) : filteredItems.length === 0 ? (
-        <div className="text-center py-16 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm rounded-2xl p-8">
-          <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4 text-zinc-400">
+        <div className="text-center py-16 bg-white border border-slate-200/80 shadow-2xs rounded-2xl p-8">
+          <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
             <FolderOpen className="w-8 h-8" />
           </div>
-          <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1">
+          <h3 className="text-lg font-bold text-slate-900 mb-1">
             No Media Assets Found
           </h3>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto mb-6">
+          <p className="text-sm text-slate-500 max-w-sm mx-auto mb-6">
             {searchQuery || altFilter !== "all" || selectedCategory !== "all"
               ? "Try clearing your search query or selecting a different category."
-              : "Upload your first image asset to use across the DigiVigee platform."}
+              : "Upload your first clinical image asset to use across the Dr. Noopur Patel platform."}
           </p>
           <button
             onClick={() => {
@@ -582,7 +582,7 @@ export default function AdminMediaLibraryPage() {
               setSelectedCategory("all");
               setAltFilter("all");
             }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 rounded-xl text-xs font-bold hover:bg-zinc-800 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-semibold hover:bg-slate-800 transition-colors cursor-pointer"
           >
             Clear Filters
           </button>
@@ -596,15 +596,15 @@ export default function AdminMediaLibraryPage() {
               <div
                 key={item.id}
                 onClick={() => setSelectedItem(item)}
-                className="group flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl overflow-hidden cursor-pointer hover:border-emerald-500 dark:hover:border-emerald-500 hover:shadow-lg transition-all"
+                className="group flex flex-col bg-white border border-slate-200/80 rounded-2xl overflow-hidden cursor-pointer hover:border-rose-300 hover:shadow-md transition-all shadow-2xs"
               >
                 {/* Visual Thumbnail */}
-                <div className="relative w-full aspect-square bg-zinc-100 dark:bg-zinc-800/80 flex items-center justify-center p-3 overflow-hidden border-b border-zinc-100 dark:border-zinc-800">
+                <div className="relative w-full aspect-square bg-slate-50 flex items-center justify-center p-3 overflow-hidden border-b border-slate-100">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={item.url}
                     alt={item.altText || item.name}
-                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-xs"
+                    className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-2xs"
                     onError={(e) => {
                       (e.target as HTMLElement).style.display = "none";
                     }}
@@ -613,11 +613,11 @@ export default function AdminMediaLibraryPage() {
                   {/* Top Badges */}
                   <div className="absolute top-2 right-2 flex gap-1 z-10">
                     {item.altText ? (
-                      <span className="inline-flex items-center gap-1 bg-emerald-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-xs">
+                      <span className="inline-flex items-center gap-1 bg-emerald-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md shadow-2xs">
                         <CheckCircle2 className="w-2.5 h-2.5" /> ALT
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 bg-amber-500 text-white text-[9px] font-black px-1.5 py-0.5 rounded-md shadow-xs">
+                      <span className="inline-flex items-center gap-1 bg-amber-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-md shadow-2xs">
                         <AlertTriangle className="w-2.5 h-2.5" /> NO ALT
                       </span>
                     )}
@@ -625,34 +625,34 @@ export default function AdminMediaLibraryPage() {
                 </div>
 
                 {/* Info */}
-                <div className="p-3 flex flex-col gap-1 flex-1 bg-white dark:bg-zinc-900 justify-between">
+                <div className="p-3 flex flex-col gap-1 flex-1 bg-white justify-between">
                   <div>
                     <div
-                      className="text-xs font-bold text-zinc-900 dark:text-zinc-100 truncate"
+                      className="text-xs font-bold text-slate-900 truncate"
                       title={item.name || item.fileName}
                     >
                       {item.name || item.fileName}
                     </div>
-                    <div className="flex items-center justify-between text-[11px] text-zinc-400 mt-1">
+                    <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
                       <span>{formatFileSize(item.fileSize)}</span>
-                      <span className="font-mono uppercase text-[10px] bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">
+                      <span className="font-mono uppercase text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">
                         {item.mimeType?.replace("image/", "") || "IMG"}
                       </span>
                     </div>
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center justify-between pt-2 mt-2 border-t border-zinc-100 dark:border-zinc-800">
+                  <div className="flex items-center justify-between pt-2 mt-2 border-t border-slate-100">
                     <button
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleCopyUrl(item.url, item.id);
                       }}
-                      className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold transition-all cursor-pointer ${
+                      className={`inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-semibold transition-all cursor-pointer ${
                         isCopied
-                          ? "bg-emerald-600 text-white"
-                          : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400"
+                          ? "bg-rose-600 text-white"
+                          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                       }`}
                       title="Copy public URL"
                     >
@@ -660,7 +660,7 @@ export default function AdminMediaLibraryPage() {
                       <span>{isCopied ? "Copied" : "Copy"}</span>
                     </button>
 
-                    <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 hover:underline">
+                    <span className="text-[10px] font-semibold text-rose-600 hover:underline">
                       Inspect &rarr;
                     </span>
                   </div>
@@ -671,11 +671,11 @@ export default function AdminMediaLibraryPage() {
         </div>
       ) : (
         /* LIST VIEW */
-        <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
-                <tr className="bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 text-xs font-bold uppercase tracking-wider">
+                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs font-bold uppercase tracking-wider">
                   <th className="px-5 py-3.5">Asset</th>
                   <th className="px-5 py-3.5">Alt Text</th>
                   <th className="px-5 py-3.5">Size / Type</th>
@@ -683,18 +683,18 @@ export default function AdminMediaLibraryPage() {
                   <th className="px-5 py-3.5 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800 text-sm">
+              <tbody className="divide-y divide-slate-100 text-sm">
                 {filteredItems.map((item) => {
                   const isCopied = copiedId === item.id;
                   return (
                     <tr
                       key={item.id}
                       onClick={() => setSelectedItem(item)}
-                      className="hover:bg-zinc-50/70 dark:hover:bg-zinc-800/40 transition-colors cursor-pointer group"
+                      className="hover:bg-slate-50/70 transition-colors cursor-pointer group"
                     >
                       <td className="px-5 py-3">
                         <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 p-1 flex items-center justify-center overflow-hidden border border-zinc-200 dark:border-zinc-700 shrink-0">
+                          <div className="w-12 h-12 rounded-xl bg-slate-50 p-1 flex items-center justify-center overflow-hidden border border-slate-200 shrink-0">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={item.url}
@@ -703,10 +703,10 @@ export default function AdminMediaLibraryPage() {
                             />
                           </div>
                           <div className="min-w-0">
-                            <div className="font-bold text-zinc-900 dark:text-zinc-100 truncate max-w-[220px]">
+                            <div className="font-bold text-slate-900 truncate max-w-[220px]">
                               {item.name || item.fileName}
                             </div>
-                            <div className="text-xs font-mono text-zinc-400 truncate max-w-[220px]">
+                            <div className="text-xs font-mono text-slate-400 truncate max-w-[220px]">
                               {item.url}
                             </div>
                           </div>
@@ -714,24 +714,24 @@ export default function AdminMediaLibraryPage() {
                       </td>
                       <td className="px-5 py-3 max-w-[240px]">
                         {item.altText ? (
-                          <div className="text-xs text-zinc-700 dark:text-zinc-300 truncate" title={item.altText}>
+                          <div className="text-xs text-slate-700 truncate" title={item.altText}>
                             {item.altText}
                           </div>
                         ) : (
-                          <span className="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+                          <span className="text-xs font-semibold text-amber-600 flex items-center gap-1">
                             <AlertTriangle className="w-3 h-3" /> Missing Alt Text
                           </span>
                         )}
                       </td>
                       <td className="px-5 py-3">
-                        <div className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                        <div className="text-xs font-semibold text-slate-700">
                           {formatFileSize(item.fileSize)}
                         </div>
-                        <div className="text-[10px] font-mono text-zinc-400 uppercase">
+                        <div className="text-[10px] font-mono text-slate-400 uppercase">
                           {item.mimeType?.replace("image/", "")}
                         </div>
                       </td>
-                      <td className="px-5 py-3 text-xs text-zinc-500 dark:text-zinc-400">
+                      <td className="px-5 py-3 text-xs text-slate-500">
                         {item.width && item.height ? `${item.width} × ${item.height} px` : "—"}
                       </td>
                       <td className="px-5 py-3 text-right">
@@ -742,10 +742,10 @@ export default function AdminMediaLibraryPage() {
                               e.stopPropagation();
                               handleCopyUrl(item.url, item.id);
                             }}
-                            className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                            className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                               isCopied
-                                ? "bg-emerald-600 text-white"
-                                : "bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
+                                ? "bg-rose-600 text-white"
+                                : "bg-slate-100 text-slate-700 hover:bg-slate-200"
                             }`}
                           >
                             {isCopied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
@@ -756,7 +756,7 @@ export default function AdminMediaLibraryPage() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}
-                            className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
                             title="Open in new tab"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
@@ -784,22 +784,22 @@ export default function AdminMediaLibraryPage() {
       {/* Upload Modal Dialog */}
       {showUploadModal && (
         <div
-          className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-zinc-900/80 backdrop-blur-sm animate-in fade-in duration-200"
+          className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200"
           onClick={() => setShowUploadModal(false)}
         >
           <div
-            className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-lg shadow-2xl border border-zinc-200 dark:border-zinc-800 overflow-hidden animate-in zoom-in-95 duration-200"
+            className="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-slate-200 overflow-hidden animate-in zoom-in-95 duration-200"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
-              <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                <Upload className="w-5 h-5 text-emerald-600" />
-                Upload New Image Asset
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
+              <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                <Upload className="w-5 h-5 text-rose-600" />
+                Upload New Clinical Asset
               </h2>
               <button
                 type="button"
                 onClick={() => setShowUploadModal(false)}
-                className="p-1.5 rounded-full text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="p-1.5 rounded-full text-slate-400 hover:text-slate-900 hover:bg-slate-200 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -809,7 +809,7 @@ export default function AdminMediaLibraryPage() {
               {/* Drop Zone Box */}
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-6 text-center cursor-pointer bg-zinc-50/50 hover:bg-emerald-50/30 dark:bg-zinc-800/30 dark:hover:bg-emerald-950/20 hover:border-emerald-500 transition-all flex flex-col items-center justify-center group"
+                className="border-2 border-dashed border-slate-300 rounded-2xl p-6 text-center cursor-pointer bg-slate-50 hover:bg-rose-50/30 hover:border-rose-400 transition-all flex flex-col items-center justify-center group"
               >
                 <input
                   ref={fileInputRef}
@@ -827,24 +827,24 @@ export default function AdminMediaLibraryPage() {
 
                 {uploadPreviewUrl ? (
                   <div className="flex flex-col items-center">
-                    <div className="w-32 h-32 rounded-xl bg-white dark:bg-zinc-800 p-2 border border-zinc-200 dark:border-zinc-700 mb-3 flex items-center justify-center overflow-hidden">
+                    <div className="w-32 h-32 rounded-xl bg-white p-2 border border-slate-200 mb-3 flex items-center justify-center overflow-hidden">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={uploadPreviewUrl} alt="Upload Preview" className="max-w-full max-h-full object-contain" />
                     </div>
-                    <div className="font-bold text-sm text-zinc-900 dark:text-zinc-100">{uploadFile?.name}</div>
-                    <div className="text-xs text-zinc-400 mt-0.5">
+                    <div className="font-bold text-sm text-slate-900">{uploadFile?.name}</div>
+                    <div className="text-xs text-slate-400 mt-0.5">
                       {uploadFile ? formatFileSize(uploadFile.size) : ""} • Click to change file
                     </div>
                   </div>
                 ) : (
                   <div className="flex flex-col items-center">
-                    <div className="w-14 h-14 bg-white dark:bg-zinc-800 rounded-2xl shadow-xs flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
-                      <Upload className="w-7 h-7 text-emerald-600" />
+                    <div className="w-14 h-14 bg-white rounded-2xl border border-slate-200 shadow-2xs flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                      <Upload className="w-7 h-7 text-rose-600" />
                     </div>
-                    <div className="font-bold text-sm text-zinc-900 dark:text-zinc-100">
+                    <div className="font-bold text-sm text-slate-900">
                       Click to choose an image or drop it here
                     </div>
-                    <div className="text-xs text-zinc-400 mt-1">
+                    <div className="text-xs text-slate-400 mt-1">
                       Supports PNG, JPG, WebP, SVG &amp; GIF up to 5MB
                     </div>
                   </div>
@@ -853,33 +853,33 @@ export default function AdminMediaLibraryPage() {
 
               {/* Title input */}
               <div>
-                <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5">
                   Display Title / Asset Name
                 </label>
                 <input
                   type="text"
                   value={uploadTitle}
                   onChange={(e) => setUploadTitle(e.target.value)}
-                  placeholder="e.g. DigiVigee Brand Icon"
-                  className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  placeholder="e.g. Dr. Noopur Patel Practice Logo"
+                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
               {/* Alt Text input */}
               <div>
-                <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5">
                   Accessible Alt Text (Required for SEO) <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={uploadAltText}
                   onChange={(e) => setUploadAltText(e.target.value)}
-                  placeholder="Describe what is seen in the image for Google rankings..."
+                  placeholder="Describe what is seen in the image for oncology Google rankings..."
                   required
-                  className="block w-full px-3.5 py-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="block w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 text-slate-900 placeholder:text-slate-400"
                 />
-                <p className="text-[11px] text-zinc-400 mt-1">
-                  10-Year-Old Tip: Write a short sentence describing the picture so Google knows what it is!
+                <p className="text-[11px] text-slate-400 mt-1">
+                  Clinical SEO Tip: Write a descriptive alt text for accessibility and oncology health search indexing.
                 </p>
               </div>
 
@@ -888,14 +888,14 @@ export default function AdminMediaLibraryPage() {
                 <button
                   type="button"
                   onClick={() => setShowUploadModal(false)}
-                  className="px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold text-xs rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                  className="px-4 py-2.5 border border-slate-200 text-slate-700 font-semibold text-xs rounded-xl hover:bg-slate-50 transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!uploadFile || !uploadAltText.trim() || isUploading}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-all shadow-md shadow-emerald-600/20 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-rose-600 text-white text-xs font-semibold hover:bg-rose-700 transition-all shadow-xs disabled:opacity-50 cursor-pointer"
                 >
                   {isUploading ? (
                     <>
@@ -921,7 +921,7 @@ export default function AdminMediaLibraryPage() {
         onClose={() => setIsResetConfirmOpen(false)}
         onConfirm={handleResetToDefaults}
         title="Reset Media Library to Defaults?"
-        message={`Are you sure you want to restore the media library to canonical DigiVigee defaults?\n\nThis will restore all 37 real production assets:\n• DigiVigee Brand Logos & Symbols\n• Homepage Hero & Marketing Banners\n• Blog Strategy Covers & SEO Guides\n• Verified Portfolio Case Studies (Ayush, Kalpvruksh, etc.)\n• Leadership Team Portraits (Vipul, Disha, Hetal, etc.)\n• Industry Awards & Compliance Badges`}
+        message={`Are you sure you want to restore the media library to canonical Dr. Noopur Patel practice defaults?\n\nThis will restore all verified clinical assets:\n• Dr. Noopur Patel Brand Logos & Hospital Badges\n• Surgical Hero & Consultation Banners\n• Breast Health Guides & Clinical Blog Covers\n• Oncoplastic Surgical Case Studies & Clinical Outcomes\n• Medical Team & Oncology Care Coordinator Portraits\n• Professional Accreditations & Hospital Affiliation Seals`}
         confirmLabel="Yes, Reset Media Assets"
         isDestructive={false}
         isLoading={isResetting}
