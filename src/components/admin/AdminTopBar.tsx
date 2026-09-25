@@ -34,8 +34,6 @@ const SECTION_TITLES: Record<string, string> = {
   "/admin/redirects": "URL Redirects",
   "/admin/seo": "Global SEO Engine",
   "/admin/users": "Users & RBAC",
-  "/admin/activity": "Activity & Audit Logs",
-  "/admin/backup": "Backup & Storage",
   "/admin/settings": "Global Settings",
 };
 
@@ -43,40 +41,17 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
   const router = useRouter();
   const pathname = usePathname();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
-  // Sync theme state with document element (Default to Light First)
+  // Strictly enforce Light Mode for the entire Admin experience
   React.useEffect(() => {
     if (typeof window !== "undefined") {
+      document.documentElement.classList.remove("dark");
       try {
-        const savedTheme = localStorage.getItem("digivigee_theme");
-        if (savedTheme === "dark") {
-          document.documentElement.classList.add("dark");
-          setIsDark(true);
-        } else {
-          document.documentElement.classList.remove("dark");
-          setIsDark(false);
-        }
-      } catch {
-        document.documentElement.classList.remove("dark");
-        setIsDark(false);
-      }
+        localStorage.setItem("digivigee_theme", "light");
+      } catch {}
     }
   }, []);
-
-  const toggleTheme = () => {
-    if (typeof window === "undefined") return;
-    const nextDark = !isDark;
-    setIsDark(nextDark);
-    if (nextDark) {
-      document.documentElement.classList.add("dark");
-      try { localStorage.setItem("digivigee_theme", "dark"); } catch {}
-    } else {
-      document.documentElement.classList.remove("dark");
-      try { localStorage.setItem("digivigee_theme", "light"); } catch {}
-    }
-  };
 
   // Dynamic breadcrumb resolution
   const currentSection = useMemo(() => {
@@ -102,14 +77,14 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
   };
 
   return (
-    <header className="sticky top-0 z-20 bg-white/85 dark:bg-[#0B0F17]/85 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 h-14 flex items-center justify-between px-3 sm:px-6 transition-colors">
+    <header className="sticky top-0 z-20 bg-white/95 backdrop-blur-xl border-b border-slate-200/80 h-14 flex items-center justify-between px-3 sm:px-6 transition-colors shadow-2xs">
       {/* Left Area: Universal Hamburger Button & Breadcrumbs */}
       <div className="flex items-center gap-3">
         {/* Universal Hamburger Toggle Button (Active on ALL screens) */}
         <button
           type="button"
           onClick={onToggleSidebar}
-          className="flex items-center justify-center w-8.5 h-8.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white transition-all shadow-2xs cursor-pointer group"
+          className="flex items-center justify-center w-8.5 h-8.5 rounded-xl border border-slate-200 bg-white text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all shadow-2xs cursor-pointer group"
           title={isSidebarCollapsed ? "Expand Sidebar (Ctrl+B)" : "Toggle Sidebar (Ctrl+B)"}
           aria-label="Toggle navigation sidebar"
         >
@@ -132,47 +107,29 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
 
         {/* Breadcrumb Path */}
         <div className="flex items-center gap-2 text-xs sm:text-[13px] font-medium">
-          <span className="text-slate-400 dark:text-slate-500 font-medium">Admin</span>
-          <span className="text-slate-300 dark:text-slate-700">/</span>
-          <span className="text-slate-900 dark:text-slate-100 font-semibold tracking-tight truncate max-w-[160px] sm:max-w-[280px]">
+          <span className="text-slate-400 font-medium">Admin</span>
+          <span className="text-slate-300">/</span>
+          <span className="text-slate-900 font-semibold tracking-tight truncate max-w-[160px] sm:max-w-[280px]">
             {currentSection}
           </span>
         </div>
       </div>
 
-      {/* Right Area: Theme Switcher, Live Site Link, User Info & Logout */}
+      {/* Right Area: Live Mode Badge, Live Site Link, User Info & Logout */}
       <div className="flex items-center gap-2 sm:gap-3.5">
-        {/* Theme Mode Toggle (Minimalist Dark / Light) */}
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-          title={isDark ? "Switch to Minimalist Light Mode" : "Switch to Minimalist Dark Mode"}
-          aria-label="Toggle theme mode"
-        >
-          {isDark ? (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-400">
-              <circle cx="12" cy="12" r="5" />
-              <line x1="12" y1="1" x2="12" y2="3" />
-              <line x1="12" y1="21" x2="12" y2="23" />
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-              <line x1="1" y1="12" x2="3" y2="12" />
-              <line x1="21" y1="12" x2="23" y2="12" />
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-            </svg>
-          ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-600">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-            </svg>
-          )}
-        </button>
+        {/* Live Mode Badge */}
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-xs font-semibold tracking-tight shadow-2xs select-none">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span>Live Mode</span>
+        </div>
 
         <Link
           href="/"
           target="_blank"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 no-underline"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-emerald-700 transition-colors px-2.5 py-1.5 rounded-lg hover:bg-slate-100 no-underline"
           title="Open public website in new tab"
         >
           <span className="hidden sm:inline">Live Website</span>
@@ -183,15 +140,15 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
           </svg>
         </Link>
 
-        <div className="h-4 w-px bg-slate-200 dark:bg-slate-800" />
+        <div className="h-4 w-px bg-slate-200" />
 
         {/* User Badge */}
         <div className="flex items-center gap-2">
           <div className="hidden md:flex flex-col items-end mr-0.5">
-            <span className="text-xs font-semibold text-slate-900 dark:text-slate-100 leading-tight tracking-tight">
+            <span className="text-xs font-semibold text-slate-900 leading-tight tracking-tight">
               {user.email}
             </span>
-            <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+            <span className="text-[10px] text-slate-400 font-medium">
               {user.roleName || user.role.replace(/_/g, " ")}
             </span>
           </div>
@@ -205,7 +162,7 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
         <button
           type="button"
           onClick={() => setIsPasswordModalOpen(true)}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 transition-colors cursor-pointer"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-colors cursor-pointer"
           title="Change Admin Password"
         >
           <KeyRound className="w-4 h-4" />
@@ -215,7 +172,7 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
         <button
           onClick={handleLogout}
           disabled={isLoggingOut}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors disabled:opacity-50 cursor-pointer"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors disabled:opacity-50 cursor-pointer"
           title="Sign Out"
         >
           <svg

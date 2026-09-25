@@ -42,7 +42,7 @@ import {
 } from "lucide-react";
 
 export default function AdminUsersPage() {
-  const [activeTab, setActiveTab] = useState<"users" | "roles" | "matrix" | "activity" | "backup">("users");
+  const [activeTab, setActiveTab] = useState<"users" | "roles" | "matrix">("users");
   const [users, setUsers] = useState<AdminUser[]>([]);
   const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(true);
@@ -97,21 +97,6 @@ export default function AdminUsersPage() {
   });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
 
-  // Activity Stream State
-  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([]);
-  const [auditLoading, setAuditLoading] = useState(false);
-  const [auditSearch, setAuditSearch] = useState("");
-
-  // Backup & Recovery State
-  const [backupStatus, setBackupStatus] = useState<{
-    totalEntities: number;
-    collections: { id: string; name: string; count: number; category: string }[];
-    health: string;
-    disasterRecoveryGuide: { title: string; description: string; command: string };
-  } | null>(null);
-  const [isDownloadingBackup, setIsDownloadingBackup] = useState(false);
-  const [copiedCommand, setCopiedCommand] = useState(false);
-
   // Real-time broadcaster
   const broadcastAuthUpdate = () => {
     try {
@@ -153,40 +138,9 @@ export default function AdminUsersPage() {
     }
   }, []);
 
-  // Load Audit Logs
-  const fetchAuditLogs = useCallback(async () => {
-    setAuditLoading(true);
-    try {
-      const res = await fetch("/api/admin/audit-logs?limit=15");
-      const data = await res.json();
-      if (data.success) {
-        setAuditLogs(data.logs || []);
-      }
-    } catch (err) {
-      console.error("[UsersPage] Audit log fetch error:", err);
-    } finally {
-      setAuditLoading(false);
-    }
-  }, []);
-
-  // Load Backup Status
-  const fetchBackupStatus = useCallback(async () => {
-    try {
-      const res = await fetch("/api/admin/backup/status");
-      const data = await res.json();
-      if (data.success) {
-        setBackupStatus(data.status);
-      }
-    } catch (err) {
-      console.error("[UsersPage] Backup status fetch error:", err);
-    }
-  }, []);
-
   useEffect(() => {
     fetchData();
-    fetchAuditLogs();
-    fetchBackupStatus();
-  }, [fetchData, fetchAuditLogs, fetchBackupStatus]);
+  }, [fetchData]);
 
   // Filtered Users
   const filteredUsers = useMemo(() => {
@@ -462,29 +416,6 @@ export default function AdminUsersPage() {
     }
   };
 
-  // Full Database Backup Download
-  const handleDownloadFullBackup = async () => {
-    setIsDownloadingBackup(true);
-    try {
-      const res = await fetch("/api/admin/backup/export");
-      if (!res.ok) throw new Error("Failed to export backup.");
-      const blob = await res.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `digivigee-backup-${new Date().toISOString().slice(0, 10)}.json`;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-      a.remove();
-      showToast("success", "Full JSON database backup downloaded successfully.");
-    } catch {
-      showToast("error", "Failed to download backup archive.");
-    } finally {
-      setIsDownloadingBackup(false);
-    }
-  };
-
   // Helper colors for roles (Minimalist Soft Tones)
   const getRoleBadgeStyle = (roleId: string) => {
     switch (roleId) {
@@ -504,23 +435,23 @@ export default function AdminUsersPage() {
   return (
     <div className="flex flex-col gap-6 max-w-6xl mx-auto w-full pb-16">
       {/* 1. Header Bar with Real-Time Live Status */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-[#0E1422] p-5 sm:p-6 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200/80 shadow-2xs">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 shadow-2xs">
+          <div className="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-600 shrink-0 shadow-2xs">
             <Shield className="w-6 h-6" />
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2 mb-1">
-              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
+              <h1 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight leading-tight">
                 Users, Permissions & Security
               </h1>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200/80 dark:border-emerald-800/60">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 🟢 Live RBAC Cloud: Connected (Turant Sync)
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-normal">
-              Manage team administrators, RBAC roles, permission matrices, audit streams, and database backups in one unified place.
+            <p className="text-xs sm:text-sm text-slate-500 font-normal">
+              Manage team administrators, RBAC roles, and granular permission matrices in one unified place.
             </p>
           </div>
         </div>
@@ -530,7 +461,7 @@ export default function AdminUsersPage() {
           <button
             type="button"
             onClick={() => setIsResetDefaultsModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 transition-colors shadow-2xs cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset to Defaults</span>
@@ -548,83 +479,63 @@ export default function AdminUsersPage() {
       </div>
 
       {/* 2. Top Bento KPI Cards (Visual Overview) */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
         {/* Total Admins */}
-        <div className="bg-white dark:bg-[#0E1422] p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs flex flex-col justify-between">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Administrators
             </span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <Users className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
+            <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight tabular-nums">
               {users.length} Active Accounts
             </div>
-            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1 mt-1">
+            <p className="text-[11px] text-emerald-600 font-medium flex items-center gap-1 mt-1">
               <CheckCircle2 className="w-3 h-3" /> Vipul, Disha, Krunal & Meet
             </p>
           </div>
         </div>
 
         {/* Security Roles */}
-        <div className="bg-white dark:bg-[#0E1422] p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs flex flex-col justify-between">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
               Security Roles
             </span>
-            <div className="w-8 h-8 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
               <Crown className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
+            <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight tabular-nums">
               {roles.length} Roles Configured
             </div>
-            <p className="text-[11px] text-purple-600 dark:text-purple-400 font-medium flex items-center gap-1 mt-1">
-              <ShieldCheck className="w-3 h-3" /> 35 Permission Rules
+            <p className="text-[11px] text-purple-600 font-medium flex items-center gap-1 mt-1">
+              <ShieldCheck className="w-3 h-3" /> Tiered RBAC Hierarchy
             </p>
           </div>
         </div>
 
-        {/* Audit Coverage */}
-        <div className="bg-white dark:bg-[#0E1422] p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs flex flex-col justify-between">
+        {/* Permissions Count */}
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs flex flex-col justify-between">
           <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-              Audit Trail
+            <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+              Permissions
             </span>
-            <div className="w-8 h-8 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
-              <Activity className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+              <ShieldCheck className="w-4 h-4" />
             </div>
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
-              100% Monitored
+            <div className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight tabular-nums">
+              35 Security Rules
             </div>
-            <p className="text-[11px] text-blue-600 dark:text-blue-400 font-medium flex items-center gap-1 mt-1">
-              <Sparkles className="w-3 h-3" /> Real-time Audit Stream
-            </p>
-          </div>
-        </div>
-
-        {/* Disaster Recovery */}
-        <div className="bg-white dark:bg-[#0E1422] p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 shadow-2xs flex flex-col justify-between">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-              Cloud Backup
-            </span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-              <Database className="w-4 h-4" />
-            </div>
-          </div>
-          <div>
-            <div className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight tabular-nums">
-              Database Healthy
-            </div>
-            <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1 mt-1">
-              <CheckCircle2 className="w-3 h-3" /> 1-Click Export Ready
+            <p className="text-[11px] text-blue-600 font-medium flex items-center gap-1 mt-1">
+              <Sparkles className="w-3 h-3" /> Granular Access Control
             </p>
           </div>
         </div>
@@ -636,21 +547,21 @@ export default function AdminUsersPage() {
           <div
             className={`flex items-center justify-between p-4 rounded-xl border shadow-2xs ${
               feedback.type === "success"
-                ? "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-200"
-                : "bg-red-50 border-red-200 text-red-900 dark:bg-red-950/40 dark:border-red-800 dark:text-red-200"
+                ? "bg-emerald-50 border-emerald-200 text-emerald-900"
+                : "bg-red-50 border-red-200 text-red-900"
             }`}
           >
             <div className="flex items-center gap-3">
               {feedback.type === "success" ? (
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
               ) : (
-                <XCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0" />
+                <XCircle className="w-5 h-5 text-red-600 shrink-0" />
               )}
               <span className="font-semibold text-sm">{feedback.message}</span>
             </div>
             <button
               onClick={() => setFeedback(null)}
-              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+              className="text-slate-400 hover:text-slate-600"
             >
               <X className="w-4 h-4" />
             </button>
@@ -659,14 +570,12 @@ export default function AdminUsersPage() {
       )}
 
       {/* 3. Visual Tab Navigation */}
-      <div className="flex flex-wrap items-center justify-between gap-2 p-1.5 bg-slate-100/90 dark:bg-slate-900/90 rounded-2xl border border-slate-200/80 dark:border-slate-800/80">
+      <div className="flex flex-wrap items-center justify-between gap-2 p-1.5 bg-slate-100/90 rounded-2xl border border-slate-200/80">
         <div className="flex flex-wrap items-center gap-1.5">
           {[
             { id: "users", label: `Team Users (${users.length})`, icon: Users },
             { id: "roles", label: `Roles & Access (${roles.length})`, icon: Crown },
             { id: "matrix", label: "Permissions Matrix", icon: ShieldCheck },
-            { id: "activity", label: "Live Audit Stream", icon: Activity },
-            { id: "backup", label: "Backup & Recovery", icon: Database },
           ].map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -677,11 +586,11 @@ export default function AdminUsersPage() {
                 onClick={() => setActiveTab(tab.id as typeof activeTab)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                   isActive
-                    ? "bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 shadow-2xs border border-slate-200/80 dark:border-slate-700"
-                    : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/50 dark:hover:bg-slate-850"
+                    ? "bg-white text-slate-900 shadow-2xs border border-slate-200/80"
+                    : "text-slate-500 hover:text-slate-900 hover:bg-white/50"
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600 dark:text-emerald-400" : "text-slate-400"}`} />
+                <Icon className={`w-4 h-4 ${isActive ? "text-emerald-600" : "text-slate-400"}`} />
                 <span>{tab.label}</span>
               </button>
             );
@@ -1128,180 +1037,6 @@ export default function AdminUsersPage() {
                 ))}
               </tbody>
             </table>
-          </div>
-        </div>
-      )}
-
-      {/* 7. TAB 4: Live Activity & Audit Stream */}
-      {activeTab === "activity" && (
-        <div className="flex flex-col gap-5 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div>
-              <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                Live Security & Mutation Audit Stream
-              </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Every administrative edit, user invitation, and default restore is recorded with immutable actor stamps.
-              </p>
-            </div>
-            <div className="flex items-center gap-2">
-              <Link
-                href="/admin/activity"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 text-xs font-bold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-              >
-                <span>Full Activity Portal</span>
-                <ExternalLink className="w-3 h-3" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Audit Events List */}
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm overflow-hidden">
-            {auditLoading ? (
-              <div className="py-16 text-center text-zinc-400 flex flex-col items-center justify-center">
-                <div className="w-8 h-8 border-3 border-blue-500 border-t-transparent rounded-full animate-spin mb-3"></div>
-                <p className="text-xs font-semibold">Loading audit events...</p>
-              </div>
-            ) : auditLogs.length === 0 ? (
-              <div className="py-12 text-center text-zinc-400">No recent security events recorded.</div>
-            ) : (
-              <div className="divide-y divide-zinc-100 dark:divide-zinc-800/80">
-                {auditLogs.slice(0, 10).map((log) => {
-                  return (
-                    <div key={log.id} className="p-4 sm:p-5 flex items-start justify-between gap-4 hover:bg-zinc-50/50 dark:hover:bg-zinc-800/40 transition-colors">
-                      <div className="flex items-start gap-3.5">
-                        <div className="w-8 h-8 rounded-lg bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-300 shrink-0 mt-0.5">
-                          <Activity className="w-4 h-4" />
-                        </div>
-                        <div>
-                          <div className="flex flex-wrap items-center gap-2 mb-1">
-                            <span className="font-bold text-xs sm:text-sm text-zinc-900 dark:text-zinc-100">
-                              {log.actor.displayName || log.actor.email}
-                            </span>
-                            <span className="px-2 py-0.5 rounded-md text-[10px] font-black tracking-wider uppercase bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                              {log.action}
-                            </span>
-                            <span className="text-xs text-zinc-400">• {log.resourceType}</span>
-                          </div>
-                          <p className="text-xs text-zinc-600 dark:text-zinc-300">{log.summary}</p>
-                        </div>
-                      </div>
-
-                      <div className="text-[11px] text-zinc-400 whitespace-nowrap text-right shrink-0">
-                        {new Date(log.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* 8. TAB 5: Backup & Disaster Recovery */}
-      {activeTab === "backup" && (
-        <div className="flex flex-col gap-5 animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                <Database className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-                Cloud Database Backup & Disaster Recovery
-              </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                Instant 1-click snapshot of all platform entities across Firestore for complete offline security.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={handleDownloadFullBackup}
-                disabled={isDownloadingBackup}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-md shadow-emerald-600/20 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
-              >
-                {isDownloadingBackup ? (
-                  <>
-                    <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>Generating JSON...</span>
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-4 h-4" />
-                    <span>Download Full Backup (.JSON)</span>
-                  </>
-                )}
-              </button>
-
-              <Link
-                href="/admin/backup"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 text-xs font-bold hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
-              >
-                <span>Backup Portal</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Database Health Summary */}
-          {backupStatus && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-                <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
-                  Total Active Entities
-                </span>
-                <span className="text-2xl font-black text-zinc-900 dark:text-zinc-100">
-                  {backupStatus.totalEntities} Documents
-                </span>
-                <p className="text-[11px] text-emerald-600 font-bold mt-1">100% Synchronized</p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-                <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
-                  Active Collections
-                </span>
-                <span className="text-2xl font-black text-zinc-900 dark:text-zinc-100">
-                  {backupStatus.collections?.length || 12} Collections
-                </span>
-                <p className="text-[11px] text-indigo-600 font-bold mt-1">Services, Blogs, Leads & Settings</p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-sm">
-                <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider block mb-1">
-                  Engine Status
-                </span>
-                <span className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
-                  Operational
-                </span>
-                <p className="text-[11px] text-zinc-400 mt-1">Cloud Firestore Atomic Batches</p>
-              </div>
-            </div>
-          )}
-
-          {/* Terminal Command Box */}
-          <div className="p-5 rounded-2xl bg-zinc-950 text-white border border-zinc-800 shadow-sm">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-bold text-zinc-400 flex items-center gap-2 font-mono">
-                <Terminal className="w-4 h-4 text-emerald-400" />
-                Disaster Recovery CLI Command
-              </span>
-              <button
-                type="button"
-                onClick={() => {
-                  navigator.clipboard.writeText("npm run sync:data");
-                  setCopiedCommand(true);
-                  setTimeout(() => setCopiedCommand(false), 2000);
-                }}
-                className="text-xs text-emerald-400 font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
-              >
-                {copiedCommand ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                {copiedCommand ? "Copied Command" : "Copy Command"}
-              </button>
-            </div>
-            <pre className="p-3 bg-zinc-900 rounded-xl font-mono text-xs text-emerald-300 overflow-x-auto">
-              npm run sync:data
-            </pre>
           </div>
         </div>
       )}

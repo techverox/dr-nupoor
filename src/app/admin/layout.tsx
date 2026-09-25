@@ -2,6 +2,7 @@ import React from "react";
 import { cookies } from "next/headers";
 import { verifyAdminSessionCookie, AUTH_CONFIG } from "@/lib/auth";
 import { AdminShell } from "@/components/admin/AdminShell";
+import { AdminClientGuard } from "@/components/admin/AdminClientGuard";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -20,10 +21,12 @@ export default async function AdminRootLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value;
+  const sessionCookie =
+    cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value ||
+    cookieStore.get(AUTH_CONFIG.LEGACY_SESSION_COOKIE_NAME)?.value;
 
   if (!sessionCookie || sessionCookie.trim().length === 0) {
-    return <>{children}</>;
+    return <AdminClientGuard>{children}</AdminClientGuard>;
   }
 
   try {
@@ -36,5 +39,5 @@ export default async function AdminRootLayout({
     console.error("[AdminRootLayout] Session verification error:", error);
   }
 
-  return <>{children}</>;
+  return <AdminClientGuard>{children}</AdminClientGuard>;
 }

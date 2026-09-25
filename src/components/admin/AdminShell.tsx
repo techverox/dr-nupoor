@@ -84,8 +84,18 @@ export function AdminShell({ user, children }: AdminShellProps) {
     };
   }, []);
 
+  // Enforce pure light mode in admin interface
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.documentElement.classList.remove("dark");
+      try {
+        localStorage.setItem("digivigee_theme", "light");
+      } catch {}
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen bg-[#F8FAFC] dark:bg-[#080C14] text-slate-900 dark:text-slate-100 font-[family-name:var(--font-plus-jakarta)] font-sans antialiased tracking-[-0.011em] selection:bg-emerald-500/20 selection:text-emerald-900 dark:selection:text-emerald-300">
+    <div className="flex min-h-screen bg-[#F8FAFC] text-slate-900 font-[family-name:var(--font-plus-jakarta)] font-sans antialiased tracking-[-0.011em] selection:bg-emerald-500/20 selection:text-emerald-900">
       {/* Sidebar Navigation */}
       <AdminSidebar
         isMobileOpen={isMobileOpen}

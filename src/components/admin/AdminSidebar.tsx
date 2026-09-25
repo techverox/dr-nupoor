@@ -311,30 +311,6 @@ export const ADMIN_NAV_GROUPS: NavGroupDef[] = [
           </svg>
         ),
       },
-      {
-        label: "Activity & Audit Logs",
-        href: "/admin/activity",
-        isImplemented: true,
-        permission: "audit_logs.view",
-        icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-          </svg>
-        ),
-      },
-      {
-        label: "Backup & Storage",
-        href: "/admin/backup",
-        isImplemented: true,
-        permission: "backup.view",
-        icon: (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <ellipse cx="12" cy="5" rx="9" ry="3" />
-            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-          </svg>
-        ),
-      },
     ],
   },
 ];
@@ -412,29 +388,28 @@ export function AdminSidebar({
         />
       )}
 
-      {/* Main Sidebar Navigation Panel (Light First Minimalist) */}
+      {/* Main Sidebar Navigation Panel (Pure Light Mode) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex flex-col h-screen bg-white dark:bg-[#0B0F17] text-slate-700 dark:text-slate-300 border-r border-slate-200/80 dark:border-slate-800/80 transition-all duration-300 ease-in-out
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col h-screen bg-white text-slate-700 border-r border-slate-200/80 transition-all duration-300 ease-in-out
           lg:static lg:sticky lg:top-0 lg:z-30
           ${isMobileOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full lg:translate-x-0"}
           ${isCollapsed ? "lg:w-[72px] lg:min-w-[72px]" : "lg:w-[260px] lg:min-w-[260px]"}
         `}
       >
         {/* Sidebar Brand Header */}
-        <div className="flex items-center justify-between px-4 py-3.5 border-b border-slate-200/80 dark:border-slate-800/80 shrink-0 h-14 bg-white dark:bg-[#0B0F17]">
+        <div className="flex items-center justify-between px-4 py-3.5 border-b border-slate-200/80 shrink-0 h-14 bg-white">
           <div className="flex items-center gap-2 overflow-hidden">
             {!isCollapsed ? (
               <>
                 <div className="w-[115px] shrink-0">
-                  <span className="dark:hidden inline-block"><Logo variant="light" /></span>
-                  <span className="hidden dark:inline-block"><Logo variant="dark" /></span>
+                  <Logo variant="light" />
                 </div>
-                <span className="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 shrink-0">
+                <span className="px-2 py-0.5 rounded-md text-[9px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0">
                   Admin
                 </span>
               </>
             ) : (
-              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 flex items-center justify-center font-bold text-xs shrink-0 mx-auto">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200/80 flex items-center justify-center font-bold text-xs shrink-0 mx-auto">
                 DV
               </div>
             )}
@@ -445,7 +420,7 @@ export function AdminSidebar({
             <button
               type="button"
               onClick={onToggleCollapse}
-              className="hidden lg:flex p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors cursor-pointer"
+              className="hidden lg:flex p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               title={isCollapsed ? "Expand Sidebar (Ctrl+B)" : "Collapse Sidebar (Ctrl+B)"}
               aria-label="Toggle sidebar collapse"
             >
@@ -459,7 +434,7 @@ export function AdminSidebar({
             {/* Mobile Close Button */}
             <button
               type="button"
-              className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 transition-colors cursor-pointer"
+              className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
               onClick={onCloseMobile}
               aria-label="Close sidebar"
             >
@@ -476,11 +451,11 @@ export function AdminSidebar({
           {filteredNavGroups.map((group) => (
             <div key={group.title}>
               {!isCollapsed ? (
-                <div className="px-3 pb-1.5 text-[10px] font-bold tracking-[0.08em] text-slate-400 dark:text-slate-500 uppercase truncate select-none">
+                <div className="px-3 pb-1.5 text-[10px] font-bold tracking-[0.08em] text-slate-400 uppercase truncate select-none">
                   {group.title}
                 </div>
               ) : (
-                <div className="w-8 mx-auto border-t border-slate-200/80 dark:border-slate-800/80 my-1" />
+                <div className="w-8 mx-auto border-t border-slate-200/80 my-1" />
               )}
 
               <div className="flex flex-col gap-0.5">
@@ -497,16 +472,16 @@ export function AdminSidebar({
                         isCollapsed ? "justify-center px-2" : "justify-between"
                       } ${
                         isActive
-                          ? "bg-emerald-50 text-emerald-800 border border-emerald-200/80 dark:bg-emerald-500/15 dark:text-emerald-300 dark:border-emerald-500/30 font-semibold shadow-2xs"
-                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70 dark:text-slate-400 dark:hover:text-slate-100 dark:hover:bg-slate-800/50"
+                          ? "bg-emerald-50 text-emerald-800 border border-emerald-200/80 font-semibold shadow-2xs"
+                          : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/70"
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <span
                           className={`shrink-0 transition-colors ${
                             isActive
-                              ? "text-emerald-700 dark:text-emerald-400"
-                              : "text-slate-400 group-hover:text-slate-700 dark:group-hover:text-slate-200"
+                              ? "text-emerald-700"
+                              : "text-slate-400 group-hover:text-slate-700"
                           }`}
                         >
                           {item.icon}
@@ -515,7 +490,7 @@ export function AdminSidebar({
                       </div>
 
                       {!isCollapsed && item.isImplemented && isActive && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 dark:bg-emerald-400 shadow-[0_0_6px_rgba(5,150,105,0.4)] dark:shadow-[0_0_8px_rgba(52,211,153,0.8)] shrink-0" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shadow-[0_0_6px_rgba(5,150,105,0.4)] shrink-0" />
                       )}
                     </Link>
                   );
@@ -526,14 +501,14 @@ export function AdminSidebar({
         </nav>
 
         {/* Sidebar Footer (adjusted padding so Next.js dev badge doesn't overlap text) */}
-        <div className="p-3 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-medium shrink-0 bg-slate-50/50 dark:bg-[#0B0F17] h-14">
+        <div className="p-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] text-slate-500 font-medium shrink-0 bg-slate-50/50 h-14">
           {!isCollapsed ? (
             <>
-              <div className="flex items-center gap-1.5 pl-10 text-slate-600 dark:text-slate-400">
+              <div className="flex items-center gap-1.5 pl-10 text-slate-600">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse shrink-0" />
-                <span className="font-semibold text-xs text-slate-700 dark:text-slate-300">DigiVigee CMS</span>
+                <span className="font-semibold text-xs text-slate-700">DigiVigee CMS</span>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20 shrink-0">
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0">
                 Live Sync
               </span>
             </>
