@@ -23,7 +23,7 @@ export default function DoctorFooter() {
 
   return (
     <footer className="w-full bg-[#FFFFFF] border-t border-[#F5D6DE] text-slate-700 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 sm:pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
           
           {/* Column 1: Doctor Identity & Mission (4 cols) */}

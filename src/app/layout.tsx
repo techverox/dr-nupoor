@@ -9,6 +9,7 @@ import { GlobalStructuredData } from "@/components/seo/StructuredData";
 import { getCmsSiteSettings } from "@/lib/services/cmsService";
 import { CustomCodeInjector } from "@/components/analytics/CustomCodeInjector";
 import { LiveSyncListener } from "@/components/sync/LiveSyncListener";
+import MobileBottomNav from "@/components/doctor/MobileBottomNav";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -56,6 +57,7 @@ export default async function RootLayout({
           <AnalyticsTracker />
         </Suspense>
         {children}
+        <MobileBottomNav />
       </body>
     </html>
   );

@@ -206,26 +206,37 @@ export default function DoctorNavbar() {
             </Link>
           </div>
 
-          {/* Mobile Hamburger & Quick CTA */}
+          {/* Mobile Quick Actions (Call, WhatsApp, Pink Hamburger) */}
           <div className="flex items-center gap-2 lg:hidden">
-            <Link
-              href="/appointments"
-              className="inline-flex items-center gap-1 bg-[#D84C70] text-white text-[12px] font-semibold px-3 py-1.5 rounded-full"
+            <a
+              href={`tel:${SITE_CONFIG.contact.phone.replace(/\s+/g, "")}`}
+              className="w-8 h-8 rounded-full bg-[#FFF5F7] border border-[#F5CAD5] flex items-center justify-center text-[#D84C70] hover:bg-[#FCE8ED] active:scale-95 transition-all"
+              aria-label="Call Clinic"
             >
-              <Calendar className="w-3 h-3" />
-              <span>Book</span>
-            </Link>
+              <Phone className="w-4 h-4" />
+            </a>
+
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 rounded-full bg-[#F0FDF4] border border-emerald-200 flex items-center justify-center text-emerald-600 hover:bg-emerald-100 active:scale-95 transition-all"
+              aria-label="Chat on WhatsApp"
+            >
+              <MessageCircle className="w-4 h-4" />
+            </a>
+
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-slate-700 hover:text-[#D84C70] focus:outline-none min-w-[44px] min-h-[44px] flex items-center justify-center cursor-pointer"
+              className="w-9 h-9 rounded-full bg-[#D84C70] hover:bg-[#C0395D] text-white flex items-center justify-center shadow-sm cursor-pointer active:scale-95 transition-all"
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
               )}
             </button>
           </div>
