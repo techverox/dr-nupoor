@@ -327,7 +327,7 @@ export default function AdminFaqsPage() {
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 font-normal">
-              Manage agency objection clearance questions, answers, and category tags displayed across public accordion sections.
+              Manage clinical breast health questions, diagnostic FAQs, surgical oncology guidance, and post-op care answers.
             </p>
           </div>
         </div>
@@ -338,7 +338,7 @@ export default function AdminFaqsPage() {
             type="button"
             onClick={() => setIsResetConfirmOpen(true)}
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all cursor-pointer shadow-2xs active:scale-[0.98]"
-            title="Reset all 6 FAQs to pristine live defaults"
+            title="Reset all FAQs to pristine clinical defaults"
           >
             <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             <span>Reset Defaults</span>
@@ -358,7 +358,7 @@ export default function AdminFaqsPage() {
           <button
             type="button"
             onClick={openCreateModal}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0C1628] text-white text-xs font-bold hover:bg-slate-800 transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] text-white text-xs font-bold hover:opacity-95 transition-all cursor-pointer shadow-sm active:scale-[0.98]"
           >
             <Plus className="w-4 h-4" />
             <span>Add FAQ</span>
@@ -647,8 +647,8 @@ export default function AdminFaqsPage() {
                     required
                     value={formData.question}
                     onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-                    placeholder="e.g. How long does it take to see results from digital marketing?"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                    placeholder="e.g. When should I get my first screening mammogram?"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                   />
                 </div>
 
@@ -663,8 +663,8 @@ export default function AdminFaqsPage() {
                       required
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      placeholder="e.g. General, Services, Support"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all mb-2"
+                      placeholder="e.g. Screening, Diagnosis, Surgery, Recovery"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all mb-2"
                     />
                     {/* Quick Category Chips */}
                     <div className="flex flex-wrap gap-1.5">
@@ -695,7 +695,7 @@ export default function AdminFaqsPage() {
                       max={99}
                       value={formData.order}
                       onChange={(e) => setFormData({ ...formData, order: Number(e.target.value) })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                     />
                     <span className="text-[11px] text-slate-400 mt-1 block">
                       Lower numbers appear first on the public accordion.
@@ -713,11 +713,11 @@ export default function AdminFaqsPage() {
                     rows={5}
                     value={formData.answer}
                     onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-                    placeholder="Provide a transparent, thorough answer explaining the exact timeline, process, or guarantee..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all leading-relaxed"
+                    placeholder="Provide a clear, reassuring clinical explanation regarding diagnosis, procedure, recovery timeline..."
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all leading-relaxed"
                   />
                   <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
-                    <span>Keep answers authoritative, jargon-free, and client-friendly.</span>
+                    <span>Keep answers compassionate, clinically accurate, and patient-friendly.</span>
                     <span>{formData.answer.length} characters</span>
                   </div>
                 </div>
@@ -822,7 +822,7 @@ export default function AdminFaqsPage() {
                   type="button"
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#0C1628] text-white text-xs font-bold hover:bg-slate-800 transition-all cursor-pointer shadow-sm disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] text-white text-xs font-bold hover:opacity-95 transition-all cursor-pointer shadow-sm disabled:opacity-50"
                 >
                   {isSaving ? (
                     <>
@@ -851,17 +851,17 @@ export default function AdminFaqsPage() {
             </div>
 
             <h3 className="text-lg font-black text-slate-900 tracking-tight mb-2">
-              Reset All 6 FAQs to Factory Defaults?
+              Reset All FAQs to Clinical Defaults?
             </h3>
 
             <p className="text-xs text-slate-600 leading-relaxed mb-4">
-              This action will safely restore all 6 canonical agency questions (covering Performance, Services, Support, Pricing, Ad Spend, and Onboarding) to their pristine live defaults. Any custom edits or draft FAQs will be reset.
+              This action will safely restore all verified clinical breast health and oncoplastic surgery FAQs (covering Screening, Diagnosis, Surgery, Recovery, and Genetic Counseling) to their pristine live defaults. Any unsaved drafts will be reset.
             </p>
 
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-6 space-y-1.5 text-xs text-slate-700">
               <div className="flex items-center gap-2 font-bold text-slate-900">
                 <CheckCircle2 className="w-4 h-4 text-[#008744]" />
-                <span>Restores 6 Verified Objection Clearance FAQs</span>
+                <span>Restores Verified Breast Care Clinical FAQs</span>
               </div>
               <div className="flex items-center gap-2 text-[11px] text-slate-500 pl-6">
                 <span>100% synchronized with the live homepage accordion and schema.</span>

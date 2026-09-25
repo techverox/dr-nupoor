@@ -39,19 +39,18 @@ function LinkedinIcon({ className = "w-4 h-4" }: { className?: string }) {
 }
 
 const CANONICAL_AVATARS = [
-  { name: "Vipul Gajjar", url: "/images/team/vipul-gajjar.jpg" },
-  { name: "Disha Parmar", url: "/images/team/disha-parmar.jpg" },
-  { name: "Meet Patel", url: "/images/team/meet-patel.jpg" },
-  { name: "Hetal Shah", url: "/images/team/hetal-shah.jpg" },
-  { name: "Krunal Vyas", url: "/images/team/krunal-vyas.jpg" },
+  { name: "Dr. Noopur Patel", url: "/images/doctor/assets/hero-doctor.png" },
+  { name: "Care Coordinator", url: "/images/doctor/assets/patient-avatar-1.png" },
+  { name: "Clinical Nurse", url: "/images/doctor/assets/patient-avatar-2.png" },
+  { name: "Care Support", url: "/images/doctor/assets/hero-doctor.png" },
 ];
 
 const ROLE_PRESETS = [
-  "Founder & Digital Strategist",
-  "Social Media Strategist",
-  "Performance Marketing Expert",
-  "Content Strategy Lead",
-  "Web & SEO Specialist",
+  "Breast Cancer Surgeon & Oncoplastic Specialist",
+  "Clinical Care Coordinator & Patient Navigator",
+  "Associate Consultant in Surgical Oncology",
+  "Surgical Scheduling & Helpdesk",
+  "Clinical Breast Nurse & Counselor",
 ];
 
 export default function AdminTeamPage() {
@@ -69,9 +68,9 @@ export default function AdminTeamPage() {
   // Form State
   const [formData, setFormData] = useState({
     name: "",
-    role: "Founder & Digital Strategist",
+    role: "Breast Cancer Surgeon & Oncoplastic Specialist",
     bio: "",
-    avatar: "/images/team/vipul-gajjar.jpg",
+    avatar: "/images/doctor/assets/hero-doctor.png",
     linkedin: "",
     email: "",
     order: 1,
@@ -122,9 +121,9 @@ export default function AdminTeamPage() {
     setEditingItem(null);
     setFormData({
       name: "",
-      role: "Digital Strategist",
+      role: "Clinical Care Coordinator & Patient Navigator",
       bio: "",
-      avatar: "/images/team/vipul-gajjar.jpg",
+      avatar: "/images/doctor/assets/patient-avatar-1.png",
       linkedin: "",
       email: "",
       order: members.length + 1,
@@ -139,7 +138,7 @@ export default function AdminTeamPage() {
       name: member.name || "",
       role: member.role || "",
       bio: member.bio || "",
-      avatar: member.avatar || "/images/team/vipul-gajjar.jpg",
+      avatar: member.avatar || "/images/doctor/assets/hero-doctor.png",
       linkedin: member.socials?.linkedin || "",
       email: member.socials?.email || "",
       order: member.order || 1,
@@ -162,7 +161,7 @@ export default function AdminTeamPage() {
         name: formData.name.trim(),
         role: formData.role.trim(),
         bio: formData.bio.trim(),
-        avatar: formData.avatar || "/images/team/vipul-gajjar.jpg",
+        avatar: formData.avatar || "/images/doctor/assets/hero-doctor.png",
         socials: {
           linkedin: formData.linkedin.trim() || undefined,
           email: formData.email.trim() || undefined,
@@ -295,12 +294,11 @@ export default function AdminTeamPage() {
 
   // Filter tabs
   const FILTER_TABS = [
-    { id: "all", label: "All Specialists" },
+    { id: "all", label: "All Team Members" },
     { id: "published", label: "Published Live" },
     { id: "draft", label: "Drafts" },
-    { id: "leadership", label: "Leadership" },
-    { id: "strategy", label: "Strategy & Performance" },
-    { id: "technical", label: "Web & Technical" },
+    { id: "surgeons", label: "Surgical Specialists" },
+    { id: "care", label: "Care & Navigation" },
   ];
 
   // Filtered Members
@@ -315,17 +313,13 @@ export default function AdminTeamPage() {
 
       if (activeTab === "published") return m.isPublished;
       if (activeTab === "draft") return !m.isPublished;
-      if (activeTab === "leadership") {
+      if (activeTab === "surgeons") {
         const role = m.role.toLowerCase();
-        return role.includes("founder") || role.includes("lead") || role.includes("head");
+        return role.includes("surgeon") || role.includes("oncolog") || role.includes("doctor");
       }
-      if (activeTab === "strategy") {
+      if (activeTab === "care") {
         const role = m.role.toLowerCase();
-        return role.includes("strategist") || role.includes("performance") || role.includes("media");
-      }
-      if (activeTab === "technical") {
-        const role = m.role.toLowerCase();
-        return role.includes("web") || role.includes("seo") || role.includes("content") || role.includes("developer");
+        return role.includes("care") || role.includes("navigator") || role.includes("nurse") || role.includes("coordinator") || role.includes("scheduling");
       }
 
       return true;
@@ -336,12 +330,12 @@ export default function AdminTeamPage() {
   const metrics = useMemo(() => {
     const total = members.length;
     const published = members.filter((m) => m.isPublished).length;
-    const leadershipCount = members.filter((m) => {
+    const surgeonsCount = members.filter((m) => {
       const r = m.role.toLowerCase();
-      return r.includes("founder") || r.includes("lead") || r.includes("head") || r.includes("director");
+      return r.includes("surgeon") || r.includes("oncolog") || r.includes("doctor");
     }).length;
-    const activePods = total;
-    return { total, published, leadershipCount, activePods };
+    const careCount = total - surgeonsCount;
+    return { total, published, surgeonsCount, careCount };
   }, [members]);
 
   return (
@@ -355,7 +349,7 @@ export default function AdminTeamPage() {
           <div>
             <div className="flex items-center gap-2 mb-1">
               <h1 className="text-2xl font-black text-slate-900 tracking-tight leading-none">
-                Team Specialists CMS
+                Medical Team &amp; Specialists CMS
               </h1>
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-[#008744] border border-emerald-200">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#008744] animate-pulse" />
@@ -363,7 +357,7 @@ export default function AdminTeamPage() {
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-500 font-normal">
-              Manage agency leadership, digital marketing specialists, and dedicated pod directors displayed on the About page.
+              Manage breast surgical oncology specialists, clinical care navigators, and patient counselors displayed on practice pages.
             </p>
           </div>
         </div>
@@ -374,7 +368,7 @@ export default function AdminTeamPage() {
             type="button"
             onClick={() => setIsResetConfirmOpen(true)}
             className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-slate-700 text-xs font-semibold hover:bg-slate-50 hover:border-slate-300 transition-all cursor-pointer shadow-2xs active:scale-[0.98]"
-            title="Reset all 5 specialists to pristine live defaults"
+            title="Reset team to clinical defaults"
           >
             <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             <span>Reset Defaults</span>
@@ -394,10 +388,10 @@ export default function AdminTeamPage() {
           <button
             type="button"
             onClick={openCreateModal}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#0C1628] text-white text-xs font-bold hover:bg-slate-800 transition-all cursor-pointer shadow-sm active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] text-white text-xs font-bold hover:opacity-95 transition-all cursor-pointer shadow-sm active:scale-[0.98]"
           >
             <Plus className="w-4 h-4" />
-            <span>Add Specialist</span>
+            <span>Add Team Member</span>
           </button>
         </div>
       </div>
@@ -406,7 +400,7 @@ export default function AdminTeamPage() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
         <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-between">
           <div>
-            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Specialists</div>
+            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Total Members</div>
             <div className="text-2xl font-black text-slate-900 mt-0.5">{metrics.total}</div>
           </div>
           <div className="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600">
@@ -426,8 +420,8 @@ export default function AdminTeamPage() {
 
         <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-between">
           <div>
-            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Leadership Roles</div>
-            <div className="text-2xl font-black text-amber-600 mt-0.5">{metrics.leadershipCount}</div>
+            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Surgeons &amp; Doctors</div>
+            <div className="text-2xl font-black text-amber-600 mt-0.5">{metrics.surgeonsCount}</div>
           </div>
           <div className="w-9 h-9 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600">
             <Crown className="w-4 h-4" />
@@ -436,8 +430,8 @@ export default function AdminTeamPage() {
 
         <div className="p-4 rounded-xl bg-white border border-slate-200/80 shadow-2xs flex items-center justify-between">
           <div>
-            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Dedicated Pods</div>
-            <div className="text-2xl font-black text-indigo-600 mt-0.5">{metrics.activePods}</div>
+            <div className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Care &amp; Navigation</div>
+            <div className="text-2xl font-black text-indigo-600 mt-0.5">{metrics.careCount}</div>
           </div>
           <div className="w-9 h-9 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
             <Award className="w-4 h-4" />
@@ -713,8 +707,8 @@ export default function AdminTeamPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Vipul Gajjar"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                      placeholder="e.g. Dr. Noopur Patel"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                     />
                   </div>
 
@@ -727,8 +721,8 @@ export default function AdminTeamPage() {
                       required
                       value={formData.role}
                       onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      placeholder="e.g. Founder & Digital Strategist"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                      placeholder="e.g. Breast Cancer Surgeon & Oncoplastic Specialist"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                     />
                   </div>
                 </div>
@@ -764,8 +758,8 @@ export default function AdminTeamPage() {
                       type="text"
                       value={formData.avatar}
                       onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
-                      placeholder="/images/team/vipul-gajjar.jpg"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all mb-2"
+                      placeholder="/images/doctor/assets/hero-doctor.png"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all mb-2"
                     />
                     {/* Quick Avatar Suggestions */}
                     <div className="flex items-center gap-1.5">
@@ -795,7 +789,7 @@ export default function AdminTeamPage() {
                       max={99}
                       value={formData.order}
                       onChange={(e) => setFormData({ ...formData, order: Number(e.target.value) })}
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                     />
                     <span className="text-[11px] text-slate-400 mt-1 block">
                       Order #1 appears first in the leadership grid.
@@ -806,18 +800,18 @@ export default function AdminTeamPage() {
                 {/* Biography */}
                 <div>
                   <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
-                    Professional Biography &amp; Leadership Voice <span className="text-red-500">*</span>
+                    Professional Biography &amp; Clinical Experience <span className="text-red-500">*</span>
                   </label>
                   <textarea
                     required
                     rows={4}
                     value={formData.bio}
                     onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                    placeholder="Visionary digital strategist leading agency growth and delivering high-ROI marketing ecosystems..."
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all leading-relaxed"
+                    placeholder="Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Dedicated to compassionate, individualized breast care..."
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all leading-relaxed"
                   />
                   <div className="flex items-center justify-between text-[11px] text-slate-400 mt-1">
-                    <span>Highlight core skills, client impact, and strategic role.</span>
+                    <span>Highlight clinical qualifications, surgical expertise, and hospital affiliations.</span>
                     <span>{formData.bio.length} characters</span>
                   </div>
                 </div>
@@ -832,8 +826,8 @@ export default function AdminTeamPage() {
                       type="url"
                       value={formData.linkedin}
                       onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
-                      placeholder="https://linkedin.com/in/vipul-gajjar"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                      placeholder="https://linkedin.com/in/drnoopurpatel"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                     />
                   </div>
 
@@ -845,8 +839,8 @@ export default function AdminTeamPage() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="vipul@digivigee.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0C1628]/10 focus:border-[#0C1628] transition-all"
+                      placeholder="dr.noopurpatel@gmail.com"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] transition-all"
                     />
                   </div>
                 </div>
@@ -974,7 +968,7 @@ export default function AdminTeamPage() {
                   type="button"
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#0C1628] text-white text-xs font-bold hover:bg-slate-800 transition-all cursor-pointer shadow-sm disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] text-white text-xs font-bold hover:opacity-95 transition-all cursor-pointer shadow-sm disabled:opacity-50"
                 >
                   {isSaving ? (
                     <>
@@ -1003,20 +997,20 @@ export default function AdminTeamPage() {
             </div>
 
             <h3 className="text-lg font-black text-slate-900 tracking-tight mb-2">
-              Reset All 5 Specialists to Factory Defaults?
+              Reset Team Members to Clinical Defaults?
             </h3>
 
             <p className="text-xs text-slate-600 leading-relaxed mb-4">
-              This action will safely restore the 5 canonical agency specialists (Vipul Gajjar, Disha Parmar, Meet Patel, Hetal Shah, and Krunal Vyas) to their pristine live defaults. Any custom edits or draft members will be reset.
+              This action will safely restore Dr. Noopur Patel and her clinical care coordination team to their pristine live defaults. Any custom edits or draft members will be reset.
             </p>
 
             <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80 mb-6 space-y-1.5 text-xs text-slate-700">
               <div className="flex items-center gap-2 font-bold text-slate-900">
                 <CheckCircle2 className="w-4 h-4 text-[#008744]" />
-                <span>Restores 5 Verified Leadership Specialists</span>
+                <span>Restores Verified Clinical Practice Team</span>
               </div>
               <div className="flex items-center gap-2 text-[11px] text-slate-500 pl-6">
-                <span>100% synchronized with the live About page leadership grid.</span>
+                <span>100% synchronized with the live About page team grid.</span>
               </div>
             </div>
 

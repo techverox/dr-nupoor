@@ -45,22 +45,18 @@ const CATEGORIES = [
 ];
 
 const COLOR_SWATCHES = [
-  { name: "Obsidian Dark", bg: "#0f172a", text: "#ffffff" },
   { name: "Clean White", bg: "#ffffff", text: "#0f172a" },
+  { name: "Rose Petal", bg: "#FFF5F7", text: "#0f172a" },
   { name: "Cool Slate", bg: "#F8FAFC", text: "#0f172a" },
+  { name: "Clinic Sage", bg: "#F0FDF4", text: "#0f172a" },
+  {
+    name: "Rose Gradient",
+    bg: "linear-gradient(135deg, #D84C70 0%, #C23B5E 100%)",
+    text: "#ffffff",
+  },
   {
     name: "Emerald Glow",
     bg: "linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%)",
-    text: "#ffffff",
-  },
-  {
-    name: "Midnight Navy",
-    bg: "linear-gradient(135deg, #020617 0%, #0f172a 60%, #1e293b 100%)",
-    text: "#ffffff",
-  },
-  {
-    name: "Indigo Cyber",
-    bg: "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
     text: "#ffffff",
   },
 ];
@@ -188,25 +184,25 @@ export default function ReusableComponentsLibraryPage() {
   const openStudioForNew = () => {
     setActiveComponentId(null);
     setIsCreatingNew(true);
-    setDraftName("Custom Homepage Block");
+    setDraftName("Breast Oncology Hero Block");
     setDraftCategory("Hero");
-    setDraftDescription("Custom high-converting master block for fast page building.");
-    setDraftTags("custom, high-conversion");
+    setDraftDescription("Clinical oncology hero section with compassionate care messaging.");
+    setDraftTags("oncology, hero, consultation");
     setDraftSectionType("hero");
     setDraftContent({
-      eyebrow: "Enterprise Agency Growth OS",
-      headline: "Scale 10x Client Retainers. Burn Out 0 Teams.",
+      eyebrow: "Compassionate Breast Cancer Care",
+      headline: "Advanced Breast Surgical Oncology & Preservation",
       description:
-        "Stop wasting senior talent on manual reporting that Digivigee handles in seconds.",
-      primaryCtaLabel: "Claim Free Proposal",
+        "Led by Dr. Noopur Patel, fellowship-trained breast cancer surgeon offering evidence-based oncoplastic surgery.",
+      primaryCtaLabel: "Book Consultation",
       primaryCtaTarget: "#lead-form",
-      secondaryCtaLabel: "Explore Capabilities",
+      secondaryCtaLabel: "Explore Treatments",
       secondaryCtaTarget: "#features",
-      logosHeading: "Trusted by 2,350+ Scaling Agencies & Enterprises",
+      logosHeading: "Affiliated with Marengo CIMS Hospital, Ahmedabad",
     });
     setDraftStyling({
-      backgroundColor: "#0f172a",
-      textColor: "#ffffff",
+      backgroundColor: "#ffffff",
+      textColor: "#0f172a",
       paddingY: "xl",
     });
     setStudioTab("content");
@@ -392,30 +388,30 @@ export default function ReusableComponentsLibraryPage() {
   return (
     <div className="space-y-6">
       {/* Top Header & Breadcrumb */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs">
         <div>
           <div className="flex items-center gap-2 mb-2 text-sm">
             <Link
               href="/admin/landing-pages"
-              className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 flex items-center gap-1 font-medium transition-colors"
+              className="text-slate-500 hover:text-slate-900 flex items-center gap-1 font-medium transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Landing Pages
             </Link>
-            <span className="text-zinc-300 dark:text-zinc-600">/</span>
-            <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-              Reusable Component Library
+            <span className="text-slate-300">/</span>
+            <span className="font-semibold text-slate-900">
+              Clinical Component Library
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-2.5">
-            <Layers className="w-7 h-7 text-emerald-600 dark:text-emerald-400" />
-            Reusable Component Library
-            <span className="ml-2 text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 px-2.5 py-0.5 rounded-full border border-emerald-300 dark:border-emerald-800">
-              100% Real Website Data
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 flex items-center gap-2.5">
+            <Layers className="w-7 h-7 text-[#D84C70]" />
+            Clinical Component Library
+            <span className="ml-2 text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full border border-emerald-200">
+              Live Synchronized
             </span>
           </h1>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 max-w-2xl">
-            Pre-engineered master blocks matching DigiVigee homepage 1:1. Edit live in side-by-side studio or insert into any landing page with zero coding.
+          <p className="text-sm text-slate-500 mt-1 max-w-2xl">
+            Pre-engineered clinical sections and blocks for Dr. Noopur Patel&apos;s practice. Edit live in side-by-side studio or insert into any campaign page with zero coding.
           </p>
         </div>
 
@@ -424,10 +420,10 @@ export default function ReusableComponentsLibraryPage() {
           <button
             type="button"
             onClick={() => setIsResetModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-lg border border-amber-300 dark:border-amber-700 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 hover:bg-amber-100 dark:hover:bg-amber-900/50 shadow-xs transition-all cursor-pointer"
-            title="Restore all 11 canonical DigiVigee homepage-grade master components"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-xs transition-all cursor-pointer"
+            title="Restore canonical clinical master components"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+            <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             Reset to Defaults
           </button>
 
@@ -435,7 +431,7 @@ export default function ReusableComponentsLibraryPage() {
           <button
             type="button"
             onClick={openStudioForNew}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold rounded-xl bg-gradient-to-r from-[#D84C70] to-[#C23B5E] text-white hover:brightness-105 shadow-md shadow-rose-900/10 transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             New Master Component
@@ -444,9 +440,9 @@ export default function ReusableComponentsLibraryPage() {
           {/* Browse Templates */}
           <Link
             href="/admin/landing-pages/templates"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-zinc-700/60 shadow-xs transition-colors"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100 shadow-xs transition-colors"
           >
-            <Folder className="w-3.5 h-3.5 text-zinc-500" />
+            <Folder className="w-3.5 h-3.5 text-slate-500" />
             Templates
           </Link>
         </div>
@@ -1717,7 +1713,7 @@ export default function ReusableComponentsLibraryPage() {
 
             {/* RIGHT PANE: 0ms REAL-TIME LIVE PREVIEW STAGE */}
             <div
-              className={`flex-1 bg-zinc-950 p-4 sm:p-6 overflow-y-auto flex-col items-center justify-start ${
+              className={`flex-1 bg-slate-100/70 p-4 sm:p-6 overflow-y-auto flex-col items-center justify-start ${
                 mobileStudioView === "controls" ? "hidden lg:flex" : "flex"
               }`}
             >
@@ -1726,28 +1722,28 @@ export default function ReusableComponentsLibraryPage() {
                   studioViewport === "desktop"
                     ? "max-w-5xl"
                     : studioViewport === "tablet"
-                    ? "max-w-[768px] border-x border-zinc-800 shadow-2xl rounded-2xl overflow-hidden bg-white"
-                    : "max-w-[390px] border-[10px] border-zinc-800 rounded-[44px] shadow-2xl overflow-hidden bg-white"
+                    ? "max-w-[768px] border-x border-slate-300 shadow-2xl rounded-2xl overflow-hidden bg-white"
+                    : "max-w-[390px] border-[10px] border-slate-300 rounded-[44px] shadow-2xl overflow-hidden bg-white"
                 }`}
               >
                 {/* Browser Mockup Chrome */}
-                <div className="bg-zinc-900 px-4 py-2.5 rounded-t-2xl border border-zinc-800 flex items-center justify-between text-xs text-zinc-400 shrink-0">
+                <div className="bg-slate-200/90 px-4 py-2.5 rounded-t-2xl border border-slate-300 flex items-center justify-between text-xs text-slate-600 shrink-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                   </div>
-                  <div className="text-[11px] font-mono text-zinc-400 bg-zinc-950/80 px-4 py-0.5 rounded-full border border-zinc-800 flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    digivigee.com/live-preview/{draftSectionType}
+                  <div className="text-[11px] font-mono text-slate-600 bg-white px-4 py-0.5 rounded-full border border-slate-300 flex items-center gap-1.5 shadow-2xs">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    drnoopurpatel.com/preview/{draftSectionType}
                   </div>
-                  <div className="text-[10px] font-bold uppercase text-emerald-400">
+                  <div className="text-[10px] font-bold uppercase text-emerald-700">
                     0ms Live Mirror
                   </div>
                 </div>
 
                 {/* The Rendered Section (Immediate 0ms reflect) */}
-                <div className="overflow-hidden shadow-2xl border-x border-b border-zinc-800 rounded-b-2xl">
+                <div className="overflow-hidden shadow-sm border-x border-b border-slate-200 rounded-b-2xl bg-white">
                   <SectionRenderer
                     section={draftSectionForRenderer}
                     isBuilder={false}

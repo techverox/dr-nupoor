@@ -79,18 +79,18 @@ export default function AdminBlogManagementPage() {
     slug: "",
     excerpt: "",
     content: "",
-    featuredImage: "/images/showcase/collaborate_keynote.jpg",
+    featuredImage: "/images/doctor/assets/service-1.png",
     featuredImageAlt: "",
-    categoryName: "Agency OS & Operations",
-    categoryId: "operations",
-    readingTimeMinutes: 6,
-    authorName: "Marcus Vance",
-    authorRole: "Managing Partner",
-    authorAvatar: "/images/showcase/marcus_vance.jpg",
+    categoryName: "Screening & Early Detection",
+    categoryId: "screening",
+    readingTimeMinutes: 5,
+    authorName: "Dr. Noopur Patel",
+    authorRole: "Breast Cancer Surgeon & Oncoplastic Specialist",
+    authorAvatar: "/images/doctor/assets/hero-doctor.png",
     authorBio: "",
     status: "published" as BlogStatus,
     isFeatured: false,
-    tagsText: "Agency OS, Retainer Scale, Operations",
+    tagsText: "Early Detection, Mammography, Screening",
   });
 
   // Reset to Defaults Modal State
@@ -167,14 +167,14 @@ export default function AdminBlogManagementPage() {
       slug: post.slug,
       excerpt: post.excerpt,
       content: post.content || "",
-      featuredImage: post.featuredImage || "/images/showcase/collaborate_keynote.jpg",
+      featuredImage: post.featuredImage || "/images/doctor/assets/service-1.png",
       featuredImageAlt: post.featuredImageAlt || post.title,
-      categoryName: post.categoryName || "Agency OS & Operations",
-      categoryId: post.categoryId || "operations",
-      readingTimeMinutes: post.readingTimeMinutes || 6,
-      authorName: post.author?.name || "Marcus Vance",
-      authorRole: post.author?.role || "Managing Partner",
-      authorAvatar: post.author?.avatar || "/images/showcase/marcus_vance.jpg",
+      categoryName: post.categoryName || "Screening & Early Detection",
+      categoryId: post.categoryId || "screening",
+      readingTimeMinutes: post.readingTimeMinutes || 5,
+      authorName: post.author?.name || "Dr. Noopur Patel",
+      authorRole: post.author?.role || "Breast Cancer Surgeon & Oncoplastic Specialist",
+      authorAvatar: post.author?.avatar || "/images/doctor/assets/hero-doctor.png",
       authorBio: post.author?.bio || "",
       status: post.status || "published",
       isFeatured: Boolean(post.isFeatured),
@@ -189,22 +189,22 @@ export default function AdminBlogManagementPage() {
     setEditingPost(null);
     setFormData({
       id: `blog-${Date.now()}`,
-      title: "New High-Growth Agency Playbook 2026",
-      slug: `playbook-${Date.now().toString().slice(-4)}`,
-      excerpt: "Step-by-step systems framework for scaling recurring client retainers with verified high-margin economics.",
-      content: "## Executive Summary\n\nExplain your operational agency framework here with actionable milestones.\n\n### Step 1: System Baseline\n\nEstablish standard operating deliverables with client SLA guarantees.",
-      featuredImage: "/images/showcase/pillar_roas_command.jpg",
-      featuredImageAlt: "New Agency Playbook",
-      categoryName: "Performance Marketing",
-      categoryId: "performance",
+      title: "Understanding Early Signs of Breast Cancer: A Surgeon's Clinical Guide",
+      slug: `early-signs-guide-${Date.now().toString().slice(-4)}`,
+      excerpt: "A compassionate clinical overview on identifying subtle breast changes, understanding risk profiles, and the vital role of prompt mammographic screening.",
+      content: "## Clinical Overview\n\nEarly detection of breast cancer significantly improves treatment outcomes and allows for minimally invasive, breast-conserving surgical options.\n\n### Key Warning Signs\n\n- A painless, firm breast lump or thickening\n- Changes in breast size, contour, or skin dimpling\n- Nipple retraction or unusual discharge\n\n### When to Seek Evaluation\n\nAny persistent breast change lasting more than one menstrual cycle should be evaluated promptly with clinical breast examination and imaging.",
+      featuredImage: "/images/doctor/assets/service-1.png",
+      featuredImageAlt: "Breast Cancer Early Detection and Clinical Evaluation",
+      categoryName: "Screening & Early Detection",
+      categoryId: "screening",
       readingTimeMinutes: 5,
-      authorName: "Marcus Vance",
-      authorRole: "Managing Partner",
-      authorAvatar: "/images/showcase/marcus_vance.jpg",
-      authorBio: "",
+      authorName: "Dr. Noopur Patel",
+      authorRole: "Breast Cancer Surgeon & Oncoplastic Specialist",
+      authorAvatar: "/images/doctor/assets/hero-doctor.png",
+      authorBio: "Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad.",
       status: "published",
       isFeatured: false,
-      tagsText: "Agency OS, Performance, Growth",
+      tagsText: "Early Detection, Mammography, Screening, Breast Care",
     });
     setPreviewMode("card");
     setIsEditorOpen(true);
@@ -413,19 +413,19 @@ export default function AdminBlogManagementPage() {
       )}
 
       {/* Top Header Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white tracking-tight">
-              Blog CMS & Playbooks
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Health Insights &amp; Blog CMS
             </h1>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 shadow-2xs">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-2xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               Live Synchronized
             </span>
           </div>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            Real-time live sync engine for 6 canonical DigiVigee agency operating playbooks & articles.
+          <p className="text-sm text-slate-500">
+            Publish and manage breast oncology articles, diagnostic guidance, and patient recovery education.
           </p>
         </div>
 
@@ -433,10 +433,10 @@ export default function AdminBlogManagementPage() {
           {/* Reset to Defaults Button */}
           <button
             onClick={() => setIsResetOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-all shadow-2xs cursor-pointer"
-            title="Restore all 6 original canonical playbooks with 1 click"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition-all shadow-2xs cursor-pointer"
+            title="Restore canonical clinical articles with 1 click"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             Reset Defaults
           </button>
 
@@ -444,17 +444,17 @@ export default function AdminBlogManagementPage() {
           <Link
             href="/blog"
             target="_blank"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all border border-zinc-200 dark:border-zinc-700 no-underline"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-white text-slate-700 hover:text-[#D84C70] hover:bg-slate-50 transition-all border border-slate-200 shadow-2xs no-underline"
           >
-            <Eye className="w-3.5 h-3.5" />
+            <Eye className="w-3.5 h-3.5 text-slate-400" />
             View on Site
-            <ExternalLink className="w-3 h-3 opacity-60" />
+            <ExternalLink className="w-3 h-3 text-slate-400" />
           </Link>
 
-          {/* Create New Playbook */}
+          {/* Create New Article */}
           <button
             onClick={handleOpenNew}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-[#008744] hover:bg-[#00733a] text-white transition-all shadow-sm shadow-emerald-700/20 cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-[#D84C70] to-[#BE3A5C] text-white hover:opacity-95 transition-all shadow-sm cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             Create Article
@@ -464,70 +464,70 @@ export default function AdminBlogManagementPage() {
 
       {/* 4-Card Summary Metrics Banner */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-1">
-          <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Playbooks</span>
-            <BookOpen className="w-4 h-4 text-zinc-400" />
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+          <div className="flex items-center justify-between text-slate-500">
+            <span className="text-xs font-bold uppercase tracking-wider">Total Articles</span>
+            <BookOpen className="w-4 h-4 text-slate-400" />
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             {totalArticles}
           </div>
-          <div className="text-[11px] text-zinc-400">Full markdown articles</div>
+          <div className="text-[11px] text-slate-400">Clinical guides &amp; articles</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-1">
-          <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+          <div className="flex items-center justify-between text-emerald-600">
             <span className="text-xs font-bold uppercase tracking-wider">Published Live</span>
             <Sparkles className="w-4 h-4 text-emerald-500" />
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400">
+          <div className="text-2xl sm:text-3xl font-black text-emerald-600">
             {publishedCount}
           </div>
-          <div className="text-[11px] text-emerald-700/70 dark:text-emerald-500/70">
+          <div className="text-[11px] text-emerald-700/70">
             Active on /blog archive
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-1">
-          <div className="flex items-center justify-between text-blue-600 dark:text-blue-400">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+          <div className="flex items-center justify-between text-blue-600">
             <span className="text-xs font-bold uppercase tracking-wider">Categories</span>
             <Layers className="w-4 h-4 text-blue-500" />
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             {uniqueCategories.length}
           </div>
-          <div className="text-[11px] text-zinc-400">Topic verticals</div>
+          <div className="text-[11px] text-slate-400">Clinical topics</div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-1">
-          <div className="flex items-center justify-between text-purple-600 dark:text-purple-400">
+        <div className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-1">
+          <div className="flex items-center justify-between text-purple-600">
             <span className="text-xs font-bold uppercase tracking-wider">Total Read Time</span>
             <Clock className="w-4 h-4 text-purple-500" />
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-zinc-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-black text-slate-900">
             ~{totalReadingTime}m
           </div>
-          <div className="text-[11px] text-zinc-400">High-intent reading</div>
+          <div className="text-[11px] text-slate-400">Patient education time</div>
         </div>
       </div>
 
       {/* Filter & Search Bar (Simple & Clean for 10-year-old child) */}
-      <div className="bg-white dark:bg-zinc-900 p-4 sm:p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xs space-y-3">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-2xs space-y-3">
         <div className="flex flex-col md:flex-row gap-3">
           {/* Search Input */}
           <div className="relative flex-1">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search playbooks by title, slug, excerpt, or author..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/60 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-[#008744]"
+              placeholder="Search articles by title, slug, excerpt, or author..."
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70]"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -535,15 +535,15 @@ export default function AdminBlogManagementPage() {
           </div>
 
           {/* Status Filter */}
-          <div className="flex items-center gap-1 bg-zinc-100 dark:bg-zinc-800/80 p-1 rounded-xl border border-zinc-200 dark:border-zinc-700 shrink-0">
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 shrink-0">
             {(["all", "published", "draft"] as const).map((st) => (
               <button
                 key={st}
                 onClick={() => setSelectedStatus(st)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold capitalize transition-all cursor-pointer ${
                   selectedStatus === st
-                    ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs"
-                    : "text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
+                    ? "bg-white text-slate-900 shadow-xs"
+                    : "text-slate-500 hover:text-slate-900"
                 }`}
               >
                 {st}
@@ -561,8 +561,8 @@ export default function AdminBlogManagementPage() {
             onClick={() => setSelectedCategory("all")}
             className={`px-3 py-1 rounded-full font-bold whitespace-nowrap transition-all cursor-pointer ${
               selectedCategory === "all"
-                ? "bg-zinc-900 dark:bg-white text-white dark:text-zinc-900"
-                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200"
+                ? "bg-slate-900 text-white"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200"
             }`}
           >
             All Categories ({posts.length})
@@ -574,31 +574,31 @@ export default function AdminBlogManagementPage() {
               className={`px-3 py-1 rounded-full font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? "bg-[#008744] text-white shadow-xs"
-                  : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
               }`}
             >
-              {cat} ({posts.filter((p) => (p.categoryName || "Agency OS") === cat).length})
+              {cat} ({posts.filter((p) => (p.categoryName || "Clinical Care") === cat).length})
             </button>
           ))}
         </div>
       </div>
 
       {/* Main Articles Table / Card Roster */}
-      <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
+      <div className="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
         {isLoading ? (
           <div className="py-20 text-center space-y-3">
             <div className="w-8 h-8 border-3 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto" />
-            <p className="text-sm text-zinc-500 font-medium">Synchronizing live blog playbooks...</p>
+            <p className="text-sm text-slate-500 font-medium">Synchronizing live clinical articles...</p>
           </div>
         ) : filteredPosts.length === 0 ? (
           <div className="py-16 text-center px-4 space-y-4">
-            <div className="w-14 h-14 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+            <div className="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto text-2xl">
               📚
             </div>
-            <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-              No matching playbooks found
+            <h3 className="text-base font-bold text-slate-900">
+              No matching clinical articles found
             </h3>
-            <p className="text-xs text-zinc-500 max-w-sm mx-auto">
+            <p className="text-xs text-slate-500 max-w-sm mx-auto">
               Try adjusting your search query or reset back to default canonical articles.
             </p>
             <button
@@ -607,31 +607,31 @@ export default function AdminBlogManagementPage() {
                 setSelectedCategory("all");
                 setSelectedStatus("all");
               }}
-              className="px-4 py-2 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 transition-all"
+              className="px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all cursor-pointer"
             >
               Clear Filters
             </button>
           </div>
         ) : (
-          <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+          <div className="divide-y divide-slate-200">
             {filteredPosts.map((post) => (
               <div
                 key={post.id}
-                className="p-5 sm:p-6 hover:bg-zinc-50/60 dark:hover:bg-zinc-800/40 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-5"
+                className="p-5 sm:p-6 hover:bg-slate-50/60 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-5"
               >
                 {/* Article Info & Thumbnail */}
                 <div className="flex items-start sm:items-center gap-4 flex-1 min-w-0">
                   {/* Thumbnail */}
-                  <div className="relative w-20 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 shrink-0 border border-zinc-200 dark:border-zinc-700">
+                  <div className="relative w-20 h-16 sm:w-28 sm:h-20 rounded-xl overflow-hidden bg-slate-100 shrink-0 border border-slate-200">
                     <Image
-                      src={post.featuredImage || "/images/showcase/collaborate_keynote.jpg"}
+                      src={post.featuredImage || "/images/doctor/assets/service-1.png"}
                       alt={post.title}
                       fill
                       className="object-cover"
                       sizes="112px"
                     />
                     {post.isFeatured && (
-                      <span className="absolute top-1 left-1 bg-[#008744] text-[9px] font-black text-white px-1.5 py-0.5 rounded-md uppercase">
+                      <span className="absolute top-1 left-1 bg-[#D84C70] text-[9px] font-black text-white px-1.5 py-0.5 rounded-md uppercase">
                         Featured
                       </span>
                     )}
@@ -640,30 +640,30 @@ export default function AdminBlogManagementPage() {
                   {/* Text Details */}
                   <div className="space-y-1.5 min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/40 text-[#008744] border border-emerald-200/80 dark:border-emerald-800/50">
-                        {post.categoryName || "Agency OS"}
+                      <span className="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-[#008744] border border-emerald-200/80">
+                        {post.categoryName || "Screening & Detection"}
                       </span>
-                      <span className="text-[11px] text-zinc-400 flex items-center gap-1 font-medium">
+                      <span className="text-[11px] text-slate-400 flex items-center gap-1 font-medium">
                         <Clock className="w-3 h-3" /> ~{post.readingTimeMinutes || 5} min read
                       </span>
-                      <span className="text-zinc-300 dark:text-zinc-700">•</span>
-                      <span className="text-[11px] text-zinc-400 font-mono">
+                      <span className="text-slate-300">•</span>
+                      <span className="text-[11px] text-slate-400 font-mono">
                         /blog/{post.slug}
                       </span>
                     </div>
 
-                    <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white line-clamp-1">
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 line-clamp-1">
                       {post.title}
                     </h3>
 
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-1 max-w-2xl">
+                    <p className="text-xs text-slate-500 line-clamp-1 max-w-2xl">
                       {post.excerpt}
                     </p>
 
                     {/* Author & Date Footer */}
-                    <div className="flex items-center gap-2 pt-1 text-[11px] text-zinc-500">
+                    <div className="flex items-center gap-2 pt-1 text-[11px] text-slate-500">
                       {post.author?.avatar && (
-                        <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 border border-zinc-200">
+                        <div className="relative w-4 h-4 rounded-full overflow-hidden shrink-0 border border-slate-200">
                           <Image
                             src={post.author.avatar}
                             alt={post.author.name}
@@ -672,8 +672,8 @@ export default function AdminBlogManagementPage() {
                           />
                         </div>
                       )}
-                      <span className="font-semibold text-zinc-700 dark:text-zinc-300">
-                        {post.author?.name || "Marcus Vance"}
+                      <span className="font-semibold text-slate-700">
+                        {post.author?.name || "Dr. Noopur Patel"}
                       </span>
                       <span>•</span>
                       <span>{formatDate(post.publishedAt || post.createdAt)}</span>
@@ -682,14 +682,14 @@ export default function AdminBlogManagementPage() {
                 </div>
 
                 {/* Right Action Bar */}
-                <div className="flex flex-wrap items-center gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-zinc-100 dark:border-zinc-800">
+                <div className="flex flex-wrap items-center gap-2 shrink-0 pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100">
                   {/* Status Toggle Switch */}
                   <button
                     onClick={() => handleTogglePublish(post)}
                     className={`px-3 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider border transition-all cursor-pointer ${
                       post.status === "published"
-                        ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100"
-                        : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-200"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100"
+                        : "bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200"
                     }`}
                     title="Click to toggle between published and draft"
                   >
@@ -699,9 +699,9 @@ export default function AdminBlogManagementPage() {
                   {/* Side-by-side Live Edit CTA */}
                   <button
                     onClick={() => handleOpenEdit(post)}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all shadow-2xs cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 transition-all shadow-2xs cursor-pointer"
                   >
-                    <Edit3 className="w-3.5 h-3.5" />
+                    <Edit3 className="w-3.5 h-3.5 text-slate-600" />
                     Live Edit
                   </button>
 
@@ -709,17 +709,17 @@ export default function AdminBlogManagementPage() {
                   <Link
                     href={`/blog/${post.slug}`}
                     target="_blank"
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-all border border-zinc-200 dark:border-zinc-700 no-underline"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-bold bg-white text-slate-700 hover:text-[#D84C70] hover:bg-slate-50 transition-all border border-slate-200 shadow-2xs no-underline"
                     title="Open live public URL"
                   >
-                    <ExternalLink className="w-3.5 h-3.5" />
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                   </Link>
 
                   {/* Delete Button */}
                   <button
                     onClick={() => setDeleteTarget(post)}
-                    className="p-1.5 rounded-xl text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 transition-all cursor-pointer"
-                    title="Delete playbook"
+                    className="p-1.5 rounded-xl text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all cursor-pointer"
+                    title="Delete article"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -735,21 +735,21 @@ export default function AdminBlogManagementPage() {
       {/* ========================================================================= */}
       {isEditorOpen && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-200 overflow-y-auto">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-7xl rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col max-h-[94vh] my-auto">
+          <div className="bg-white w-full max-w-7xl rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[94vh] my-auto">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50/70 dark:bg-zinc-800/40 shrink-0">
+            <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/70 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-xl bg-[#008744]/10 text-[#008744] flex items-center justify-center font-bold">
-                  <Zap className="w-5 h-5" />
+                <div className="w-9 h-9 rounded-xl bg-[#D84C70]/10 text-[#D84C70] flex items-center justify-center font-bold">
+                  <BookOpen className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-base sm:text-lg font-black text-zinc-900 dark:text-white flex items-center gap-2">
-                    <span>{editingPost ? "Side-by-Side Playbook Editor" : "Create New Playbook"}</span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 dark:bg-emerald-950 text-[#008744] uppercase tracking-wider">
+                  <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                    <span>{editingPost ? "Side-by-Side Article Editor" : "Create New Clinical Article"}</span>
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-100 text-[#008744] uppercase tracking-wider">
                       Live Keystroke Sync: 0ms
                     </span>
                   </h2>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-slate-500">
                     Left: Edit content easily. Right: See your live website card update in real-time.
                   </p>
                 </div>
@@ -757,13 +757,13 @@ export default function AdminBlogManagementPage() {
 
               <div className="flex items-center gap-3">
                 {/* Mode Selector for Preview */}
-                <div className="hidden sm:flex items-center bg-zinc-200/70 dark:bg-zinc-700/60 p-1 rounded-xl text-xs font-bold">
+                <div className="hidden sm:flex items-center bg-slate-200/70 p-1 rounded-xl text-xs font-bold">
                   <button
                     onClick={() => setPreviewMode("card")}
                     className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
                       previewMode === "card"
-                        ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-2xs"
-                        : "text-zinc-600 dark:text-zinc-400"
+                        ? "bg-white text-slate-900 shadow-2xs"
+                        : "text-slate-600"
                     }`}
                   >
                     Archive Card View
@@ -772,8 +772,8 @@ export default function AdminBlogManagementPage() {
                     onClick={() => setPreviewMode("article")}
                     className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
                       previewMode === "article"
-                        ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-2xs"
-                        : "text-zinc-600 dark:text-zinc-400"
+                        ? "bg-white text-slate-900 shadow-2xs"
+                        : "text-slate-600"
                     }`}
                   >
                     Article Reader View
@@ -782,7 +782,7 @@ export default function AdminBlogManagementPage() {
 
                 <button
                   onClick={() => setIsEditorOpen(false)}
-                  className="p-2 rounded-xl text-zinc-400 hover:text-zinc-700 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all cursor-pointer"
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-all cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -790,28 +790,28 @@ export default function AdminBlogManagementPage() {
             </div>
 
             {/* Modal Body: Two Columns (Left Form, Right Live Preview) */}
-            <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-zinc-200 dark:divide-zinc-800">
+            <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-slate-200">
               {/* LEFT COLUMN: Clean & Simple Editor Form */}
               <div className="lg:col-span-7 p-6 sm:p-8 space-y-6 overflow-y-auto max-h-[calc(94vh-130px)]">
                 {/* Title */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300 flex items-center justify-between">
-                    <span>1. Playbook Title</span>
-                    <span className="text-[10px] text-zinc-400 font-normal">Required</span>
+                  <label className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
+                    <span>1. Article Title</span>
+                    <span className="text-[10px] text-slate-400 font-normal">Required</span>
                   </label>
                   <input
                     type="text"
                     value={formData.title}
                     onChange={(e) => handleTitleChange(e.target.value)}
-                    placeholder="e.g., The 2026 Agency Operating Playbook..."
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-sm font-bold text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none"
+                    placeholder="e.g. Early Detection of Breast Cancer: Why Timely Screening Saves Lives..."
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none"
                   />
                 </div>
 
                 {/* Slug & Reading Time */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="sm:col-span-2 space-y-1.5">
-                    <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                    <label className="text-xs font-black uppercase tracking-wider text-slate-700">
                       2. URL Slug (/blog/[slug])
                     </label>
                     <input
@@ -823,13 +823,13 @@ export default function AdminBlogManagementPage() {
                           slug: e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, "-"),
                         }))
                       }
-                      placeholder="e.g. 10-social-media-marketing-tips"
-                      className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-mono text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none"
+                      placeholder="e.g. early-detection-of-breast-cancer"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-mono text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                    <label className="text-xs font-black uppercase tracking-wider text-slate-700">
                       Read Time (min)
                     </label>
                     <input
@@ -843,7 +843,7 @@ export default function AdminBlogManagementPage() {
                           readingTimeMinutes: parseInt(e.target.value) || 5,
                         }))
                       }
-                      className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-bold text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none"
                     />
                   </div>
                 </div>
@@ -851,8 +851,8 @@ export default function AdminBlogManagementPage() {
                 {/* Category & Status */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
-                      3. Category
+                    <label className="text-xs font-black uppercase tracking-wider text-slate-700">
+                      3. Clinical Category
                     </label>
                     <select
                       value={formData.categoryName}
@@ -861,7 +861,7 @@ export default function AdminBlogManagementPage() {
                         const id = val.toLowerCase().replace(/[^a-z0-9]/g, "-");
                         setFormData((prev) => ({ ...prev, categoryName: val, categoryId: id }));
                       }}
-                      className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-bold text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none"
                     >
                       {PRESET_CATEGORIES.map((cat) => (
                         <option key={cat} value={cat}>
@@ -872,7 +872,7 @@ export default function AdminBlogManagementPage() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
+                    <label className="text-xs font-black uppercase tracking-wider text-slate-700">
                       Publication Status
                     </label>
                     <select
@@ -883,7 +883,7 @@ export default function AdminBlogManagementPage() {
                           status: e.target.value as BlogStatus,
                         }))
                       }
-                      className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-bold text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none"
+                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none"
                     >
                       <option value="published">🟢 Published Live (Visible on /blog)</option>
                       <option value="draft">🟡 Draft (Hidden from /blog)</option>
@@ -893,23 +893,23 @@ export default function AdminBlogManagementPage() {
 
                 {/* Excerpt / Summary */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300 flex items-center justify-between">
+                  <label className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
                     <span>4. Excerpt / Subtitle Summary</span>
-                    <span className="text-[10px] text-zinc-400 font-normal">Hook & SEO card snippet</span>
+                    <span className="text-[10px] text-slate-400 font-normal">Patient guide &amp; SEO summary</span>
                   </label>
                   <textarea
                     rows={3}
                     value={formData.excerpt}
                     onChange={(e) => setFormData((prev) => ({ ...prev, excerpt: e.target.value }))}
-                    placeholder="Brief description of the operating strategy..."
-                    className="w-full px-4 py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none leading-relaxed"
+                    placeholder="Brief clinical description of the topic and key takeaways for patients..."
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none leading-relaxed"
                   />
                 </div>
 
                 {/* Author Selection */}
                 <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
-                    5. Author & Growth Specialist
+                  <label className="text-xs font-black uppercase tracking-wider text-slate-700">
+                    5. Author &amp; Specialist
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                     {PRESET_AUTHORS.map((aut) => {
@@ -928,18 +928,18 @@ export default function AdminBlogManagementPage() {
                           }
                           className={`p-2.5 rounded-xl border text-left flex items-center gap-2.5 transition-all cursor-pointer ${
                             isSelected
-                              ? "bg-emerald-50 dark:bg-emerald-950/50 border-[#008744] ring-1 ring-[#008744]"
-                              : "bg-zinc-50 dark:bg-zinc-800/60 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100"
+                              ? "bg-rose-50 border-[#D84C70] ring-1 ring-[#D84C70]"
+                              : "bg-slate-50 border-slate-200 hover:bg-slate-100"
                           }`}
                         >
-                          <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 border border-zinc-200">
+                          <div className="relative w-7 h-7 rounded-full overflow-hidden shrink-0 border border-slate-200">
                             <Image src={aut.avatar} alt={aut.name} fill className="object-cover" />
                           </div>
                           <div className="min-w-0 flex-1">
-                            <div className="text-[11px] font-bold text-zinc-900 dark:text-white truncate">
+                            <div className="text-[11px] font-bold text-slate-900 truncate">
                               {aut.name}
                             </div>
-                            <div className="text-[9px] text-zinc-500 truncate">{aut.role}</div>
+                            <div className="text-[9px] text-slate-500 truncate">{aut.role}</div>
                           </div>
                         </button>
                       );
@@ -949,9 +949,9 @@ export default function AdminBlogManagementPage() {
 
                 {/* Featured Image Quick-Picks */}
                 <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300 flex items-center justify-between">
+                  <label className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
                     <span>6. Cover Image Visual</span>
-                    <span className="text-[10px] text-zinc-400 font-normal">1-click agency photos</span>
+                    <span className="text-[10px] text-slate-400 font-normal">1-click clinical photos</span>
                   </label>
                   <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                     {PRESET_IMAGES.map((img) => {
@@ -963,13 +963,13 @@ export default function AdminBlogManagementPage() {
                           onClick={() => setFormData((prev) => ({ ...prev, featuredImage: img.url }))}
                           className={`relative h-14 rounded-xl overflow-hidden border-2 transition-all cursor-pointer ${
                             isSelected
-                              ? "border-[#008744] ring-2 ring-[#008744]/30"
-                              : "border-zinc-200 dark:border-zinc-700 opacity-70 hover:opacity-100"
+                              ? "border-[#D84C70] ring-2 ring-[#D84C70]/30"
+                              : "border-slate-200 opacity-70 hover:opacity-100"
                           }`}
                         >
                           <Image src={img.url} alt={img.label} fill className="object-cover" sizes="80px" />
                           {isSelected && (
-                            <div className="absolute inset-0 bg-[#008744]/25 flex items-center justify-center">
+                            <div className="absolute inset-0 bg-[#D84C70]/25 flex items-center justify-center">
                               <Check className="w-4 h-4 text-white drop-shadow" />
                             </div>
                           )}
@@ -982,46 +982,46 @@ export default function AdminBlogManagementPage() {
                     value={formData.featuredImage}
                     onChange={(e) => setFormData((prev) => ({ ...prev, featuredImage: e.target.value }))}
                     placeholder="Or enter custom image URL path..."
-                    className="w-full px-3 py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 focus:outline-none"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-white text-xs font-mono text-slate-600 focus:outline-none focus:border-[#D84C70]"
                   />
                 </div>
 
                 {/* Content / Markdown Body */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-black uppercase tracking-wider text-zinc-700 dark:text-zinc-300 flex items-center justify-between">
-                    <span>7. Playbook Article Content (Markdown)</span>
-                    <span className="text-[10px] text-zinc-400 font-normal">Supports ## headings, bullets, code</span>
+                  <label className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center justify-between">
+                    <span>7. Clinical Article Content (Markdown)</span>
+                    <span className="text-[10px] text-slate-400 font-normal">Supports ## headings, bullets, highlights</span>
                   </label>
                   <textarea
                     rows={8}
                     value={formData.content}
                     onChange={(e) => setFormData((prev) => ({ ...prev, content: e.target.value }))}
-                    placeholder="## Executive Summary\n\nExplain your operational agency framework here..."
-                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-xs font-mono text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#008744] focus:outline-none leading-relaxed"
+                    placeholder="## Clinical Overview\n\nExplain the diagnostic pathway, surgical options, and patient care guidance here..."
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-xs font-mono text-slate-900 focus:ring-2 focus:ring-[#D84C70]/10 focus:border-[#D84C70] focus:outline-none leading-relaxed"
                   />
                 </div>
               </div>
 
               {/* RIGHT COLUMN: Real-Time Live Preview Stage */}
-              <div className="lg:col-span-5 p-6 sm:p-8 bg-[#F8FAFC] dark:bg-zinc-950 flex flex-col justify-start space-y-4 overflow-y-auto max-h-[calc(94vh-130px)] sticky top-0">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-200/80 dark:border-zinc-800">
+              <div className="lg:col-span-5 p-6 sm:p-8 bg-slate-50/70 border-l border-slate-200 flex flex-col justify-start space-y-4 overflow-y-auto max-h-[calc(94vh-130px)] sticky top-0">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-200">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-extrabold text-[#0C1628] dark:text-white uppercase tracking-wider">
+                    <span className="text-xs font-black text-slate-900 uppercase tracking-wider">
                       Live Public Card Preview
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-slate-400 dark:text-zinc-500">
+                  <span className="text-[11px] font-mono text-slate-400">
                     /blog/{formData.slug || "slug"}
                   </span>
                 </div>
 
-                {/* REPLICA OF THE DIGIVIGEE PUBLIC BLOG CARD */}
+                {/* REPLICA OF THE PUBLIC BLOG CARD */}
                 {previewMode === "card" ? (
-                  <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 border border-slate-200/80 dark:border-zinc-800 shadow-md flex flex-col justify-between text-left transition-all max-w-md mx-auto w-full">
+                  <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between text-left transition-all max-w-md mx-auto w-full">
                     <div>
                       {/* Visual Media Header */}
-                      <div className="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 dark:bg-zinc-800 border border-slate-200/70 dark:border-zinc-700">
+                      <div className="relative w-full h-48 rounded-2xl overflow-hidden mb-5 bg-slate-100 border border-slate-200">
                         <Image
                           src={formData.featuredImage || "/images/showcase/collaborate_keynote.jpg"}
                           alt={formData.title || "Preview"}
@@ -1031,8 +1031,8 @@ export default function AdminBlogManagementPage() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
                         <div className="absolute top-3 left-3">
-                          <span className="px-2.5 py-1 rounded-full bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md text-[10px] font-bold text-slate-800 dark:text-zinc-200 uppercase tracking-wider border border-slate-200/60 shadow-2xs">
-                            {formData.categoryName || "Agency OS"}
+                          <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold text-slate-800 uppercase tracking-wider border border-slate-200 shadow-2xs">
+                            {formData.categoryName || "Breast Oncology"}
                           </span>
                         </div>
                         {formData.status === "draft" && (
@@ -1045,7 +1045,7 @@ export default function AdminBlogManagementPage() {
                       </div>
 
                       {/* Metadata Strip */}
-                      <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-zinc-400 mb-3 font-medium">
+                      <div className="flex items-center gap-2 text-[11px] text-slate-500 mb-3 font-medium">
                         <span className="inline-flex items-center gap-1">
                           <Calendar className="w-3 h-3 text-slate-400" />
                           Today
@@ -1058,51 +1058,51 @@ export default function AdminBlogManagementPage() {
                       </div>
 
                       {/* Title */}
-                      <h4 className="text-base font-extrabold text-[#0C1628] dark:text-white tracking-tight leading-snug mb-3 hover:text-[#008744] transition-colors">
-                        {formData.title || "Your Playbook Title Here"}
+                      <h4 className="text-base font-extrabold text-slate-900 tracking-tight leading-snug mb-3 hover:text-[#D84C70] transition-colors">
+                        {formData.title || "Clinical Article Title"}
                       </h4>
 
                       {/* Excerpt */}
-                      <p className="text-xs text-[#475569] dark:text-zinc-400 leading-relaxed line-clamp-3 mb-5 font-normal">
-                        {formData.excerpt || "Enter an excerpt to see how this summary appears to visitors on your blog archive page..."}
+                      <p className="text-xs text-slate-600 leading-relaxed line-clamp-3 mb-5 font-normal">
+                        {formData.excerpt || "Enter an excerpt to see how this summary appears to patients and visitors on the blog archive..."}
                       </p>
                     </div>
 
                     {/* Author Footer */}
-                    <div className="pt-4 border-t border-slate-100 dark:border-zinc-800 flex items-center justify-between">
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
                       <div className="flex items-center gap-2.5">
-                        <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-200 dark:border-zinc-700 shrink-0">
+                        <div className="relative w-8 h-8 rounded-full overflow-hidden border border-slate-200 shrink-0">
                           <Image
-                            src={formData.authorAvatar || "/images/showcase/marcus_vance.jpg"}
+                            src={formData.authorAvatar || "/images/team/dr-noopur-patel.png"}
                             alt={formData.authorName}
                             fill
                             className="object-cover"
                           />
                         </div>
                         <div>
-                          <div className="text-[11px] font-bold text-[#0C1628] dark:text-white flex items-center gap-1">
-                            <span>{formData.authorName || "Marcus Vance"}</span>
-                            <CheckCircle2 className="w-3 h-3 text-[#008744]" />
+                          <div className="text-[11px] font-bold text-slate-900 flex items-center gap-1">
+                            <span>{formData.authorName || "Dr. Noopur Patel"}</span>
+                            <CheckCircle2 className="w-3 h-3 text-[#D84C70]" />
                           </div>
-                          <div className="text-[10px] text-slate-400 dark:text-zinc-500">
-                            {formData.authorRole || "Managing Partner"}
+                          <div className="text-[10px] text-slate-400">
+                            {formData.authorRole || "Breast Cancer Surgeon"}
                           </div>
                         </div>
                       </div>
 
-                      <div className="inline-flex items-center gap-1 text-xs font-bold text-[#008744] group-hover:translate-x-0.5 transition-transform">
-                        <span>Read Playbook</span>
+                      <div className="inline-flex items-center gap-1 text-xs font-bold text-[#D84C70] group-hover:translate-x-0.5 transition-transform">
+                        <span>Read Article</span>
                         <ArrowRight className="w-3 h-3" />
                       </div>
                     </div>
                   </div>
                 ) : (
                   /* SINGLE ARTICLE HEADER PREVIEW */
-                  <div className="bg-white dark:bg-zinc-900 rounded-3xl p-6 border border-slate-200/80 dark:border-zinc-800 shadow-md space-y-4 text-left max-w-md mx-auto w-full">
-                    <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-[#008744] text-[10px] font-bold uppercase tracking-wider border border-emerald-200">
+                  <div className="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4 text-left max-w-md mx-auto w-full">
+                    <span className="px-2.5 py-1 rounded-full bg-rose-50 text-[#D84C70] text-[10px] font-bold uppercase tracking-wider border border-rose-200">
                       {formData.categoryName}
                     </span>
-                    <h2 className="text-lg font-black text-[#0C1628] dark:text-white leading-snug">
+                    <h2 className="text-lg font-black text-slate-900 leading-snug">
                       {formData.title}
                     </h2>
                     <div className="flex items-center gap-2 text-xs text-slate-500">
@@ -1110,7 +1110,7 @@ export default function AdminBlogManagementPage() {
                       <span>•</span>
                       <span>{formData.readingTimeMinutes}m read</span>
                     </div>
-                    <div className="relative w-full h-44 rounded-xl overflow-hidden">
+                    <div className="relative w-full h-44 rounded-xl overflow-hidden border border-slate-100">
                       <Image
                         src={formData.featuredImage}
                         alt="Article hero"
@@ -1118,31 +1118,31 @@ export default function AdminBlogManagementPage() {
                         className="object-cover"
                       />
                     </div>
-                    <div className="text-xs text-slate-600 dark:text-zinc-300 space-y-2 border-t pt-3 font-mono whitespace-pre-wrap line-clamp-6">
+                    <div className="text-xs text-slate-600 space-y-2 border-t border-slate-100 pt-3 font-mono whitespace-pre-wrap line-clamp-6">
                       {formData.content}
                     </div>
                   </div>
                 )}
 
                 <div className="text-center pt-2">
-                  <p className="text-[11px] text-slate-400 dark:text-zinc-500">
-                    Edits made here are saved directly to the database and reflected live across the entire website instantly.
+                  <p className="text-[11px] text-slate-400">
+                    Edits saved here reflect directly on the patient-facing health portal instantly.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Modal Footer Bar */}
-            <div className="px-6 py-4 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-zinc-50/80 dark:bg-zinc-900 shrink-0">
-              <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">
-                URL: <span className="font-mono text-zinc-700 dark:text-zinc-300">/blog/{formData.slug}</span>
+            <div className="px-6 py-4 border-t border-slate-200 flex items-center justify-between bg-slate-50 shrink-0">
+              <div className="text-xs text-slate-500 font-medium">
+                URL: <span className="font-mono text-slate-700">/blog/{formData.slug}</span>
               </div>
 
               <div className="flex items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setIsEditorOpen(false)}
-                  className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all cursor-pointer"
+                  className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-200 transition-all cursor-pointer"
                 >
                   Cancel
                 </button>
@@ -1151,7 +1151,7 @@ export default function AdminBlogManagementPage() {
                   type="button"
                   onClick={handleSavePost}
                   disabled={isSaving}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold bg-[#008744] hover:bg-[#00733a] text-white transition-all shadow-md shadow-emerald-700/20 cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-[#D84C70] to-[#C23B5E] text-white hover:brightness-105 transition-all shadow-md shadow-rose-900/10 cursor-pointer disabled:opacity-50"
                 >
                   {isSaving ? (
                     <>
@@ -1161,7 +1161,7 @@ export default function AdminBlogManagementPage() {
                   ) : (
                     <>
                       <Check className="w-4 h-4" />
-                      Save & Sync Live
+                      Save &amp; Publish Article
                     </>
                   )}
                 </button>
@@ -1175,23 +1175,23 @@ export default function AdminBlogManagementPage() {
       {/* 1-CLICK RESET TO DEFAULTS CONFIRMATION MODAL                              */}
       {/* ========================================================================= */}
       {isResetOpen && (
-        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950 text-amber-600 flex items-center justify-center">
+        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="bg-white w-full max-w-md rounded-3xl border border-slate-200 shadow-2xl p-6 space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-200">
               <RotateCcw className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-black text-zinc-900 dark:text-white">
-                Restore Canonical Playbooks?
+              <h3 className="text-lg font-black text-slate-900">
+                Restore Canonical Health Articles?
               </h3>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                This will reset all 6 agency scaling playbooks (Marcus Vance, Elena Rostova, Vipul Gajjar, Sophie Laurent) back to their canonical factory defaults.
+              <p className="text-xs text-slate-500 leading-relaxed">
+                This will reset all oncology health awareness articles by Dr. Noopur Patel back to clinical defaults.
               </p>
             </div>
             <div className="flex items-center justify-end gap-3 pt-3">
               <button
                 onClick={() => setIsResetOpen(false)}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-all cursor-pointer"
               >
                 Cancel
               </button>
@@ -1211,34 +1211,34 @@ export default function AdminBlogManagementPage() {
       {/* DELETE CONFIRMATION MODAL                                                 */}
       {/* ========================================================================= */}
       {deleteTarget && (
-        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-zinc-900 w-full max-w-md rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-red-100 dark:bg-red-950 text-red-600 flex items-center justify-center">
+        <div className="fixed inset-0 z-[210] flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="bg-white w-full max-w-md rounded-3xl border border-slate-200 shadow-2xl p-6 space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center border border-rose-200">
               <Trash2 className="w-6 h-6" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-black text-zinc-900 dark:text-white">
-                Delete Blog Playbook?
+              <h3 className="text-lg font-black text-slate-900">
+                Delete Health Article?
               </h3>
-              <p className="text-xs text-zinc-500 leading-relaxed">
+              <p className="text-xs text-slate-500 leading-relaxed">
                 Are you sure you want to permanently delete{" "}
-                <span className="font-bold text-zinc-800 dark:text-zinc-200">
+                <span className="font-bold text-slate-800">
                   &quot;{deleteTarget.title}&quot;
                 </span>
-                ? This will remove it from the live website.
+                ? This will remove it from the patient website.
               </p>
             </div>
             <div className="flex items-center justify-end gap-3 pt-3">
               <button
                 onClick={() => setDeleteTarget(null)}
-                className="px-4 py-2 rounded-xl text-xs font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 transition-all cursor-pointer"
+                className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition-all cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeleteConfirm}
                 disabled={isDeleting}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-700 text-white transition-all shadow-md cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-700 text-white transition-all shadow-md cursor-pointer disabled:opacity-50"
               >
                 {isDeleting ? "Deleting..." : "Delete Article"}
               </button>

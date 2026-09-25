@@ -15,26 +15,26 @@ export interface AdminTopBarProps {
 }
 
 const SECTION_TITLES: Record<string, string> = {
-  "/admin": "Dashboard",
+  "/admin": "Practice Dashboard",
   "/admin/pages": "Website Pages CMS",
-  "/admin/services": "Services CMS",
-  "/admin/portfolio": "Portfolio CMS",
+  "/admin/services": "Treatments & Services",
+  "/admin/portfolio": "Patient Stories & Cases",
   "/admin/testimonials": "Patient Reviews & Stories",
-  "/admin/faqs": "FAQs Management CMS",
-  "/admin/team": "Team Specialists CMS",
-  "/admin/blog": "Blog CMS & Playbooks",
-  "/admin/landing-pages": "Landing Pages CMS",
-  "/admin/landing-pages/components": "Component Library",
-  "/admin/landing-pages/templates": "Landing Templates",
-  "/admin/forms": "Forms & Builder",
-  "/admin/leads": "Leads & Inquiries",
-  "/admin/analytics": "Traffic & Telemetry",
-  "/admin/subscribers": "Newsletter Subscribers",
-  "/admin/offers": "Popups & Offers",
+  "/admin/faqs": "Clinical FAQs",
+  "/admin/team": "Medical Team & Specialists",
+  "/admin/blog": "Health Insights & Blog",
+  "/admin/landing-pages": "Specialty Care Pages",
+  "/admin/landing-pages/components": "Clinical Component Library",
+  "/admin/landing-pages/templates": "Care Journey Templates",
+  "/admin/forms": "Clinical Forms & Assessments",
+  "/admin/leads": "Consultation Bookings & Inquiries",
+  "/admin/analytics": "Practice Analytics & Traffic",
+  "/admin/subscribers": "Health Newsletter Subscribers",
+  "/admin/offers": "Announcements & Health Alerts",
   "/admin/redirects": "URL Redirects",
-  "/admin/seo": "Global SEO Engine",
-  "/admin/users": "Users & RBAC",
-  "/admin/settings": "Global Settings",
+  "/admin/seo": "Oncology SEO Engine",
+  "/admin/users": "Staff Access & Permissions",
+  "/admin/settings": "Clinic Global Settings",
 };
 
 export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: AdminTopBarProps) {
@@ -48,7 +48,7 @@ export function AdminTopBar({ user, onToggleSidebar, isSidebarCollapsed }: Admin
     if (typeof window !== "undefined") {
       document.documentElement.classList.remove("dark");
       try {
-        localStorage.setItem("digivigee_theme", "light");
+        localStorage.setItem("dr_noopur_theme", "light");
       } catch {}
     }
   }, []);

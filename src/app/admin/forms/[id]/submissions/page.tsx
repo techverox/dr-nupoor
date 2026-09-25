@@ -82,22 +82,22 @@ export default function FormSubmissionsPage({
         <div className="flex items-center gap-4">
           <Link
             href="/admin/forms"
-            className="inline-flex items-center justify-center p-2 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors shadow-sm"
+            className="inline-flex items-center justify-center p-2 rounded-xl border border-slate-200 bg-white text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors shadow-sm"
           >
             <ArrowLeft className="w-5 h-5" />
           </Link>
 
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight leading-none">
+              <h1 className="text-2xl font-bold text-slate-900 tracking-tight leading-none">
                 {form ? form.name : "Loading Form..."}
               </h1>
-              <Badge variant="primary-subtle" size="sm" className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200">
                 {submissions.length} Submissions
-              </Badge>
+              </span>
             </div>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400">
-              Real-time incoming submissions captured from this form.
+            <p className="text-sm text-slate-500">
+              Real-time incoming submissions captured from patient inquiries and consultation forms.
             </p>
           </div>
         </div>
@@ -105,16 +105,16 @@ export default function FormSubmissionsPage({
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <Link
             href={`/admin/forms/${formId}/builder`}
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors shadow-sm"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors shadow-sm"
           >
-            <Edit className="w-4 h-4" />
+            <Edit className="w-4 h-4 text-slate-500" />
             <span>Edit Form</span>
           </Link>
 
           <a
             href={`/api/admin/forms/${formId}/submissions?format=csv`}
             download
-            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-sm font-bold hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm"
+            className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-bold hover:bg-slate-800 transition-colors shadow-sm"
           >
             <Download className="w-4 h-4" />
             <span>Export CSV</span>
@@ -123,24 +123,24 @@ export default function FormSubmissionsPage({
       </div>
 
       {/* Filter Bar */}
-      <Card padding="md" className="bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-sm rounded-xl">
+      <Card padding="md" className="bg-white border-slate-200 shadow-sm rounded-xl">
         <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
           <div className="relative flex-1 w-full md:max-w-md">
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-4 w-4 text-zinc-400" />
+              <Search className="h-4 w-4 text-slate-400" />
             </div>
             <input
               type="text"
               placeholder="Search submissions by submitter, email, phone, or answer..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full pl-10 pr-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg leading-5 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 focus:border-zinc-900 dark:focus:border-zinc-100 sm:text-sm transition-all"
+              className="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-lg leading-5 bg-slate-50 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 sm:text-sm transition-all"
             />
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
-            <div className="flex items-center gap-1 p-1 bg-zinc-100 dark:bg-zinc-800/80 rounded-lg border border-zinc-200 dark:border-zinc-700 shrink-0">
-              <div className="pl-2 pr-1 text-zinc-400">
+            <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-lg border border-slate-200 shrink-0">
+              <div className="pl-2 pr-1 text-slate-400">
                 <ListFilter className="w-4 h-4" />
               </div>
               {(["all", "new", "processed", "spam"] as const).map((st) => (
@@ -149,8 +149,8 @@ export default function FormSubmissionsPage({
                   onClick={() => setStatusFilter(st)}
                   className={`px-3 py-1.5 rounded-md text-sm font-semibold capitalize whitespace-nowrap transition-all ${
                     statusFilter === st
-                      ? "bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm"
-                      : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50"
+                      ? "bg-white text-slate-900 shadow-sm font-bold"
+                      : "text-slate-500 hover:text-slate-700 hover:bg-slate-200/50"
                   }`}
                 >
                   {st}
@@ -162,21 +162,21 @@ export default function FormSubmissionsPage({
       </Card>
 
       {/* Submissions Table */}
-      <Card padding="none" className="bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 shadow-sm rounded-xl overflow-hidden">
+      <Card padding="none" className="bg-white border-slate-200 shadow-sm rounded-xl overflow-hidden">
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center py-20 text-zinc-500 dark:text-zinc-400">
-            <div className="animate-spin w-8 h-8 border-2 border-zinc-300 border-t-zinc-900 dark:border-zinc-600 dark:border-t-zinc-100 rounded-full mb-4"></div>
+          <div className="flex flex-col items-center justify-center py-20 text-slate-500">
+            <div className="animate-spin w-8 h-8 border-2 border-slate-300 border-t-rose-600 rounded-full mb-4"></div>
             <p className="text-sm font-medium">Loading submissions...</p>
           </div>
         ) : filteredSubmissions.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
-            <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-4 text-zinc-400">
+            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mb-4 text-slate-400">
               <Inbox className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-1">
+            <h3 className="text-lg font-bold text-slate-900 mb-1">
               No submissions found.
             </h3>
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto">
+            <p className="text-sm text-slate-500 max-w-sm mx-auto">
               {searchQuery || statusFilter !== "all" 
                 ? "Try adjusting your search query or filters to find what you're looking for." 
                 : "Submissions submitted through this form will automatically display here."}
@@ -187,7 +187,7 @@ export default function FormSubmissionsPage({
                   setSearchQuery("");
                   setStatusFilter("all");
                 }}
-                className="mt-4 px-4 py-2 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-lg text-sm font-semibold hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+                className="mt-4 px-4 py-2 bg-slate-100 text-slate-900 rounded-lg text-sm font-semibold hover:bg-slate-200 transition-colors"
               >
                 Clear all filters
               </button>
@@ -197,16 +197,16 @@ export default function FormSubmissionsPage({
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-zinc-50 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-800">
-                  <th className="px-5 py-3.5 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Submitter Info</th>
-                  <th className="px-5 py-3.5 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Key Payload Values</th>
-                  <th className="px-5 py-3.5 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Source / Page</th>
-                  <th className="px-5 py-3.5 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Submitted At</th>
-                  <th className="px-5 py-3.5 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
-                  <th className="px-5 py-3.5 text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider text-right">Action</th>
+                <tr className="bg-slate-50 border-b border-slate-200">
+                  <th className="px-5 py-3.5 text-xs font-bold text-slate-500 uppercase tracking-wider">Submitter Info</th>
+                  <th className="px-5 py-3.5 text-xs font-bold text-slate-500 uppercase tracking-wider">Key Payload Values</th>
+                  <th className="px-5 py-3.5 text-xs font-bold text-slate-500 uppercase tracking-wider">Source / Page</th>
+                  <th className="px-5 py-3.5 text-xs font-bold text-slate-500 uppercase tracking-wider">Submitted At</th>
+                  <th className="px-5 py-3.5 text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                  <th className="px-5 py-3.5 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-200 dark:divide-zinc-800">
+              <tbody className="divide-y divide-slate-100">
                 {filteredSubmissions.map((sub) => {
                   const values = sub.values || {};
                   const name = String(values.name || values.fullName || values.contact_name || "Anonymous");
@@ -216,19 +216,19 @@ export default function FormSubmissionsPage({
                   return (
                     <tr
                       key={sub.id}
-                      className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/30 transition-colors group cursor-pointer"
+                      className="hover:bg-slate-50/70 transition-colors group cursor-pointer"
                       onClick={() => setSelectedSub(sub)}
                     >
                       {/* Submitter */}
                       <td className="px-5 py-4">
-                        <div className="font-bold text-zinc-900 dark:text-zinc-100">{name}</div>
+                        <div className="font-bold text-slate-900">{name}</div>
                         {email && (
-                          <div className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center gap-1.5 mt-0.5">
+                          <div className="text-sm text-slate-500 flex items-center gap-1.5 mt-0.5">
                             {email}
                           </div>
                         )}
                         {phone && (
-                          <div className="text-xs text-zinc-400 dark:text-zinc-500 mt-0.5">
+                          <div className="text-xs text-slate-400 mt-0.5">
                             {phone}
                           </div>
                         )}
@@ -236,43 +236,43 @@ export default function FormSubmissionsPage({
 
                       {/* Values Snippet */}
                       <td className="px-5 py-4 max-w-[280px]">
-                        <div className="text-sm text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+                        <div className="text-sm text-slate-600 line-clamp-2 leading-relaxed">
                           {Object.entries(values)
                             .filter(([k]) => !["name", "email", "phone"].includes(k))
                             .map(([k, v], idx, arr) => (
                               <React.Fragment key={k}>
                                 <span>
-                                  <span className="font-medium text-zinc-700 dark:text-zinc-300">{k}:</span> {Array.isArray(v) ? v.join(", ") : String(v)}
+                                  <span className="font-medium text-slate-800">{k}:</span> {Array.isArray(v) ? v.join(", ") : String(v)}
                                 </span>
-                                {idx < arr.length - 1 && <span className="text-zinc-300 dark:text-zinc-600 mx-1">•</span>}
+                                {idx < arr.length - 1 && <span className="text-slate-300 mx-1">•</span>}
                               </React.Fragment>
                             ))}
                           {Object.entries(values).filter(([k]) => !["name", "email", "phone"].includes(k)).length === 0 && (
-                            <span className="text-zinc-400 italic">No additional fields</span>
+                            <span className="text-slate-400 italic">No additional fields</span>
                           )}
                         </div>
                       </td>
 
                       {/* Source */}
                       <td className="px-5 py-4">
-                        <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                          {sub.landingPageSlug ? <Globe className="w-3.5 h-3.5 text-blue-500" /> : <Tag className="w-3.5 h-3.5 text-zinc-400" />}
+                        <div className="text-sm font-semibold text-slate-800 flex items-center gap-1.5">
+                          {sub.landingPageSlug ? <Globe className="w-3.5 h-3.5 text-blue-500" /> : <Tag className="w-3.5 h-3.5 text-slate-400" />}
                           {sub.landingPageSlug ? `/landing/${sub.landingPageSlug}` : sub.pageUrl || sub.source}
                         </div>
-                        <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 flex items-center gap-1">
-                          <Hash className="w-3 h-3" /> tag: {sub.source}
+                        <div className="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                          <Hash className="w-3 h-3 text-slate-400" /> tag: {sub.source}
                         </div>
                       </td>
 
                       {/* Submitted At */}
-                      <td className="px-5 py-4 text-sm text-zinc-500 dark:text-zinc-400 whitespace-nowrap">
-                        <div className="flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5" />
+                      <td className="px-5 py-4 text-sm text-slate-500 whitespace-nowrap">
+                        <div className="flex items-center gap-1.5 text-slate-700 font-medium">
+                          <Clock className="w-3.5 h-3.5 text-slate-400" />
                           {new Date(sub.createdAt).toLocaleString("en-IN", {
                             dateStyle: "medium",
                           })}
                         </div>
-                        <div className="text-xs mt-0.5 ml-5">
+                        <div className="text-xs mt-0.5 ml-5 text-slate-400">
                            {new Date(sub.createdAt).toLocaleString("en-IN", {
                             timeStyle: "short",
                           })}
@@ -283,10 +283,10 @@ export default function FormSubmissionsPage({
                       <td className="px-5 py-4">
                         <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-bold uppercase tracking-wider ${
                           sub.status === "new" 
-                            ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400" 
+                            ? "bg-blue-50 text-blue-700 border border-blue-200" 
                             : sub.status === "spam"
-                            ? "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400"
-                            : "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-400"
+                            ? "bg-red-50 text-red-700 border border-red-200"
+                            : "bg-emerald-50 text-emerald-700 border border-emerald-200"
                         }`}>
                           {sub.status}
                         </span>
@@ -299,9 +299,9 @@ export default function FormSubmissionsPage({
                             e.stopPropagation();
                             setSelectedSub(sub);
                           }}
-                          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-md hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors shadow-sm opacity-0 group-hover:opacity-100 focus:opacity-100"
+                          className="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm opacity-0 group-hover:opacity-100 focus:opacity-100"
                         >
-                          <Eye className="w-3.5 h-3.5" /> View
+                          <Eye className="w-3.5 h-3.5 text-slate-500" /> View
                         </button>
                       </td>
                     </tr>
@@ -315,25 +315,25 @@ export default function FormSubmissionsPage({
 
       {/* SUBMISSION DETAILS MODAL */}
       {selectedSub && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-zinc-900/70 backdrop-blur-sm animate-in fade-in duration-200">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
           <div 
-            className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl border border-zinc-200 dark:border-zinc-800 animate-in slide-in-from-bottom-4 duration-300"
+            className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 animate-in slide-in-from-bottom-4 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 shrink-0">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 shrink-0">
               <div>
-                <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-                  <Inbox className="w-5 h-5 text-zinc-400" />
+                <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                  <Inbox className="w-5 h-5 text-rose-600" />
                   Submission Details
                 </h3>
-                <div className="text-xs text-zinc-500 dark:text-zinc-400 font-mono mt-1">
+                <div className="text-xs text-slate-500 font-mono mt-1">
                   ID: {selectedSub.id}
                 </div>
               </div>
               <button
                 onClick={() => setSelectedSub(null)}
-                className="p-2 rounded-full text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:text-zinc-200 dark:hover:bg-zinc-800 transition-colors focus:outline-none"
+                className="p-2 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -345,14 +345,14 @@ export default function FormSubmissionsPage({
               {/* Status Banner */}
               <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 border ${
                 selectedSub.status === 'new' 
-                  ? "bg-blue-50 border-blue-100 text-blue-800 dark:bg-blue-900/20 dark:border-blue-900/50 dark:text-blue-300" 
+                  ? "bg-blue-50 border-blue-200 text-blue-900" 
                   : selectedSub.status === 'spam'
-                  ? "bg-red-50 border-red-100 text-red-800 dark:bg-red-900/20 dark:border-red-900/50 dark:text-red-300"
-                  : "bg-emerald-50 border-emerald-100 text-emerald-800 dark:bg-emerald-900/20 dark:border-emerald-900/50 dark:text-emerald-300"
+                  ? "bg-red-50 border-red-200 text-red-900"
+                  : "bg-emerald-50 border-emerald-200 text-emerald-900"
               }`}>
-                {selectedSub.status === 'new' && <Inbox className="w-5 h-5" />}
-                {selectedSub.status === 'spam' && <ShieldAlert className="w-5 h-5" />}
-                {selectedSub.status === 'processed' && <CheckCircle2 className="w-5 h-5" />}
+                {selectedSub.status === 'new' && <Inbox className="w-5 h-5 text-blue-600" />}
+                {selectedSub.status === 'spam' && <ShieldAlert className="w-5 h-5 text-red-600" />}
+                {selectedSub.status === 'processed' && <CheckCircle2 className="w-5 h-5 text-emerald-600" />}
                 <div>
                   <div className="font-bold uppercase tracking-wider text-sm">Status: {selectedSub.status}</div>
                   <div className="text-xs mt-0.5 opacity-80">This submission was captured on {new Date(selectedSub.createdAt).toLocaleDateString()}.</div>
@@ -361,19 +361,19 @@ export default function FormSubmissionsPage({
 
               {/* Submitted Values Grid */}
               <div className="mb-8">
-                <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                  <ListFilter className="w-4 h-4" /> Submitted Form Fields
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <ListFilter className="w-4 h-4 text-slate-400" /> Submitted Form Fields
                 </h4>
-                <div className="bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 space-y-3">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
                   {Object.entries(selectedSub.values || {}).map(([key, val]) => (
                     <div
                       key={key}
-                      className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-2 border-b border-zinc-200/60 dark:border-zinc-700/60 last:border-0 last:pb-0"
+                      className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-2 border-b border-slate-200/60 last:border-0 last:pb-0"
                     >
-                      <span className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider sm:w-1/3 shrink-0">
+                      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider sm:w-1/3 shrink-0">
                         {key.replace(/_/g, ' ')}
                       </span>
-                      <span className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 break-words">
+                      <span className="text-sm font-semibold text-slate-900 break-words">
                         {Array.isArray(val) ? val.join(", ") : String(val || "—")}
                       </span>
                     </div>
@@ -383,34 +383,34 @@ export default function FormSubmissionsPage({
 
               {/* Metadata Section */}
               <div className="mb-6">
-                <h4 className="text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mb-3 flex items-center gap-2">
-                  <Hash className="w-4 h-4" /> Audit Metadata
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <Hash className="w-4 h-4 text-slate-400" /> Audit Metadata
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Submitted At</div>
-                    <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-zinc-400" />
+                  <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                    <div className="text-xs text-slate-500 mb-1">Submitted At</div>
+                    <div className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-slate-400" />
                       {new Date(selectedSub.createdAt).toLocaleString()}
                     </div>
                   </div>
-                  <div className="p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">IP Address</div>
-                    <div className="text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100">
+                  <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                    <div className="text-xs text-slate-500 mb-1">IP Address</div>
+                    <div className="text-sm font-mono font-medium text-slate-900">
                       {selectedSub.ipAddress || "Unknown"}
                     </div>
                   </div>
-                  <div className="p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Source Tag</div>
-                    <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                      <Tag className="w-3.5 h-3.5 text-zinc-400" />
+                  <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                    <div className="text-xs text-slate-500 mb-1">Source Tag</div>
+                    <div className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+                      <Tag className="w-3.5 h-3.5 text-slate-400" />
                       {selectedSub.source || "N/A"}
                     </div>
                   </div>
-                  <div className="p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-                    <div className="text-xs text-zinc-500 dark:text-zinc-400 mb-1">Landing Page</div>
-                    <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
-                      <Globe className="w-3.5 h-3.5 text-zinc-400" />
+                  <div className="p-3 bg-white border border-slate-200 rounded-xl shadow-xs">
+                    <div className="text-xs text-slate-500 mb-1">Landing Page</div>
+                    <div className="text-sm font-semibold text-slate-900 flex items-center gap-1.5">
+                      <Globe className="w-3.5 h-3.5 text-slate-400" />
                       {selectedSub.landingPageSlug || "Direct / Embedded"}
                     </div>
                   </div>
@@ -419,13 +419,13 @@ export default function FormSubmissionsPage({
 
               {/* Lead Link if available */}
               {selectedSub.leadId && (
-                <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                   <div>
-                    <div className="text-sm font-bold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4" />
-                      Synchronized to CRM Lead
+                    <div className="text-sm font-bold text-emerald-800 flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      Synchronized to Consultation Lead
                     </div>
-                    <div className="text-xs text-emerald-600 dark:text-emerald-500 mt-1 font-mono">
+                    <div className="text-xs text-emerald-700 mt-1 font-mono">
                       Lead ID: {selectedSub.leadId}
                     </div>
                   </div>
@@ -440,10 +440,10 @@ export default function FormSubmissionsPage({
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 rounded-b-2xl flex justify-end shrink-0">
+            <div className="p-4 border-t border-slate-100 bg-slate-50 rounded-b-2xl flex justify-end shrink-0">
               <button 
                 onClick={() => setSelectedSub(null)}
-                className="px-5 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold text-sm rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors shadow-sm"
+                className="px-5 py-2 bg-white border border-slate-200 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-50 transition-colors shadow-sm"
               >
                 Close Details
               </button>

@@ -243,27 +243,27 @@ export default function AdminFormsPage() {
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-12">
       {/* Top Header Card */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-5 sm:p-6 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-xs">
         <div>
-          <div className="text-[11px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <span>Growth & Operations</span>
+          <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <span>Growth &amp; Operations</span>
             <span>/</span>
-            <span className="text-zinc-900 dark:text-zinc-100 font-bold">Forms & Lead Funnels</span>
+            <span className="text-slate-900 font-bold">Clinical Forms &amp; Inquiries</span>
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#D84C70] to-[#C23B5E] flex items-center justify-center text-white shadow-md shadow-rose-900/10">
               <FileText className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="text-xl sm:text-2xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight flex items-center gap-2">
-                Forms & Lead Funnels
-                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
+              <h1 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                Clinical Forms &amp; Inquiries
+                <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                   Live Engine
                 </span>
               </h1>
-              <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-0.5">
-                Dynamic conversion forms with 100% CRM lead sync, honeypot spam shield, and live multi-device preview.
+              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                Dynamic patient consultation forms with 100% CRM inquiry sync, spam shield, and live multi-device preview.
               </p>
             </div>
           </div>
@@ -276,20 +276,20 @@ export default function AdminFormsPage() {
             type="button"
             id="reset-forms-defaults-btn"
             onClick={() => setIsResetModalOpen(true)}
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50/50 dark:bg-rose-950/20 text-rose-700 dark:text-rose-300 hover:bg-rose-100 dark:hover:bg-rose-950/40 shadow-sm transition-all active:scale-95"
-            title="Restore all 6 canonical DigiVigee forms and lead funnels to defaults"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 shadow-xs transition-all cursor-pointer"
+            title="Restore canonical clinical patient forms to defaults"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-rose-500" />
+            <RotateCcw className="w-3.5 h-3.5 text-slate-500" />
             <span>Reset to Defaults</span>
           </button>
 
           {/* View Leads Link */}
           <Link
             href="/admin/leads"
-            className="inline-flex items-center gap-2 px-3.5 py-2 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-xs font-bold text-zinc-700 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-all shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:bg-slate-100 transition-all shadow-xs"
           >
-            <Users className="w-3.5 h-3.5 text-zinc-500" />
-            <span>View All Leads</span>
+            <Users className="w-3.5 h-3.5 text-slate-500" />
+            <span>View All Inquiries</span>
           </Link>
 
           {/* Create Form Button */}
@@ -298,9 +298,9 @@ export default function AdminFormsPage() {
               setCreateError("");
               setIsCreateModalOpen(true);
             }}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 rounded-xl text-xs font-black transition-all shadow-md active:scale-95"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#D84C70] to-[#C23B5E] text-white hover:brightness-105 rounded-xl text-xs font-black transition-all shadow-md shadow-rose-900/10 cursor-pointer"
           >
-            <Plus className="w-4 h-4 text-emerald-400 dark:text-emerald-600" />
+            <Plus className="w-4 h-4" />
             <span>Create New Form</span>
           </button>
         </div>
@@ -308,43 +308,43 @@ export default function AdminFormsPage() {
 
       {/* Bento Metric Strip */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-rose-50 text-[#D84C70] flex items-center justify-center shrink-0 border border-rose-100">
             <FileText className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-zinc-900 dark:text-zinc-100">{totalForms} Funnels</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Production Ready</div>
+            <div className="text-xl font-black text-slate-900">{totalForms} Forms</div>
+            <div className="text-xs text-slate-500 font-medium">Production Ready</div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
             <Activity className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-emerald-600 dark:text-emerald-400">{activeForms} Active</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Accepting Leads</div>
+            <div className="text-xl font-black text-emerald-600">{activeForms} Active</div>
+            <div className="text-xs text-slate-500 font-medium">Accepting Inquiries</div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
             <Inbox className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-zinc-900 dark:text-zinc-100">{totalSubmissions} Inquiries</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Direct Inquiries</div>
+            <div className="text-xl font-black text-slate-900">{totalSubmissions} Submissions</div>
+            <div className="text-xs text-slate-500 font-medium">Patient Submissions</div>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 shadow-sm flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-xl font-black text-zinc-900 dark:text-zinc-100">100% Shield</div>
-            <div className="text-xs text-zinc-500 dark:text-zinc-400 font-medium">Honeypot & Rate Limit</div>
+            <div className="text-xl font-black text-slate-900">Protected</div>
+            <div className="text-xs text-slate-500 font-medium">Spam Shield &amp; SSL</div>
           </div>
         </div>
       </div>
@@ -352,10 +352,10 @@ export default function AdminFormsPage() {
       {/* Feedback Banner */}
       {feedback && (
         <div
-          className={`flex items-center justify-between p-4 rounded-xl border text-xs sm:text-sm animate-in fade-in duration-200 shadow-sm ${
+          className={`flex items-center justify-between p-4 rounded-xl border text-xs sm:text-sm animate-in fade-in duration-200 shadow-xs ${
             feedback.type === "success"
-              ? "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
-              : "bg-rose-50 dark:bg-rose-950/30 text-rose-800 dark:text-rose-300 border-rose-200 dark:border-rose-800"
+              ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+              : "bg-rose-50 text-rose-800 border-rose-200"
           }`}
         >
           <div className="flex items-center gap-2.5">
@@ -368,7 +368,7 @@ export default function AdminFormsPage() {
           </div>
           <button
             onClick={() => setFeedback(null)}
-            className="p-1 rounded-md text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
+            className="p-1 rounded-md text-slate-400 hover:text-slate-700 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -376,21 +376,21 @@ export default function AdminFormsPage() {
       )}
 
       {/* Search & Status Filter Strip */}
-      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-4 sm:p-5 shadow-sm">
+      <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-xs">
         <div className="flex flex-col sm:flex-row gap-3 items-center justify-between">
           <div className="relative w-full sm:max-w-md">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
               placeholder="Search forms by name, slug, or fields..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-zinc-100 transition-all"
+              className="w-full pl-9 pr-8 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#D84C70] focus:ring-2 focus:ring-[#D84C70]/10 transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 p-0.5"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-0.5 cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -398,7 +398,7 @@ export default function AdminFormsPage() {
           </div>
 
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider mr-2">
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mr-2">
               Status:
             </span>
             {(["all", "active", "inactive"] as const).map((status) => {
@@ -407,10 +407,10 @@ export default function AdminFormsPage() {
                 <button
                   key={status}
                   onClick={() => setSelectedStatus(status)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold capitalize transition-all ${
+                  className={`px-3 py-1 rounded-full text-xs font-semibold capitalize transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 shadow-sm"
-                      : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-700"
+                      ? "bg-slate-900 text-white shadow-xs"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   {status}
@@ -423,25 +423,25 @@ export default function AdminFormsPage() {
 
       {/* Forms Grid */}
       {isLoading ? (
-        <div className="py-24 text-center bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-zinc-900 dark:border-zinc-100 border-t-transparent mb-3" />
-          <p className="text-sm font-semibold text-zinc-600 dark:text-zinc-400">Loading forms engine...</p>
+        <div className="py-24 text-center bg-white rounded-2xl border border-slate-200 shadow-xs">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-[#D84C70] border-t-transparent mb-3" />
+          <p className="text-sm font-semibold text-slate-600">Loading forms engine...</p>
         </div>
       ) : filteredForms.length === 0 ? (
-        <div className="py-20 text-center bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm px-4">
-          <FileText className="w-12 h-12 text-zinc-300 dark:text-zinc-600 mx-auto mb-3" />
-          <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
+        <div className="py-20 text-center bg-white rounded-2xl border border-slate-200 shadow-xs px-4">
+          <FileText className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+          <h3 className="text-base font-bold text-slate-900">
             {searchQuery || selectedStatus !== "all" ? "No matching forms found" : "No forms created yet"}
           </h3>
-          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto mt-1">
-            Try modifying your search or click &ldquo;Reset to Defaults&rdquo; to restore all 6 canonical lead funnels.
+          <p className="text-xs sm:text-sm text-slate-500 max-w-sm mx-auto mt-1">
+            Try modifying your search or click &ldquo;Reset to Defaults&rdquo; to restore canonical patient forms.
           </p>
           <button
             onClick={() => {
               setSearchQuery("");
               setSelectedStatus("all");
             }}
-            className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 transition-colors"
+            className="mt-4 px-4 py-2 text-xs font-bold rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
           >
             Clear Filters
           </button>
@@ -454,10 +454,10 @@ export default function AdminFormsPage() {
             return (
               <div
                 key={form.id}
-                className={`bg-white dark:bg-zinc-900 border rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-5 flex flex-col justify-between gap-4 relative ${
+                className={`bg-white border rounded-2xl shadow-xs hover:shadow-lg transition-all duration-300 p-5 flex flex-col justify-between gap-4 relative ${
                   isHomepageForm
-                    ? "border-blue-500/60 dark:border-blue-500/50 ring-2 ring-blue-500/10"
-                    : "border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700"
+                    ? "border-[#D84C70]/60 ring-2 ring-[#D84C70]/10"
+                    : "border-slate-200 hover:border-slate-300"
                 }`}
               >
                 <div>
@@ -466,36 +466,36 @@ export default function AdminFormsPage() {
                     <button
                       onClick={() => handleToggleStatus(form)}
                       title={`Click to mark as ${form.status === "active" ? "Inactive" : "Active"}`}
-                      className="focus:outline-none"
+                      className="focus:outline-none cursor-pointer"
                     >
                       <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider transition-all ${
                         form.status === "active"
-                          ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800"
-                          : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700"
+                          ? "bg-emerald-50 text-emerald-800 border border-emerald-200"
+                          : "bg-slate-100 text-slate-600 border border-slate-200"
                       }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${form.status === "active" ? "bg-emerald-500" : "bg-zinc-400"}`} />
+                        <span className={`w-1.5 h-1.5 rounded-full ${form.status === "active" ? "bg-emerald-500" : "bg-slate-400"}`} />
                         {form.status === "active" ? "Active" : "Inactive"}
                       </span>
                     </button>
 
                     <div className="flex items-center gap-1.5">
                       {isHomepageForm && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
-                          ⭐ Homepage Core
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-rose-50 text-[#D84C70] border border-rose-200">
+                          ⭐ Main Consultation
                         </span>
                       )}
-                      <span className="text-[10px] text-zinc-400 font-mono">
+                      <span className="text-[10px] text-slate-400 font-mono">
                         {form.slug}
                       </span>
                     </div>
                   </div>
 
                   {/* Form Name & Description */}
-                  <h3 className="text-base font-black text-zinc-900 dark:text-zinc-100 mb-1 leading-snug">
+                  <h3 className="text-base font-black text-slate-900 mb-1 leading-snug">
                     {form.name}
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2 mb-3.5 leading-relaxed min-h-[32px]">
-                    {form.description || "Conversion-optimized dynamic lead capture funnel."}
+                  <p className="text-xs text-slate-500 line-clamp-2 mb-3.5 leading-relaxed min-h-[32px]">
+                    {form.description || "Patient consultation intake and inquiry funnel."}
                   </p>
 
                   {/* Fields Breakdown Chips */}
@@ -503,32 +503,32 @@ export default function AdminFormsPage() {
                     {(form.fields || []).slice(0, 5).map((f) => (
                       <span
                         key={f.id}
-                        className="px-2 py-0.5 rounded text-[10px] font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300"
+                        className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 text-slate-600"
                       >
                         {f.label}
                       </span>
                     ))}
                     {(form.fields || []).length > 5 && (
-                      <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300">
+                      <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-600">
                         +{(form.fields || []).length - 5}
                       </span>
                     )}
                   </div>
 
                   {/* Meta Badges */}
-                  <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-100 dark:border-zinc-800">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-lg text-[11px] font-semibold">
-                      <FileText className="w-3 h-3 text-zinc-500" />
+                  <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-100">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg text-[11px] font-semibold">
+                      <FileText className="w-3 h-3 text-slate-500" />
                       {form.fields?.length || 0} Fields
                     </span>
 
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400 rounded-lg text-[11px] font-bold border border-blue-100 dark:border-blue-900/50">
-                      <Inbox className="w-3 h-3 text-blue-500" />
-                      {form.totalSubmissions || 0} Subs
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-rose-50 text-[#D84C70] rounded-lg text-[11px] font-bold border border-rose-100">
+                      <Inbox className="w-3 h-3 text-[#D84C70]" />
+                      {form.totalSubmissions || 0} Inquiries
                     </span>
 
                     {form.createLead && (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-400 rounded-lg text-[11px] font-bold border border-emerald-100 dark:border-emerald-900/50">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-[11px] font-bold border border-emerald-100">
                         <Users className="w-3 h-3 text-emerald-500" />
                         CRM Sync
                       </span>
@@ -537,12 +537,12 @@ export default function AdminFormsPage() {
                 </div>
 
                 {/* Card Bottom Actions */}
-                <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-2">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
                     {/* Visual Builder */}
                     <Link
                       href={`/admin/forms/${form.id}/builder`}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 rounded-xl text-xs font-bold transition-all shadow-sm active:scale-95"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-[#D84C70] text-white rounded-xl text-xs font-bold transition-all shadow-xs cursor-pointer"
                     >
                       <Edit2 className="w-3 h-3" />
                       <span>Builder</span>
@@ -554,17 +554,17 @@ export default function AdminFormsPage() {
                         setPreviewForm(form);
                         setPreviewDevice("desktop");
                       }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-xl text-xs font-bold transition-all"
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all cursor-pointer"
                       title="Test Interactive Form in Live Studio"
                     >
-                      <Eye className="w-3 h-3 text-blue-500" />
+                      <Eye className="w-3 h-3 text-[#D84C70]" />
                       <span>Live Studio</span>
                     </button>
 
                     {/* Submissions Data */}
                     <Link
                       href={`/admin/forms/${form.id}/submissions`}
-                      className="p-1.5 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                      className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
                       title="View Captured Submissions"
                     >
                       <Inbox className="w-4 h-4" />
@@ -576,7 +576,7 @@ export default function AdminFormsPage() {
                       onClick={() => handleDuplicate(form)}
                       disabled={duplicatingId === form.id}
                       title="Duplicate Form"
-                      className="p-1.5 text-zinc-400 hover:text-zinc-700 hover:bg-zinc-100 dark:hover:text-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
                     >
                       <Copy className="w-4 h-4" />
                     </button>
@@ -584,7 +584,7 @@ export default function AdminFormsPage() {
                     <button
                       onClick={() => setDeleteTarget(form)}
                       title="Delete Form"
-                      className="p-1.5 text-zinc-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:text-rose-400 dark:hover:bg-rose-950/30 rounded-lg transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -603,33 +603,33 @@ export default function AdminFormsPage() {
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden animate-in fade-in duration-200"
+          className="fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-hidden animate-in fade-in duration-200"
         >
-          <div className="bg-white dark:bg-zinc-900 rounded-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden shadow-2xl border border-zinc-200 dark:border-zinc-800">
+          <div className="bg-white rounded-2xl w-full max-w-4xl h-[90vh] flex flex-col overflow-hidden shadow-2xl border border-slate-200">
             {/* Modal Top Bar */}
-            <div className="px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between bg-white dark:bg-zinc-900 shrink-0 gap-3">
+            <div className="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between bg-white shrink-0 gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-50 text-[#D84C70] border border-rose-200">
                     Live Form Studio
                   </span>
-                  <span className="text-xs text-zinc-400 font-mono">
+                  <span className="text-xs text-slate-400 font-mono">
                     id: {previewForm.id}
                   </span>
                 </div>
-                <h2 className="text-base sm:text-lg font-black text-zinc-900 dark:text-zinc-100 mt-0.5">
+                <h2 className="text-base sm:text-lg font-black text-slate-900 mt-0.5">
                   {previewForm.name}
                 </h2>
               </div>
 
               {/* Viewport Switcher */}
-              <div className="flex items-center bg-zinc-100 dark:bg-zinc-800 p-1 rounded-xl border border-zinc-200 dark:border-zinc-700">
+              <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
                 <button
                   onClick={() => setPreviewDevice("desktop")}
-                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     previewDevice === "desktop"
-                      ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm"
-                      : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-500 hover:text-slate-900"
                   }`}
                   title="Desktop Preview"
                 >
@@ -639,10 +639,10 @@ export default function AdminFormsPage() {
 
                 <button
                   onClick={() => setPreviewDevice("tablet")}
-                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     previewDevice === "tablet"
-                      ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm"
-                      : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-500 hover:text-slate-900"
                   }`}
                   title="Tablet Preview (768px)"
                 >
@@ -652,10 +652,10 @@ export default function AdminFormsPage() {
 
                 <button
                   onClick={() => setPreviewDevice("mobile")}
-                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     previewDevice === "mobile"
-                      ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm"
-                      : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+                      ? "bg-white text-slate-900 shadow-xs"
+                      : "text-slate-500 hover:text-slate-900"
                   }`}
                   title="Mobile Preview (390px)"
                 >
@@ -668,14 +668,14 @@ export default function AdminFormsPage() {
               <div className="flex items-center gap-2">
                 <Link
                   href={`/admin/forms/${previewForm.id}/builder`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 text-xs font-bold shadow-sm transition-all"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-[#D84C70] text-white text-xs font-bold shadow-xs transition-all"
                 >
                   <Edit2 className="w-3 h-3" />
                   <span>Edit in Builder</span>
                 </Link>
                 <button
                   onClick={() => setPreviewForm(null)}
-                  className="p-1.5 rounded-xl text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                  className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
                   title="Close Preview"
                 >
                   <X className="w-5 h-5" />
@@ -684,27 +684,27 @@ export default function AdminFormsPage() {
             </div>
 
             {/* Interactive Form Canvas */}
-            <div className="flex-1 overflow-y-auto bg-zinc-950 p-4 sm:p-6 flex justify-center items-start">
+            <div className="flex-1 overflow-y-auto bg-slate-100 p-4 sm:p-6 flex justify-center items-start">
               <div
                 className={`transition-all duration-300 w-full ${
                   previewDevice === "desktop"
-                    ? "max-w-2xl bg-white dark:bg-zinc-900 rounded-2xl p-6 sm:p-8 shadow-xl border border-zinc-200 dark:border-zinc-800"
+                    ? "max-w-2xl bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200"
                     : previewDevice === "tablet"
-                    ? "max-w-[768px] border-4 border-zinc-800 rounded-3xl p-6 bg-white dark:bg-zinc-900 shadow-2xl"
-                    : "max-w-[390px] border-8 border-zinc-800 rounded-[3rem] p-5 bg-white dark:bg-zinc-900 shadow-2xl"
+                    ? "max-w-[768px] border-4 border-slate-300 rounded-3xl p-6 bg-white shadow-2xl"
+                    : "max-w-[390px] border-8 border-slate-300 rounded-[3rem] p-5 bg-white shadow-2xl"
                 }`}
               >
                 {/* Mobile notch */}
                 {previewDevice === "mobile" && (
-                  <div className="w-24 h-3.5 bg-zinc-800 rounded-full mx-auto mb-5" />
+                  <div className="w-24 h-3.5 bg-slate-300 rounded-full mx-auto mb-5" />
                 )}
 
                 <div className="mb-4">
-                  <h3 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
+                  <h3 className="text-lg font-black text-slate-900">
                     {previewForm.name}
                   </h3>
                   {previewForm.description && (
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                    <p className="text-xs text-slate-500 mt-1">
                       {previewForm.description}
                     </p>
                   )}
@@ -716,14 +716,14 @@ export default function AdminFormsPage() {
             </div>
 
             {/* Studio Footer */}
-            <div className="px-5 py-3 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400 shrink-0">
+            <div className="px-5 py-3 border-t border-slate-200 bg-white flex items-center justify-between text-xs text-slate-500 shrink-0">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                <span>Test mode active: submissions in this preview will not trigger live ad spend alerts.</span>
+                <span>Test mode active: submissions in this preview will not trigger patient WhatsApp notifications.</span>
               </div>
               <button
                 onClick={() => setPreviewForm(null)}
-                className="px-3 py-1 rounded-lg text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 font-semibold"
+                className="px-3 py-1 rounded-lg text-slate-600 hover:bg-slate-100 font-semibold cursor-pointer"
               >
                 Close Studio
               </button>
@@ -736,61 +736,61 @@ export default function AdminFormsPage() {
       {/* 1-CLICK CREATE FORM MODAL */}
       {/* ========================================================================= */}
       {isCreateModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl w-full max-w-lg flex flex-col shadow-2xl overflow-hidden">
-            <div className="px-6 py-5 border-b border-zinc-200 dark:border-zinc-800 flex justify-between items-center bg-zinc-50/50 dark:bg-zinc-800/20">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="bg-white border border-slate-200 rounded-3xl w-full max-w-lg flex flex-col shadow-2xl overflow-hidden">
+            <div className="px-6 py-5 border-b border-slate-100 flex justify-between items-center bg-slate-50">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                <div className="w-8 h-8 rounded-xl bg-rose-50 text-[#D84C70] flex items-center justify-center border border-rose-100">
                   <Plus className="w-4 h-4" />
                 </div>
-                <h2 className="text-lg font-black text-zinc-900 dark:text-zinc-100">
-                  Create New Form
+                <h2 className="text-lg font-black text-slate-900">
+                  Create New Clinical Form
                 </h2>
               </div>
               <button
                 onClick={() => setIsCreateModalOpen(false)}
-                className="p-1.5 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-slate-400 hover:text-slate-900 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <div className="p-6">
-              <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-5 leading-relaxed">
-                Give your form a title. It will instantly launch in the Visual Form Builder where you can add, arrange, and customize fields easily.
+              <p className="text-xs sm:text-sm text-slate-500 mb-5 leading-relaxed">
+                Give your form a clinical title. It will instantly launch in the Visual Form Builder where you can add, arrange, and customize fields easily.
               </p>
 
               {createError && (
-                <div className="mb-4 p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 text-xs border border-rose-200 dark:border-rose-800 flex items-center gap-2">
+                <div className="mb-4 p-3 rounded-xl bg-rose-50 text-rose-700 text-xs border border-rose-200 flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0" /> {createError}
                 </div>
               )}
 
               <form onSubmit={handleCreateSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5">
                     Form Name <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Real Estate Project Inquiries"
+                    placeholder="e.g. Breast Cancer Second Opinion Intake"
                     value={newFormName}
                     onChange={(e) => setNewFormName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-zinc-100 transition-all"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#D84C70] focus:ring-2 focus:ring-[#D84C70]/10 text-slate-900 transition-all"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-zinc-900 dark:text-zinc-100 uppercase tracking-wider mb-1.5">
+                  <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider mb-1.5">
                     Description (Optional)
                   </label>
                   <textarea
                     rows={3}
-                    placeholder="Describe the campaign or objective for this form..."
+                    placeholder="Describe the clinical objective or intake requirements for this form..."
                     value={newFormDesc}
                     onChange={(e) => setNewFormDesc(e.target.value)}
-                    className="w-full px-3.5 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-zinc-100 transition-all"
+                    className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#D84C70] focus:ring-2 focus:ring-[#D84C70]/10 text-slate-900 transition-all"
                   />
                 </div>
 
@@ -798,14 +798,14 @@ export default function AdminFormsPage() {
                   <button
                     type="button"
                     onClick={() => setIsCreateModalOpen(false)}
-                    className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-bold text-xs rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
+                    className="px-4 py-2 bg-white border border-slate-200 text-slate-700 font-bold text-xs rounded-xl hover:bg-slate-50 transition-colors cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={isSubmittingCreate}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-black text-xs rounded-xl hover:bg-zinc-800 dark:hover:bg-white disabled:opacity-50 transition-all shadow-md active:scale-95"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#D84C70] to-[#C23B5E] text-white font-black text-xs rounded-xl hover:brightness-105 disabled:opacity-50 transition-all shadow-md shadow-rose-900/10 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>{isSubmittingCreate ? "Creating..." : "Create & Launch Builder"}</span>
@@ -823,7 +823,7 @@ export default function AdminFormsPage() {
       <ConfirmDialog
         isOpen={isResetModalOpen}
         title="Reset All Forms to Defaults?"
-        message="Are you sure you want to reset all forms and lead funnels to official DigiVigee defaults? This will restore all 6 canonical blueprints (Strategic Consultation, Paid Ads Audit, SEO Review, Quick Quote, Enterprise Discovery, and Partner Program) to factory state. Existing customer lead records in the database will remain 100% safe and intact."
+        message="Are you sure you want to reset all clinical forms to defaults? This will restore canonical blueprints (Initial Consultation, Second Opinion Intake, Breast Screening Request, Post-Op Follow-up, Oncology Advisory) to clinical factory state. Existing patient lead records in the database will remain 100% safe and intact."
         confirmLabel="Yes, Reset to Defaults"
         isDestructive
         isLoading={isResetting}
