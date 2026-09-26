@@ -61,9 +61,9 @@ export function SocialShareBar({ title, url }: SocialShareBarProps) {
 
   return (
     <div className="flex items-center gap-2 flex-wrap py-4">
-      <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mr-2 flex items-center gap-1.5">
-        <Share2 className="w-3.5 h-3.5" />
-        Share Insight:
+      <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mr-2 flex items-center gap-1.5">
+        <Share2 className="w-3.5 h-3.5 text-[#D84C70]" />
+        Share Article:
       </span>
 
       {shareLinks.map((item) => (
@@ -73,7 +73,7 @@ export function SocialShareBar({ title, url }: SocialShareBarProps) {
           target="_blank"
           rel="noopener noreferrer"
           title={`Share on ${item.name}`}
-          className={`w-9 h-9 rounded-xl border border-slate-200 bg-white text-slate-600 flex items-center justify-center transition-all ${item.color} shadow-xs`}
+          className={`w-9 h-9 rounded-xl border border-[#F5D6DE] bg-white text-slate-600 flex items-center justify-center transition-all ${item.color} shadow-2xs`}
         >
           {item.icon}
         </a>
@@ -83,7 +83,7 @@ export function SocialShareBar({ title, url }: SocialShareBarProps) {
         type="button"
         onClick={handleCopy}
         title="Copy article link"
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold transition-colors shadow-xs"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#F5D6DE] bg-white hover:bg-[#FFF8F9] text-slate-700 text-xs font-bold transition-colors shadow-2xs cursor-pointer"
       >
         {copied ? (
           <>
@@ -92,7 +92,7 @@ export function SocialShareBar({ title, url }: SocialShareBarProps) {
           </>
         ) : (
           <>
-            <LinkIcon className="w-3.5 h-3.5 text-slate-500" />
+            <LinkIcon className="w-3.5 h-3.5 text-[#D84C70]" />
             <span>Copy Link</span>
           </>
         )}
