@@ -150,14 +150,14 @@ export default function DoctorNavbar() {
         aria-label="Main Navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-          {/* Logo Branding */}
-          <Link href="/" className="flex items-center group py-0.5" aria-label="Dr. Noopur Patel — Home">
+          {/* Logo Branding - Slightly enlarged per doctor feedback */}
+          <Link href="/" className="flex items-center group py-1" aria-label="Dr. Nupur Patel — Home">
             <Image
               src="/images/doctor/assets/logo.png"
-              alt="Dr. Noopur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
-              width={220}
-              height={73}
-              className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-opacity hover:opacity-95"
+              alt="Dr. Nupur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
+              width={260}
+              height={87}
+              className="h-12 sm:h-13 md:h-14 lg:h-[56px] w-auto object-contain transition-transform group-hover:scale-[1.02]"
               priority
             />
           </Link>
@@ -260,10 +260,10 @@ export default function DoctorNavbar() {
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                 <Image
                   src="/images/doctor/assets/logo.png"
-                  alt="Dr. Noopur Patel Logo"
-                  width={180}
-                  height={60}
-                  className="h-9 w-auto object-contain"
+                  alt="Dr. Nupur Patel Logo"
+                  width={220}
+                  height={73}
+                  className="h-11 w-auto object-contain"
                 />
                 <button
                   type="button"

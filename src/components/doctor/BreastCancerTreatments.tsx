@@ -16,25 +16,25 @@ export const TREATMENTS_6: TreatmentCardItem[] = [
   {
     title: "Breast Conservation Surgery",
     subtitle: "Removal of cancerous tissue while preserving the breast whenever possible.",
-    image: "/images/doctor/assets/service-1.png",
+    image: "/images/doctor/assets/treatment-lumpectomy.png",
     href: "/breast-conservation-surgery-ahmedabad",
   },
   {
     title: "Mastectomy",
     subtitle: "Surgical removal of breast tissue when clinically appropriate.",
-    image: "/images/doctor/assets/service-2.png",
+    image: "/images/doctor/assets/treatment-mastectomy.png",
     href: "/mastectomy-ahmedabad",
   },
   {
     title: "Sentinel Lymph Node Biopsy",
     subtitle: "Evaluation of selected lymph nodes for accurate cancer staging.",
-    image: "/images/doctor/assets/service-3.png",
+    image: "/images/doctor/assets/clinic-consultation.jpg",
     href: "/sentinel-lymph-node-biopsy",
   },
   {
     title: "Oncoplastic Breast Surgery",
     subtitle: "Combines cancer removal with cosmetic breast reshaping techniques.",
-    image: "/images/doctor/assets/service-5.png",
+    image: "/images/doctor/assets/treatment-oncoplastic.png",
     href: "/oncoplastic-breast-surgery-ahmedabad",
   },
   {
@@ -46,7 +46,7 @@ export const TREATMENTS_6: TreatmentCardItem[] = [
   {
     title: "Breast Reconstruction",
     subtitle: "Reconstructive options after mastectomy to restore natural breast shape.",
-    image: "/images/doctor/assets/service-4.png",
+    image: "/images/doctor/assets/treatment-reconstruction.png",
     href: "/breast-reconstruction-surgery-ahmedabad",
   },
 ];

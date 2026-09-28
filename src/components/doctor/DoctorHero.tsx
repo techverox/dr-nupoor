@@ -3,7 +3,16 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, MapPin, ArrowRight, Sparkles, ShieldCheck, Quote } from "lucide-react";
+import { 
+  Calendar, 
+  MapPin, 
+  ArrowRight, 
+  Sparkles, 
+  ShieldCheck, 
+  CheckCircle2,
+  MessageCircle
+} from "lucide-react";
+import { SITE_CONFIG } from "@/config/site";
 
 interface DoctorHeroProps {
   badge?: string;
@@ -17,134 +26,184 @@ interface DoctorHeroProps {
 }
 
 export default function DoctorHero({
-  badge = "SPECIALISED. COMPASSIONATE. PATIENT-CENTRED.",
-  subheadline = "Expert care for breast cancer and other breast conditions, with a focus on personalised treatment planning and advanced breast surgery.",
+  badge = "SURGICAL BREAST ONCOLOGY · BREAST CANCER SPECIALIST",
+  subheadline = "Specialised care for breast cancer, benign breast lumps, and oncoplastic breast surgery with an evidence-based, compassionate, patient-first approach.",
   primaryCtaText = "Book a Consultation",
   primaryCtaLink = "/appointments",
-  secondaryCtaText = "Explore Treatments",
-  secondaryCtaLink = "#cancer-treatments",
+  secondaryCtaText = "Consult on WhatsApp",
+  secondaryCtaLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=Hello%20Dr.%20Nupur%20Patel,%20I%20would%20like%20to%20schedule%20a%20consultation.`,
 }: DoctorHeroProps) {
   return (
-    <section className="w-full bg-white py-3 sm:py-6 lg:py-8">
-      {/* =========================================================================
-          CONTAINED HERO WRAPPER
-          ========================================================================= */}
+    <section className="w-full bg-white py-2 sm:py-4 lg:py-6" id="hero-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        {/* THE HERO BOX: Controls max-width, rounding, and clips background */}
-        <div className="relative w-full overflow-hidden bg-gradient-to-br from-[#FFF5F7] via-[#FDF8F9] to-[#FCEEF2] border border-[#F5D6DE] rounded-3xl lg:rounded-[36px] lg:min-h-[580px] xl:min-h-[620px] flex flex-col lg:flex-row lg:items-center shadow-xs">
+        {/* Contained Hero Box with Rich Visual Depth */}
+        <div className="relative w-full overflow-hidden bg-gradient-to-br from-[#FFF5F7] via-[#FAF0F3] to-[#F7E5EB] border border-[#F5CAD5] rounded-3xl lg:rounded-[36px] shadow-sm">
           
-          {/* =========================================================================
-              DESKTOP ONLY: Contained Background Image Layer & Floating Accents
-              ========================================================================= */}
-          <div className="hidden lg:block absolute inset-0 z-0 pointer-events-none select-none">
-            <Image
-              src="/images/doctor/assets/hero-image.png"
-              alt="Dr. Noopur Patel - Breast Cancer Surgeon in Ahmedabad"
-              fill
-              priority
-              sizes="1280px"
-              className="object-cover object-[85%_center] xl:object-[right_center]"
-            />
+          {/* Subtle Ambient Decorative Circles */}
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-gradient-to-br from-[#D84C70]/10 to-transparent blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-gradient-to-tr from-[#9B2846]/10 to-transparent blur-3xl pointer-events-none" />
 
-            {/* Desktop: smooth gradient from left to right */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FFF5F7] via-[#FFF5F7]/95 via-50% to-transparent w-[72%] xl:w-[58%]" />
-
-            {/* Desktop Floating Doctor Pill (Top-Right) */}
-            <div className="absolute top-8 right-12 z-20 bg-white/90 backdrop-blur-md px-4 py-2.5 rounded-2xl border border-[#F5D6DE] shadow-sm flex items-center gap-3 animate-fade-in">
-              <div className="w-8 h-8 rounded-full bg-[#FDF2F4] flex items-center justify-center text-[#D84C70]">
-                <ShieldCheck className="w-4 h-4 text-[#D84C70]" />
-              </div>
-              <div className="text-left">
-                <div className="text-xs font-bold text-slate-900 leading-none">Dr. Noopur Patel</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">Breast Cancer Surgeon · MS (Surg)</div>
-              </div>
-            </div>
-
-            {/* Desktop Floating Quote (Mid-Right) */}
-            <div className="absolute bottom-16 right-10 z-20 max-w-[270px] bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-[#F5D6DE] shadow-md shadow-rose-950/5">
-              <div className="flex items-center gap-1.5 text-[10.5px] font-bold text-[#D84C70] uppercase tracking-wider mb-1">
-                <Sparkles className="w-3 h-3" />
-                <span>Patient-First Philosophy</span>
-              </div>
-              <p className="font-serif italic text-xs text-slate-800 leading-relaxed">
-                &ldquo;Personalised Care for Every Step of Your Breast Health Journey&rdquo;
-              </p>
-            </div>
-          </div>
-
-          {/* =========================================================================
-              FOREGROUND CONTENT CONTAINER (Both Mobile & Desktop)
-              ========================================================================= */}
-          <div className="relative z-10 w-full pt-6 pb-6 px-4 sm:px-8 lg:py-12 lg:px-12 xl:px-16 my-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-6 lg:gap-12">
+          <div className="relative z-10 w-full p-4 sm:p-8 lg:p-12 xl:p-14">
+            {/* Flex Container: On mobile image comes FIRST (order-1), on desktop text on left (order-1) & photo on right (order-2) */}
+            <div className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12">
               
-              {/* LEFT SIDE: Specialist Copy */}
-              <div className="lg:col-span-7 xl:col-span-7 space-y-3.5 sm:space-y-5 max-w-xl lg:max-w-none relative z-20">
+              {/* =========================================================================
+                  MOBILE ONLY: Doctor Photo shown AT THE TOP (order-1 on mobile)
+                  ========================================================================= */}
+              <div className="w-full lg:hidden order-1">
+                <div className="relative w-full max-w-md mx-auto aspect-[4/3.8] sm:aspect-[16/11] rounded-2xl overflow-hidden bg-gradient-to-b from-[#FCEEF2] to-[#F5D2DB] border border-[#F5CAD5] shadow-md">
+                  <Image
+                    src="/images/doctor/optimized/dr-nupur-hero-portrait.webp"
+                    alt="Dr. Nupur Patel — Surgical Breast Oncologist in Ahmedabad"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 500px"
+                    className="object-cover object-[center_15%]"
+                  />
+                  {/* Subtle Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+                  
+                  {/* Doctor Badge Pill on Mobile */}
+                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-rose-200 shadow-sm flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span className="text-[11px] font-bold text-slate-900">Dr. Nupur Patel</span>
+                  </div>
+
+                  {/* Bottom Mobile Tagline */}
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <p className="text-[11px] font-bold tracking-wider uppercase text-rose-200">
+                      Surgical Breast Oncology
+                    </p>
+                    <p className="text-xs font-serif italic text-white/95 leading-tight">
+                      &ldquo;Personalised care for every step of your breast health journey&rdquo;
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* =========================================================================
+                  TEXT / HERO CONTENT (order-2 on mobile, order-1 on desktop)
+                  ========================================================================= */}
+              <div className="w-full lg:w-7/12 order-2 lg:order-1 space-y-4 sm:space-y-5">
                 
-                {/* 1. Top Eyebrow Badge */}
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#F5CAD5] text-[#88213B] text-[10px] sm:text-[11.5px] font-bold tracking-wider uppercase shadow-2xs">
-                  <span className="w-2 h-2 rounded-full bg-[#D84C70] shrink-0" />
+                {/* 1. Top Eyebrow Badge - Surgical Breast Oncology */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F5CAD5] text-[#88213B] text-[11px] sm:text-[12.5px] font-bold tracking-wider uppercase shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-[#D84C70] shrink-0 animate-pulse" />
                   <span>{badge}</span>
                 </div>
 
-                {/* 2. Main Heading */}
-                <h1 className="font-serif text-[30px] sm:text-[40px] md:text-[48px] lg:text-[50px] xl:text-[54px] font-bold text-slate-900 leading-[1.15] tracking-tight">
-                  Breast Cancer Surgeon{" "}
-                  <span className="text-[#D84C70] block sm:inline">in Ahmedabad</span>
+                {/* 2. Main Heading - Explicitly "Surgical Breast Oncology" */}
+                <h1 className="font-serif text-[28px] sm:text-[40px] md:text-[46px] lg:text-[48px] xl:text-[54px] font-bold text-slate-900 leading-[1.15] tracking-tight">
+                  <span className="text-slate-900 block">Surgical Breast Oncology</span>
+                  <span className="text-[#D84C70] block text-[24px] sm:text-[34px] md:text-[40px] lg:text-[42px] xl:text-[46px] mt-1">
+                    &amp; Cancer Surgery in Ahmedabad
+                  </span>
                 </h1>
 
                 {/* 3. Supporting Description */}
-                <p className="text-slate-600 text-[14px] sm:text-[16px] lg:text-[17px] leading-relaxed font-normal max-w-[540px]">
+                <p className="text-slate-700 text-[14px] sm:text-[16px] lg:text-[17px] leading-relaxed font-normal max-w-2xl">
                   {subheadline}
                 </p>
 
-                {/* 4. CTA Buttons Row */}
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 pt-1">
+                {/* 4. Four Bullet Highlights */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 pt-1">
+                  <div className="flex items-center gap-2 text-xs sm:text-[13px] font-medium text-slate-800">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Lady Breast Surgeon for Confidential Care</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs sm:text-[13px] font-medium text-slate-800">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Fellowship in Breast Oncology (Max)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs sm:text-[13px] font-medium text-slate-800">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>Breast Conservation &amp; Oncoplastic Surgery</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs sm:text-[13px] font-medium text-slate-800">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>100% Cashless Mediclaim &amp; TPA Empaneled</span>
+                  </div>
+                </div>
+
+                {/* 5. CTA Buttons Row */}
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
                   <Link
                     href={primaryCtaLink}
-                    className="inline-flex items-center justify-center gap-2 bg-[#D84C70] hover:bg-[#C0395D] text-white text-[14px] sm:text-[15px] font-semibold px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full shadow-[0_4px_16px_rgba(216,76,112,0.25)] hover:shadow-[0_6px_20px_rgba(216,76,112,0.35)] transition-all duration-200 active:scale-95 text-center cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 bg-[#D84C70] hover:bg-[#C0395D] text-white text-[14px] sm:text-[15px] font-semibold px-7 py-3.5 rounded-full shadow-[0_4px_16px_rgba(216,76,112,0.28)] hover:shadow-[0_6px_22px_rgba(216,76,112,0.38)] transition-all duration-200 active:scale-95 text-center cursor-pointer"
                   >
+                    <Calendar className="w-4 h-4 shrink-0" />
                     <span>{primaryCtaText}</span>
-                    <ArrowRight className="w-4 h-4 shrink-0" />
+                    <ArrowRight className="w-4 h-4 shrink-0 ml-0.5" />
                   </Link>
 
                   <a
                     href={secondaryCtaLink}
-                    className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#FDF2F4] border border-[#D84C70] text-[#D84C70] hover:text-[#88213B] text-[14px] sm:text-[15px] font-semibold px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full transition-all duration-200 active:scale-95 text-center cursor-pointer shadow-2xs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 bg-white hover:bg-emerald-50 border border-emerald-300 text-emerald-700 hover:text-emerald-800 text-[14px] sm:text-[15px] font-semibold px-6 py-3.5 rounded-full transition-all duration-200 active:scale-95 text-center cursor-pointer shadow-xs"
                   >
+                    <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>{secondaryCtaText}</span>
-                    <ArrowRight className="w-4 h-4 shrink-0" />
                   </a>
                 </div>
 
-                {/* 5. Hospital Location Text */}
-                <div className="flex items-center gap-1.5 text-[11.5px] sm:text-[13px] text-slate-500 pt-1 font-medium">
-                  <MapPin className="w-3.5 h-3.5 text-[#D84C70] shrink-0" />
-                  <span>Marengo CIMS Hospital, Sola, Ahmedabad, Gujarat</span>
+                {/* 6. Hospital Practice Location Badge */}
+                <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-slate-600 pt-1 font-medium">
+                  <MapPin className="w-4 h-4 text-[#D84C70] shrink-0" />
+                  <span>Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad</span>
                 </div>
 
               </div>
 
-              {/* MOBILE ONLY: Doctor Photo Block below CTAs with Quote Card */}
-              <div className="lg:hidden relative w-full mt-2">
-                <div className="relative w-full h-[320px] sm:h-[400px] rounded-2xl overflow-hidden bg-gradient-to-b from-[#FCEEF2] to-[#F8DCE4] border border-[#F5CAD5]">
-                  <Image
-                    src="/images/doctor/assets/hero-image.png"
-                    alt="Dr. Noopur Patel - Breast Cancer Surgeon in Ahmedabad"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw"
-                    className="object-cover object-[75%_top]"
-                  />
-                  {/* Subtle bottom gradient */}
-                  <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              {/* =========================================================================
+                  DESKTOP ONLY: Large High-Res Doctor Showcase Column (order-2 on desktop)
+                  ========================================================================= */}
+              <div className="hidden lg:block lg:w-5/12 order-2">
+                <div className="relative w-full max-w-[440px] xl:max-w-[480px] mx-auto">
                   
-                  {/* Mobile Quote Overlay in Bottom Corner */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-rose-100 shadow-md flex items-start gap-2.5">
-                    <Quote className="w-4 h-4 text-[#D84C70] shrink-0 mt-0.5" />
-                    <p className="text-[11.5px] font-serif italic text-slate-800 leading-snug">
-                      &ldquo;Personalised Care for Every Step of Your Breast Health Journey&rdquo;
-                    </p>
+                  {/* Decorative Frame Glow */}
+                  <div className="absolute -inset-2 bg-gradient-to-tr from-[#D84C70]/20 via-rose-200/40 to-transparent rounded-[32px] blur-md -z-10" />
+
+                  {/* Main Portrait Card */}
+                  <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-gradient-to-b from-[#FFF0F4] to-[#F5CAD5] border-2 border-white shadow-xl">
+                    <Image
+                      src="/images/doctor/optimized/dr-nupur-hero-portrait.webp"
+                      alt="Dr. Nupur Patel — Surgical Breast Oncology Specialist in Ahmedabad"
+                      fill
+                      priority
+                      sizes="(min-width: 1024px) 460px"
+                      className="object-cover object-[center_12%] hover:scale-[1.02] transition-transform duration-500"
+                    />
+
+                    {/* Gradient Overlay at Bottom */}
+                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent pointer-events-none" />
+
+                    {/* Floating Doctor Badge (Top-Right) */}
+                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-rose-100 shadow-md flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-[#FCE8ED] flex items-center justify-center text-[#D84C70]">
+                        <ShieldCheck className="w-4 h-4 text-[#D84C70]" />
+                      </div>
+                      <div className="text-left">
+                        <div className="text-xs font-bold text-slate-900 leading-none">Dr. Nupur Patel</div>
+                        <div className="text-[10px] text-slate-500 mt-0.5 font-medium">Associate Consultant</div>
+                      </div>
+                    </div>
+
+                    {/* Floating Quote Card (Bottom) */}
+                    <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-rose-100 shadow-lg">
+                      <div className="flex items-center gap-1.5 text-[10.5px] font-bold text-[#D84C70] uppercase tracking-wider mb-0.5">
+                        <Sparkles className="w-3 h-3" />
+                        <span>Patient-First Philosophy</span>
+                      </div>
+                      <p className="font-serif italic text-xs text-slate-800 leading-snug">
+                        &ldquo;Personalised care for every step of your breast health journey&rdquo;
+                      </p>
+                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100 text-[10.5px] text-slate-500">
+                        <span className="font-semibold text-slate-700">Marengo CIMS Hospital</span>
+                        <span className="text-[#D84C70] font-bold">Ahmedabad</span>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
               </div>

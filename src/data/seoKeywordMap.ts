@@ -48,15 +48,22 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
     silo: "Core / Brand",
     searchIntent: "Commercial / Local",
     competition: "Medium",
-    metaTitle: "Best Breast Surgeon in Ahmedabad | Dr. Noopur Patel",
-    metaDescription: "Dr. Noopur Patel is a renowned Breast Cancer Surgeon and Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad. Expert, compassionate breast care and advanced surgery.",
-    h1: "Expert Breast Cancer & Breast Surgery Care in Ahmedabad",
+    metaTitle: "Dr. Nupur Patel | Best Breast Cancer Surgeon in Ahmedabad | Surgical Breast Oncology",
+    metaDescription: "Dr. Nupur Patel is an expert Breast Cancer Surgeon & Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Specialised breast cancer surgery, breast conservation, oncoplastic care & screening.",
+    h1: "Surgical Breast Oncology & Breast Cancer Surgery in Ahmedabad",
     focusOnPageElements: "Surgeon credentials, surgical experience, OPD timings, patient testimonials",
     secondaryKeywords: [
-      "breast cancer specialist in ahmedabad",
+      "best breast surgeon in ahmedabad",
+      "dr nupur patel",
+      "dr noopur patel",
+      "surgical breast oncology ahmedabad",
       "female breast surgeon in ahmedabad",
+      "breast cancer specialist in ahmedabad",
+      "lady doctor for breast checkup ahmedabad",
       "oncoplastic breast surgery ahmedabad",
-      "breast clinic ahmedabad",
+      "mastectomy in ahmedabad",
+      "breast clinic sola ahmedabad",
+      "marengo cims hospital breast surgeon",
     ],
     semanticEntities: [
       "Marengo CIMS Hospital",
@@ -1588,8 +1595,8 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
     silo: "Surgical Oncology",
     searchIntent: "Transactional / Informational",
     competition: "Low-Medium",
-    metaTitle: "Mastectomy Surgery in Ahmedabad | Dr. Noopur Patel",
-    metaDescription: "Surgical removal of breast tissue when clinically indicated. Simple, Modified Radical (MRM) and skin-sparing mastectomy by Dr. Noopur Patel in Ahmedabad.",
+    metaTitle: "Mastectomy Surgery in Ahmedabad | Dr. Nupur Patel",
+    metaDescription: "Safe, compassionate mastectomy surgery in Ahmedabad by Dr. Nupur Patel at Marengo CIMS Hospital. Simple, Modified Radical (MRM) and skin-sparing mastectomy with reconstruction planning.",
     h1: "Mastectomy Surgery in Ahmedabad – Total, Modified Radical & Skin-Sparing",
     focusOnPageElements: "Indications for mastectomy, surgical technique, drain care, recovery and reconstruction",
     secondaryKeywords: [
@@ -1597,6 +1604,7 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
       "simple mastectomy sola",
       "skin sparing mastectomy cims",
       "breast removal surgery doctor",
+      "mastectomy specialist ahmedabad",
     ],
     semanticEntities: [
       "Simple Mastectomy",
@@ -1604,26 +1612,78 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
       "Skin-Sparing Mastectomy",
       "Nipple-Sparing Mastectomy",
       "Post-Mastectomy Survivorship",
+      "Sentinel Lymph Node Clearance",
     ],
-    heroBadge: "DEFINITIVE CANCER CLEARANCE",
-    heroSubtitle: "Safe, compassionate radical and skin-sparing mastectomies with immediate or delayed reconstructive choices.",
-    quickOverview: "A mastectomy involves the surgical removal of breast tissue. It is recommended for multicentric tumors, large tumors relative to breast size, extensive calcifications, or patient choice for risk reduction.",
+    heroBadge: "DEFINITIVE ONCOLOGIC CLEARANCE",
+    heroSubtitle: "Safe, compassionate radical and skin-sparing mastectomies performed with meticulous surgical margins and optional immediate reconstruction.",
+    quickOverview: "A mastectomy involves the surgical removal of breast tissue to achieve complete cancer clearance. Led by Dr. Nupur Patel at Marengo CIMS Hospital, Ahmedabad, every procedure is planned individually—balancing complete oncological safety with advanced skin-sparing and immediate reconstruction options.",
     keySections: [
       {
         heading: "Types of Mastectomy Performed",
-        content: "Techniques are chosen to achieve maximal oncologic safety with optimal skin envelope preservation:",
+        content: "Depending on tumor size, location, genetics, and patient preference, several surgical approaches are offered:",
         bulletPoints: [
-          "Total / Simple Mastectomy: Complete removal of breast tissue, areola, and nipple",
-          "Modified Radical Mastectomy (MRM): Total mastectomy combined with axillary lymph node dissection",
-          "Skin-Sparing Mastectomy: Preserves natural breast skin envelope for immediate reconstruction",
-          "Nipple-Sparing Mastectomy: Preserves nipple-areolar complex when cancer is safely distant from ducts",
+          "Total / Simple Mastectomy: Complete removal of all breast tissue, nipple-areolar complex, and overlying skin, while leaving chest wall muscles intact.",
+          "Modified Radical Mastectomy (MRM): Total mastectomy combined with axillary lymph node dissection for patients with confirmed lymph node involvement.",
+          "Skin-Sparing Mastectomy: Preserves the natural breast skin envelope and inframammary fold, creating the ideal foundation for immediate breast reconstruction.",
+          "Nipple-Sparing Mastectomy: Preserves the nipple and areola when the tumor is safely distant from the central ductal tissue.",
+        ],
+      },
+      {
+        heading: "When is Mastectomy Recommended?",
+        content: "While breast conservation surgery is always prioritized when feasible, a mastectomy may be the safest and most definitive treatment in the following scenarios:",
+        bulletPoints: [
+          "Multicentric breast cancer (tumors in more than one quadrant of the breast)",
+          "Large tumor size in proportion to a smaller breast where lumpectomy would cause severe deformity",
+          "Widespread malignant microcalcifications visible on digital mammography",
+          "Inability to receive post-operative radiation therapy due to medical contraindications",
+          "Positive BRCA1 or BRCA2 genetic mutations where bilateral risk-reducing mastectomy is preferred",
+        ],
+      },
+      {
+        heading: "Recovery Timeline, Drain Care & Hospital Stay",
+        content: "Modern surgical recovery protocols at Marengo CIMS Hospital emphasize rapid mobilization, minimal discomfort, and compassionate nursing care:",
+        bulletPoints: [
+          "Hospital stay is typically 1 to 2 days under continuous clinical observation",
+          "A small closed-suction drain is placed during surgery to collect fluid, usually removed comfortably in OPD within 7 to 10 days",
+          "Guided gentle shoulder and arm physiotherapy begins on day 1 to prevent stiffness",
+          "Most women resume light sedentary activities within 10 to 14 days post-surgery",
+        ],
+      },
+      {
+        heading: "Immediate vs. Delayed Breast Reconstruction",
+        content: "Women undergoing mastectomy do not have to live with a permanent mastectomy defect if they desire restoration. Dr. Nupur Patel collaborates closely with reconstructive plastic surgeons to discuss options before cancer surgery begins:",
+        bulletPoints: [
+          "Immediate Reconstruction: Done during the same operation using silicone implants or the patient's own tissue (flap surgery)",
+          "Delayed Reconstruction: Performed months or years later after chemotherapy and radiation are fully completed",
+          "External Breast Prostheses: Customized, lightweight silicone breast forms fitted for normal clothing and daily comfort",
         ],
       },
     ],
+    costAndInsurance: {
+      indicativeRange: "Cashless Mediclaim & Corporate TPA Empaneled",
+      tpaNotes: "Mastectomy is 100% covered under all major health insurance policies, corporate TPAs, and Ayushman Bharat / PMJAY where applicable at Marengo CIMS Hospital.",
+      disclaimer: "Final surgical estimates depend on room category, procedure complexity (simple vs MRM vs reconstructive flap), and length of hospital stay.",
+    },
     faqs: [
       {
-        question: "When is a mastectomy preferred over breast conservation?",
-        answer: "Mastectomy is typically recommended for multiple cancer foci across different quadrants, very large tumors in small breasts, or when radiation therapy cannot be administered.",
+        question: "When is a mastectomy preferred over breast conservation (lumpectomy)?",
+        answer: "Mastectomy is recommended when cancer is present in multiple areas of the breast (multicentric), when the tumor is too large relative to the breast size to achieve clear margins with good cosmetic results, or if the patient has a high-risk genetic mutation.",
+      },
+      {
+        question: "How many days will I need to stay in the hospital?",
+        answer: "Most patients stay in the hospital for 1 to 2 nights following a simple or modified radical mastectomy. If simultaneous reconstruction is performed, the stay may extend to 3 to 4 days.",
+      },
+      {
+        question: "Can I have breast reconstruction at the same time as my mastectomy?",
+        answer: "Yes. Immediate breast reconstruction is often performed in the same surgical session as a skin-sparing or nipple-sparing mastectomy, allowing you to wake up from surgery with a restored breast shape.",
+      },
+      {
+        question: "Will I need chemotherapy or radiation after a mastectomy?",
+        answer: "The need for chemotherapy, radiation, or hormone therapy depends on the final pathology report (tumor stage, grade, hormone receptors, and lymph node status), not solely on whether a mastectomy was done.",
+      },
+      {
+        question: "How is post-operative drain care managed at home?",
+        answer: "Our nursing team provides detailed, hands-on instructions on measuring and emptying the drain bulb before discharge. The drain is typically removed painlessly in our OPD within 7 to 10 days.",
       },
     ],
     relatedSlugs: [
@@ -1631,16 +1691,25 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
       "breast-cancer-surgery",
       "breast-reconstruction-surgery-ahmedabad",
       "breast-conservation-surgery-ahmedabad",
+      "sentinel-lymph-node-biopsy",
     ],
-    ctaText: "Consult About Mastectomy Options",
+    ctaText: "Schedule Consultation with Dr. Nupur Patel",
     schemaType: "MedicalProcedure",
   },
 };
 
-
 export function getSeoPageData(slug: string): SeoPageData | undefined {
   const cleanSlug = slug.replace(/^\/+|\/+$/g, "");
   if (cleanSlug === "") return SEO_KEYWORD_MAP["home"];
+  
+  // Safe alias routing for mastectomy and common variations
+  if (cleanSlug === "mastectomy" || cleanSlug === "mastectomy-surgery") {
+    return SEO_KEYWORD_MAP["mastectomy-ahmedabad"];
+  }
+  if (cleanSlug === "bcs" || cleanSlug === "lumpectomy") {
+    return SEO_KEYWORD_MAP["breast-conservation-surgery-ahmedabad"];
+  }
+
   return SEO_KEYWORD_MAP[cleanSlug];
 }
 

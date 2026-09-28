@@ -10,7 +10,7 @@ import WhyChooseDoctor from "@/components/doctor/WhyChooseDoctor";
 import FeaturedProceduresSection from "@/components/doctor/FeaturedProceduresSection";
 import CareJourneyTimeline from "@/components/doctor/CareJourneyTimeline";
 import InstagramAwarenessFeed from "@/components/doctor/InstagramAwarenessFeed";
-import MedicalGallerySection from "@/components/doctor/MedicalGallerySection";
+import CommunityInitiativesSection from "@/components/doctor/CommunityInitiativesSection";
 import PatientStoriesSection from "@/components/doctor/PatientStoriesSection";
 import DoctorFaqAccordion from "@/components/doctor/DoctorFaqAccordion";
 import ClinicLocationSection from "@/components/doctor/ClinicLocationSection";
@@ -50,10 +50,10 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: SITE_CONFIG.name,
       images: [
         {
-          url: `${SITE_CONFIG.url}/images/doctor/assets/hero-doctor.png`,
+          url: `${SITE_CONFIG.url}/images/doctor/optimized/dr-nupur-hero-portrait.webp`,
           width: 1200,
           height: 630,
-          alt: "Dr. Noopur Patel - Best Breast Surgeon in Ahmedabad",
+          alt: "Dr. Nupur Patel - Best Breast Cancer Surgeon in Ahmedabad",
         },
       ],
       type: "website",
@@ -77,22 +77,95 @@ export default async function Home() {
     console.warn("[Home] Using resilient clinical seed data:", e);
   }
 
+  // Comprehensive JSON-LD Schema for Ahmedabad Google Local SEO & Rich Snippets
+  const physicianSchema = {
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    name: "Dr. Nupur Patel",
+    alternateName: ["Dr. Noopur Patel", "Dr Nupur Patel Breast Surgeon Ahmedabad"],
+    jobTitle: "Associate Consultant – Surgical Breast Oncology",
+    description:
+      "Dr. Nupur Patel is an expert Breast Cancer Surgeon & Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad. Specialised in breast cancer surgery, breast conservation (BCS), mastectomy, and benign breast lumps.",
+    medicalSpecialty: [
+      "Surgical Oncology",
+      "Breast Cancer Surgery",
+      "Oncoplastic Breast Surgery",
+      "Mammography Screening & Biopsy"
+    ],
+    url: SITE_CONFIG.url,
+    image: `${SITE_CONFIG.url}/images/doctor/optimized/dr-nupur-hero-portrait.webp`,
+    telephone: SITE_CONFIG.contact.phone,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Off Science City Road, Sola",
+      addressLocality: "Ahmedabad",
+      addressRegion: "Gujarat",
+      postalCode: "380060",
+      addressCountry: "IN",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: "23.0725",
+      longitude: "72.5165",
+    },
+    worksFor: {
+      "@type": "Hospital",
+      name: "Marengo CIMS Hospital",
+      address: "Off Science City Road, Sola, Ahmedabad, Gujarat 380060",
+    },
+    hospitalAffiliation: {
+      "@type": "Hospital",
+      name: "Marengo CIMS Hospital",
+    },
+    areaServed: [
+      { "@type": "City", name: "Ahmedabad" },
+      { "@type": "AdministrativeArea", name: "Gujarat" },
+      { "@type": "Place", name: "Sola" },
+      { "@type": "Place", name: "Science City Road" },
+      { "@type": "Place", name: "SG Highway" },
+    ],
+    openingHours: "Mo-Sa 10:00-18:00",
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.slice(0, 10).map((f) => ({
+      "@type": "Question",
+      name: f.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: f.answer,
+      },
+    })),
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white selection:bg-[#D84C70]/20 selection:text-[#9B2846]">
+      {/* Schema Injection for Google Search & Ahmedabad Local Ranking */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(physicianSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* 01. Header / Navigation */}
       <DoctorNavbar />
 
       <main className="flex-1">
         {/* 02. Hero Section */}
         <DoctorHero
-          badge="BREAST CANCER & BREAST SURGERY"
-          headline="Specialised"
-          headlineHighlight="Breast Cancer Care, With a Patient-First Approach"
-          subheadline="Dr. Noopur Patel provides specialised care for breast cancer and other breast conditions, with a focus on personalised evaluation, surgical treatment planning and breast surgery."
+          badge="SURGICAL BREAST ONCOLOGY · BREAST CANCER SPECIALIST"
+          headline="Surgical Breast Oncology"
+          headlineHighlight="& Advanced Breast Cancer Surgery in Ahmedabad"
+          subheadline="Dr. Nupur Patel provides specialised surgical breast oncology, oncoplastic breast surgery, and compassionate care for breast cancer and benign breast conditions at Marengo CIMS Hospital, Ahmedabad."
           primaryCtaText="Book a Consultation"
           primaryCtaLink="/appointments"
-          secondaryCtaText="WhatsApp"
-          secondaryCtaLink={`https://wa.me/${SITE_CONFIG.contact.whatsappNumber}`}
+          secondaryCtaText="Consult on WhatsApp"
+          secondaryCtaLink={`https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=Hello%20Dr.%20Nupur%20Patel,%20I%20would%20like%20to%20schedule%20a%20consultation.`}
         />
 
         {/* 03. Doctor Trust / Credentials Strip */}
@@ -119,8 +192,8 @@ export default async function Home() {
         {/* 10. Instagram — Latest Reels */}
         <InstagramAwarenessFeed />
 
-        {/* 11. Medical Gallery (4 Categories Bento Grid + Lightbox Modal) */}
-        <MedicalGallerySection />
+        {/* 11. Cancer Patient Support Group, Screening Camps & Awareness Sessions */}
+        <CommunityInitiativesSection />
 
         {/* 12. Patient Testimonials (What Our Patients Say) */}
         <PatientStoriesSection testimonials={testimonials} />
