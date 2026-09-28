@@ -11,8 +11,8 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     categoryKey: "oncoplastic",
     authorName: "Dr. Noopur Patel",
     authorRole: "Breast Cancer Surgeon",
-    authorAvatar: "/images/doctor/assets/hero-doctor.png",
-    heroImage: "/images/doctor/assets/service-2.png",
+    authorAvatar: "/images/doctor/optimized/dr-nupur-clinical-portrait.webp",
+    heroImage: "/images/doctor/optimized/dr-nupur-hero-mobile-landscape.webp",
     servicesDelivered: ["Triple Assessment", "Oncoplastic Breast Conservation (BCS)", "Sentinel Lymph Node Biopsy"],
     shortDescription:
       "A 42-year-old female diagnosed with early-stage invasive breast carcinoma successfully treated with complete clear margins and excellent cosmetic symmetry preservation.",
@@ -74,8 +74,8 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     categoryKey: "benign",
     authorName: "Dr. Noopur Patel",
     authorRole: "Breast Cancer Surgeon",
-    authorAvatar: "/images/doctor/assets/hero-doctor.png",
-    heroImage: "/images/doctor/assets/service-5.png",
+    authorAvatar: "/images/doctor/optimized/dr-nupur-clinical-portrait.webp",
+    heroImage: "/images/doctor/optimized/dr-nupur-hero-mobile-square.webp",
     servicesDelivered: ["Ultrasound Evaluation", "Core Needle Biopsy", "Cosmetic Excision"],
     shortDescription:
       "A young professional presented with an enlarging, symptomatic 4.5 cm benign lump. Successfully excised via a concealed sub-areolar cosmetic incision.",
@@ -137,8 +137,8 @@ export const PORTFOLIO_DATA: PortfolioItem[] = [
     categoryKey: "reconstruction",
     authorName: "Dr. Noopur Patel",
     authorRole: "Breast Cancer Surgeon",
-    authorAvatar: "/images/doctor/assets/hero-doctor.png",
-    heroImage: "/images/doctor/assets/service-4.png",
+    authorAvatar: "/images/doctor/optimized/dr-nupur-clinical-portrait.webp",
+    heroImage: "/images/doctor/optimized/hero-clinic-portrait-test.webp",
     servicesDelivered: ["Multidisciplinary Tumor Board", "Skin-Sparing Mastectomy", "Immediate Reconstruction"],
     shortDescription:
       "Multicentric breast cancer managed with skin-sparing mastectomy and immediate autologous reconstruction, achieving complete cancer control without chest wall flattening.",

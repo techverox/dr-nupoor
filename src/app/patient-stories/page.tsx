@@ -39,7 +39,7 @@ const DEFAULT_STORIES: Array<{
   {
     id: "story-1",
     category: "Early Detection",
-    avatar: "/images/doctor/assets/patient-avatar-1.png",
+    avatar: "/images/doctor/assets/patient-avatar-7.png",
     quote:
       "I was diagnosed with breast cancer at an early stage. Dr. Noopur Patel explained everything so clearly and supported me at every step. Today I am healthy and back to my normal life.",
     patient: "Patient from Ahmedabad",
@@ -50,7 +50,7 @@ const DEFAULT_STORIES: Array<{
   {
     id: "story-2",
     category: "Benign Conditions",
-    avatar: "/images/doctor/assets/patient-avatar-2.png",
+    avatar: "/images/doctor/assets/patient-avatar-8.png",
     quote:
       "I had a breast lump and was very worried. Dr. Noopur Patel guided me with the right tests and the treatment was simple. I am grateful for her calm and kind approach.",
     patient: "Patient from Gandhinagar",
@@ -61,7 +61,7 @@ const DEFAULT_STORIES: Array<{
   {
     id: "story-3",
     category: "Oncoplastic Surgery",
-    avatar: "/images/doctor/assets/patient-avatar-3.png",
+    avatar: "/images/doctor/assets/patient-avatar-9.png",
     quote:
       "After my surgery, I was concerned about how I would look. Dr. Noopur Patel explained the oncoplastic options and the results have been truly life-changing.",
     patient: "Patient from Palanpur",
@@ -72,7 +72,7 @@ const DEFAULT_STORIES: Array<{
   {
     id: "story-4",
     category: "Breast Reconstruction",
-    avatar: "/images/doctor/assets/patient-avatar-1.png",
+    avatar: "/images/doctor/assets/patient-avatar-10.png",
     quote:
       "From the first consultation to the final reconstructive follow-up, the surgical precision and empathy shown by Dr. Patel gave my family immense peace of mind.",
     patient: "Patient from Rajkot",
@@ -83,7 +83,7 @@ const DEFAULT_STORIES: Array<{
   {
     id: "story-5",
     category: "Breast Cancer",
-    avatar: "/images/doctor/assets/patient-avatar-2.png",
+    avatar: "/images/doctor/assets/patient-avatar-11.png",
     quote:
       "The multidisciplinary care at Marengo CIMS Hospital under Dr. Noopur Patel was exceptional. Every question was answered with scientific clarity and patience.",
     patient: "Patient from Surat",
@@ -98,21 +98,21 @@ const DEFAULT_VIDEOS = [
     title: "My Breast Cancer Journey and Recovery",
     duration: "02:45",
     patient: "Patient from Ahmedabad",
-    image: "/images/doctor/assets/patient-avatar-1.png",
+    image: "/images/doctor/optimized/video-story-priya.webp",
     videoUrl: "https://www.youtube.com",
   },
   {
     title: "How Early Detection Saved My Life",
     duration: "04:12",
     patient: "Patient from Mehsana",
-    image: "/images/doctor/assets/patient-avatar-2.png",
+    image: "/images/doctor/optimized/video-story-ananya.webp",
     videoUrl: "https://www.youtube.com",
   },
   {
     title: "Life After Oncoplastic Surgery",
     duration: "05:08",
     patient: "Patient from Palanpur",
-    image: "/images/doctor/assets/patient-avatar-3.png",
+    image: "/images/doctor/optimized/video-story-meenakshi.webp",
     videoUrl: "https://www.youtube.com",
   },
 ];
@@ -260,7 +260,7 @@ export default function PatientStoriesPage() {
                 <div className="relative w-full max-w-[380px] aspect-[4/5] rounded-[32px] overflow-hidden bg-[#FDF2F4] border border-[#F5D6DE] shadow-xl p-2.5">
                   <div className="relative w-full h-full rounded-[26px] overflow-hidden">
                     <Image
-                      src="/images/doctor/assets/dr-noopur-hd.jpg"
+                      src="/images/doctor/optimized/DSC08632.webp"
                       alt="Dr. Noopur Patel, Breast Cancer Surgeon"
                       fill
                       className="object-cover object-top"
@@ -280,14 +280,8 @@ export default function PatientStoriesPage() {
                 </div>
 
                 <div className="absolute -bottom-4 right-2 sm:right-6 bg-white/95 backdrop-blur-md border border-[#F5D6DE] rounded-2xl p-2.5 shadow-lg flex items-center gap-3 max-w-[210px]">
-                  <div className="relative w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden shadow-xs">
-                    <Image
-                      src="/images/doctor/assets/favicon.png"
-                      alt="Stronger Women"
-                      width={36}
-                      height={36}
-                      className="object-contain"
-                    />
+                  <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-xl bg-[#FCE8ED] text-[#D84C70] shadow-xs">
+                    <Sparkles className="w-5 h-5 fill-[#D84C70]/20" />
                   </div>
                   <div className="text-[11px] leading-tight font-bold text-slate-800">
                     Stronger Women

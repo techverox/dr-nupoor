@@ -752,8 +752,8 @@ export default function PlatformPage() {
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-mono">
                         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
                           <div className="flex items-center gap-2">
-                            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-slate-300 shrink-0">
-                              <Image src="/images/showcase/marcus_vance.jpg" alt="Acme" fill className="object-cover" sizes="28px" />
+                            <div className="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                              AB
                             </div>
                             <div className="min-w-0">
                               <div className="text-xs font-bold text-slate-900 truncate">Acme Brands DTC</div>
@@ -768,8 +768,8 @@ export default function PlatformPage() {
 
                         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
                           <div className="flex items-center gap-2">
-                            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-slate-300 shrink-0">
-                              <Image src="/images/showcase/elena_rostova.jpg" alt="Apex" fill className="object-cover" sizes="28px" />
+                            <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                              AD
                             </div>
                             <div className="min-w-0">
                               <div className="text-xs font-bold text-slate-900 truncate">Apex Dental Group</div>
@@ -784,8 +784,8 @@ export default function PlatformPage() {
 
                         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
                           <div className="flex items-center gap-2">
-                            <div className="relative w-7 h-7 rounded-full overflow-hidden border border-slate-300 shrink-0">
-                              <Image src="/images/showcase/david_sterling.jpg" alt="Nova" fill className="object-cover" sizes="28px" />
+                            <div className="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-bold shrink-0">
+                              NA
                             </div>
                             <div className="min-w-0">
                               <div className="text-xs font-bold text-slate-900 truncate">Nova Athletics</div>

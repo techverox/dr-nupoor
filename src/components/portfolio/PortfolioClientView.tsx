@@ -186,7 +186,7 @@ export default function PortfolioClientView({ initialItems }: PortfolioClientVie
                 const heroImgSrc =
                   item.heroImage && typeof item.heroImage === "string" && item.heroImage.trim().length > 0
                     ? item.heroImage.trim()
-                    : "/images/showcase/pillar_roas_command.jpg";
+                    : "/images/doctor/optimized/blog-default-hero.webp";
 
                 return (
                   <motion.article

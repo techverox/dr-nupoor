@@ -20,7 +20,7 @@ export default function HopeCtaBanner() {
             <div className="lg:col-span-3 flex justify-center lg:justify-start">
               <div className="relative w-44 h-56 sm:w-48 sm:h-64 rounded-2xl overflow-hidden border border-[#F5CAD5] shadow-xs bg-white">
                 <Image
-                  src="/images/doctor/assets/dr-noopur-hd.jpg"
+                  src="/images/doctor/optimized/DSC08628.webp"
                   alt="Dr. Noopur Patel"
                   fill
                   className="object-cover object-top"

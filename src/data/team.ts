@@ -6,7 +6,7 @@ export const TEAM_MEMBERS_DATA: TeamMember[] = [
     name: "Dr. Noopur Patel",
     role: "Breast Cancer Surgeon & Oncoplastic Specialist",
     bio: "Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Dedicated to compassionate, individualized breast care.",
-    avatar: "/images/doctor/assets/hero-doctor.png",
+    avatar: "/images/doctor/optimized/dr-nupur-clinical-portrait.webp",
     socials: {
       linkedin: "https://linkedin.com/in/drnoopurpatel",
       email: "dr.noopurpatel@gmail.com",
@@ -21,7 +21,7 @@ export const TEAM_MEMBERS_DATA: TeamMember[] = [
     name: "Clinical Care Coordinator",
     role: "Patient Navigator & Care Support",
     bio: "Guides patients through diagnostic imaging scheduling, consultation preparation, and treatment journey communication.",
-    avatar: "/images/doctor/assets/patient-avatar-1.png",
+    avatar: "/images/doctor/assets/team-coordinator-priya.png",
     socials: {
       email: "care@drnoopurpatel.com",
     },
@@ -35,7 +35,7 @@ export const TEAM_MEMBERS_DATA: TeamMember[] = [
     name: "Appointments & Reception",
     role: "Surgical Scheduling & Helpdesk",
     bio: "Assists with clinic appointment slots, hospital admission paperwork, and direct WhatsApp consultations.",
-    avatar: "/images/doctor/assets/patient-avatar-2.png",
+    avatar: "/images/doctor/assets/team-coordinator-sneha.png",
     socials: {
       email: "appointments@drnoopurpatel.com",
     },

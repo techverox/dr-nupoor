@@ -272,7 +272,7 @@ export default function BlogArchiveClientView({ initialPosts }: BlogArchiveClien
                 {/* Visual Image Banner */}
                 <div className="lg:col-span-7 relative h-64 sm:h-80 lg:h-auto min-h-[300px] bg-[#FFF8F9] overflow-hidden border-b lg:border-b-0 lg:border-r border-[#F5D6DE]">
                   <Image
-                    src={featuredPost.featuredImage || "/images/doctor/assets/service-1.png"}
+                    src={featuredPost.featuredImage || "/images/doctor/optimized/blog-default-hero.webp"}
                     alt={featuredPost.featuredImageAlt || featuredPost.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 60vw"
@@ -384,7 +384,7 @@ export default function BlogArchiveClientView({ initialPosts }: BlogArchiveClien
                       className="block relative w-full h-48 sm:h-52 rounded-2xl overflow-hidden mb-5 bg-[#FFF8F9] border border-[#F5D6DE]"
                     >
                       <Image
-                        src={post.featuredImage || "/images/doctor/assets/service-2.png"}
+                        src={post.featuredImage || "/images/doctor/optimized/blog-default-hero.webp"}
                         alt={post.featuredImageAlt || post.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

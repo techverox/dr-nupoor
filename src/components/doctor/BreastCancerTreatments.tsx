@@ -28,25 +28,25 @@ export const TREATMENTS_6: TreatmentCardItem[] = [
   {
     title: "Sentinel Lymph Node Biopsy",
     subtitle: "Evaluation of selected lymph nodes for accurate cancer staging.",
-    image: "/images/doctor/assets/clinic-consultation.jpg",
+    image: "/images/doctor/optimized/treatment-sentinel-node.webp",
     href: "/sentinel-lymph-node-biopsy",
   },
   {
     title: "Oncoplastic Breast Surgery",
     subtitle: "Combines cancer removal with cosmetic breast reshaping techniques.",
-    image: "/images/doctor/assets/treatment-oncoplastic.png",
+    image: "/images/doctor/optimized/treatment-oncoplastic-surgical.webp",
     href: "/oncoplastic-breast-surgery-ahmedabad",
   },
   {
     title: "Axillary Lymph Node Surgery",
     subtitle: "Management of lymph nodes when required for complete clearance.",
-    image: "/images/doctor/assets/service-6.png",
+    image: "/images/doctor/optimized/treatment-mastectomy-care.webp",
     href: "/services",
   },
   {
     title: "Breast Reconstruction",
     subtitle: "Reconstructive options after mastectomy to restore natural breast shape.",
-    image: "/images/doctor/assets/treatment-reconstruction.png",
+    image: "/images/doctor/optimized/treatment-reconstruction-latissimus.webp",
     href: "/breast-reconstruction-surgery-ahmedabad",
   },
 ];

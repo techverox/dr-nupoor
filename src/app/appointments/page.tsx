@@ -130,7 +130,7 @@ export default function AppointmentPage() {
               <div className="lg:col-span-4 flex justify-center lg:justify-end">
                 <div className="relative w-[240px] h-[200px] rounded-2xl overflow-hidden border border-[#F5D6DE] shadow-sm bg-white">
                   <Image
-                    src="/images/doctor/assets/dr-noopur-hd.jpg"
+                    src="/images/doctor/optimized/DSC08630.webp"
                     alt="Dr. Noopur Patel, Breast Cancer Surgeon"
                     fill
                     className="object-cover object-top"
@@ -472,7 +472,7 @@ export default function AppointmentPage() {
 
                 <div className="relative w-full aspect-[16/8] rounded-2xl overflow-hidden border border-[#F5D6DE] bg-slate-100">
                   <Image
-                    src="/images/doctor/assets/clinic-appoint-card.png"
+                    src="/images/doctor/optimized/clinic-reception-facility.webp"
                     alt="Clinic Reception Area"
                     fill
                     className="object-cover"

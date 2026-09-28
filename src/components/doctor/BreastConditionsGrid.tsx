@@ -24,7 +24,7 @@ export const BREAST_CONDITIONS: BreastConditionCard[] = [
       "A new or persistent palpable lump in the breast tissue. Requires prompt Triple Assessment to rule out malignancy.",
     href: "/breast-lump-treatment-ahmedabad",
     badge: "Most Common",
-    image: "/images/doctor/assets/service-1.png",
+    image: "/images/doctor/assets/condition-grid-lump.png",
   },
   {
     id: "fibroadenoma",
@@ -34,7 +34,7 @@ export const BREAST_CONDITIONS: BreastConditionCard[] = [
       "Firm, rubbery, non-cancerous lumps common in young women aged 15-35. Can be safely monitored or removed via daycare excision.",
     href: "/fibroadenoma-treatment-ahmedabad",
     badge: "100% Benign",
-    image: "/images/doctor/assets/service-2.png",
+    image: "/images/doctor/assets/condition-grid-fibroadenoma.png",
   },
   {
     id: "breast-pain",
@@ -44,7 +44,7 @@ export const BREAST_CONDITIONS: BreastConditionCard[] = [
       "Tenderness or heaviness related to hormonal changes or fibrocystic tissue. Detailed evaluation provides reassuring relief.",
     href: "/breast-specialist-doctor-ahmedabad",
     badge: "Symptom Care",
-    image: "/images/doctor/assets/service-3.png",
+    image: "/images/doctor/assets/condition-grid-pain.png",
   },
   {
     id: "nipple-discharge",
@@ -54,7 +54,7 @@ export const BREAST_CONDITIONS: BreastConditionCard[] = [
       "Clear, milky or bloody discharge from milk ducts. Spontaneous single-duct discharge warrants careful ductal evaluation.",
     href: "/nipple-discharge-treatment-ahmedabad",
     badge: "Diagnostic Focus",
-    image: "/images/doctor/assets/condition-ductal.png",
+    image: "/images/doctor/assets/condition-grid-discharge.png",
   },
   {
     id: "benign-conditions",
@@ -64,7 +64,7 @@ export const BREAST_CONDITIONS: BreastConditionCard[] = [
       "Care for simple fluid cysts, lactational mastitis, breast abscesses, and fibrocystic changes with minimal intervention.",
     href: "/breast-lump-treatment-ahmedabad",
     badge: "Non-Cancerous",
-    image: "/images/doctor/assets/condition-benign.png",
+    image: "/images/doctor/assets/condition-grid-cysts.png",
   },
   {
     id: "breast-cancer",
@@ -74,7 +74,7 @@ export const BREAST_CONDITIONS: BreastConditionCard[] = [
       "Malignant breast disease managed through personalized surgical oncology: Breast Conservation Surgery (BCS) & mastectomy.",
     href: "/breast-cancer-specialist-ahmedabad",
     badge: "Surgical Oncology",
-    image: "/images/doctor/assets/condition-cancer.png",
+    image: "/images/doctor/assets/condition-grid-cancer.png",
   },
 ];
 

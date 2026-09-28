@@ -86,7 +86,7 @@ export default async function AboutPage() {
   const facilities = [
     {
       title: "Modern Reception Desk",
-      image: "/images/doctor/assets/clinic-reception.jpg",
+      image: "/images/doctor/assets/doctor-office-home.png",
       desc: "Warm and confidential welcome",
     },
     {
@@ -155,14 +155,8 @@ export default async function AboutPage() {
                 </div>
 
                 <div className="absolute -bottom-4 right-2 sm:right-6 bg-white/95 backdrop-blur-md border border-[#F5D6DE] rounded-2xl p-2.5 shadow-lg flex items-center gap-3 max-w-[210px]">
-                  <div className="relative w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-xl overflow-hidden shadow-xs">
-                    <Image
-                      src="/images/doctor/assets/favicon.png"
-                      alt="Care Support Strength"
-                      width={36}
-                      height={36}
-                      className="object-contain"
-                    />
+                  <div className="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-xl bg-[#FCE8ED] text-[#D84C70] shadow-xs">
+                    <Heart className="w-5 h-5 fill-[#D84C70]/20" />
                   </div>
                   <div className="text-[11px] leading-tight font-bold text-slate-800">
                     Care. Support. Strength.
@@ -303,7 +297,7 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/assets/doctor-consultation-about.png"
+                    src="/images/doctor/optimized/DSC08631.webp"
                     alt="Detailed Consultation"
                     fill
                     className="object-cover"
@@ -321,7 +315,7 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/assets/service-1.png"
+                    src="/images/doctor/optimized/DSC08636.webp"
                     alt="Advanced Surgical Care"
                     fill
                     className="object-cover"
@@ -339,7 +333,7 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/assets/clinic-mammography.jpg"
+                    src="/images/doctor/optimized/clinic-diagnostic-care.webp"
                     alt="Accurate Diagnosis"
                     fill
                     className="object-cover"
@@ -427,13 +421,13 @@ export default async function AboutPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
               <div className="lg:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-[380px] aspect-[4/3] rounded-3xl overflow-hidden bg-[#FFF8F9] border border-[#F5D6DE] p-4 flex items-center justify-center shadow-xs">
+                <div className="relative w-full max-w-[420px] aspect-[4/3] rounded-3xl overflow-hidden bg-[#FFF8F9] border border-[#F5D6DE] shadow-md">
                   <Image
-                    src="/images/doctor/assets/anatomy-diagram.png"
-                    alt="Clinical Anatomy and Precision"
+                    src="/images/doctor/optimized/about-clinical-excellence.webp"
+                    alt="Clinical Excellence and Patient Care"
                     fill
-                    className="object-contain p-2"
-                    sizes="380px"
+                    className="object-cover"
+                    sizes="420px"
                   />
                 </div>
               </div>

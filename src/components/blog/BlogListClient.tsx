@@ -127,7 +127,7 @@ export function BlogListClient({ initialPosts }: BlogListClientProps) {
             {/* Featured Image */}
             <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto bg-slate-900 overflow-hidden">
               <Image
-                src={featuredPost.featuredImage || "/images/og-image.jpg"}
+                src={featuredPost.featuredImage || "/images/doctor/optimized/blog-default-hero.webp"}
                 alt={featuredPost.featuredImageAlt || featuredPost.title}
                 fill
                 sizes="(max-width: 1024px) 100vw, 60vw"
@@ -206,7 +206,7 @@ export function BlogListClient({ initialPosts }: BlogListClientProps) {
                 {/* Image Container */}
                 <Link href={`/blog/${post.slug}`} className="block relative h-52 bg-slate-900 overflow-hidden">
                   <Image
-                    src={post.featuredImage || "/images/og-image.jpg"}
+                    src={post.featuredImage || "/images/doctor/optimized/blog-default-hero.webp"}
                     alt={post.featuredImageAlt || post.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

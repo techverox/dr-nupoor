@@ -1,0 +1,327 @@
+=== ALL IMAGES AND USAGE COUNTS ===
+
+Total unique image paths referenced in src: 150
+Images used 2 or more times: 49
+Images used only once: 101
+
+--------------------------------------------------
+REPEATED IMAGES (COUNT >= 2):
+--------------------------------------------------
+
+[35x] /images/doctor/assets/hero-doctor.png
+    src/app/admin/blog/page.tsx:42 -> { label: "Dr. Noopur Patel Clinical", url: "/images/doctor/assets/hero-doctor.png" },
+    src/app/admin/blog/page.tsx:55 -> { name: "Dr. Noopur Patel", role: "Breast Cancer Surgeon & Oncoplastic Specialist", avatar
+    src/app/admin/blog/page.tsx:56 -> { name: "Clinical Oncology Team", role: "Marengo CIMS Hospital", avatar: "/images/doctor/a
+    src/app/admin/blog/page.tsx:89 -> authorAvatar: "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/blog/page.tsx:177 -> authorAvatar: post.author?.avatar || "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/blog/page.tsx:203 -> authorAvatar: "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/portfolio/page.tsx:207 -> authorAvatar: "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/seo/page.tsx:55 -> defaultOgImage: "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/seo/page.tsx:597 -> placeholder="/images/doctor/assets/hero-doctor.png"
+    src/app/admin/team/page.tsx:42 -> { name: "Dr. Noopur Patel", url: "/images/doctor/assets/hero-doctor.png" },
+    src/app/admin/team/page.tsx:45 -> { name: "Care Support", url: "/images/doctor/assets/hero-doctor.png" },
+    src/app/admin/team/page.tsx:73 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/team/page.tsx:141 -> avatar: member.avatar || "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/team/page.tsx:164 -> avatar: formData.avatar || "/images/doctor/assets/hero-doctor.png",
+    src/app/admin/team/page.tsx:761 -> placeholder="/images/doctor/assets/hero-doctor.png"
+    src/app/locations/[slug]/page.tsx:218 -> src="/images/doctor/assets/hero-doctor.png"
+    src/app/[slug]/page.tsx:241 -> src="/images/doctor/assets/hero-doctor.png"
+    src/config/site.ts:9 -> ogImage: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:16 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:69 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:122 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:179 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:225 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:274 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:320 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:406 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/blog.ts:498 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/portfolio.ts:14 -> authorAvatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/portfolio.ts:77 -> authorAvatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/portfolio.ts:140 -> authorAvatar: "/images/doctor/assets/hero-doctor.png",
+    src/data/team.ts:9 -> avatar: "/images/doctor/assets/hero-doctor.png",
+    src/lib/services/mediaService.ts:51 -> url: "/images/doctor/assets/hero-doctor.png",
+    src/lib/services/mediaService.ts:104 -> url: "/images/doctor/assets/hero-doctor.png",
+    src/lib/services/mediaService.ts:121 -> url: "/images/doctor/assets/hero-doctor.png",
+    src/lib/services/seoService.ts:21 -> defaultOgImage: "/images/doctor/assets/hero-doctor.png",
+
+[17x] /images/doctor/assets/logo.png
+    src/agency-panel/components/LoginScreen.tsx:35 -> src="/images/doctor/assets/logo.png"
+    src/agency-panel/components/Sidebar.tsx:154 -> src="/images/doctor/assets/logo.png"
+    src/app/admin/seo/page.tsx:69 -> organizationLogo: "/images/doctor/assets/logo.png",
+    src/app/admin/settings/page.tsx:77 -> logoUrl: "/images/doctor/assets/logo.png",
+    src/app/admin/settings/page.tsx:588 -> src={formData.logoUrl || "/images/doctor/assets/logo.png"}
+    src/app/admin/settings/page.tsx:1355 -> src={formData.logoUrl || "/images/doctor/assets/logo.png"}
+    src/app/landing/[slug]/page.tsx:122 -> src="/images/doctor/assets/logo.png"
+    src/components/doctor/DoctorFooter.tsx:33 -> src="/images/doctor/assets/logo.png"
+    src/components/doctor/DoctorNavbar.tsx:170 -> src="/images/doctor/assets/logo.png"
+    src/components/doctor/DoctorNavbar.tsx:334 -> src="/images/doctor/assets/logo.png"
+    src/components/Footer.tsx:142 -> src="/images/doctor/assets/logo.png"
+    src/components/Navbar.tsx:240 -> src="/images/doctor/assets/logo.png"
+    src/components/Navbar.tsx:533 -> src="/images/doctor/assets/logo.png"
+    src/components/ui/Logo.tsx:42 -> src="/images/doctor/assets/logo.png"
+    src/data/pagesContent.ts:89 -> logoUrl: "/images/doctor/assets/logo.png",
+    src/lib/services/mediaService.ts:17 -> url: "/images/doctor/assets/logo.png",
+    src/lib/services/seoService.ts:37 -> organizationLogo: "/images/doctor/assets/logo.png",
+
+[13x] /images/doctor/assets/service-1.png
+    src/app/about/page.tsx:324 -> src="/images/doctor/assets/service-1.png"
+    src/app/admin/blog/page.tsx:37 -> { label: "Early Screening & Mammography", url: "/images/doctor/assets/service-1.png" },
+    src/app/admin/blog/page.tsx:82 -> featuredImage: "/images/doctor/assets/service-1.png",
+    src/app/admin/blog/page.tsx:170 -> featuredImage: post.featuredImage || "/images/doctor/assets/service-1.png",
+    src/app/admin/blog/page.tsx:196 -> featuredImage: "/images/doctor/assets/service-1.png",
+    src/app/admin/blog/page.tsx:627 -> src={post.featuredImage || "/images/doctor/assets/service-1.png"}
+    src/components/blog/BlogArchiveClientView.tsx:275 -> src={featuredPost.featuredImage || "/images/doctor/assets/service-1.png"}
+    src/components/doctor/BreastConditionsGrid.tsx:27 -> image: "/images/doctor/assets/service-1.png",
+    src/components/doctor/ComprehensiveServicesGrid.tsx:20 -> image: "/images/doctor/assets/service-1.png",
+    src/components/doctor/ComprehensiveServicesGrid.tsx:60 -> image: s.icon || defaultServices[idx]?.image || "/images/doctor/assets/service-1.png",
+    src/data/blog.ts:10 -> featuredImage: "/images/doctor/assets/service-1.png",
+    src/data/blog.ts:400 -> featuredImage: "/images/doctor/assets/service-1.png",
+    src/data/services.ts:22 -> icon: "/images/doctor/assets/service-1.png",
+
+[12x] /images/doctor/assets/patient-avatar-1.png
+    src/app/admin/team/page.tsx:43 -> { name: "Care Coordinator", url: "/images/doctor/assets/patient-avatar-1.png" },
+    src/app/admin/team/page.tsx:126 -> avatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/app/admin/testimonials/page.tsx:882 -> src={item.photoUrl || item.clientAvatar || "/images/doctor/assets/patient-avatar-1.png"}
+    src/app/admin/testimonials/page.tsx:1209 -> placeholder="/images/doctor/assets/patient-avatar-1.png"
+    src/app/patient-stories/page.tsx:42 -> avatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/app/patient-stories/page.tsx:75 -> avatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/app/patient-stories/page.tsx:101 -> image: "/images/doctor/assets/patient-avatar-1.png",
+    src/data/team.ts:24 -> avatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/data/testimonials.ts:16 -> clientAvatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/data/testimonials.ts:79 -> clientAvatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/data/testimonials.ts:121 -> clientAvatar: "/images/doctor/assets/patient-avatar-1.png",
+    src/lib/api/handlers/stories/submit/route.ts:61 -> "/images/doctor/assets/patient-avatar-1.png",
+
+[11x] /images/doctor/assets/service-2.png
+    src/app/admin/blog/page.tsx:38 -> { label: "Oncoplastic Breast Surgery", url: "/images/doctor/assets/service-2.png" },
+    src/app/admin/portfolio/page.tsx:63 -> heroImage: "/images/doctor/assets/service-2.png",
+    src/app/admin/portfolio/page.tsx:131 -> heroImage: "/images/doctor/assets/service-2.png",
+    src/app/admin/portfolio/page.tsx:160 -> heroImage: item.heroImage || "/images/doctor/assets/service-2.png",
+    src/components/blog/BlogArchiveClientView.tsx:387 -> src={post.featuredImage || "/images/doctor/assets/service-2.png"}
+    src/components/doctor/BreastConditionsGrid.tsx:37 -> image: "/images/doctor/assets/service-2.png",
+    src/components/doctor/ComprehensiveServicesGrid.tsx:26 -> image: "/images/doctor/assets/service-2.png",
+    src/data/blog.ts:63 -> featuredImage: "/images/doctor/assets/service-2.png",
+    src/data/blog.ts:492 -> featuredImage: "/images/doctor/assets/service-2.png",
+    src/data/portfolio.ts:15 -> heroImage: "/images/doctor/assets/service-2.png",
+    src/data/services.ts:72 -> icon: "/images/doctor/assets/service-2.png",
+
+[8x] /images/doctor/assets/patient-avatar-2.png
+    src/app/admin/team/page.tsx:44 -> { name: "Clinical Nurse", url: "/images/doctor/assets/patient-avatar-2.png" },
+    src/app/patient-stories/page.tsx:53 -> avatar: "/images/doctor/assets/patient-avatar-2.png",
+    src/app/patient-stories/page.tsx:86 -> avatar: "/images/doctor/assets/patient-avatar-2.png",
+    src/app/patient-stories/page.tsx:108 -> image: "/images/doctor/assets/patient-avatar-2.png",
+    src/data/team.ts:38 -> avatar: "/images/doctor/assets/patient-avatar-2.png",
+    src/data/testimonials.ts:37 -> clientAvatar: "/images/doctor/assets/patient-avatar-2.png",
+    src/data/testimonials.ts:100 -> clientAvatar: "/images/doctor/assets/patient-avatar-2.png",
+    src/lib/api/handlers/stories/submit/route.ts:62 -> "/images/doctor/assets/patient-avatar-2.png",
+
+[6x] /images/doctor/assets/dr-noopur-hd.jpg
+    src/app/about/page.tsx:147 -> src="/images/doctor/assets/dr-noopur-hd.jpg"
+    src/app/appointments/page.tsx:133 -> src="/images/doctor/assets/dr-noopur-hd.jpg"
+    src/app/patient-stories/page.tsx:263 -> src="/images/doctor/assets/dr-noopur-hd.jpg"
+    src/app/share-story/page.tsx:563 -> src="/images/doctor/assets/dr-noopur-hd.jpg"
+    src/components/doctor/HopeCtaBanner.tsx:23 -> src="/images/doctor/assets/dr-noopur-hd.jpg"
+    src/components/doctor/MedicalGallerySection.tsx:25 -> image: "/images/doctor/assets/dr-noopur-hd.jpg",
+
+[5x] /images/doctor/assets/service-5.png
+    src/components/doctor/ComprehensiveServicesGrid.tsx:44 -> image: "/images/doctor/assets/service-5.png",
+    src/data/blog.ts:116 -> featuredImage: "/images/doctor/assets/service-5.png",
+    src/data/blog.ts:314 -> featuredImage: "/images/doctor/assets/service-5.png",
+    src/data/portfolio.ts:78 -> heroImage: "/images/doctor/assets/service-5.png",
+    src/data/services.ts:210 -> icon: "/images/doctor/assets/service-5.png",
+
+[4x] /images/showcase/david_sterling.jpg
+    src/agency-panel/database/initial-data.ts:466 -> imageUrl: "/images/showcase/david_sterling.jpg",
+    src/app/platform/page.tsx:788 -> <Image src="/images/showcase/david_sterling.jpg" alt="Nova" fill className="object-cover" 
+    src/app/platform/page.tsx:2016 -> <Image src="/images/showcase/david_sterling.jpg" alt="David Sterling" fill className="obje
+    src/components/Hero.tsx:149 -> "/images/showcase/david_sterling.jpg"
+
+[4x] /images/doctor/assets/clinic-mammography.jpg
+    src/app/about/page.tsx:99 -> image: "/images/doctor/assets/clinic-mammography.jpg",
+    src/app/about/page.tsx:342 -> src="/images/doctor/assets/clinic-mammography.jpg"
+    src/components/doctor/FeaturedProceduresSection.tsx:45 -> image: "/images/doctor/assets/clinic-mammography.jpg",
+    src/components/doctor/MedicalGallerySection.tsx:49 -> image: "/images/doctor/assets/clinic-mammography.jpg",
+
+[4x] /images/doctor/assets/patient-avatar-3.png
+    src/app/patient-stories/page.tsx:64 -> avatar: "/images/doctor/assets/patient-avatar-3.png",
+    src/app/patient-stories/page.tsx:115 -> image: "/images/doctor/assets/patient-avatar-3.png",
+    src/data/testimonials.ts:58 -> clientAvatar: "/images/doctor/assets/patient-avatar-3.png",
+    src/lib/api/handlers/stories/submit/route.ts:63 -> "/images/doctor/assets/patient-avatar-3.png",
+
+[4x] /images/doctor/assets/service-6.png
+    src/components/doctor/BreastCancerTreatments.tsx:43 -> image: "/images/doctor/assets/service-6.png",
+    src/components/doctor/ComprehensiveServicesGrid.tsx:50 -> image: "/images/doctor/assets/service-6.png",
+    src/data/blog.ts:268 -> featuredImage: "/images/doctor/assets/service-6.png",
+    src/data/services.ts:260 -> icon: "/images/doctor/assets/service-6.png",
+
+[4x] /images/doctor/assets/service-3.png
+    src/components/doctor/BreastConditionsGrid.tsx:47 -> image: "/images/doctor/assets/service-3.png",
+    src/components/doctor/ComprehensiveServicesGrid.tsx:32 -> image: "/images/doctor/assets/service-3.png",
+    src/data/blog.ts:173 -> featuredImage: "/images/doctor/assets/service-3.png",
+    src/data/services.ts:118 -> icon: "/images/doctor/assets/service-3.png",
+
+[4x] /images/doctor/assets/service-4.png
+    src/components/doctor/ComprehensiveServicesGrid.tsx:38 -> image: "/images/doctor/assets/service-4.png",
+    src/data/blog.ts:219 -> featuredImage: "/images/doctor/assets/service-4.png",
+    src/data/portfolio.ts:141 -> heroImage: "/images/doctor/assets/service-4.png",
+    src/data/services.ts:164 -> icon: "/images/doctor/assets/service-4.png",
+
+[3x] /images/doctor/assets/clinic-reception.jpg
+    src/app/about/page.tsx:89 -> image: "/images/doctor/assets/clinic-reception.jpg",
+    src/components/doctor/ClinicLocationSection.tsx:139 -> src="/images/doctor/assets/clinic-reception.jpg"
+    src/components/doctor/MedicalGallerySection.tsx:41 -> image: "/images/doctor/assets/clinic-reception.jpg",
+
+[3x] /images/doctor/assets/clinic-consultation.jpg
+    src/app/about/page.tsx:94 -> image: "/images/doctor/assets/clinic-consultation.jpg",
+    src/components/doctor/BreastCancerTreatments.tsx:31 -> image: "/images/doctor/assets/clinic-consultation.jpg",
+    src/components/doctor/MedicalGallerySection.tsx:33 -> image: "/images/doctor/assets/clinic-consultation.jpg",
+
+[3x] /images/doctor/assets/favicon.png
+    src/app/about/page.tsx:160 -> src="/images/doctor/assets/favicon.png"
+    src/app/patient-stories/page.tsx:285 -> src="/images/doctor/assets/favicon.png"
+    src/lib/services/mediaService.ts:34 -> url: "/images/doctor/assets/favicon.png",
+
+[3x] /images/doctor/assets/doctor-consultation-about.png
+    src/app/about/page.tsx:188 -> src="/images/doctor/assets/doctor-consultation-about.png"
+    src/app/about/page.tsx:306 -> src="/images/doctor/assets/doctor-consultation-about.png"
+    src/components/doctor/MedicalGallerySection.tsx:81 -> image: "/images/doctor/assets/doctor-consultation-about.png",
+
+[3x] /images/doctor/assets/anatomy-diagram.png
+    src/app/about/page.tsx:432 -> src="/images/doctor/assets/anatomy-diagram.png"
+    src/components/doctor/BreastAnatomySection.tsx:64 -> src="/images/doctor/assets/anatomy-diagram.png"
+    src/components/doctor/MedicalGallerySection.tsx:57 -> image: "/images/doctor/assets/anatomy-diagram.png",
+
+[3x] /images/blog/breast-cancer-myths.jpg
+    src/app/admin/blog/new/page.tsx:39 -> featuredImage: "/images/blog/breast-cancer-myths.jpg",
+    src/app/admin/blog/[id]/edit/page.tsx:45 -> featuredImage: "/images/blog/breast-cancer-myths.jpg",
+    src/app/admin/blog/[id]/edit/page.tsx:78 -> featuredImage: p.featuredImage || "/images/blog/breast-cancer-myths.jpg",
+
+[3x] /images/team/dr-noopur-patel.jpg
+    src/app/admin/blog/new/page.tsx:47 -> authorAvatar: "/images/team/dr-noopur-patel.jpg",
+    src/app/admin/blog/[id]/edit/page.tsx:53 -> authorAvatar: "/images/team/dr-noopur-patel.jpg",
+    src/app/admin/blog/[id]/edit/page.tsx:86 -> authorAvatar: p.author?.avatar || "/images/team/dr-noopur-patel.jpg",
+
+[3x] /images/doctor/assets/condition-benign.png
+    src/app/admin/blog/page.tsx:39 -> { label: "Benign Breast Evaluation", url: "/images/doctor/assets/condition-benign.png" },
+    src/components/doctor/BreastAnatomySection.tsx:18 -> image: "/images/doctor/assets/condition-benign.png",
+    src/components/doctor/BreastConditionsGrid.tsx:67 -> image: "/images/doctor/assets/condition-benign.png",
+
+[3x] /images/doctor/assets/condition-ductal.png
+    src/app/admin/blog/page.tsx:40 -> { label: "Ductal Assessment", url: "/images/doctor/assets/condition-ductal.png" },
+    src/components/doctor/BreastAnatomySection.tsx:28 -> image: "/images/doctor/assets/condition-ductal.png",
+    src/components/doctor/BreastConditionsGrid.tsx:57 -> image: "/images/doctor/assets/condition-ductal.png",
+
+[3x] /favicon-32x32.png
+    src/app/manifest.ts:25 -> src: "/favicon-32x32.png",
+    src/lib/seo/metadata.ts:337 -> { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    src/lib/seo/metadata.ts:359 -> { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+
+[3x] /apple-touch-icon.png
+    src/app/manifest.ts:30 -> src: "/apple-touch-icon.png",
+    src/lib/seo/metadata.ts:341 -> { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    src/lib/seo/metadata.ts:363 -> { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+
+[3x] /images/showcase/marcus_vance.jpg
+    src/app/platform/page.tsx:756 -> <Image src="/images/showcase/marcus_vance.jpg" alt="Acme" fill className="object-cover" si
+    src/app/platform/page.tsx:1972 -> <Image src="/images/showcase/marcus_vance.jpg" alt="Marcus Vance" fill className="object-c
+    src/components/Hero.tsx:97 -> "/images/showcase/marcus_vance.jpg"
+
+[3x] /images/showcase/elena_rostova.jpg
+    src/app/platform/page.tsx:772 -> <Image src="/images/showcase/elena_rostova.jpg" alt="Apex" fill className="object-cover" s
+    src/app/platform/page.tsx:1994 -> <Image src="/images/showcase/elena_rostova.jpg" alt="Elena Rostova" fill className="object
+    src/components/Hero.tsx:124 -> "/images/showcase/elena_rostova.jpg"
+
+[3x] /images/team/vipul-gajjar.jpg
+    src/components/about/AboutClientView.tsx:829 -> src={member.avatar || "/images/team/vipul-gajjar.jpg"}
+    src/lib/services/cmsService.ts:704 -> avatar: item.avatar || prev?.avatar || "/images/team/vipul-gajjar.jpg",
+    src/lib/services/mediaService.ts:382 -> url: "/images/team/vipul-gajjar.jpg",
+
+[3x] /images/og-image.jpg
+    src/components/admin/seo/EditPageSeoModal.tsx:448 -> placeholder="/images/og-image.jpg"
+    src/components/blog/BlogListClient.tsx:130 -> src={featuredPost.featuredImage || "/images/og-image.jpg"}
+    src/components/blog/BlogListClient.tsx:209 -> src={post.featuredImage || "/images/og-image.jpg"}
+
+[3x] /images/doctor/assets/treatment-lumpectomy.png
+    src/components/doctor/BreastCancerTreatments.tsx:19 -> image: "/images/doctor/assets/treatment-lumpectomy.png",
+    src/components/doctor/FeaturedProceduresSection.tsx:21 -> image: "/images/doctor/assets/treatment-lumpectomy.png",
+    src/components/doctor/TreatmentOptionsGrid.tsx:14 -> image: "/images/doctor/assets/treatment-lumpectomy.png",
+
+[3x] /images/doctor/assets/treatment-mastectomy.png
+    src/components/doctor/BreastCancerTreatments.tsx:25 -> image: "/images/doctor/assets/treatment-mastectomy.png",
+    src/components/doctor/FeaturedProceduresSection.tsx:37 -> image: "/images/doctor/assets/treatment-mastectomy.png",
+    src/components/doctor/TreatmentOptionsGrid.tsx:21 -> image: "/images/doctor/assets/treatment-mastectomy.png",
+
+[3x] /images/doctor/assets/treatment-oncoplastic.png
+    src/components/doctor/BreastCancerTreatments.tsx:37 -> image: "/images/doctor/assets/treatment-oncoplastic.png",
+    src/components/doctor/FeaturedProceduresSection.tsx:29 -> image: "/images/doctor/assets/treatment-oncoplastic.png",
+    src/components/doctor/TreatmentOptionsGrid.tsx:35 -> image: "/images/doctor/assets/treatment-oncoplastic.png",
+
+[3x] images/doctor/assets/hero-doctor.png
+    src/lib/services/mediaService.ts:52 -> storagePath: "images/doctor/assets/hero-doctor.png",
+    src/lib/services/mediaService.ts:105 -> storagePath: "images/doctor/assets/hero-doctor.png",
+    src/lib/services/mediaService.ts:122 -> storagePath: "images/doctor/assets/hero-doctor.png",
+
+[2x] /images/doctor/assets/clinic-lounge.jpg
+    src/app/about/page.tsx:104 -> image: "/images/doctor/assets/clinic-lounge.jpg",
+    src/components/doctor/MedicalGallerySection.tsx:73 -> image: "/images/doctor/assets/clinic-lounge.jpg",
+
+[2x] /images/doctor/assets/condition-normal.png
+    src/app/admin/blog/page.tsx:41 -> { label: "Breast Anatomy Normal", url: "/images/doctor/assets/condition-normal.png" },
+    src/components/doctor/BreastAnatomySection.tsx:13 -> image: "/images/doctor/assets/condition-normal.png",
+
+[2x] /images/showcase/collaborate_keynote.jpg
+    src/app/admin/blog/page.tsx:1026 -> src={formData.featuredImage || "/images/showcase/collaborate_keynote.jpg"}
+    src/lib/services/cmsService.ts:1059 -> featuredImage: item.featuredImage || prev?.featuredImage || "/images/showcase/collaborate_
+
+[2x] /images/awards/g2_top50_trans.png
+    src/app/platform/page.tsx:2129 -> <Image src="/images/awards/g2_top50_trans.png" alt="G2 Best Software Top 50" fill sizes="9
+    src/components/FinalCta.tsx:159 -> src="/images/awards/g2_top50_trans.png"
+
+[2x] /images/awards/ai_tech_trans.png
+    src/app/platform/page.tsx:2136 -> <Image src="/images/awards/ai_tech_trans.png" alt="AI Tech Awards Winner" fill sizes="90px
+    src/components/FinalCta.tsx:175 -> src="/images/awards/ai_tech_trans.png"
+
+[2x] /images/awards/ai_excellence_trans.png
+    src/app/platform/page.tsx:2143 -> <Image src="/images/awards/ai_excellence_trans.png" alt="AI Excellence Award" fill sizes="
+    src/components/FinalCta.tsx:191 -> src="/images/awards/ai_excellence_trans.png"
+
+[2x] /images/awards/capterra_trans.png
+    src/app/platform/page.tsx:2150 -> <Image src="/images/awards/capterra_trans.png" alt="Capterra Best Value" fill sizes="90px"
+    src/components/FinalCta.tsx:207 -> src="/images/awards/capterra_trans.png"
+
+[2x] /images/awards/buyers_choice_trans.png
+    src/app/platform/page.tsx:2157 -> <Image src="/images/awards/buyers_choice_trans.png" alt="TrustRadius Buyer's Choice" fill 
+    src/components/FinalCta.tsx:223 -> src="/images/awards/buyers_choice_trans.png"
+
+[2x] /images/awards/compliance_seals_trans.png
+    src/app/platform/page.tsx:2164 -> <Image src="/images/awards/compliance_seals_trans.png" alt="Compliance Seals" fill sizes="
+    src/components/FinalCta.tsx:239 -> src="/images/awards/compliance_seals_trans.png"
+
+[2x] /images/showcase/pillar_roas_command.jpg
+    src/components/AgencyRolePillars.tsx:192 -> src="/images/showcase/pillar_roas_command.jpg"
+    src/components/portfolio/PortfolioClientView.tsx:189 -> : "/images/showcase/pillar_roas_command.jpg";
+
+[2x] /images/doctor/assets/condition-cancer.png
+    src/components/doctor/BreastAnatomySection.tsx:23 -> image: "/images/doctor/assets/condition-cancer.png",
+    src/components/doctor/BreastConditionsGrid.tsx:77 -> image: "/images/doctor/assets/condition-cancer.png",
+
+[2x] /images/doctor/assets/treatment-reconstruction.png
+    src/components/doctor/BreastCancerTreatments.tsx:49 -> image: "/images/doctor/assets/treatment-reconstruction.png",
+    src/components/doctor/TreatmentOptionsGrid.tsx:28 -> image: "/images/doctor/assets/treatment-reconstruction.png",
+
+[2x] /images/doctor/assets/early-detection-woman.png
+    src/components/doctor/EarlyDetectionSection.tsx:84 -> src="/images/doctor/assets/early-detection-woman.png"
+    src/components/doctor/MedicalGallerySection.tsx:65 -> image: "/images/doctor/assets/early-detection-woman.png",
+
+[2x] /images/showcase/sophie_laurent.jpg
+    src/components/Hero.tsx:96 -> "/images/showcase/sophie_laurent.jpg",
+    src/components/Hero.tsx:148 -> "/images/showcase/sophie_laurent.jpg",
+
+[2x] /images/techverox_logo.png
+    src/components/Hero.tsx:180 -> src="/images/techverox_logo.png"
+    src/lib/services/mediaService.ts:85 -> url: "/images/techverox_logo.png",
+
+[2x] /favicon-16x16.png
+    src/lib/seo/metadata.ts:338 -> { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    src/lib/seo/metadata.ts:360 -> { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },

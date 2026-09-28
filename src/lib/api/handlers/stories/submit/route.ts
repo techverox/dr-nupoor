@@ -56,13 +56,8 @@ export async function POST(request: NextRequest) {
       ? `Patient from ${city.trim()}`
       : name.trim();
 
-    // Default avatar choice based on a friendly palette
-    const defaultAvatars = [
-      "/images/doctor/assets/patient-avatar-1.png",
-      "/images/doctor/assets/patient-avatar-2.png",
-      "/images/doctor/assets/patient-avatar-3.png",
-    ];
-    const assignedAvatar = photoUrl || defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
+    // Default avatar choice
+    const assignedAvatar = photoUrl || "/images/doctor/assets/patient-avatar-submit.png";
 
     const docId = `story-${Date.now()}`;
     const payload: Partial<TestimonialItem> = {

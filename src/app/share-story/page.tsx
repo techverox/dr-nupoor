@@ -560,7 +560,7 @@ export default function ShareStoryPage() {
                   <div className="flex items-center gap-3 mb-4">
                     <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#D84C70] shadow-sm">
                       <Image
-                        src="/images/doctor/assets/dr-noopur-hd.jpg"
+                        src="/images/doctor/optimized/dr-nupur-hero-3x4.webp"
                         alt="Dr. Noopur Patel"
                         fill
                         className="object-cover object-top"

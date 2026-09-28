@@ -238,7 +238,7 @@ export default async function SeoProcedurePage({ params }: PageProps) {
                   <div className="flex items-center gap-4 border-b border-[#F7E5EA] pb-5">
                     <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[#9B2846] shrink-0 bg-rose-50">
                       <Image
-                        src="/images/doctor/assets/hero-doctor.png"
+                        src="/images/doctor/optimized/DSC08640.webp"
                         alt="Dr. Noopur Patel - Breast Cancer Surgeon"
                         fill
                         className="object-cover object-top"
