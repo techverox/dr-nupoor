@@ -7,7 +7,7 @@ import DoctorNavbar from "@/components/doctor/DoctorNavbar";
 import DoctorFooter from "@/components/doctor/DoctorFooter";
 import TrustStrip from "@/components/doctor/TrustStrip";
 import HospitalAffiliationBanner from "@/components/doctor/HospitalAffiliationBanner";
-import { getSeoPageData } from "@/data/seoKeywordMap";
+import { getSeoPageData, getAllSeoPages } from "@/data/seoKeywordMap";
 import {
   Calendar,
   Phone,
@@ -22,6 +22,13 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+
+export async function generateStaticParams() {
+  const pages = getAllSeoPages();
+  return pages
+    .filter((p) => p.slug && p.slug !== "home" && !p.slug.includes("/"))
+    .map((p) => ({ slug: p.slug }));
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

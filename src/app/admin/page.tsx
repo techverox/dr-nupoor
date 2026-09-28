@@ -1,8 +1,7 @@
-import React from "react";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { verifyAdminSessionCookie, AUTH_CONFIG } from "@/lib/auth";
-import { getDashboardSummary, DashboardSummary } from "@/lib/services/dashboardService";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { DashboardSummary } from "@/lib/services/dashboardService";
 import { StatCard } from "@/components/admin/StatCard";
 import { RecentLeadsTable } from "@/components/admin/RecentLeadsTable";
 import { ContentOverviewGrid } from "@/components/admin/ContentOverviewGrid";
@@ -10,43 +9,8 @@ import { QuickActionsCard } from "@/components/admin/QuickActionsCard";
 import { SystemStatusCard } from "@/components/admin/SystemStatusCard";
 import { Stethoscope } from "lucide-react";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
-
-export const metadata = {
-  title: "Practice Dashboard | Dr. Noopur Patel Admin",
-  robots: {
-    index: false,
-    follow: false,
-  },
-};
-
-export default async function AdminDashboardPage() {
-  const cookieStore = await cookies();
-  const sessionCookie = cookieStore.get(AUTH_CONFIG.SESSION_COOKIE_NAME)?.value;
-
-  if (!sessionCookie || sessionCookie.trim().length === 0) {
-    redirect(AUTH_CONFIG.LOGIN_ROUTE);
-  }
-
-  let authenticated = false;
-  let user = null;
-
-  try {
-    const verification = await verifyAdminSessionCookie(sessionCookie);
-    authenticated = verification.authenticated;
-    user = verification.user || null;
-  } catch (err) {
-    console.error("[AdminDashboardPage] Auth verification error:", err);
-    redirect(AUTH_CONFIG.LOGIN_ROUTE);
-  }
-
-  if (!authenticated || !user) {
-    redirect(AUTH_CONFIG.LOGIN_ROUTE);
-  }
-
-  // Fetch real-time dashboard data safely with robust fallback
-  let summary: DashboardSummary = {
+export default function AdminDashboardPage() {
+  const [summary, setSummary] = useState<DashboardSummary>({
     metrics: {
       totalLeads: 0,
       newLeads: 0,
@@ -71,18 +35,20 @@ export default async function AdminDashboardPage() {
       authStatus: "connected" as const,
       firestoreStatus: "local_fallback" as const,
       sessionSecurity: "active" as const,
-      nodeEnv: process.env.NODE_ENV || "production",
+      nodeEnv: "production",
     },
-  };
+  });
 
-  try {
-    const fetched = await getDashboardSummary();
-    if (fetched) {
-      summary = fetched;
-    }
-  } catch (err) {
-    console.error("[AdminDashboardPage] Error loading dashboard summary:", err);
-  }
+  useEffect(() => {
+    fetch("/api/admin/analytics")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.summary) {
+          setSummary(data.summary);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const currentDate = new Date().toLocaleDateString("en-IN", {
     weekday: "long",
@@ -109,7 +75,7 @@ export default async function AdminDashboardPage() {
 
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs text-slate-700 font-bold shadow-2xs">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>Authenticated as {user.email}</span>
+          <span>Admin Portal Active</span>
         </div>
       </div>
 

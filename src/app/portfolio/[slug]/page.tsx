@@ -8,8 +8,14 @@ import { getCmsPortfolioBySlug, getCmsPortfolio } from "@/lib/services/cmsServic
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 import { SITE_CONFIG } from "@/config/site";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export async function generateStaticParams() {
+  try {
+    const items = await getCmsPortfolio();
+    return items.map((i) => ({ slug: i.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface PortfolioPageProps {
   params: Promise<{ slug: string }>;

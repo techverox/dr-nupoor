@@ -26,7 +26,14 @@ import {
 } from "lucide-react";
 import { ShimmerButton } from "@/components/motion";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  try {
+    const posts = await getCmsBlogPosts();
+    return posts.map((post) => ({ slug: post.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

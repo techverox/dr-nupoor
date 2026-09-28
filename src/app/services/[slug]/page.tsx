@@ -7,8 +7,14 @@ import ServiceDetailClientView from "@/components/services/ServiceDetailClientVi
 import { getCmsServiceBySlug, getCmsServices } from "@/lib/services/cmsService";
 import { resolveDynamicPageMetadata } from "@/lib/seo/metadata";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+export async function generateStaticParams() {
+  try {
+    const services = await getCmsServices();
+    return services.map((s) => ({ slug: s.slug }));
+  } catch {
+    return [];
+  }
+}
 
 interface ServicePageProps {
   params: Promise<{ slug: string }>;

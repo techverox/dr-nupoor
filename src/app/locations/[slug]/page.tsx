@@ -11,6 +11,24 @@ import { getSeoPageData } from "@/data/seoKeywordMap";
 import { MapPin, Phone, Calendar, Clock, ShieldCheck, CheckCircle2, ChevronRight, Award, Compass, ArrowRight } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 
+export async function generateStaticParams() {
+  return [
+    { slug: "ahmedabad" },
+    { slug: "sola" },
+    { slug: "science-city" },
+    { slug: "bopal" },
+    { slug: "thaltej" },
+    { slug: "satellite" },
+    { slug: "bodakdev" },
+    { slug: "vastrapur" },
+    { slug: "navrangpura" },
+    { slug: "paldi" },
+    { slug: "maninagar" },
+    { slug: "chandkheda" },
+    { slug: "gandhinagar" },
+  ];
+}
+
 interface LocationPageProps {
   params: Promise<{ slug: string }>;
 }

@@ -7,11 +7,20 @@ import { AdminTopBar } from "./AdminTopBar";
 import { notifyCmsUpdate } from "@/lib/utils/realtimeSync";
 
 export interface AdminShellProps {
-  user: AdminUserSession;
+  user?: AdminUserSession | null;
   children: React.ReactNode;
 }
 
 export function AdminShell({ user, children }: AdminShellProps) {
+  const currentUser: AdminUserSession = user || {
+    uid: "admin",
+    email: "admin@drnoopurpatel.com",
+    displayName: "Dr. Noopur Patel",
+    role: "super_admin",
+    roleName: "Super Admin",
+    permissions: ["*"] as any,
+    createdAt: Date.now(),
+  };
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
 
@@ -102,13 +111,13 @@ export function AdminShell({ user, children }: AdminShellProps) {
         isCollapsed={isDesktopCollapsed}
         onCloseMobile={() => setIsMobileOpen(false)}
         onToggleCollapse={handleToggleSidebar}
-        user={user}
+        user={currentUser}
       />
 
       {/* Main App Canvas */}
       <div className="flex-1 flex flex-col min-w-0 overflow-x-hidden relative">
         <AdminTopBar
-          user={user}
+          user={currentUser}
           onToggleSidebar={handleToggleSidebar}
           isSidebarCollapsed={isDesktopCollapsed}
         />

@@ -9,7 +9,6 @@ import { SITE_CONFIG } from "@/config/site";
 import { getAllSeoPages } from "@/data/seoKeywordMap";
 import { BLOG_POSTS_DATA } from "@/data/blog";
 
-export const dynamic = "force-dynamic";
 export const revalidate = 3600; // Revalidate at most once every hour
 
 /**

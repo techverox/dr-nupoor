@@ -28,8 +28,6 @@ import {
 import { HomePortfolioCarousel } from "@/components/public/HomePortfolioCarousel";
 import { HomeLeadSection } from "@/components/public/HomeLeadSection";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 export async function generateMetadata() {
   return resolveDynamicPageMetadata("/", {

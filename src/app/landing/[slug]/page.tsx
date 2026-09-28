@@ -10,8 +10,11 @@ import { ContactForm } from "@/components/forms/ContactForm";
 import { SITE_CONFIG } from "@/config/site";
 import { Phone, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
 import GlobalSpotlightGrid from "@/components/GlobalSpotlightGrid";
+import { SEED_LANDING_PAGES } from "@/lib/services/landingPageService";
 
-export const dynamic = "force-dynamic";
+export async function generateStaticParams() {
+  return SEED_LANDING_PAGES.map((p) => ({ slug: p.slug }));
+}
 
 interface LandingPageProps {
   params: Promise<{ slug: string }>;
