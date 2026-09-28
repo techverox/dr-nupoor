@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
           exp: Date.now() + maxAgeSeconds * 1000,
           created: Date.now(),
         };
-        sessionCookieValue = `digivigee-session-${Buffer.from(JSON.stringify(payload)).toString("base64url")}`;
+        sessionCookieValue = `drn-session-${Buffer.from(JSON.stringify(payload)).toString("base64url")}`;
       }
     } else {
       const payload = {
@@ -112,13 +112,21 @@ export async function POST(request: NextRequest) {
         exp: Date.now() + maxAgeSeconds * 1000,
         created: Date.now(),
       };
-      sessionCookieValue = `digivigee-session-${Buffer.from(JSON.stringify(payload)).toString("base64url")}`;
+      sessionCookieValue = `drn-session-${Buffer.from(JSON.stringify(payload)).toString("base64url")}`;
     }
 
-    // 5. Set Secure HTTP-Only Cookie
+    // 5. Set Secure HTTP-Only Cookie + Client-readable Status Cookie
     const cookieStore = await cookies();
     cookieStore.set(AUTH_CONFIG.SESSION_COOKIE_NAME, sessionCookieValue, {
       httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: maxAgeSeconds,
+    });
+
+    cookieStore.set(AUTH_CONFIG.LOGGED_IN_COOKIE_NAME, "1", {
+      httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",

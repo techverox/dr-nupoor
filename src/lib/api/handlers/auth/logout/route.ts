@@ -30,8 +30,10 @@ export async function POST() {
       await revokeAdminSession(sessionCookie);
     }
 
-    // Clear session cookie
+    // Clear session cookies
     cookieStore.delete(AUTH_CONFIG.SESSION_COOKIE_NAME);
+    cookieStore.delete(AUTH_CONFIG.LEGACY_SESSION_COOKIE_NAME);
+    cookieStore.delete(AUTH_CONFIG.LOGGED_IN_COOKIE_NAME);
 
     return NextResponse.json(
       { success: true, message: "Logged out successfully." },

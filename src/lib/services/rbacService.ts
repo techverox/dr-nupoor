@@ -20,18 +20,62 @@ if (!globalForRbac.__RBAC_USERS_CACHE__) globalForRbac.__RBAC_USERS_CACHE__ = us
 
 export const DEFAULT_SUPER_ADMIN: AdminUser = {
   id: "admin-noopur-patel",
-  email: "admin@noopur.com",
-  displayName: "Dr. Noopur Patel Admin",
+  email: "drnoopur@gmail.com",
+  displayName: "Dr. Noopur Patel",
   roleId: "super_admin",
   roleName: "Super Administrator",
   isActive: true,
   createdAt: "2026-01-01T00:00:00Z",
   updatedAt: "2026-01-01T00:00:00Z",
-  lastLoginAt: "2026-09-25T00:00:00Z",
+  lastLoginAt: "2026-09-28T00:00:00Z",
 };
 
 export const CANONICAL_ADMIN_USERS: AdminUser[] = [
   DEFAULT_SUPER_ADMIN,
+  {
+    id: "admin_drnoopur_gmail",
+    email: "drnoopur@gmail.com",
+    displayName: "Dr. Noopur Patel",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: "2026-01-01T00:00:00Z",
+    updatedAt: "2026-01-01T00:00:00Z",
+    lastLoginAt: "2026-09-28T00:00:00Z",
+  },
+  {
+    id: "admin_drnoopurpatel_com",
+    email: "admin@drnoopurpatel.com",
+    displayName: "Dr. Noopur Patel Admin",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: "2026-01-01T00:00:00Z",
+    updatedAt: "2026-01-01T00:00:00Z",
+    lastLoginAt: "2026-09-28T00:00:00Z",
+  },
+  {
+    id: "admin_dr_noopurpatel_gmail",
+    email: "dr.noopurpatel@gmail.com",
+    displayName: "Dr. Noopur Patel Practice",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: "2026-01-01T00:00:00Z",
+    updatedAt: "2026-01-01T00:00:00Z",
+    lastLoginAt: "2026-09-28T00:00:00Z",
+  },
+  {
+    id: "admin_noopur_com",
+    email: "admin@noopur.com",
+    displayName: "Dr. Noopur Patel Administrator",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: "2026-01-01T00:00:00Z",
+    updatedAt: "2026-01-01T00:00:00Z",
+    lastLoginAt: "2026-09-28T00:00:00Z",
+  },
   {
     id: "user-clinical-coordinator",
     email: "care@drnoopurpatel.com",
@@ -363,9 +407,14 @@ export async function getAdminUserByIdOrEmail(idOrEmail: string): Promise<AdminU
     }
   }
 
-  // Pre-cached default Super Admin
-  if (normalized === "admin@noopur.com" || normalized === "admin@digivigee.com" || idOrEmail === "dev-admin-user" || idOrEmail === "default-super-admin" || idOrEmail === "admin-noopur-patel") {
-    return DEFAULT_SUPER_ADMIN;
+  // Pre-cached canonical Super Admins
+  const matchedCanonical = CANONICAL_ADMIN_USERS.find(
+    (u) => u.email.toLowerCase().trim() === normalized || u.id === idOrEmail
+  );
+  if (matchedCanonical) {
+    usersCache.set(idOrEmail, matchedCanonical);
+    usersCache.set(normalized, matchedCanonical);
+    return matchedCanonical;
   }
 
   const adminDb = getAdminFirestore();

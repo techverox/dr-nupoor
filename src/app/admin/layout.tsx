@@ -22,9 +22,7 @@ export default function AdminRootLayout({
           __html: `document.documentElement.classList.remove('dark');document.documentElement.classList.add('light');document.documentElement.style.colorScheme='light';`,
         }}
       />
-      <AdminClientGuard>
-        <AdminShell>{children}</AdminShell>
-      </AdminClientGuard>
+      <AdminClientGuard>{children}</AdminClientGuard>
     </div>
   );
 }

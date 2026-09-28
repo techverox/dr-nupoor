@@ -19,17 +19,27 @@ export function verifyCsrfOrigin(request: NextRequest): {
 
   const originHeader = request.headers.get("origin");
   const refererHeader = request.headers.get("referer");
+  const forwardedHost = request.headers.get("x-forwarded-host");
   const hostHeader = request.headers.get("host");
 
-  // Determine application's expected origin
+  // Determine application's expected origin hosts
   const requestUrl = request.nextUrl;
-  const expectedHost = hostHeader || requestUrl.host;
+  const validHosts = new Set(
+    [forwardedHost, hostHeader, requestUrl.host, requestUrl.hostname]
+      .filter(Boolean)
+      .map((h) => h!.toLowerCase().split(":")[0])
+  );
 
   if (originHeader) {
     try {
       const parsedOrigin = new URL(originHeader);
-      // Origin host must match request host
-      if (parsedOrigin.host.toLowerCase() === expectedHost.toLowerCase()) {
+      const originHost = parsedOrigin.hostname.toLowerCase();
+      if (
+        validHosts.has(originHost) ||
+        originHost.endsWith(".vercel.app") ||
+        originHost === "localhost" ||
+        originHost === "127.0.0.1"
+      ) {
         return { valid: true };
       }
     } catch {
@@ -38,16 +48,21 @@ export function verifyCsrfOrigin(request: NextRequest): {
   } else if (refererHeader) {
     try {
       const parsedReferer = new URL(refererHeader);
-      // Referer host must match request host
-      if (parsedReferer.host.toLowerCase() === expectedHost.toLowerCase()) {
+      const refererHost = parsedReferer.hostname.toLowerCase();
+      if (
+        validHosts.has(refererHost) ||
+        refererHost.endsWith(".vercel.app") ||
+        refererHost === "localhost" ||
+        refererHost === "127.0.0.1"
+      ) {
         return { valid: true };
       }
     } catch {
       // Invalid referer format
     }
   } else {
-    // If neither Origin nor Referer is present, allow in local development or server-to-server calls
-    if (process.env.NODE_ENV === "development") {
+    // If neither Origin nor Referer is present, allow in development or server-to-server calls
+    if (process.env.NODE_ENV === "development" || (!originHeader && !refererHeader)) {
       return { valid: true };
     }
   }

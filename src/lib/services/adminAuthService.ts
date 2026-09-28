@@ -2,7 +2,7 @@ import crypto from "crypto";
 import { getAdminFirestore, getAdminAuth } from "@/lib/firebase/admin";
 import { COLLECTIONS } from "@/config/firebase";
 import { AdminUser } from "@/types/rbac";
-import { getAdminUserByIdOrEmail, DEFAULT_SUPER_ADMIN, bootstrapSystemRbac } from "@/lib/services/rbacService";
+import { getAdminUserByIdOrEmail, DEFAULT_SUPER_ADMIN, CANONICAL_ADMIN_USERS, bootstrapSystemRbac } from "@/lib/services/rbacService";
 import { validateStrongPassword } from "@/lib/validation/passwordPolicy";
 
 export interface AdminCredential {
@@ -71,85 +71,86 @@ export async function bootstrapAdminCredentials(): Promise<void> {
 
   await bootstrapSystemRbac();
 
-  const superAdminEmail = DEFAULT_SUPER_ADMIN.email.toLowerCase().trim();
   const defaultPassword = process.env.INITIAL_ADMIN_PASSWORD || "123456";
-
   const adminDb = getAdminFirestore();
+  const adminAuth = getAdminAuth();
 
-  if (adminDb) {
-    try {
-      const credDoc = await adminDb.collection(COLLECTIONS.ADMIN_CREDENTIALS).doc(superAdminEmail).get();
-      if (!credDoc.exists) {
-        const salt = generateSalt();
-        const hash = hashPassword(defaultPassword, salt);
-        const cred: AdminCredential = {
-          uid: DEFAULT_SUPER_ADMIN.id,
-          email: superAdminEmail,
-          salt,
-          hash,
-          failedAttempts: 0,
-          lockedUntil: null,
-          mustChangePassword: false,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
+  const superAdmins = CANONICAL_ADMIN_USERS.filter((u) => u.roleId === "super_admin");
 
-        await adminDb.collection(COLLECTIONS.ADMIN_CREDENTIALS).doc(superAdminEmail).set(cred);
-        credentialsCache.set(superAdminEmail, cred);
-        credentialsCache.set(DEFAULT_SUPER_ADMIN.id, cred);
-      } else {
-        const data = credDoc.data() as AdminCredential;
-        credentialsCache.set(superAdminEmail, data);
-        credentialsCache.set(data.uid, data);
-      }
+  for (const adminUser of superAdmins) {
+    const email = adminUser.email.toLowerCase().trim();
 
-      // Also ensure Firebase Auth has the Super Admin provisioned
-      const adminAuth = getAdminAuth();
-      if (adminAuth) {
-        try {
-          await adminAuth.getUserByEmail(superAdminEmail);
-        } catch (authErr: unknown) {
-          const err = authErr as { code?: string };
-          if (err.code === "auth/user-not-found") {
-            try {
-              await adminAuth.createUser({
-                uid: DEFAULT_SUPER_ADMIN.id,
-                email: superAdminEmail,
-                password: defaultPassword,
-                displayName: DEFAULT_SUPER_ADMIN.displayName,
-              });
-              await adminAuth.setCustomUserClaims(DEFAULT_SUPER_ADMIN.id, { role: "super_admin" });
-            } catch (createErr) {
-              console.warn("[bootstrapAdminCredentials] Firebase Auth create warning:", createErr);
+    if (adminDb) {
+      try {
+        const credDoc = await adminDb.collection(COLLECTIONS.ADMIN_CREDENTIALS).doc(email).get();
+        if (!credDoc.exists) {
+          const salt = generateSalt();
+          const hash = hashPassword(defaultPassword, salt);
+          const cred: AdminCredential = {
+            uid: adminUser.id,
+            email,
+            salt,
+            hash,
+            failedAttempts: 0,
+            lockedUntil: null,
+            mustChangePassword: false,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          };
+
+          await adminDb.collection(COLLECTIONS.ADMIN_CREDENTIALS).doc(email).set(cred);
+          credentialsCache.set(email, cred);
+          credentialsCache.set(adminUser.id, cred);
+        } else {
+          const data = credDoc.data() as AdminCredential;
+          credentialsCache.set(email, data);
+          credentialsCache.set(data.uid, data);
+        }
+
+        // Also ensure Firebase Auth has the Super Admin provisioned
+        if (adminAuth) {
+          try {
+            await adminAuth.getUserByEmail(email);
+          } catch (authErr: unknown) {
+            const err = authErr as { code?: string };
+            if (err.code === "auth/user-not-found") {
+              try {
+                await adminAuth.createUser({
+                  uid: adminUser.id,
+                  email,
+                  password: defaultPassword,
+                  displayName: adminUser.displayName,
+                });
+                await adminAuth.setCustomUserClaims(adminUser.id, { role: "super_admin" });
+              } catch (createErr) {
+                console.warn(`[bootstrapAdminCredentials] Firebase Auth create warning for ${email}:`, createErr);
+              }
             }
           }
         }
+      } catch (err) {
+        console.warn(`[bootstrapAdminCredentials] Firestore warning for ${email}:`, err);
       }
-
-      globalForCredentials.__CREDENTIALS_BOOTSTRAPPED__ = true;
-      return;
-    } catch (err) {
-      console.warn("[bootstrapAdminCredentials] Firestore warning, using in-memory bootstrap:", err);
     }
-  }
 
-  // Fallback in-memory initialization
-  if (!credentialsCache.has(superAdminEmail)) {
-    const salt = generateSalt();
-    const hash = hashPassword(defaultPassword, salt);
-    const cred: AdminCredential = {
-      uid: DEFAULT_SUPER_ADMIN.id,
-      email: superAdminEmail,
-      salt,
-      hash,
-      failedAttempts: 0,
-      lockedUntil: null,
-      mustChangePassword: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    };
-    credentialsCache.set(superAdminEmail, cred);
-    credentialsCache.set(DEFAULT_SUPER_ADMIN.id, cred);
+    // In-memory fallback
+    if (!credentialsCache.has(email)) {
+      const salt = generateSalt();
+      const hash = hashPassword(defaultPassword, salt);
+      const cred: AdminCredential = {
+        uid: adminUser.id,
+        email,
+        salt,
+        hash,
+        failedAttempts: 0,
+        lockedUntil: null,
+        mustChangePassword: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      credentialsCache.set(email, cred);
+      credentialsCache.set(adminUser.id, cred);
+    }
   }
 
   globalForCredentials.__CREDENTIALS_BOOTSTRAPPED__ = true;

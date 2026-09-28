@@ -5,6 +5,7 @@
 export const AUTH_CONFIG = {
   SESSION_COOKIE_NAME: "drn_admin_session",
   LEGACY_SESSION_COOKIE_NAME: "digivigee_admin_session",
+  LOGGED_IN_COOKIE_NAME: "drn_logged_in",
   // 5 days in milliseconds
   SESSION_EXPIRATION_MS: 5 * 24 * 60 * 60 * 1000,
   // 5 days in seconds for cookie max-age

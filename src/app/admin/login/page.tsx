@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect, Suspense } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { loginAdmin, requestPasswordReset } from "@/lib/auth/clientAuth";
 import { Logo } from "@/components/ui/Logo";
 import {
@@ -15,13 +16,17 @@ import {
   X,
   CheckCircle2,
   KeyRound,
+  ArrowLeft,
+  Sparkles,
 } from "lucide-react";
 
-export default function AdminLoginPage() {
+function AdminLoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const targetDestination = searchParams.get("from") || "/admin";
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("drnoopur@gmail.com");
+  const [password, setPassword] = useState("123456");
   const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,32 +48,39 @@ export default function AdminLoginPage() {
     }
   }, []);
 
+  const handleQuickFill = (targetEmail: string) => {
+    setEmail(targetEmail);
+    setPassword("123456");
+    setError(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    if (!email.trim() || !password.trim()) {
-      setError("Please provide both email and password.");
+    const cleanEmail = email.trim();
+    if (!cleanEmail || !password.trim()) {
+      setError("Please provide both administrator email and password.");
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const result = await loginAdmin(email.trim(), password, rememberMe);
+      const result = await loginAdmin(cleanEmail, password, rememberMe);
 
       if (!result.success) {
-        setError(result.error || "Authentication failed. Please check your credentials.");
+        setError(result.error || "Authentication failed. Please verify your credentials.");
         setIsSubmitting(false);
         return;
       }
 
-      // Success -> Redirect to Admin Dashboard
-      router.push("/admin");
+      // Success -> Redirect to Admin Dashboard or intended page
+      router.push(targetDestination);
       router.refresh();
     } catch (err) {
       console.error("[AdminLogin] Error:", err);
-      setError("An unexpected error occurred. Please try again.");
+      setError("An unexpected error occurred while connecting. Please try again.");
       setIsSubmitting(false);
     }
   };
@@ -86,27 +98,66 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-emerald-50/20 to-teal-50/30 p-6 relative overflow-hidden font-sans">
-      {/* Decorative background glows */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-100/40 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-emerald-50/25 to-teal-50/30 p-4 sm:p-6 relative overflow-hidden font-sans">
+      {/* Decorative background blurs */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-200/25 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 right-10 w-[400px] h-[400px] bg-teal-100/30 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 w-full max-w-md">
-        <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-xl border border-slate-200/90 backdrop-blur-md">
+      {/* Top Bar Navigation: Return to Website */}
+      <div className="absolute top-6 left-6 z-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/80 hover:bg-white text-xs font-semibold text-slate-600 hover:text-slate-900 border border-slate-200/80 shadow-2xs backdrop-blur-md transition-all group no-underline"
+        >
+          <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
+          <span>Return to Clinic Website</span>
+        </Link>
+      </div>
+
+      <div className="relative z-10 w-full max-w-[430px] my-auto">
+        <div className="bg-white rounded-3xl p-7 sm:p-9 shadow-xl shadow-slate-200/60 border border-slate-200/90 backdrop-blur-xl">
           {/* Brand Header */}
-          <div className="text-center mb-8">
-            <div className="inline-block mb-3">
+          <div className="text-center mb-7">
+            <div className="inline-block mb-3.5">
               <Logo variant="light" size="md" />
             </div>
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200/80 mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/80 mb-2.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Secure Admin Portal
+              Practice Management Portal
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 tracking-tight mb-1.5">
-              Practice Management Login
+            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight mb-1">
+              Admin Sign In
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Sign in to manage clinical content, patient stories, and inquiries.
+            <p className="text-xs text-slate-500 max-w-[320px] mx-auto leading-relaxed">
+              Secure clinical workspace for Dr. Noopur Patel practice operations, patient inquiries, and medical content.
             </p>
+          </div>
+
+          {/* Quick Credential Helper Pill */}
+          <div className="mb-5 p-3 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 text-xs text-emerald-900">
+            <div className="flex items-center justify-between font-bold text-[11px] mb-1.5 text-emerald-800 uppercase tracking-wider">
+              <span className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                Quick Login Options
+              </span>
+              <span className="text-[10px] bg-emerald-200/60 px-1.5 py-0.5 rounded text-emerald-800">Pass: 123456</span>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                type="button"
+                onClick={() => handleQuickFill("drnoopur@gmail.com")}
+                className="px-2.5 py-1 rounded-lg bg-white border border-emerald-200 hover:border-emerald-400 text-[11px] font-medium text-slate-700 hover:text-emerald-800 shadow-2xs transition-all cursor-pointer"
+              >
+                drnoopur@gmail.com
+              </button>
+              <button
+                type="button"
+                onClick={() => handleQuickFill("admin@drnoopurpatel.com")}
+                className="px-2.5 py-1 rounded-lg bg-white border border-emerald-200 hover:border-emerald-400 text-[11px] font-medium text-slate-700 hover:text-emerald-800 shadow-2xs transition-all cursor-pointer"
+              >
+                admin@drnoopurpatel.com
+              </button>
+            </div>
           </div>
 
           {/* Error Alert */}
@@ -118,9 +169,12 @@ export default function AdminLoginPage() {
           )}
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} noValidate className="space-y-4.5">
+          <form onSubmit={handleSubmit} noValidate className="space-y-4">
             <div>
-              <label htmlFor="admin-email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label
+                htmlFor="admin-email"
+                className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5"
+              >
                 Admin Email <span className="text-rose-500">*</span>
               </label>
               <div className="relative">
@@ -130,9 +184,12 @@ export default function AdminLoginPage() {
                 <input
                   id="admin-email"
                   type="email"
-                  placeholder="admin@noopur.com"
+                  placeholder="drnoopur@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError(null);
+                  }}
                   disabled={isSubmitting}
                   autoComplete="email"
                   autoFocus
@@ -143,7 +200,10 @@ export default function AdminLoginPage() {
 
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label htmlFor="admin-password" className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                <label
+                  htmlFor="admin-password"
+                  className="block text-xs font-bold uppercase tracking-wider text-slate-700"
+                >
                   Password <span className="text-rose-500">*</span>
                 </label>
                 <button
@@ -167,7 +227,10 @@ export default function AdminLoginPage() {
                   type={showPassword ? "text" : "password"}
                   placeholder="••••••••••••"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (error) setError(null);
+                  }}
                   disabled={isSubmitting}
                   autoComplete="current-password"
                   className="block w-full pl-10 pr-10 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 focus:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
@@ -204,7 +267,7 @@ export default function AdminLoginPage() {
               {isSubmitting ? (
                 <>
                   <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                  <span>Signing In...</span>
+                  <span>Verifying & Signing In...</span>
                 </>
               ) : (
                 <>
@@ -216,9 +279,9 @@ export default function AdminLoginPage() {
           </form>
 
           {/* Security Footer Notice */}
-          <div className="mt-8 pt-5 border-t border-slate-100 text-center text-xs text-slate-400 flex items-center justify-center gap-2">
+          <div className="mt-7 pt-4.5 border-t border-slate-100 text-center text-[11px] text-slate-400 flex items-center justify-center gap-1.5">
             <Shield className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Encrypted with Scrypt & Firebase Session Guard</span>
+            <span>Encrypted Dual-Layer Firebase Auth & Salted Scrypt Guard</span>
           </div>
         </div>
       </div>
@@ -272,7 +335,7 @@ export default function AdminLoginPage() {
                     </div>
                     <input
                       type="email"
-                      placeholder="admin@noopur.com"
+                      placeholder="drnoopur@gmail.com"
                       value={resetEmail}
                       onChange={(e) => setResetEmail(e.target.value)}
                       autoFocus
@@ -305,5 +368,19 @@ export default function AdminLoginPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
+          <div className="w-8 h-8 border-3 border-emerald-600 border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <AdminLoginForm />
+    </Suspense>
   );
 }

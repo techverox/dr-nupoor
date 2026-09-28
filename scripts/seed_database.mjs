@@ -206,16 +206,38 @@ const siteSettings = {
   updatedAt: new Date().toISOString(),
 };
 
-const adminUser = {
-  id: "admin-noopur-patel",
-  email: "admin@noopur.com",
-  displayName: "Dr. Noopur Patel Admin",
-  roleId: "super_admin",
-  roleName: "Super Administrator",
-  isActive: true,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-};
+const adminUsers = [
+  {
+    id: "admin_drnoopur_gmail",
+    email: "drnoopur@gmail.com",
+    displayName: "Dr. Noopur Patel",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: "admin_drnoopurpatel_com",
+    email: "admin@drnoopurpatel.com",
+    displayName: "Dr. Noopur Patel Admin",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: "admin-noopur-patel",
+    email: "admin@noopur.com",
+    displayName: "Dr. Noopur Patel Administrator",
+    roleId: "super_admin",
+    roleName: "Super Administrator",
+    isActive: true,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  }
+];
 
 export async function seedAll() {
   console.log("Starting Firestore database seeding for dr-noopur-website...");
@@ -239,8 +261,11 @@ export async function seedAll() {
     await setDoc(doc(db, "siteSettings", siteSettings.id), siteSettings);
     console.log("✓ Seeded siteSettings");
 
-    await setDoc(doc(db, "adminUsers", adminUser.id), adminUser);
-    console.log("✓ Seeded adminUser: admin@noopur.com");
+    for (const u of adminUsers) {
+      await setDoc(doc(db, "adminUsers", u.id), u);
+      await setDoc(doc(db, "adminUsers", u.email), u);
+      console.log(`✓ Seeded adminUser: ${u.email}`);
+    }
 
     console.log("\n==============================================");
     console.log("SUCCESS: Firestore Database fully seeded!");
