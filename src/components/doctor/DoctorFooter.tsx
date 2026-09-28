@@ -147,8 +147,13 @@ export default function DoctorFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/#feedback" className="text-slate-600 hover:text-[#D84C70] transition-colors font-medium">
+                  Review &amp; Feedback (QR)
+                </Link>
+              </li>
+              <li>
                 <Link href="/share-story" className="text-slate-600 hover:text-[#D84C70] transition-colors">
-                  Share Your Story (QR)
+                  Submit Full Story (Form)
                 </Link>
               </li>
               <li>

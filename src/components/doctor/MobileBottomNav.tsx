@@ -17,7 +17,7 @@ export default function MobileBottomNav() {
   const isHomeActive = pathname === "/";
   const isAppointmentActive = pathname?.startsWith("/appointments");
   const isContactActive = pathname?.startsWith("/contact");
-  const isFeedbackActive = pathname?.startsWith("/patient-stories");
+  const isFeedbackActive = pathname?.startsWith("/patient-stories") || pathname?.startsWith("/share-story");
 
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
     "Hello Dr. Noopur Patel, I would like to consult regarding breast health."
@@ -75,7 +75,7 @@ export default function MobileBottomNav() {
         {/* 3. FEEDBACK (Center Elevated Prominent Button) */}
         <div className="flex flex-col items-center justify-center relative -top-3">
           <Link
-            href="/patient-stories#feedback"
+            href="/#feedback"
             className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#9B2846] via-[#D84C70] to-[#E25C82] text-white flex items-center justify-center shadow-lg shadow-[#D84C70]/40 ring-4 ring-white active:scale-95 transition-transform duration-200 select-none"
             aria-label="Submit Patient Feedback"
           >

@@ -13,7 +13,9 @@ import {
   X, 
   MessageCircle,
   ChevronDown,
-  ArrowRight
+  ArrowRight,
+  QrCode,
+  Star
 } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 
@@ -93,6 +95,7 @@ export default function DoctorNavbar() {
     },
     { label: "Conditions", href: "/#conditions" },
     { label: "Patient Stories", href: "/patient-stories" },
+    { label: "Feedback (QR)", href: "/#feedback" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -138,6 +141,14 @@ export default function DoctorNavbar() {
           </div>
 
           <div className="flex items-center space-x-4">
+            <Link
+              href="/#feedback"
+              className="flex items-center gap-1.5 text-[#88213B] font-semibold hover:text-[#D84C70] transition-colors"
+            >
+              <QrCode className="w-3.5 h-3.5 text-[#D84C70]" />
+              <span>Review / Feedback (QR)</span>
+            </Link>
+            <span className="text-slate-300">|</span>
             <a
               href={`tel:${SITE_CONFIG.contact.phone.replace(/\s+/g, "")}`}
               className="flex items-center gap-1.5 text-slate-700 font-semibold hover:text-[#88213B] transition-colors"
@@ -398,6 +409,19 @@ export default function DoctorNavbar() {
                   }`}
                 >
                   Patient Stories
+                </Link>
+                <Link
+                  href="/#feedback"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center justify-between text-[14.5px] font-medium px-4 py-2.5 rounded-xl text-slate-800 hover:bg-[#FFF8F9] hover:text-[#88213B] transition-colors group"
+                >
+                  <span className="flex items-center gap-2">
+                    <QrCode className="w-4 h-4 text-[#D84C70]" />
+                    <span>Feedback &amp; Review (QR)</span>
+                  </span>
+                  <span className="text-[10px] font-bold text-[#88213B] bg-[#FFF0F3] px-2 py-0.5 rounded-full border border-[#F5D6DE]">
+                    Scan QR
+                  </span>
                 </Link>
                 <Link
                   href="/contact"

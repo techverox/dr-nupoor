@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, Star, Quote, ShieldCheck, Heart } from "lucide-react";
+import { ArrowRight, Star, Quote, ShieldCheck, Heart, QrCode } from "lucide-react";
 import { TestimonialItem } from "@/types";
 
 interface PatientStoriesSectionProps {
@@ -65,12 +65,20 @@ export default function PatientStoriesSection({
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-wrap items-center gap-3">
+            <a
+              href="#feedback"
+              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-white px-5 py-2.5 rounded-full bg-gradient-to-r from-[#88213B] to-[#D84C70] hover:opacity-95 shadow-xs hover:shadow transition-all"
+            >
+              <QrCode className="w-4 h-4 text-white" />
+              <span>Leave Feedback / Scan QR</span>
+            </a>
+
             <Link
               href="/patient-stories"
               className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#88213B] hover:text-[#6E172E] px-5 py-2.5 rounded-full bg-white border border-[#EED7DC] shadow-xs hover:shadow transition-all"
             >
-              <span>View More Patient Stories</span>
+              <span>View More Stories</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -112,6 +120,31 @@ export default function PatientStoriesSection({
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Quick QR Code / Feedback Prompt Bar */}
+        <div className="mt-10 bg-white rounded-2xl p-4 sm:p-5 border border-[#F5D6DE] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5 text-center sm:text-left">
+            <div className="w-10 h-10 rounded-xl bg-[#FFF0F3] border border-[#F5D6DE] flex items-center justify-center shrink-0 mx-auto sm:mx-0">
+              <QrCode className="w-5 h-5 text-[#D84C70]" />
+            </div>
+            <div>
+              <p className="font-serif text-sm sm:text-base font-bold text-slate-900 leading-tight">
+                Were you treated by Dr. Noopur Patel? Scan QR or share your feedback
+              </p>
+              <p className="text-xs text-slate-500">
+                Your experience provides hope, clarity, and comfort to other women across Gujarat.
+              </p>
+            </div>
+          </div>
+
+          <a
+            href="#feedback"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#88213B] to-[#D84C70] hover:opacity-95 shadow-xs transition-all shrink-0"
+          >
+            <QrCode className="w-4 h-4" />
+            <span>Scan QR Code Below</span>
+          </a>
         </div>
 
         {/* Clinical Consent Disclaimer */}

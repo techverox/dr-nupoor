@@ -23,6 +23,7 @@ import DoctorNavbar from "@/components/doctor/DoctorNavbar";
 import DoctorFooter from "@/components/doctor/DoctorFooter";
 import TrustStrip from "@/components/doctor/TrustStrip";
 import PatientStoryQRCode from "@/components/doctor/PatientStoryQRCode";
+import PatientReviewQrSection from "@/components/doctor/PatientReviewQrSection";
 import { TestimonialItem } from "@/types";
 import { subscribeLiveSync } from "@/lib/sync/clientSync";
 
@@ -258,14 +259,14 @@ export default function PatientStoriesPage() {
               {/* Doctor Visual with Quote */}
               <div className="lg:col-span-5 relative flex justify-center">
                 <div className="relative w-full max-w-[380px] aspect-[4/5] rounded-[32px] overflow-hidden bg-[#FDF2F4] border border-[#F5D6DE] shadow-xl p-2.5">
-                  <div className="relative w-full h-full rounded-[26px] overflow-hidden">
+                  <div className="relative w-full h-full rounded-[26px] overflow-hidden bg-gradient-to-b from-[#FFF5F7] to-[#FDF2F4]">
                     <Image
-                      src="/images/doctor/optimized/DSC08632.webp"
+                      src="/images/doctor/optimized/1db1c4b8-abfb-4fe4-98ca-10f34bbda72e.webp"
                       alt="Dr. Noopur Patel, Breast Cancer Surgeon"
                       fill
                       className="object-cover object-top"
                       priority
-                      sizes="380px"
+                      sizes="(max-width: 768px) 100vw, 380px"
                     />
                   </div>
                 </div>
@@ -588,7 +589,10 @@ export default function PatientStoriesPage() {
           </div>
         </section>
 
-        {/* 6. BOTTOM INSPIRATION CTA BANNER WITH DIRECT QR BUTTON */}
+        {/* 6. DEDICATED SCANNABLE REVIEW QR CODE & FEEDBACK HUB */}
+        <PatientReviewQrSection />
+
+        {/* 7. BOTTOM INSPIRATION CTA BANNER WITH DIRECT QR BUTTON */}
         <section className="w-full bg-gradient-to-r from-[#D84C70] via-[#C83E62] to-[#B83054] text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
             <h2 className="font-serif text-[28px] sm:text-[38px] font-bold">

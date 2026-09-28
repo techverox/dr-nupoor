@@ -27,7 +27,7 @@ export interface MediaAsset {
 
 export const DOCTOR_PROFILE_IMAGES = {
   heroPrimary: {
-    src: "/images/doctor/optimized/dr-noopur-patel-hero-portrait.webp",
+    src: "/images/doctor/optimized/dr-nupur-hero-reception-desktop.webp",
     alt: "Dr. Noopur Patel, Breast Cancer Surgeon & Surgical Breast Oncologist at Marengo CIMS Hospital Ahmedabad",
     title: "Dr. Noopur Patel - Lead Breast Cancer Surgeon",
     sourceDir: "Myself",
@@ -36,7 +36,7 @@ export const DOCTOR_PROFILE_IMAGES = {
     objectPosition: "center top",
   },
   heroMobile: {
-    src: "/images/doctor/optimized/dr-noopur-patel-hero-portrait.webp",
+    src: "/images/doctor/optimized/dr-nupur-hero-reception-mobile-square.webp",
     alt: "Dr. Noopur Patel, Breast Cancer Surgeon in Ahmedabad",
     title: "Dr. Noopur Patel - Surgical Breast Oncology",
     sourceDir: "Myself",

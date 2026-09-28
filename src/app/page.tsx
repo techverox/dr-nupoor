@@ -12,6 +12,7 @@ import CareJourneyTimeline from "@/components/doctor/CareJourneyTimeline";
 import InstagramAwarenessFeed from "@/components/doctor/InstagramAwarenessFeed";
 import CommunityInitiativesSection from "@/components/doctor/CommunityInitiativesSection";
 import PatientStoriesSection from "@/components/doctor/PatientStoriesSection";
+import PatientReviewQrSection from "@/components/doctor/PatientReviewQrSection";
 import DoctorFaqAccordion from "@/components/doctor/DoctorFaqAccordion";
 import ClinicLocationSection from "@/components/doctor/ClinicLocationSection";
 import HopeCtaBanner from "@/components/doctor/HopeCtaBanner";
@@ -198,7 +199,10 @@ export default async function Home() {
         {/* 12. Patient Testimonials (What Our Patients Say) */}
         <PatientStoriesSection testimonials={testimonials} />
 
-        {/* 13. Frequently Asked Questions */}
+        {/* 13. Interactive Patient Feedback & Scannable Review QR Code Hub */}
+        <PatientReviewQrSection />
+
+        {/* 14. Frequently Asked Questions */}
         <DoctorFaqAccordion faqs={faqs} />
 
         {/* 14. Location / Clinic Information with Google Map */}
