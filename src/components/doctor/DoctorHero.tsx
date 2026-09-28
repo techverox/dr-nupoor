@@ -51,32 +51,42 @@ export default function DoctorHero({
                   MOBILE ONLY: Doctor Photo shown AT THE TOP (order-1 on mobile)
                   ========================================================================= */}
               <div className="w-full lg:hidden order-1">
-                <div className="relative w-full max-w-md mx-auto aspect-[4/3.8] sm:aspect-[16/11] rounded-2xl overflow-hidden bg-gradient-to-b from-[#FCEEF2] to-[#F5D2DB] border border-[#F5CAD5] shadow-md">
+                <div className="relative w-full max-w-md mx-auto aspect-square sm:aspect-[4/3.8] rounded-2xl overflow-hidden bg-gradient-to-b from-[#FCEEF2] to-[#F5D2DB] border border-[#F5CAD5] shadow-md">
                   <Image
-                    src="/images/doctor/optimized/dr-nupur-hero-portrait.webp"
+                    src="/images/doctor/optimized/dr-nupur-clinic-hero-mobile.webp"
                     alt="Dr. Nupur Patel — Surgical Breast Oncologist in Ahmedabad"
                     fill
                     priority
-                    sizes="(max-width: 1024px) 100vw, 500px"
-                    className="object-cover object-[center_15%]"
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                    className="object-cover object-center"
                   />
-                  {/* Subtle Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+                  {/* Subtle Gradient Overlay at bottom for legibility */}
+                  <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent pointer-events-none" />
                   
-                  {/* Doctor Badge Pill on Mobile */}
-                  <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-rose-200 shadow-sm flex items-center gap-1.5">
+                  {/* Doctor Badge Pill on Mobile (top-left so pink ribbon on right stays visible) */}
+                  <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-rose-200 shadow-sm flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                     <span className="text-[11px] font-bold text-slate-900">Dr. Nupur Patel</span>
                   </div>
 
+                  {/* Hospital Pill top-right */}
+                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-rose-100 shadow-xs flex items-center gap-1">
+                    <span className="text-[10px] font-semibold text-rose-800">Marengo CIMS</span>
+                  </div>
+
                   {/* Bottom Mobile Tagline */}
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <p className="text-[11px] font-bold tracking-wider uppercase text-rose-200">
-                      Surgical Breast Oncology
-                    </p>
-                    <p className="text-xs font-serif italic text-white/95 leading-tight">
-                      &ldquo;Personalised care for every step of your breast health journey&rdquo;
-                    </p>
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 bg-slate-950/75 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/10 text-white flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] font-bold tracking-wider uppercase text-rose-300 leading-none">
+                        Surgical Breast Oncology
+                      </p>
+                      <p className="text-[11px] font-medium text-white/90 leading-tight mt-0.5">
+                        Marengo CIMS Hospital, Ahmedabad
+                      </p>
+                    </div>
+                    <span className="text-[9.5px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded-full">
+                      OPD Available
+                    </span>
                   </div>
                 </div>
               </div>
@@ -165,21 +175,21 @@ export default function DoctorHero({
                   <div className="absolute -inset-2 bg-gradient-to-tr from-[#D84C70]/20 via-rose-200/40 to-transparent rounded-[32px] blur-md -z-10" />
 
                   {/* Main Portrait Card */}
-                  <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-gradient-to-b from-[#FFF0F4] to-[#F5CAD5] border-2 border-white shadow-xl">
+                  <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-gradient-to-b from-[#FFF5F7] via-white to-[#FCE8ED] border-2 border-white shadow-xl">
                     <Image
-                      src="/images/doctor/optimized/dr-nupur-hero-portrait.webp"
+                      src="/images/doctor/optimized/dr-nupur-clinic-hero-desktop.webp"
                       alt="Dr. Nupur Patel — Surgical Breast Oncology Specialist in Ahmedabad"
                       fill
                       priority
-                      sizes="(min-width: 1024px) 460px"
-                      className="object-cover object-[center_12%] hover:scale-[1.02] transition-transform duration-500"
+                      sizes="(min-width: 1024px) 480px"
+                      className="object-cover object-center hover:scale-[1.02] transition-transform duration-500"
                     />
 
                     {/* Gradient Overlay at Bottom */}
-                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent pointer-events-none" />
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent pointer-events-none" />
 
-                    {/* Floating Doctor Badge (Top-Right) */}
-                    <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-rose-100 shadow-md flex items-center gap-2.5">
+                    {/* Floating Doctor Badge (Top-Left so the pink ribbon on right stays visible) */}
+                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-rose-100 shadow-md flex items-center gap-2.5">
                       <div className="w-7 h-7 rounded-full bg-[#FCE8ED] flex items-center justify-center text-[#D84C70]">
                         <ShieldCheck className="w-4 h-4 text-[#D84C70]" />
                       </div>
@@ -189,19 +199,18 @@ export default function DoctorHero({
                       </div>
                     </div>
 
-                    {/* Floating Quote Card (Bottom) */}
-                    <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl border border-rose-100 shadow-lg">
-                      <div className="flex items-center gap-1.5 text-[10.5px] font-bold text-[#D84C70] uppercase tracking-wider mb-0.5">
-                        <Sparkles className="w-3 h-3" />
-                        <span>Patient-First Philosophy</span>
+                    {/* Sleek Floating Hospital / Philosophy Badge (Bottom) */}
+                    <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-rose-100 shadow-md flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <div>
+                          <div className="text-[11px] font-bold text-slate-900 leading-none">Marengo CIMS Hospital</div>
+                          <div className="text-[9.5px] text-slate-500 mt-0.5 font-medium">Science City Road, Sola, Ahmedabad</div>
+                        </div>
                       </div>
-                      <p className="font-serif italic text-xs text-slate-800 leading-snug">
-                        &ldquo;Personalised care for every step of your breast health journey&rdquo;
-                      </p>
-                      <div className="flex items-center justify-between mt-2 pt-2 border-t border-slate-100 text-[10.5px] text-slate-500">
-                        <span className="font-semibold text-slate-700">Marengo CIMS Hospital</span>
-                        <span className="text-[#D84C70] font-bold">Ahmedabad</span>
-                      </div>
+                      <span className="text-[10px] font-bold text-[#88213B] bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
+                        Breast Oncology
+                      </span>
                     </div>
 
                   </div>
