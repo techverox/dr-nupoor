@@ -16,12 +16,12 @@ export default function HopeCtaBanner() {
           
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Column: Doctor Cutout Photo */}
+            {/* Left Column: Doctor Photo */}
             <div className="lg:col-span-3 flex justify-center lg:justify-start">
               <div className="relative w-44 h-56 sm:w-48 sm:h-64 rounded-2xl overflow-hidden border border-[#F5CAD5] shadow-xs bg-white">
                 <Image
-                  src="/images/doctor/optimized/DSC08628.webp"
-                  alt="Dr. Noopur Patel"
+                  src="/images/doctor/optimized/dr-noopur-patel-portrait-consulting.webp"
+                  alt="Dr. Noopur Patel, Breast Cancer Surgeon at Marengo CIMS Hospital Ahmedabad"
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 768px) 180px, 200px"

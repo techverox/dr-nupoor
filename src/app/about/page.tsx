@@ -25,6 +25,12 @@ import TrustStrip from "@/components/doctor/TrustStrip";
 import PatientStoriesSection from "@/components/doctor/PatientStoriesSection";
 import { TESTIMONIALS_DATA } from "@/data/testimonials";
 import { getCmsTestimonials } from "@/lib/services/cmsService";
+import { 
+  DOCTOR_PROFILE_IMAGES,
+  MENTORS_MEDIA,
+  MDT_MEDIA,
+  HOSPITAL_MEDIA
+} from "@/data/mediaManifest";
 
 export const metadata = {
   title: "About Dr. Noopur Patel | Breast Cancer Surgeon Ahmedabad",
@@ -85,24 +91,24 @@ export default async function AboutPage() {
 
   const facilities = [
     {
-      title: "Modern Reception Desk",
-      image: "/images/doctor/assets/doctor-office-home.png",
-      desc: "Warm and confidential welcome",
+      title: HOSPITAL_MEDIA.reception.title,
+      image: HOSPITAL_MEDIA.reception.src,
+      desc: HOSPITAL_MEDIA.reception.desc,
     },
     {
-      title: "Consultation Suite",
-      image: "/images/doctor/assets/clinic-consultation.jpg",
-      desc: "Private and comfortable space for thorough discussion",
+      title: HOSPITAL_MEDIA.consultation.title,
+      image: HOSPITAL_MEDIA.consultation.src,
+      desc: HOSPITAL_MEDIA.consultation.desc,
     },
     {
-      title: "Advanced Diagnostic Technology",
-      image: "/images/doctor/assets/clinic-mammography.jpg",
-      desc: "High-resolution digital mammography and imaging",
+      title: HOSPITAL_MEDIA.mammography.title,
+      image: HOSPITAL_MEDIA.mammography.src,
+      desc: HOSPITAL_MEDIA.mammography.desc,
     },
     {
-      title: "Patient Recovery Lounge",
-      image: "/images/doctor/assets/clinic-lounge.jpg",
-      desc: "Tranquil recovery and counselling environment",
+      title: HOSPITAL_MEDIA.lounge.title,
+      image: HOSPITAL_MEDIA.lounge.src,
+      desc: HOSPITAL_MEDIA.lounge.desc,
     },
   ];
 
@@ -144,8 +150,8 @@ export default async function AboutPage() {
                 <div className="relative w-full max-w-[400px] aspect-[4/5] rounded-[32px] overflow-hidden bg-[#FDF2F4] border border-[#F5D6DE] shadow-xl p-2.5">
                   <div className="relative w-full h-full rounded-[26px] overflow-hidden">
                     <Image
-                      src="/images/doctor/assets/dr-noopur-hd.jpg"
-                      alt="Dr. Noopur Patel, Breast Cancer Surgeon & Associate Consultant in Surgical Breast Oncology"
+                      src={DOCTOR_PROFILE_IMAGES.heroPrimary.src}
+                      alt={DOCTOR_PROFILE_IMAGES.heroPrimary.alt}
                       fill
                       className="object-cover object-top"
                       priority
@@ -179,10 +185,10 @@ export default async function AboutPage() {
               <div className="lg:col-span-6 flex justify-center">
                 <div className="relative w-full max-w-[480px] aspect-[4/3] rounded-3xl overflow-hidden border border-[#F5D6DE] shadow-lg">
                   <Image
-                    src="/images/doctor/assets/doctor-consultation-about.png"
-                    alt="Dr. Noopur Patel consulting with a patient"
+                    src={DOCTOR_PROFILE_IMAGES.spotlightStanding.src}
+                    alt={DOCTOR_PROFILE_IMAGES.spotlightStanding.alt}
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-[center_20%]"
                     sizes="(max-width: 768px) 100vw, 480px"
                   />
                 </div>
@@ -297,10 +303,10 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/optimized/DSC08631.webp"
-                    alt="Detailed Consultation"
+                    src={DOCTOR_PROFILE_IMAGES.consulting.src}
+                    alt={DOCTOR_PROFILE_IMAGES.consulting.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="350px"
                   />
                 </div>
@@ -315,10 +321,10 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/optimized/DSC08636.webp"
-                    alt="Advanced Surgical Care"
+                    src={DOCTOR_PROFILE_IMAGES.fellowship.src}
+                    alt={DOCTOR_PROFILE_IMAGES.fellowship.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="350px"
                   />
                 </div>
@@ -333,8 +339,8 @@ export default async function AboutPage() {
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-2xl overflow-hidden p-5 shadow-xs">
                 <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-slate-100">
                   <Image
-                    src="/images/doctor/optimized/clinic-diagnostic-care.webp"
-                    alt="Accurate Diagnosis"
+                    src={HOSPITAL_MEDIA.mammography.src}
+                    alt={HOSPITAL_MEDIA.mammography.alt}
                     fill
                     className="object-cover"
                     sizes="350px"
@@ -423,10 +429,10 @@ export default async function AboutPage() {
               <div className="lg:col-span-5 flex justify-center">
                 <div className="relative w-full max-w-[420px] aspect-[4/3] rounded-3xl overflow-hidden bg-[#FFF8F9] border border-[#F5D6DE] shadow-md">
                   <Image
-                    src="/images/doctor/optimized/about-clinical-excellence.webp"
-                    alt="Clinical Excellence and Patient Care"
+                    src={DOCTOR_PROFILE_IMAGES.spotlightCrossedArms.src}
+                    alt={DOCTOR_PROFILE_IMAGES.spotlightCrossedArms.alt}
                     fill
-                    className="object-cover"
+                    className="object-cover object-[center_18%]"
                     sizes="420px"
                   />
                 </div>
@@ -492,6 +498,135 @@ export default async function AboutPage() {
                   <p className="text-[12.5px] text-slate-500 leading-normal">
                     {m.desc}
                   </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 8. PROFESSIONAL MENTORSHIP & GUIDANCE SECTION (From /Mentors) */}
+        <section className="w-full py-16 lg:py-24 bg-white border-b border-rose-100/60" id="mentors">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+              <div className="max-w-2xl">
+                <span className="text-[11px] sm:text-[12px] font-bold tracking-widest uppercase text-[#D84C70] block mb-2">
+                  MENTORSHIP &amp; TRAINING
+                </span>
+                <h2 className="font-serif text-[32px] sm:text-[40px] font-bold text-[#1A202C] leading-tight mb-3">
+                  Professional Mentorship &amp; Guidance
+                </h2>
+                <p className="text-slate-600 text-[15px] leading-relaxed">
+                  Clinical mastery is built upon the foundation of strong mentorship. Dr. Noopur Patel has trained under distinguished senior surgical oncology mentors, absorbing meticulous operative technique, clinical ethics, and compassionate patient care.
+                </p>
+              </div>
+
+              <div>
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#FFF8F9] border border-[#F5D6DE] text-xs font-semibold text-[#88213B]">
+                  <GraduationCap className="w-4 h-4 text-[#D84C70]" />
+                  <span>Subspecialty Breast Oncology Training</span>
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {MENTORS_MEDIA.map((mentor) => (
+                <div
+                  key={mentor.id}
+                  className="group bg-[#FFF8F9]/50 rounded-2xl overflow-hidden border border-[#F5D6DE] shadow-xs hover:shadow-md hover:border-[#D84C70]/60 transition-all flex flex-col justify-between"
+                >
+                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
+                    <Image
+                      src={mentor.src}
+                      alt={mentor.alt}
+                      fill
+                      className="object-contain p-2 group-hover:scale-103 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-[#88213B] bg-white/90 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-[#F5D6DE] shadow-2xs">
+                      {mentor.badge}
+                    </span>
+                  </div>
+                  <div className="p-5 flex-1 flex flex-col justify-between bg-white">
+                    <div>
+                      <h3 className="font-serif text-[16px] font-bold text-slate-900 mb-1.5 group-hover:text-[#88213B] transition-colors">
+                        {mentor.title}
+                      </h3>
+                      <p className="text-[12.5px] text-slate-600 leading-relaxed">
+                        {mentor.description}
+                      </p>
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] font-semibold text-[#D84C70]">
+                      <span>{mentor.category}</span>
+                      <span className="text-slate-400">Clinical Excellence</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* 9. MULTIDISCIPLINARY TEAM (MDT) & TUMOR BOARD (From /MDT_) */}
+        <section className="w-full py-16 lg:py-24 bg-[#FFF8F9]/40 border-b border-rose-100/60" id="mdt">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+              <div className="max-w-2xl">
+                <span className="text-[11px] sm:text-[12px] font-bold tracking-widest uppercase text-[#D84C70] block mb-2">
+                  COLLABORATIVE ONCOLOGY CARE
+                </span>
+                <h2 className="font-serif text-[32px] sm:text-[40px] font-bold text-[#1A202C] leading-tight mb-3">
+                  Multidisciplinary Team &amp; Tumor Board
+                </h2>
+                <p className="text-slate-600 text-[15px] leading-relaxed">
+                  No breast cancer is treated in isolation. Complex cases are deliberated collaboratively in weekly multidisciplinary tumor boards alongside surgical oncologists, medical oncologists, radiation oncologists, radiologists, and pathologists at Marengo CIMS Hospital.
+                </p>
+              </div>
+
+              <div>
+                <Link
+                  href="/appointments"
+                  className="inline-flex items-center gap-2 bg-[#D84C70] hover:bg-[#BE3A5C] text-white text-[13.5px] font-semibold px-6 py-3 rounded-full shadow-xs transition-all active:scale-95"
+                >
+                  <Users className="w-4 h-4" />
+                  <span>Request MDT Case Review</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {MDT_MEDIA.map((item) => (
+                <div
+                  key={item.id}
+                  className="group bg-white rounded-3xl overflow-hidden border border-[#F5D6DE] shadow-xs hover:shadow-lg hover:border-[#D84C70]/60 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="relative w-full aspect-[16/10] overflow-hidden bg-slate-100">
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      className="object-cover object-center group-hover:scale-104 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+                    <span className="absolute top-4 left-4 text-[10.5px] font-bold uppercase tracking-wider text-white bg-slate-900/70 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                      {item.badge}
+                    </span>
+                    <h3 className="absolute bottom-3 left-4 right-4 font-serif text-lg font-bold text-white drop-shadow">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  <div className="p-5 sm:p-6 bg-white flex-1 flex flex-col justify-between">
+                    <p className="text-[13px] text-slate-600 leading-relaxed">
+                      {item.description}
+                    </p>
+                    <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#88213B]">
+                      <span>{item.category}</span>
+                      <span className="text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full text-[11px]">
+                        NCCN Guidelines Compliant
+                      </span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

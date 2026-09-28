@@ -130,8 +130,8 @@ export default function AppointmentPage() {
               <div className="lg:col-span-4 flex justify-center lg:justify-end">
                 <div className="relative w-[240px] h-[200px] rounded-2xl overflow-hidden border border-[#F5D6DE] shadow-sm bg-white">
                   <Image
-                    src="/images/doctor/optimized/DSC08630.webp"
-                    alt="Dr. Noopur Patel, Breast Cancer Surgeon"
+                    src="/images/doctor/optimized/dr-noopur-patel-portrait-clinical.webp"
+                    alt="Dr. Noopur Patel, Breast Cancer Surgeon at Marengo CIMS Hospital"
                     fill
                     className="object-cover object-top"
                     priority

@@ -101,7 +101,7 @@ export default async function ServicesPage() {
                         src={service.icon || `/images/doctor/assets/service-${(index % 6) + 1}.png`}
                         alt={service.title}
                         fill
-                        className="object-cover"
+                        className="object-contain p-2 bg-white"
                         sizes="(max-width: 768px) 100vw, 450px"
                       />
                     </div>

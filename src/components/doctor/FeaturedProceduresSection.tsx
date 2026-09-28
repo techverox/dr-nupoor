@@ -18,7 +18,7 @@ export const ADVANCED_PROCEDURES: ProcedureHighlight[] = [
   {
     title: "Breast Conservation Surgery",
     category: "Organ-Preserving Surgery",
-    image: "/images/doctor/optimized/1000066014.webp",
+    image: "/images/doctor/assets/treatment-lumpectomy.png",
     description: "Selective excision of the cancerous tumor along with a safe perimeter of healthy tissue while preserving the natural breast.",
     points: ["Equivalent long-term survival to full mastectomy", "Preserves natural breast tissue & sensory nerve function", "Combined with SLNB to avoid arm lymphedema"],
     href: "/breast-conservation-surgery-ahmedabad",
@@ -26,7 +26,7 @@ export const ADVANCED_PROCEDURES: ProcedureHighlight[] = [
   {
     title: "Oncoplastic Breast Surgery",
     category: "Aesthetic Onco-Surgery",
-    image: "/images/doctor/optimized/1000068834.webp",
+    image: "/images/doctor/assets/treatment-oncoplastic.png",
     description: "Combines complete oncologic tumor resection with plastic surgical techniques to reshape and contour the remaining breast tissue.",
     points: ["Avoids post-surgical tissue indentations", "Therapeutic mammoplasty for larger breasts", "Contralateral balancing for balanced symmetry"],
     href: "/oncoplastic-breast-surgery-ahmedabad",
@@ -34,7 +34,7 @@ export const ADVANCED_PROCEDURES: ProcedureHighlight[] = [
   {
     title: "Modified Radical Mastectomy",
     category: "Definitive Resection",
-    image: "/images/doctor/optimized/hero-clinic-full.webp",
+    image: "/images/doctor/assets/treatment-mastectomy.png",
     description: "Careful complete removal of breast tissue and axillary nodes when multicentric disease or personal preference dictates radical clearance.",
     points: ["Thorough clearance for complex or multicentric tumors", "Immediate or delayed flap/implant reconstruction options", "100% Cashless Mediclaim & corporate TPA empaneled"],
     href: "/mastectomy-ahmedabad",
@@ -42,7 +42,7 @@ export const ADVANCED_PROCEDURES: ProcedureHighlight[] = [
   {
     title: "Sentinel Lymph Node Biopsy (SLNB)",
     category: "Precision Axillary Staging",
-    image: "/images/doctor/assets/clinic-consultation.png",
+    image: "/images/doctor/assets/treatment-reconstruction.png",
     description: "Radioactive tracer & blue dye mapping to evaluate only the primary filtering lymph nodes, protecting arm lymphatic drainage.",
     points: ["Over 90% reduction in painful chronic arm swelling", "Dual-tracer radio-probe guided accuracy", "Conducted during lumpectomy or mastectomy"],
     href: "/sentinel-lymph-node-biopsy",

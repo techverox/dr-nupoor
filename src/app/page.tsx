@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: SITE_CONFIG.name,
       images: [
         {
-          url: `${SITE_CONFIG.url}/images/doctor/optimized/dr-nupur-hero-portrait.webp`,
+          url: `${SITE_CONFIG.url}/images/doctor/optimized/dr-noopur-patel-hero-portrait.webp`,
           width: 1200,
           height: 630,
           alt: "Dr. Nupur Patel - Best Breast Cancer Surgeon in Ahmedabad",
@@ -93,7 +93,7 @@ export default async function Home() {
       "Mammography Screening & Biopsy"
     ],
     url: SITE_CONFIG.url,
-    image: `${SITE_CONFIG.url}/images/doctor/optimized/dr-nupur-hero-portrait.webp`,
+    image: `${SITE_CONFIG.url}/images/doctor/optimized/dr-noopur-patel-hero-portrait.webp`,
     telephone: SITE_CONFIG.contact.phone,
     address: {
       "@type": "PostalAddress",

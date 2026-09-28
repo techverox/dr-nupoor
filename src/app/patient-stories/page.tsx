@@ -95,24 +95,24 @@ const DEFAULT_STORIES: Array<{
 
 const DEFAULT_VIDEOS = [
   {
-    title: "My Breast Cancer Journey and Recovery",
-    duration: "02:45",
-    patient: "Patient from Ahmedabad",
-    image: "/images/doctor/optimized/video-story-priya.webp",
+    title: "Survivor Journey & Healing Circle Experience",
+    duration: "03:45",
+    patient: "Patient Support Initiative",
+    image: "/images/doctor/optimized/support/support-group-auditorium-gathering.webp",
     videoUrl: "https://www.youtube.com",
   },
   {
-    title: "How Early Detection Saved My Life",
+    title: "Why Early Detection Saves Lives — Dr. Noopur Patel",
     duration: "04:12",
-    patient: "Patient from Mehsana",
-    image: "/images/doctor/optimized/video-story-ananya.webp",
+    patient: "Breast Health Awareness",
+    image: "/images/doctor/optimized/awareness/screening-camp-banner-outreach.webp",
     videoUrl: "https://www.youtube.com",
   },
   {
-    title: "Life After Oncoplastic Surgery",
+    title: "Life After Breast Surgery & Rehabilitation",
     duration: "05:08",
-    patient: "Patient from Palanpur",
-    image: "/images/doctor/optimized/video-story-meenakshi.webp",
+    patient: "Recovery & Empowerment",
+    image: "/images/doctor/optimized/support/support-group-pink-ribbon-walk.webp",
     videoUrl: "https://www.youtube.com",
   },
 ];

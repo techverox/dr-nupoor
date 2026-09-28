@@ -15,6 +15,11 @@ import {
   Stethoscope,
   GraduationCap
 } from "lucide-react";
+import { 
+  SUPPORT_ACTIVITIES_MEDIA, 
+  CAMP_AWARENESS_MEDIA, 
+  MDT_MEDIA 
+} from "@/data/mediaManifest";
 
 export type CommunityCategory = "all" | "support-group" | "screening-camps" | "awareness-sessions" | "tumor-board";
 
@@ -29,15 +34,15 @@ export interface CommunityActivityItem {
 }
 
 export const COMMUNITY_ACTIVITIES: CommunityActivityItem[] = [
-  // 1. Cancer Patient Support Group
+  // 1. Cancer Patient Support Group (from /Support group and activities_)
   {
     id: "act-1",
     category: "support-group",
     categoryLabel: "Cancer Survivor Support Group",
     badge: "Cancer Warriors Circle",
     title: "Survivor Journey Sharing & Healing Circle",
-    description: "Dr. Nupur Patel periodically gathers breast cancer warriors and survivors to share recovery stories, exchange emotional strength, and support newly diagnosed patients.",
-    image: "/images/doctor/optimized/community/support-group-gathering.webp",
+    description: "Dr. Noopur Patel periodically gathers breast cancer warriors and survivors to share recovery stories, exchange emotional strength, and support newly diagnosed patients.",
+    image: SUPPORT_ACTIVITIES_MEDIA[0]?.src || "/images/doctor/optimized/support/support-group-survivor-circle-1.webp",
   },
   {
     id: "act-2",
@@ -46,7 +51,7 @@ export const COMMUNITY_ACTIVITIES: CommunityActivityItem[] = [
     badge: "Peer Community",
     title: "Interactive Patient Support & Counseling Meeting",
     description: "Creating a warm, dignified, and safe community space where patients openly discuss survivorship, body confidence, lifestyle after surgery, and emotional wellness.",
-    image: "/images/doctor/optimized/community/support-group-sharing.webp",
+    image: SUPPORT_ACTIVITIES_MEDIA[1]?.src || "/images/doctor/optimized/support/support-group-survivor-circle-2.webp",
   },
   {
     id: "act-3",
@@ -55,45 +60,45 @@ export const COMMUNITY_ACTIVITIES: CommunityActivityItem[] = [
     badge: "Recovery Milestone",
     title: "Celebrating Cancer Remission & Milestones",
     description: "Honoring the courage and resilience of our cancer survivors with milestone celebrations, inspiring others along their treatment journey.",
-    image: "/images/doctor/optimized/community/support-group-celebration.webp",
+    image: SUPPORT_ACTIVITIES_MEDIA[2]?.src || "/images/doctor/optimized/support/support-group-milestone-celebration-1.webp",
   },
   {
     id: "act-4",
     category: "support-group",
     categoryLabel: "Cancer Survivor Support Group",
     badge: "Survivor Empowerment",
-    title: "Cancer Warriors Community Outreach",
-    description: "Patient support group participants uniting to inspire confidence in women undergoing active chemotherapy and surgical treatment.",
-    image: "/images/doctor/optimized/community/cancer-warriors-activity.webp",
+    title: "Pink Ribbon Awareness Walk & Outreach",
+    description: "Cancer warriors, families, and doctors united in Ahmedabad walking for early detection awareness and breaking breast cancer taboos.",
+    image: SUPPORT_ACTIVITIES_MEDIA[4]?.src || "/images/doctor/optimized/support/support-group-pink-ribbon-walk.webp",
   },
 
-  // 2. Mammography Screening Camps
+  // 2. Mammography Screening Camps (from /Mentors/Camp and awareness_)
   {
     id: "act-5",
     category: "screening-camps",
     categoryLabel: "Mammography Screening Camps",
     badge: "Early Detection Mission",
-    title: "Public Clinical Breast Screening Camp",
+    title: "Clinical Breast Examination & On-Site Screening",
     description: "Conducting community clinical breast evaluations, reviewing digital mammograms, and providing timely referrals to catch abnormalities at curable stages.",
-    image: "/images/doctor/optimized/community/screening-camp-counseling.webp",
+    image: CAMP_AWARENESS_MEDIA[0]?.src || "/images/doctor/optimized/awareness/screening-camp-examination-counseling.webp",
   },
   {
     id: "act-6",
     category: "screening-camps",
     categoryLabel: "Mammography Screening Camps",
     badge: "Clinical Checkup",
-    title: "On-Site Doctor Examination & Guidance",
-    description: "Personalised, confidential examinations conducted by Dr. Nupur Patel for community women, dispelling fear and offering clear clinical roadmaps.",
-    image: "/images/doctor/optimized/community/screening-camp-examination.webp",
+    title: "Preventive Mammography Consultation Drive",
+    description: "Personalised, confidential examinations conducted by Dr. Noopur Patel for community women, dispelling fear and offering clear clinical roadmaps.",
+    image: CAMP_AWARENESS_MEDIA[1]?.src || "/images/doctor/optimized/awareness/screening-camp-banner-outreach.webp",
   },
   {
     id: "act-7",
     category: "screening-camps",
     categoryLabel: "Mammography Screening Camps",
     badge: "Community Health",
-    title: "Preventive Mammography Consultation Drive",
+    title: "Community Doctor Consultation & Screening",
     description: "Free and subsidized screening drives enabling women from diverse backgrounds to access specialized breast surgical consultation and screening advice.",
-    image: "/images/doctor/optimized/community/screening-camp-community.webp",
+    image: CAMP_AWARENESS_MEDIA[2]?.src || "/images/doctor/optimized/awareness/screening-camp-community-consultation.webp",
   },
   {
     id: "act-8",
@@ -102,18 +107,18 @@ export const COMMUNITY_ACTIVITIES: CommunityActivityItem[] = [
     badge: "Multidisciplinary Camp Team",
     title: "Screening Camp Clinical & Nursing Team",
     description: "Dedicated medical personnel and nurses ensuring comfortable, dignified, and expedited breast health checkups.",
-    image: "/images/doctor/optimized/community/screening-camp-team.webp",
+    image: CAMP_AWARENESS_MEDIA[6]?.src || "/images/doctor/optimized/awareness/screening-camp-clinical-team.webp",
   },
 
-  // 3. Breast Cancer Awareness Sessions & Public Lectures
+  // 3. Breast Cancer Awareness Sessions & Public Lectures (from /Mentors/Camp and awareness_)
   {
     id: "act-9",
     category: "awareness-sessions",
     categoryLabel: "Awareness Sessions & Lectures",
     badge: "Public Education",
     title: "Keynote Lecture on Early Breast Cancer Detection",
-    description: "Dr. Nupur Patel addressing public audiences, medical students, and community forums on monthly breast self-examination and timely clinical evaluation.",
-    image: "/images/doctor/optimized/community/awareness-lecture-podium.webp",
+    description: "Dr. Noopur Patel addressing public audiences, medical students, and community forums on monthly breast self-examination and timely clinical evaluation.",
+    image: CAMP_AWARENESS_MEDIA[4]?.src || "/images/doctor/optimized/awareness/awareness-public-lecture-podium.webp",
   },
   {
     id: "act-10",
@@ -122,25 +127,63 @@ export const COMMUNITY_ACTIVITIES: CommunityActivityItem[] = [
     badge: "Seminar & Symposium",
     title: "Interactive Breast Health Awareness Seminar",
     description: "Large-scale educational seminars addressing common breast health myths, distinguishing benign lumps from cancer, and explaining oncoplastic surgery options.",
-    image: "/images/doctor/optimized/community/awareness-seminar-hall.webp",
+    image: CAMP_AWARENESS_MEDIA[5]?.src || "/images/doctor/optimized/awareness/awareness-seminar-interactive-talk.webp",
   },
   {
     id: "act-11",
     category: "awareness-sessions",
     categoryLabel: "Awareness Sessions & Lectures",
     badge: "Community Talk",
-    title: "Empowering Women with Evidence-Based Knowledge",
+    title: "Women's Health Educational Outreach",
     description: "Engaging interactive Q&A sessions encouraging women to overcome hesitation, shame, or fear and seek prompt clinical evaluation.",
-    image: "/images/doctor/optimized/community/awareness-session-interactive.webp",
+    image: CAMP_AWARENESS_MEDIA[7]?.src || "/images/doctor/optimized/awareness/awareness-education-drive.webp",
   },
   {
     id: "act-12",
     category: "awareness-sessions",
     categoryLabel: "Awareness Sessions & Lectures",
-    badge: "Specialist Speaker",
-    title: "Surgical Oncology Advancements Presentation",
-    description: "Presenting modern oncoplastic breast conservation techniques and surgical safety benchmarks to medical peers and civic organizations.",
-    image: "/images/doctor/optimized/community/awareness-specialist-address.webp",
+    badge: "Suburban Outreach",
+    title: "Suburban & Rural Healthcare Access Camp",
+    description: "Taking specialized breast oncology guidance to underserved regions, ensuring early diagnosis when cancer is most curable.",
+    image: CAMP_AWARENESS_MEDIA[3]?.src || "/images/doctor/optimized/awareness/screening-camp-rural-outreach.webp",
+  },
+
+  // 4. Multidisciplinary Team & Tumor Board (from /MDT_)
+  {
+    id: "act-13",
+    category: "tumor-board",
+    categoryLabel: "Multidisciplinary Team (MDT)",
+    badge: "Tumor Board Consensus",
+    title: "Multidisciplinary Tumor Board Meeting",
+    description: "Deliberating complex breast cancer cases with surgical oncologists, medical oncologists, radiation oncologists, radiologists, and pathologists.",
+    image: MDT_MEDIA[0]?.src || "/images/doctor/optimized/mdt/mdt-tumor-board-meeting-1.webp",
+  },
+  {
+    id: "act-14",
+    category: "tumor-board",
+    categoryLabel: "Multidisciplinary Team (MDT)",
+    badge: "Evidence-Based Consensus",
+    title: "Collaborative Oncology Case Review",
+    description: "Joint deliberation on imaging correlation, core biopsy pathology, receptor status, and personalized sequencing of surgery and systemic therapy.",
+    image: MDT_MEDIA[1]?.src || "/images/doctor/optimized/mdt/mdt-tumor-board-meeting-2.webp",
+  },
+  {
+    id: "act-15",
+    category: "tumor-board",
+    categoryLabel: "Multidisciplinary Team (MDT)",
+    badge: "Integrated Care",
+    title: "Multidisciplinary Clinical Care Team",
+    description: "Comprehensive coordination across surgical oncology, specialized breast nursing, pathology, and clinical coordinators.",
+    image: MDT_MEDIA[2]?.src || "/images/doctor/optimized/mdt/mdt-clinical-team-discussion.webp",
+  },
+  {
+    id: "act-16",
+    category: "tumor-board",
+    categoryLabel: "Multidisciplinary Team (MDT)",
+    badge: "Integrated Staging",
+    title: "Oncology Conference & Case Planning Session",
+    description: "Formal conference review following international NCCN guidelines to ensure maximum oncologic safety and optimal cosmetic outcome.",
+    image: MDT_MEDIA[3]?.src || "/images/doctor/optimized/mdt/mdt-conference-table-planning.webp",
   },
 ];
 
@@ -248,6 +291,7 @@ export default function CommunityInitiativesSection() {
             { id: "support-group", label: "Cancer Support Group" },
             { id: "screening-camps", label: "Mammography Camps" },
             { id: "awareness-sessions", label: "Awareness Lectures" },
+            { id: "tumor-board", label: "MDT & Tumor Board" },
           ].map((tab) => (
             <button
               key={tab.id}

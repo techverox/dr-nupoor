@@ -13,6 +13,7 @@ import {
   MessageCircle
 } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
+import { DOCTOR_PROFILE_IMAGES } from "@/data/mediaManifest";
 
 interface DoctorHeroProps {
   badge?: string;
@@ -53,12 +54,12 @@ export default function DoctorHero({
               <div className="w-full lg:hidden order-1">
                 <div className="relative w-full max-w-md mx-auto aspect-square sm:aspect-[4/3.8] rounded-2xl overflow-hidden bg-gradient-to-b from-[#FCEEF2] to-[#F5D2DB] border border-[#F5CAD5] shadow-md">
                   <Image
-                    src="/images/doctor/optimized/dr-nupur-clinic-hero-mobile.webp"
-                    alt="Dr. Nupur Patel — Surgical Breast Oncologist in Ahmedabad"
+                    src={DOCTOR_PROFILE_IMAGES.heroMobile.src}
+                    alt={DOCTOR_PROFILE_IMAGES.heroMobile.alt}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 420px"
-                    className="object-cover object-center"
+                    className="object-cover object-[center_top]"
                   />
                   {/* Subtle Gradient Overlay at bottom for legibility */}
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent pointer-events-none" />
@@ -177,12 +178,12 @@ export default function DoctorHero({
                   {/* Main Portrait Card */}
                   <div className="relative aspect-[4/5] rounded-[28px] overflow-hidden bg-gradient-to-b from-[#FFF5F7] via-white to-[#FCE8ED] border-2 border-white shadow-xl">
                     <Image
-                      src="/images/doctor/optimized/dr-nupur-clinic-hero-desktop.webp"
-                      alt="Dr. Nupur Patel — Surgical Breast Oncology Specialist in Ahmedabad"
+                      src={DOCTOR_PROFILE_IMAGES.heroPrimary.src}
+                      alt={DOCTOR_PROFILE_IMAGES.heroPrimary.alt}
                       fill
                       priority
                       sizes="(min-width: 1024px) 480px"
-                      className="object-cover object-center hover:scale-[1.02] transition-transform duration-500"
+                      className="object-cover object-[center_top] hover:scale-[1.02] transition-transform duration-500"
                     />
 
                     {/* Gradient Overlay at Bottom */}

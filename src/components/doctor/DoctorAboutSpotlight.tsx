@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, Stethoscope, Play, GraduationCap, Award, X } from "lucide-react";
+import { DOCTOR_PROFILE_IMAGES } from "@/data/mediaManifest";
 
 export default function DoctorAboutSpotlight() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -93,10 +94,10 @@ export default function DoctorAboutSpotlight() {
               {/* Doctor Office Photo with Video Play Overlay */}
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-[#F0D0D8] group">
                 <Image
-                  src="/images/doctor/optimized/dr-nupur-spotlight.webp"
-                  alt="Dr. Nupur Patel — Surgical Breast Oncology Specialist"
+                  src={DOCTOR_PROFILE_IMAGES.spotlightCrossedArms.src}
+                  alt={DOCTOR_PROFILE_IMAGES.spotlightCrossedArms.alt}
                   fill
-                  className="object-cover object-[center_15%] group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover object-[center_18%] group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, 420px"
                 />
                 
