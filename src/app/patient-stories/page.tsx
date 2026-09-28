@@ -466,14 +466,14 @@ export default function PatientStoriesPage() {
             <div className="bg-white rounded-3xl border border-[#F5D6DE] p-8 sm:p-10 shadow-xs">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 
-                {/* Photo: Woman with Scarf */}
+                {/* Photo: Beyond Treatment & Confidence */}
                 <div className="lg:col-span-4 flex justify-center">
                   <div className="relative w-full max-w-[340px] aspect-[4/3] rounded-2xl overflow-hidden border border-[#F5D6DE] shadow-xs">
                     <Image
-                      src="/images/doctor/assets/banner-new-chapter.png"
-                      alt="A New Chapter of Confidence"
+                      src="/images/doctor/optimized/new-chapter-confidence.webp"
+                      alt="Dr. Noopur Patel with a breast cancer warrior celebrating health, recovery, and confidence"
                       fill
-                      className="object-cover"
+                      className="object-cover object-[center_top]"
                       sizes="340px"
                     />
                   </div>

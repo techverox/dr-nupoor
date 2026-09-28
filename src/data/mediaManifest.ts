@@ -315,6 +315,19 @@ export const SUPPORT_ACTIVITIES_MEDIA: MediaAsset[] = [
     objectFit: "cover",
     objectPosition: "center",
   },
+  {
+    id: "support-8",
+    src: "/images/doctor/optimized/new-chapter-confidence.webp",
+    alt: "Dr. Noopur Patel with breast cancer warrior celebrating health, recovery, and confidence",
+    title: "A New Chapter of Confidence - Cancer Warriors",
+    category: "Survivor Empowerment",
+    badge: "Beyond Treatment",
+    description: "Dr. Noopur Patel standing hand-in-hand with an unbeatable breast cancer warrior, celebrating health, vitality, and life beyond treatment.",
+    sourceDir: "Support group and activities_",
+    aspectRatio: "4/3",
+    objectFit: "cover",
+    objectPosition: "center top",
+  },
 ];
 
 export const CAMP_AWARENESS_MEDIA: MediaAsset[] = [

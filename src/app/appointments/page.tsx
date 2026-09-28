@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import DoctorNavbar from "@/components/doctor/DoctorNavbar";
 import DoctorFooter from "@/components/doctor/DoctorFooter";
+import ClinicLocationCard from "@/components/doctor/ClinicLocationCard";
 import { SITE_CONFIG } from "@/config/site";
 
 export default function AppointmentPage() {
@@ -452,44 +453,8 @@ export default function AppointmentPage() {
                 </div>
               </div>
 
-              {/* Clinic Location Card with Reception Photo */}
-              <div className="bg-white border border-[#F5D6DE] rounded-3xl p-6 sm:p-7 shadow-xs space-y-4">
-                <div className="flex items-center gap-2 text-[#D84C70]">
-                  <MapPin className="w-5 h-5" />
-                  <h3 className="font-serif text-[19px] font-bold text-[#1A202C]">
-                    Clinic Location
-                  </h3>
-                </div>
-
-                <div>
-                  <p className="text-[14px] font-semibold text-slate-800">
-                    Ahmedabad, Gujarat
-                  </p>
-                  <p className="text-[13px] text-slate-500 leading-normal">
-                    Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad – 380060
-                  </p>
-                </div>
-
-                <div className="relative w-full aspect-[16/8] rounded-2xl overflow-hidden border border-[#F5D6DE] bg-slate-100">
-                  <Image
-                    src="/images/doctor/optimized/clinic-reception-facility.webp"
-                    alt="Clinic Reception Area"
-                    fill
-                    className="object-cover"
-                    sizes="400px"
-                  />
-                </div>
-
-                <a
-                  href="https://maps.google.com/?q=Marengo+CIMS+Hospital+Ahmedabad"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center w-full py-2.5 rounded-xl border border-[#F5D6DE] text-[#D84C70] hover:bg-[#FFF8F9] font-semibold text-[13px] transition-colors gap-2"
-                >
-                  <MapPin className="w-4 h-4" />
-                  <span>Get Directions</span>
-                </a>
-              </div>
+              {/* Real Interactive Clinic Location & Direction System */}
+              <ClinicLocationCard />
 
               {/* Consultation Timings Card */}
               <div className="bg-[#FFF8F9] border border-[#F5D6DE] rounded-3xl p-6 shadow-xs space-y-3">
