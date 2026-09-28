@@ -164,8 +164,8 @@ export default function DoctorNavbar() {
       <nav
         className={`w-full bg-white/95 backdrop-blur-md transition-all duration-300 ${
           isScrolled
-            ? "shadow-[0_4px_20px_rgba(23,25,35,0.05)] py-2 border-b border-slate-100"
-            : "py-2.5 sm:py-3 border-b border-slate-100"
+            ? "shadow-[0_4px_20px_rgba(23,25,35,0.05)] py-1.5 border-b border-slate-100"
+            : "py-1.5 sm:py-2 border-b border-slate-100"
         }`}
         aria-label="Main Navigation"
       >
@@ -180,9 +180,9 @@ export default function DoctorNavbar() {
             <Image
               src="/images/doctor/assets/logo.png"
               alt="Dr. Nupur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
-              width={240}
-              height={80}
-              className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-transform group-hover:scale-[1.01]"
+              width={260}
+              height={86}
+              className="h-12 sm:h-12 md:h-13 w-auto object-contain transition-transform group-hover:scale-[1.01]"
               priority
             />
           </Link>
@@ -344,9 +344,9 @@ export default function DoctorNavbar() {
                 <Image
                   src="/images/doctor/assets/logo.png"
                   alt="Dr. Nupur Patel Logo"
-                  width={200}
-                  height={66}
-                  className="h-10 w-auto object-contain"
+                  width={220}
+                  height={74}
+                  className="h-11 sm:h-12 w-auto object-contain"
                 />
                 <button
                   type="button"
