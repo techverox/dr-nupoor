@@ -82,6 +82,11 @@ export type Permission =
   | "offers.create"
   | "offers.edit"
   | "offers.delete"
+  // Instagram Feed & Reels CMS
+  | "instagram.view"
+  | "instagram.create"
+  | "instagram.edit"
+  | "instagram.delete"
   // Analytics & Reporting
   | "analytics.view"
   | "analytics.export"

@@ -116,7 +116,7 @@ export default function DoctorNavbar() {
   };
 
   const whatsappUrl = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-    "Hello Dr. Nupur Patel, I would like to schedule a consultation."
+    "Hello Dr. Noopur Patel, I would like to schedule a consultation."
   )}`;
 
   return (
@@ -175,11 +175,11 @@ export default function DoctorNavbar() {
           <Link 
             href="/" 
             className="flex items-center group shrink-0" 
-            aria-label="Dr. Nupur Patel — Home"
+            aria-label="Dr. Noopur Patel — Home"
           >
             <Image
               src="/images/doctor/assets/logo.png"
-              alt="Dr. Nupur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
+              alt="Dr. Noopur Patel — Breast Cancer Surgeon & Surgical Breast Oncologist"
               width={260}
               height={86}
               className="h-12 sm:h-12 md:h-13 w-auto object-contain transition-transform group-hover:scale-[1.01]"
@@ -343,7 +343,7 @@ export default function DoctorNavbar() {
               <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                 <Image
                   src="/images/doctor/assets/logo.png"
-                  alt="Dr. Nupur Patel Logo"
+                  alt="Dr. Noopur Patel Logo"
                   width={220}
                   height={74}
                   className="h-11 sm:h-12 w-auto object-contain"
@@ -379,7 +379,7 @@ export default function DoctorNavbar() {
                       : "text-slate-800 hover:bg-slate-50"
                   }`}
                 >
-                  About Dr. Nupur Patel
+                  About Dr. Noopur Patel
                 </Link>
                 <Link
                   href="/services"

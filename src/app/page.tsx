@@ -28,6 +28,8 @@ import { TESTIMONIALS_DATA } from "@/data/testimonials";
 import { FAQS_DATA } from "@/data/faqs";
 import { getSeoPageData } from "@/data/seoKeywordMap";
 import { SITE_CONFIG } from "@/config/site";
+import { getInstagramPosts, DEFAULT_INSTAGRAM_POSTS } from "@/lib/services/instagramService";
+import { InstagramPost } from "@/types/instagram";
 
 export const revalidate = 60;
 
@@ -57,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${SITE_CONFIG.url}/images/doctor/optimized/dr-noopur-patel-hero-portrait.webp`,
           width: 1200,
           height: 630,
-          alt: "Dr. Nupur Patel - Best Breast Cancer Surgeon in Ahmedabad",
+          alt: "Dr. Noopur Patel - Best Breast Cancer Surgeon in Ahmedabad",
         },
       ],
       type: "website",
@@ -69,18 +71,23 @@ export default async function Home() {
   let testimonials = TESTIMONIALS_DATA;
   let faqs = FAQS_DATA;
   let homeContent: HomePageContent = DEFAULT_HOME_PAGE_CONTENT;
+  let instagramPosts: InstagramPost[] = DEFAULT_INSTAGRAM_POSTS;
 
   try {
-    const [cmsTestimonials, cmsFaqs, cmsHomeContent] = await Promise.all([
+    const [cmsTestimonials, cmsFaqs, cmsHomeContent, cmsInstagramPosts] = await Promise.all([
       getCmsTestimonials().catch(() => TESTIMONIALS_DATA),
       getCmsFaqs().catch(() => FAQS_DATA),
       getCmsPageContent("home").catch(() => DEFAULT_HOME_PAGE_CONTENT),
+      getInstagramPosts().catch(() => DEFAULT_INSTAGRAM_POSTS),
     ]);
 
     if (cmsTestimonials && cmsTestimonials.length > 0) testimonials = cmsTestimonials;
     if (cmsFaqs && cmsFaqs.length > 0) faqs = cmsFaqs;
     if (cmsHomeContent) {
       homeContent = { ...DEFAULT_HOME_PAGE_CONTENT, ...cmsHomeContent };
+    }
+    if (cmsInstagramPosts && cmsInstagramPosts.length > 0) {
+      instagramPosts = cmsInstagramPosts;
     }
   } catch (e) {
     console.warn("[Home] Using resilient clinical seed data:", e);
@@ -90,11 +97,15 @@ export default async function Home() {
   const physicianSchema = {
     "@context": "https://schema.org",
     "@type": "Physician",
-    name: "Dr. Nupur Patel",
-    alternateName: ["Dr. Noopur Patel", "Dr Nupur Patel Breast Surgeon Ahmedabad"],
+    name: "Dr. Noopur Patel",
+    alternateName: [
+      "Dr. Nupur Patel",
+      "Dr Noopur Patel Breast Surgeon Ahmedabad",
+      "Dr Nupur Patel Breast Surgeon Ahmedabad"
+    ],
     jobTitle: "Associate Consultant – Surgical Breast Oncology",
     description:
-      "Dr. Nupur Patel is an expert Breast Cancer Surgeon & Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad. Specialised in breast cancer surgery, breast conservation (BCS), mastectomy, and benign breast lumps.",
+      "Dr. Noopur Patel is an expert Breast Cancer Surgeon & Oncoplastic Specialist at Marengo CIMS Hospital, Ahmedabad. Specialised in breast cancer surgery, breast conservation (BCS), mastectomy, and benign breast lumps.",
     medicalSpecialty: [
       "Surgical Oncology",
       "Breast Cancer Surgery",
@@ -212,7 +223,7 @@ export default async function Home() {
         <CareJourneyTimeline />
 
         {/* 10. Instagram — Latest Reels */}
-        <InstagramAwarenessFeed />
+        <InstagramAwarenessFeed initialPosts={instagramPosts} />
 
         {/* 11. Cancer Patient Support Group, Screening Camps & Awareness Sessions */}
         <CommunityInitiativesSection />

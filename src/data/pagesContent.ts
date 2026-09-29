@@ -12,7 +12,7 @@ export const DEFAULT_HOME_PAGE_CONTENT: HomePageContent = {
   heroHeadline: "Surgical Breast Oncology",
   heroHeadlineHighlight: "& Cancer Surgery in Ahmedabad",
   heroSubheadline:
-    "Dr. Nupur Patel provides specialised surgical breast oncology, oncoplastic breast surgery, and compassionate care for breast cancer and benign breast conditions at Marengo CIMS Hospital, Ahmedabad.",
+    "Dr. Noopur Patel provides specialised surgical breast oncology, oncoplastic breast surgery, and compassionate care for breast cancer and benign breast conditions at Marengo CIMS Hospital, Ahmedabad.",
   primaryCtaText: "Book a Consultation",
   primaryCtaLink: "/appointments",
   secondaryCtaText: "Consult on WhatsApp",

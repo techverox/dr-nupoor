@@ -15,6 +15,7 @@ import * as h_admin_audit_logs from "@/lib/api/handlers/admin/audit-logs/route";
 import * as h_admin_blog from "@/lib/api/handlers/admin/blog/route";
 import * as h_admin_faqs from "@/lib/api/handlers/admin/faqs/route";
 import * as h_admin_forms from "@/lib/api/handlers/admin/forms/route";
+import * as h_admin_instagram from "@/lib/api/handlers/admin/instagram/route";
 import * as h_admin_landing_pages from "@/lib/api/handlers/admin/landing-pages/route";
 import * as h_admin_leads from "@/lib/api/handlers/admin/leads/route";
 import * as h_admin_media from "@/lib/api/handlers/admin/media/route";
@@ -32,6 +33,7 @@ import * as h_admin_sync from "@/lib/api/handlers/admin/sync/route";
 import * as h_admin_team from "@/lib/api/handlers/admin/team/route";
 import * as h_admin_testimonials from "@/lib/api/handlers/admin/testimonials/route";
 import * as h_admin_users from "@/lib/api/handlers/admin/users/route";
+import * as h_instagram from "@/lib/api/handlers/instagram/route";
 import * as h_analytics_events from "@/lib/api/handlers/analytics/events/route";
 import * as h_auth_change_password from "@/lib/api/handlers/auth/change-password/route";
 import * as h_auth_forgot_password from "@/lib/api/handlers/auth/forgot-password/route";
@@ -163,6 +165,12 @@ const ROUTES: RouteMatch[] = [
     segments: ["admin","forms"],
     isDynamic: false,
     handlers: h_admin_forms,
+  },
+  {
+    pattern: "admin/instagram",
+    segments: ["admin","instagram"],
+    isDynamic: false,
+    handlers: h_admin_instagram,
   },
   {
     pattern: "admin/landing-pages",
@@ -331,6 +339,12 @@ const ROUTES: RouteMatch[] = [
     segments: ["health"],
     isDynamic: false,
     handlers: h_health,
+  },
+  {
+    pattern: "instagram",
+    segments: ["instagram"],
+    isDynamic: false,
+    handlers: h_instagram,
   },
   {
     pattern: "leads",

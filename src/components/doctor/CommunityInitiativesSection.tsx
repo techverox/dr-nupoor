@@ -252,7 +252,7 @@ export default function CommunityInitiativesSection() {
               Cancer Warriors Support Group
             </h3>
             <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed">
-              Dr. Nupur Patel periodically gathers breast cancer patients and survivors together to share their journeys, exchange emotional strength, and build community support.
+              Dr. Noopur Patel periodically gathers breast cancer patients and survivors together to share their journeys, exchange emotional strength, and build community support.
             </p>
           </div>
 

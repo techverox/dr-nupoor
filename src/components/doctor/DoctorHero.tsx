@@ -44,7 +44,7 @@ export default function DoctorHero({
   primaryCtaText = "Book a Consultation",
   primaryCtaLink = "/appointments",
   secondaryCtaText = "Consult on WhatsApp",
-  secondaryCtaLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=Hello%20Dr.%20Nupur%20Patel,%20I%20would%20like%20to%20schedule%20a%20consultation.`,
+  secondaryCtaLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=Hello%20Dr.%20Noopur%20Patel,%20I%20would%20like%20to%20schedule%20a%20consultation.`,
   stats,
 }: DoctorHeroProps) {
   return (
@@ -80,7 +80,7 @@ export default function DoctorHero({
                   {/* Doctor Badge Pill on Mobile (top-left so pink ribbon on right stays visible) */}
                   <div className="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-rose-200 shadow-sm flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span className="text-[11px] font-bold text-slate-900">Dr. Nupur Patel</span>
+                    <span className="text-[11px] font-bold text-slate-900">Dr. Noopur Patel</span>
                   </div>
 
                   {/* Hospital Pill top-right */}
@@ -256,7 +256,7 @@ export default function DoctorHero({
                         <ShieldCheck className="w-4 h-4 text-[#D84C70]" />
                       </div>
                       <div className="text-left">
-                        <div className="text-xs font-bold text-slate-900 leading-none">Dr. Nupur Patel</div>
+                        <div className="text-xs font-bold text-slate-900 leading-none">Dr. Noopur Patel</div>
                         <div className="text-[10px] text-slate-500 mt-0.5 font-medium">Associate Consultant</div>
                       </div>
                     </div>

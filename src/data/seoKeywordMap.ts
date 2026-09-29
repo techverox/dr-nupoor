@@ -48,8 +48,8 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
     silo: "Core / Brand",
     searchIntent: "Commercial / Local",
     competition: "Medium",
-    metaTitle: "Dr. Nupur Patel | Best Breast Cancer Surgeon in Ahmedabad | Surgical Breast Oncology",
-    metaDescription: "Dr. Nupur Patel is an expert Breast Cancer Surgeon & Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Specialised breast cancer surgery, breast conservation, oncoplastic care & screening.",
+    metaTitle: "Dr. Noopur Patel | Best Breast Cancer Surgeon in Ahmedabad | Surgical Breast Oncology",
+    metaDescription: "Dr. Noopur Patel is an expert Breast Cancer Surgeon & Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Specialised breast cancer surgery, breast conservation, oncoplastic care & screening.",
     h1: "Surgical Breast Oncology & Breast Cancer Surgery in Ahmedabad",
     focusOnPageElements: "Surgeon credentials, surgical experience, OPD timings, patient testimonials",
     secondaryKeywords: [
@@ -1595,8 +1595,8 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
     silo: "Surgical Oncology",
     searchIntent: "Transactional / Informational",
     competition: "Low-Medium",
-    metaTitle: "Mastectomy Surgery in Ahmedabad | Dr. Nupur Patel",
-    metaDescription: "Safe, compassionate mastectomy surgery in Ahmedabad by Dr. Nupur Patel at Marengo CIMS Hospital. Simple, Modified Radical (MRM) and skin-sparing mastectomy with reconstruction planning.",
+    metaTitle: "Mastectomy Surgery in Ahmedabad | Dr. Noopur Patel",
+    metaDescription: "Safe, compassionate mastectomy surgery in Ahmedabad by Dr. Noopur Patel at Marengo CIMS Hospital. Simple, Modified Radical (MRM) and skin-sparing mastectomy with reconstruction planning.",
     h1: "Mastectomy Surgery in Ahmedabad – Total, Modified Radical & Skin-Sparing",
     focusOnPageElements: "Indications for mastectomy, surgical technique, drain care, recovery and reconstruction",
     secondaryKeywords: [
@@ -1616,7 +1616,7 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
     ],
     heroBadge: "DEFINITIVE ONCOLOGIC CLEARANCE",
     heroSubtitle: "Safe, compassionate radical and skin-sparing mastectomies performed with meticulous surgical margins and optional immediate reconstruction.",
-    quickOverview: "A mastectomy involves the surgical removal of breast tissue to achieve complete cancer clearance. Led by Dr. Nupur Patel at Marengo CIMS Hospital, Ahmedabad, every procedure is planned individually—balancing complete oncological safety with advanced skin-sparing and immediate reconstruction options.",
+    quickOverview: "A mastectomy involves the surgical removal of breast tissue to achieve complete cancer clearance. Led by Dr. Noopur Patel at Marengo CIMS Hospital, Ahmedabad, every procedure is planned individually—balancing complete oncological safety with advanced skin-sparing and immediate reconstruction options.",
     keySections: [
       {
         heading: "Types of Mastectomy Performed",
@@ -1651,7 +1651,7 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
       },
       {
         heading: "Immediate vs. Delayed Breast Reconstruction",
-        content: "Women undergoing mastectomy do not have to live with a permanent mastectomy defect if they desire restoration. Dr. Nupur Patel collaborates closely with reconstructive plastic surgeons to discuss options before cancer surgery begins:",
+        content: "Women undergoing mastectomy do not have to live with a permanent mastectomy defect if they desire restoration. Dr. Noopur Patel collaborates closely with reconstructive plastic surgeons to discuss options before cancer surgery begins:",
         bulletPoints: [
           "Immediate Reconstruction: Done during the same operation using silicone implants or the patient's own tissue (flap surgery)",
           "Delayed Reconstruction: Performed months or years later after chemotherapy and radiation are fully completed",
@@ -1693,7 +1693,7 @@ export const SEO_KEYWORD_MAP: Record<string, SeoPageData> = {
       "breast-conservation-surgery-ahmedabad",
       "sentinel-lymph-node-biopsy",
     ],
-    ctaText: "Schedule Consultation with Dr. Nupur Patel",
+    ctaText: "Schedule Consultation with Dr. Noopur Patel",
     schemaType: "MedicalProcedure",
   },
 };

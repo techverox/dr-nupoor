@@ -25,12 +25,12 @@ export default function DoctorAboutSpotlight() {
           <div className="lg:col-span-7 space-y-4 sm:space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FCE8ED] text-[#88213B] text-[10.5px] sm:text-xs font-bold tracking-wider uppercase border border-[#F5CAD5]">
               <Stethoscope className="w-3.5 h-3.5 text-[#D84C70]" />
-              ABOUT DR. NUPUR PATEL
+              ABOUT DR. NOOPUR PATEL
             </div>
 
             <div>
               <h2 className="font-serif text-2xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight">
-                Meet Dr. Nupur Patel
+                Meet Dr. Noopur Patel
               </h2>
               <p className="text-sm sm:text-lg font-medium text-[#D84C70] mt-1">
                 Surgical Breast Oncologist &amp; Breast Cancer Surgeon in Ahmedabad
@@ -38,7 +38,7 @@ export default function DoctorAboutSpotlight() {
             </div>
 
             <p className="text-slate-600 text-xs sm:text-base leading-relaxed">
-              Dr. Nupur Patel is a breast cancer surgeon who focuses on comprehensive care for breast diseases, including breast cancer, benign breast conditions, and advanced oncoplastic breast surgery. Her approach combines surgical precision with compassionate and patient-first care.
+              Dr. Noopur Patel is a breast cancer surgeon who focuses on comprehensive care for breast diseases, including breast cancer, benign breast conditions, and advanced oncoplastic breast surgery. Her approach combines surgical precision with compassionate and patient-first care.
             </p>
 
             {/* 4 Pillars Checklist (2x2 Grid) */}
@@ -82,7 +82,7 @@ export default function DoctorAboutSpotlight() {
                 href="/about"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl sm:rounded-full bg-[#88213B] hover:bg-[#731930] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#88213B]/20 transition-all active:scale-95 text-center"
               >
-                <span>Know More About Dr. Nupur Patel</span>
+                <span>Know More About Dr. Noopur Patel</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

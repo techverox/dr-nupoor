@@ -18,5 +18,6 @@ export * from "./offer";
 export * from "./redirect";
 export * from "./landingPage";
 export * from "./rbac";
+export * from "./instagram";
 
 
