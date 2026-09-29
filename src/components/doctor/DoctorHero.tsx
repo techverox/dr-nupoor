@@ -24,15 +24,28 @@ interface DoctorHeroProps {
   primaryCtaLink?: string;
   secondaryCtaText?: string;
   secondaryCtaLink?: string;
+  stats?: {
+    stat1Value?: string;
+    stat1Label?: string;
+    stat2Value?: string;
+    stat2Label?: string;
+    stat3Value?: string;
+    stat3Label?: string;
+    stat4Value?: string;
+    stat4Label?: string;
+  };
 }
 
 export default function DoctorHero({
   badge = "SURGICAL BREAST ONCOLOGY · BREAST CANCER SPECIALIST",
+  headline = "Surgical Breast Oncology",
+  headlineHighlight = "& Cancer Surgery in Ahmedabad",
   subheadline = "Specialised care for breast cancer, benign breast lumps, and oncoplastic breast surgery with an evidence-based, compassionate, patient-first approach.",
   primaryCtaText = "Book a Consultation",
   primaryCtaLink = "/appointments",
   secondaryCtaText = "Consult on WhatsApp",
   secondaryCtaLink = `https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=Hello%20Dr.%20Nupur%20Patel,%20I%20would%20like%20to%20schedule%20a%20consultation.`,
+  stats,
 }: DoctorHeroProps) {
   return (
     <section className="w-full bg-white py-2 sm:py-4 lg:py-6" id="hero-section">
@@ -97,18 +110,20 @@ export default function DoctorHero({
                   ========================================================================= */}
               <div className="w-full lg:w-7/12 order-2 lg:order-1 space-y-4 sm:space-y-5">
                 
-                {/* 1. Top Eyebrow Badge - Surgical Breast Oncology */}
+                {/* 1. Top Eyebrow Badge */}
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#F5CAD5] text-[#88213B] text-[11px] sm:text-[12.5px] font-bold tracking-wider uppercase shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-[#D84C70] shrink-0 animate-pulse" />
                   <span>{badge}</span>
                 </div>
 
-                {/* 2. Main Heading - Explicitly "Surgical Breast Oncology" */}
+                {/* 2. Main Heading - Dynamic CMS Content */}
                 <h1 className="font-serif text-[28px] sm:text-[40px] md:text-[46px] lg:text-[48px] xl:text-[54px] font-bold text-slate-900 leading-[1.15] tracking-tight">
-                  <span className="text-slate-900 block">Surgical Breast Oncology</span>
-                  <span className="text-[#D84C70] block text-[24px] sm:text-[34px] md:text-[40px] lg:text-[42px] xl:text-[46px] mt-1">
-                    &amp; Cancer Surgery in Ahmedabad
-                  </span>
+                  <span className="text-slate-900 block">{headline}</span>
+                  {headlineHighlight && (
+                    <span className="text-[#D84C70] block text-[24px] sm:text-[34px] md:text-[40px] lg:text-[42px] xl:text-[46px] mt-1">
+                      {headlineHighlight}
+                    </span>
+                  )}
                 </h1>
 
                 {/* 3. Supporting Description */}
@@ -158,7 +173,53 @@ export default function DoctorHero({
                   </a>
                 </div>
 
-                {/* 6. Hospital Practice Location Badge */}
+                {/* 6. Clinical Awareness Health Statistics (CMS Synced) */}
+                {stats && (stats.stat1Value || stats.stat2Value) && (
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5 pt-3 border-t border-[#F5CAD5]/70">
+                    {stats.stat1Value && (
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white/90 border border-[#F5CAD5] shadow-2xs">
+                        <div className="text-[14px] sm:text-[16px] font-black text-slate-900 leading-none">
+                          {stats.stat1Value}
+                        </div>
+                        <div className="text-[10px] text-slate-600 font-medium mt-1 leading-tight line-clamp-2">
+                          {stats.stat1Label}
+                        </div>
+                      </div>
+                    )}
+                    {stats.stat2Value && (
+                      <div className="p-2 sm:p-2.5 rounded-xl bg-white/90 border border-[#F5CAD5] shadow-2xs">
+                        <div className="text-[14px] sm:text-[16px] font-black text-[#D84C70] leading-none">
+                          {stats.stat2Value}
+                        </div>
+                        <div className="text-[10px] text-slate-600 font-medium mt-1 leading-tight line-clamp-2">
+                          {stats.stat2Label}
+                        </div>
+                      </div>
+                    )}
+                    {stats.stat3Value && (
+                      <div className="hidden sm:block p-2 sm:p-2.5 rounded-xl bg-white/90 border border-[#F5CAD5] shadow-2xs">
+                        <div className="text-[14px] sm:text-[16px] font-black text-slate-900 leading-none">
+                          {stats.stat3Value}
+                        </div>
+                        <div className="text-[10px] text-slate-600 font-medium mt-1 leading-tight line-clamp-2">
+                          {stats.stat3Label}
+                        </div>
+                      </div>
+                    )}
+                    {stats.stat4Value && (
+                      <div className="hidden sm:block p-2 sm:p-2.5 rounded-xl bg-white/90 border border-[#F5CAD5] shadow-2xs">
+                        <div className="text-[14px] sm:text-[16px] font-black text-slate-900 leading-none">
+                          {stats.stat4Value}
+                        </div>
+                        <div className="text-[10px] text-slate-600 font-medium mt-1 leading-tight line-clamp-2">
+                          {stats.stat4Label}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* 7. Hospital Practice Location Badge */}
                 <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-slate-600 pt-1 font-medium">
                   <MapPin className="w-4 h-4 text-[#D84C70] shrink-0" />
                   <span>Marengo CIMS Hospital, Off Science City Road, Sola, Ahmedabad</span>

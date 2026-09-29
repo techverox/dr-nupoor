@@ -6,7 +6,19 @@ import Image from "next/image";
 import { Calendar, MessageCircle, ArrowRight, ShieldCheck, Heart, Phone } from "lucide-react";
 import { SITE_CONFIG } from "@/config/site";
 
-export default function HopeCtaBanner() {
+interface HopeCtaBannerProps {
+  headline?: string;
+  subtitle?: string;
+  primaryCtaText?: string;
+  primaryCtaLink?: string;
+}
+
+export default function HopeCtaBanner({
+  headline = "Have a Breast Health Concern?",
+  subtitle = "If you noticed a breast lump, abnormal nipple discharge, or a recent diagnosis, or want a second opinion from a breast surgeon, schedule a consultation to discuss your condition.",
+  primaryCtaText = "Book Appointment",
+  primaryCtaLink = "/appointments",
+}: HopeCtaBannerProps = {}) {
   return (
     <section className="w-full py-12 sm:py-16 bg-white" id="hope-cta" aria-labelledby="hope-cta-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,21 +44,21 @@ export default function HopeCtaBanner() {
             {/* Right Column: Content & Action Buttons */}
             <div className="lg:col-span-9 space-y-4">
               <h2 id="hope-cta-heading" className="font-serif text-[26px] sm:text-[34px] lg:text-[38px] font-bold leading-tight text-slate-900">
-                Have a Breast Health Concern?
+                {headline}
               </h2>
 
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-3xl">
-                If you noticed a breast lump, abnormal nipple discharge, or a recent diagnosis, or want a second opinion from a breast surgeon, schedule a consultation to discuss your condition.
+                {subtitle}
               </p>
 
               {/* Action Buttons Row */}
               <div className="flex flex-wrap items-center gap-3.5 pt-2">
                 <Link
-                  href="/appointments"
+                  href={primaryCtaLink}
                   className="inline-flex items-center gap-2 bg-[#88213B] hover:bg-[#731930] text-white text-xs sm:text-sm font-bold py-3.5 px-7 rounded-full shadow-md shadow-[#88213B]/20 transition-all active:scale-95"
                 >
                   <Calendar className="w-4 h-4" />
-                  <span>Book Appointment</span>
+                  <span>{primaryCtaText}</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 

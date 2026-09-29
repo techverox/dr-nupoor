@@ -8,14 +8,14 @@ import { SITE_CONFIG } from "@/config/site";
 
 export const DEFAULT_HOME_PAGE_CONTENT: HomePageContent = {
   id: "home",
-  heroBadge: "SPECIALISED BREAST CANCER CARE · AHMEDABAD",
-  heroHeadline: "Specialised",
-  heroHeadlineHighlight: "Breast Cancer Care, With a Patient-First Approach",
+  heroBadge: "SURGICAL BREAST ONCOLOGY · BREAST CANCER SPECIALIST",
+  heroHeadline: "Surgical Breast Oncology",
+  heroHeadlineHighlight: "& Cancer Surgery in Ahmedabad",
   heroSubheadline:
-    "Compassionate, evidence-based surgical care for women with breast conditions and breast cancer — with a focus on personalised treatment and informed decisions.",
-  primaryCtaText: "Book an Appointment",
+    "Dr. Nupur Patel provides specialised surgical breast oncology, oncoplastic breast surgery, and compassionate care for breast cancer and benign breast conditions at Marengo CIMS Hospital, Ahmedabad.",
+  primaryCtaText: "Book a Consultation",
   primaryCtaLink: "/appointments",
-  secondaryCtaText: "WhatsApp",
+  secondaryCtaText: "Consult on WhatsApp",
   secondaryCtaLink: "https://wa.me/919876543210",
   stat1Value: "1 in 8",
   stat1Label: "Women may develop breast cancer",
@@ -25,11 +25,12 @@ export const DEFAULT_HOME_PAGE_CONTENT: HomePageContent = {
   stat3Label: "Screening saves lives",
   stat4Value: "You are not alone",
   stat4Label: "We are here to support",
-  whyUsTitle: "Early Detection Can Save Lives",
+  whyUsTitle: "A Personalised Approach to Breast Cancer Care",
   whyUsSubtitle:
-    "Breast cancer is one of the most common cancers in women, but when detected early, the chances of successful treatment are much higher. Regular check-ups and awareness can make a big difference.",
-  ctaSectionHeadline: "Take the First Step Towards Better Breast Health",
-  ctaSectionSubtitle: "We are here to listen, guide and support you.",
+    "We believe that true healing combines surgical excellence with human kindness. Here is why patients and families across Gujarat place their trust in Dr. Noopur Patel.",
+  ctaSectionHeadline: "Have a Breast Health Concern?",
+  ctaSectionSubtitle:
+    "If you noticed a breast lump, abnormal nipple discharge, or a recent diagnosis, or want a second opinion from a breast surgeon, schedule a consultation to discuss your condition.",
   createdAt: "2026-01-01T00:00:00Z",
   updatedAt: "2026-01-01T00:00:00Z",
 };

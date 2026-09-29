@@ -24,7 +24,9 @@ import HopeCtaBanner from "@/components/doctor/HopeCtaBanner";
 import TrustStrip from "@/components/doctor/TrustStrip";
 import PatientStoriesSection from "@/components/doctor/PatientStoriesSection";
 import { TESTIMONIALS_DATA } from "@/data/testimonials";
-import { getCmsTestimonials } from "@/lib/services/cmsService";
+import { getCmsTestimonials, getCmsPageContent } from "@/lib/services/cmsService";
+import { DEFAULT_ABOUT_PAGE_CONTENT } from "@/data/pagesContent";
+import { AboutPageContent } from "@/types";
 import { 
   DOCTOR_PROFILE_IMAGES,
   MENTORS_MEDIA,
@@ -40,10 +42,18 @@ export const metadata = {
 
 export default async function AboutPage() {
   let testimonials = TESTIMONIALS_DATA;
+  let aboutContent: AboutPageContent = DEFAULT_ABOUT_PAGE_CONTENT;
+
   try {
-    const cmsTestimonials = await getCmsTestimonials().catch(() => null);
+    const [cmsTestimonials, cmsAboutContent] = await Promise.all([
+      getCmsTestimonials().catch(() => null),
+      getCmsPageContent("about").catch(() => null),
+    ]);
     if (cmsTestimonials && cmsTestimonials.length > 0) {
       testimonials = cmsTestimonials;
+    }
+    if (cmsAboutContent) {
+      aboutContent = { ...DEFAULT_ABOUT_PAGE_CONTENT, ...cmsAboutContent };
     }
   } catch {}
 
@@ -124,16 +134,18 @@ export default async function AboutPage() {
               
               <div className="lg:col-span-7 space-y-6">
                 <span className="text-[11px] sm:text-[12px] font-bold tracking-widest uppercase text-[#D84C70] block">
-                  ABOUT US
+                  {aboutContent.heroBadge || "ABOUT US"}
                 </span>
                 <h1 className="font-serif text-[42px] sm:text-[52px] font-bold text-[#1A202C] leading-[1.15]">
-                  Dedicated to Women&apos;s Health.{" "}
-                  <span className="italic font-serif text-[#D84C70] block sm:inline">
-                    Today and Always.
-                  </span>
+                  {aboutContent.heroHeadline || "Dedicated to Women's Health."}{" "}
+                  {aboutContent.heroHeadlineHighlight && (
+                    <span className="italic font-serif text-[#D84C70] block sm:inline">
+                      {aboutContent.heroHeadlineHighlight}
+                    </span>
+                  )}
                 </h1>
                 <p className="text-slate-600 text-[16px] sm:text-[17px] leading-relaxed max-w-2xl">
-                  At Dr. Noopur Patel&apos;s clinic, we believe every woman deserves accurate diagnosis, advanced treatment and compassionate care for all breast health concerns — in a safe, supportive and empowering environment.
+                  {aboutContent.heroSubheadline || "At Dr. Noopur Patel's clinic, we believe every woman deserves accurate diagnosis, advanced treatment and compassionate care for all breast health concerns — in a safe, supportive and empowering environment."}
                 </p>
                 <div className="pt-2 flex items-center gap-4">
                   <Link
@@ -199,14 +211,19 @@ export default async function AboutPage() {
                   MEET YOUR DOCTOR
                 </span>
                 <h2 className="font-serif text-[32px] sm:text-[38px] font-bold text-[#1A202C]">
-                  Dr. Noopur Patel
+                  {aboutContent.storyTitle || "Meet Dr. Noopur Patel"}
                 </h2>
                 <p className="text-[15px] font-semibold text-[#D84C70]">
                   Breast Surgeon &amp; Oncoplastic Surgeon
                 </p>
                 <p className="text-slate-600 text-[15px] leading-relaxed">
-                  Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Dedicated to providing comprehensive, compassionate and personalised care for women at every stage of their breast health journey.
+                  {aboutContent.storyParagraph1 || "Dr. Noopur Patel is an Associate Consultant in Surgical Breast Oncology at Marengo CIMS Hospital, Ahmedabad. Dedicated to providing comprehensive, compassionate and personalised care for women at every stage of their breast health journey."}
                 </p>
+                {aboutContent.storyParagraph2 && (
+                  <p className="text-slate-600 text-[15px] leading-relaxed pt-1">
+                    {aboutContent.storyParagraph2}
+                  </p>
+                )}
 
                 <div className="grid grid-cols-2 gap-3 pt-3">
                   <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#FFF8F9] border border-[#F5D6DE]">
@@ -367,10 +384,10 @@ export default async function AboutPage() {
                   <Heart className="w-5 h-5" />
                 </div>
                 <h3 className="font-serif text-[20px] font-bold text-slate-900">
-                  Our Mission
+                  {aboutContent.missionTitle || "Our Mission"}
                 </h3>
                 <p className="text-[14px] text-slate-600 leading-relaxed">
-                  To provide comprehensive, evidence-based and compassionate breast care to every woman, empowering them to make informed decisions about their health.
+                  {aboutContent.missionDescription || "To provide comprehensive, evidence-based and compassionate breast care to every woman, empowering them to make informed decisions about their health."}
                 </p>
               </div>
 
@@ -379,10 +396,10 @@ export default async function AboutPage() {
                   <Sparkles className="w-5 h-5" />
                 </div>
                 <h3 className="font-serif text-[20px] font-bold text-slate-900">
-                  Our Vision
+                  {aboutContent.visionTitle || "Our Vision"}
                 </h3>
                 <p className="text-[14px] text-slate-600 leading-relaxed">
-                  To be a trusted centre for breast health, known for clinical excellence, advanced surgical techniques and a patient-centred approach.
+                  {aboutContent.visionDescription || "To be a trusted centre for breast health, known for clinical excellence, advanced surgical techniques and a patient-centred approach."}
                 </p>
               </div>
 

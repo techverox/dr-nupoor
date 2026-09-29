@@ -891,14 +891,26 @@ export async function getCmsPageContent(
     `cms_page_${pageId}`,
     60 * 1000,
     async () => {
+      const base =
+        pageId === "home"
+          ? DEFAULT_HOME_PAGE_CONTENT
+          : pageId === "about"
+          ? DEFAULT_ABOUT_PAGE_CONTENT
+          : DEFAULT_CONTACT_PAGE_CONTENT;
+
       const adminDb = getAdminFirestore();
       if (adminDb) {
-        const doc = await adminDb.collection(COLLECTIONS.PAGES).doc(pageId).get();
-        if (doc.exists) {
-          return sanitizeFirestoreDoc<HomePageContent | AboutPageContent | ContactPageContent>(
-            doc.id,
-            doc.data()!
-          );
+        try {
+          const doc = await adminDb.collection(COLLECTIONS.PAGES).doc(pageId).get();
+          if (doc.exists) {
+            const sanitized = sanitizeFirestoreDoc<Record<string, unknown>>(
+              doc.id,
+              doc.data()!
+            );
+            return { ...base, ...sanitized } as HomePageContent | AboutPageContent | ContactPageContent;
+          }
+        } catch (err) {
+          console.warn(`[getCmsPageContent:${pageId}] Firestore read notice, using fallback:`, err);
         }
       }
       return getLocalPageContentFallback(pageId);

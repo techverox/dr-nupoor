@@ -44,7 +44,15 @@ export const WHY_CHOOSE_POINTS: WhyChoosePoint[] = [
   },
 ];
 
-export default function WhyChooseDoctor() {
+interface WhyChooseDoctorProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export default function WhyChooseDoctor({
+  title = "A Personalised Approach to Breast Cancer Care",
+  subtitle = "We believe that true healing combines surgical excellence with human kindness. Here is why patients and families across Gujarat place their trust in Dr. Noopur Patel.",
+}: WhyChooseDoctorProps = {}) {
   return (
     <section className="w-full py-16 lg:py-24 bg-white border-b border-[#F5E6EA]" id="why-choose">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,10 +63,10 @@ export default function WhyChooseDoctor() {
             PATIENT-FIRST CLINICAL PHILOSOPHY
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-slate-900 leading-tight">
-            A Personalised Approach to Breast Cancer Care
+            {title}
           </h2>
           <p className="text-slate-600 text-sm sm:text-base mt-3 max-w-2xl mx-auto leading-relaxed">
-            We believe that true healing combines surgical excellence with human kindness. Here is why patients and families across Gujarat place their trust in Dr. Noopur Patel.
+            {subtitle}
           </p>
         </div>
 

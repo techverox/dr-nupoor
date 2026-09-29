@@ -20,7 +20,10 @@ import DoctorFooter from "@/components/doctor/DoctorFooter";
 import {
   getCmsTestimonials,
   getCmsFaqs,
+  getCmsPageContent,
 } from "@/lib/services/cmsService";
+import { DEFAULT_HOME_PAGE_CONTENT } from "@/data/pagesContent";
+import { HomePageContent } from "@/types";
 import { TESTIMONIALS_DATA } from "@/data/testimonials";
 import { FAQS_DATA } from "@/data/faqs";
 import { getSeoPageData } from "@/data/seoKeywordMap";
@@ -65,15 +68,20 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   let testimonials = TESTIMONIALS_DATA;
   let faqs = FAQS_DATA;
+  let homeContent: HomePageContent = DEFAULT_HOME_PAGE_CONTENT;
 
   try {
-    const [cmsTestimonials, cmsFaqs] = await Promise.all([
+    const [cmsTestimonials, cmsFaqs, cmsHomeContent] = await Promise.all([
       getCmsTestimonials().catch(() => TESTIMONIALS_DATA),
       getCmsFaqs().catch(() => FAQS_DATA),
+      getCmsPageContent("home").catch(() => DEFAULT_HOME_PAGE_CONTENT),
     ]);
 
     if (cmsTestimonials && cmsTestimonials.length > 0) testimonials = cmsTestimonials;
     if (cmsFaqs && cmsFaqs.length > 0) faqs = cmsFaqs;
+    if (cmsHomeContent) {
+      homeContent = { ...DEFAULT_HOME_PAGE_CONTENT, ...cmsHomeContent };
+    }
   } catch (e) {
     console.warn("[Home] Using resilient clinical seed data:", e);
   }
@@ -159,14 +167,24 @@ export default async function Home() {
       <main className="flex-1">
         {/* 02. Hero Section */}
         <DoctorHero
-          badge="SURGICAL BREAST ONCOLOGY · BREAST CANCER SPECIALIST"
-          headline="Surgical Breast Oncology"
-          headlineHighlight="& Advanced Breast Cancer Surgery in Ahmedabad"
-          subheadline="Dr. Nupur Patel provides specialised surgical breast oncology, oncoplastic breast surgery, and compassionate care for breast cancer and benign breast conditions at Marengo CIMS Hospital, Ahmedabad."
-          primaryCtaText="Book a Consultation"
-          primaryCtaLink="/appointments"
-          secondaryCtaText="Consult on WhatsApp"
-          secondaryCtaLink={`https://wa.me/${SITE_CONFIG.contact.whatsappNumber}?text=Hello%20Dr.%20Nupur%20Patel,%20I%20would%20like%20to%20schedule%20a%20consultation.`}
+          badge={homeContent.heroBadge}
+          headline={homeContent.heroHeadline}
+          headlineHighlight={homeContent.heroHeadlineHighlight}
+          subheadline={homeContent.heroSubheadline}
+          primaryCtaText={homeContent.primaryCtaText}
+          primaryCtaLink={homeContent.primaryCtaLink}
+          secondaryCtaText={homeContent.secondaryCtaText}
+          secondaryCtaLink={homeContent.secondaryCtaLink}
+          stats={{
+            stat1Value: homeContent.stat1Value,
+            stat1Label: homeContent.stat1Label,
+            stat2Value: homeContent.stat2Value,
+            stat2Label: homeContent.stat2Label,
+            stat3Value: homeContent.stat3Value,
+            stat3Label: homeContent.stat3Label,
+            stat4Value: homeContent.stat4Value,
+            stat4Label: homeContent.stat4Label,
+          }}
         />
 
         {/* 03. Doctor Trust / Credentials Strip */}
@@ -182,7 +200,10 @@ export default async function Home() {
         <BreastCancerTreatments />
 
         {/* 07. Why Choose Dr. Noopur Patel (Personalised Care Approach) */}
-        <WhyChooseDoctor />
+        <WhyChooseDoctor
+          title={homeContent.whyUsTitle}
+          subtitle={homeContent.whyUsSubtitle}
+        />
 
         {/* 08. Featured / Specialised Advanced Procedures */}
         <FeaturedProceduresSection />
@@ -209,7 +230,12 @@ export default async function Home() {
         <ClinicLocationSection />
 
         {/* 15. Final Appointment CTA Banner */}
-        <HopeCtaBanner />
+        <HopeCtaBanner
+          headline={homeContent.ctaSectionHeadline}
+          subtitle={homeContent.ctaSectionSubtitle}
+          primaryCtaText={homeContent.primaryCtaText}
+          primaryCtaLink={homeContent.primaryCtaLink}
+        />
       </main>
 
       {/* 16. Global Footer */}
