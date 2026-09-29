@@ -72,6 +72,30 @@ export const DEFAULT_INSTAGRAM_POSTS: InstagramPost[] = [
   },
 ];
 
+export { decodeHtmlEntities, cleanInstagramTitle } from "@/lib/utils/instagram";
+import { decodeHtmlEntities, cleanInstagramTitle } from "@/lib/utils/instagram";
+
+/**
+ * Sanitizes an Instagram post record so titles and captions are properly decoded
+ * and formatted, and image URLs are preserved with fallbacks.
+ */
+export function sanitizePost(post: InstagramPost): InstagramPost {
+  const decodedTitle = decodeHtmlEntities(post.title || "");
+  let cleanTitle = decodedTitle;
+
+  // If the title still has raw entities, line breaks, or is excessive in length
+  if (cleanTitle.includes("&#") || cleanTitle.includes("\n") || cleanTitle.length > 85) {
+    cleanTitle = cleanInstagramTitle(cleanTitle, post.shortcode);
+  }
+
+  return {
+    ...post,
+    title: cleanTitle,
+    caption: decodeHtmlEntities(post.caption || ""),
+    imageUrl: post.imageUrl || "/images/doctor/assets/insta-1.png",
+  };
+}
+
 /**
  * Extracts Instagram shortcode from any standard URL format:
  * - https://www.instagram.com/reel/C-xyz123/
@@ -110,7 +134,7 @@ export async function fetchInstagramMetadata(rawUrl: string): Promise<InstagramF
   try {
     // Attempt 1: Fetch through Facebook/WhatsApp user-agent to read OpenGraph tags
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4500);
+    const timeout = setTimeout(() => controller.abort(), 5000);
 
     const res = await fetch(cleanUrl, {
       signal: controller.signal,
@@ -140,11 +164,7 @@ export async function fetchInstagramMetadata(rawUrl: string): Promise<InstagramF
         html.match(/<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/i) ||
         html.match(/<title>([^<]+)<\/title>/i);
       if (ogTitleMatch && ogTitleMatch[1]) {
-        scrapedTitle = ogTitleMatch[1]
-          .replace(/&amp;/g, "&")
-          .replace(/&#039;/g, "'")
-          .replace(/&quot;/g, '"')
-          .trim();
+        scrapedTitle = decodeHtmlEntities(ogTitleMatch[1]).trim();
       }
 
       // Extract og:description
@@ -152,11 +172,7 @@ export async function fetchInstagramMetadata(rawUrl: string): Promise<InstagramF
         html.match(/<meta\s+property=["']og:description["']\s+content=["']([^"']+)["']/i) ||
         html.match(/<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
       if (ogDescMatch && ogDescMatch[1]) {
-        scrapedCaption = ogDescMatch[1]
-          .replace(/&amp;/g, "&")
-          .replace(/&#039;/g, "'")
-          .replace(/&quot;/g, '"')
-          .trim();
+        scrapedCaption = decodeHtmlEntities(ogDescMatch[1]).trim();
       }
     }
   } catch (err) {
@@ -164,25 +180,9 @@ export async function fetchInstagramMetadata(rawUrl: string): Promise<InstagramF
     console.warn("[InstagramService] Automated scrape notice:", (err as Error)?.message);
   }
 
-  // Clean up title: Remove common Instagram prefixes like "Dr. Noopur Patel on Instagram: "
-  let cleanedTitle = scrapedTitle;
-  if (cleanedTitle) {
-    cleanedTitle = cleanedTitle.replace(/^.*?on Instagram:\s*["“]?/i, "");
-    cleanedTitle = cleanedTitle.replace(/["”]$/, "").trim();
-  }
-
-  // If caption is present and title is too generic, pick first line or sentence
-  if (!cleanedTitle && scrapedCaption) {
-    const firstLine = scrapedCaption.split(/[\n.]/)[0]?.trim();
-    if (firstLine && firstLine.length > 5) {
-      cleanedTitle = firstLine.slice(0, 70);
-    }
-  }
-
-  // Smart fallback title if empty
-  if (!cleanedTitle) {
-    cleanedTitle = `Clinical Breast Awareness Reel (${shortcode})`;
-  }
+  // Clean up title: Decode entities, remove author prefixes, and pick concise first sentence
+  const rawCandidate = scrapedTitle || scrapedCaption || "";
+  const cleanedTitle = cleanInstagramTitle(rawCandidate, shortcode);
 
   // Fallback image if Instagram login wall obscured it
   const fallbackImageIndex = (Math.abs(shortcode.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)) % 5) + 1;
@@ -218,7 +218,7 @@ export async function getInstagramPosts(): Promise<InstagramPost[]> {
             ...serializeFirestoreData<Record<string, unknown>>(doc.data()),
           })) as InstagramPost[];
 
-        return posts.sort((a, b) => (a.order || 0) - (b.order || 0));
+        return posts.map(sanitizePost).sort((a, b) => (a.order || 0) - (b.order || 0));
       }
     }
   } catch (e) {
@@ -231,12 +231,12 @@ export async function getInstagramPosts(): Promise<InstagramPost[]> {
     const list = Array.from(store.values()) as unknown as InstagramPost[];
     const activeList = list.filter((p) => p.isActive);
     if (activeList.length > 0) {
-      return activeList.sort((a, b) => (a.order || 0) - (b.order || 0));
+      return activeList.map(sanitizePost).sort((a, b) => (a.order || 0) - (b.order || 0));
     }
   }
 
   // Return canonical seed posts
-  return DEFAULT_INSTAGRAM_POSTS;
+  return DEFAULT_INSTAGRAM_POSTS.map(sanitizePost);
 }
 
 /**
@@ -254,7 +254,7 @@ export async function getAllInstagramPostsAdmin(): Promise<InstagramPost[]> {
             ...serializeFirestoreData<Record<string, unknown>>(doc.data()),
           })) as InstagramPost[];
 
-        return posts.sort((a, b) => (a.order || 0) - (b.order || 0));
+        return posts.map(sanitizePost).sort((a, b) => (a.order || 0) - (b.order || 0));
       }
     }
   } catch (e) {
@@ -264,7 +264,7 @@ export async function getAllInstagramPostsAdmin(): Promise<InstagramPost[]> {
   const store = getCollectionStore(COLLECTIONS.INSTAGRAM_POSTS);
   if (store.size > 0) {
     const list = Array.from(store.values()) as unknown as InstagramPost[];
-    return list.sort((a, b) => (a.order || 0) - (b.order || 0));
+    return list.map(sanitizePost).sort((a, b) => (a.order || 0) - (b.order || 0));
   }
 
   // Populate store with canonical seeds on first admin view
@@ -272,7 +272,7 @@ export async function getAllInstagramPostsAdmin(): Promise<InstagramPost[]> {
     store.set(post.id, post as unknown as Record<string, unknown>);
   });
 
-  return DEFAULT_INSTAGRAM_POSTS;
+  return DEFAULT_INSTAGRAM_POSTS.map(sanitizePost);
 }
 
 /**
@@ -290,12 +290,15 @@ export async function saveInstagramPost(
     const cleanUrl = data.url?.trim() || `https://www.instagram.com/reel/${shortcode}/`;
     const embedUrl = data.embedUrl || `https://www.instagram.com/reel/${shortcode}/embed/`;
 
+    const cleanTitle = cleanInstagramTitle(data.title || "", shortcode);
+    const cleanCaption = decodeHtmlEntities(data.caption || "");
+
     const postRecord: InstagramPost = {
       id: postId,
       url: cleanUrl,
       shortcode,
-      title: data.title?.trim() || "Breast Awareness Reel",
-      caption: data.caption?.trim() || "",
+      title: cleanTitle,
+      caption: cleanCaption,
       imageUrl: data.imageUrl?.trim() || "/images/doctor/assets/insta-1.png",
       embedUrl,
       order: typeof data.order === "number" ? data.order : 99,

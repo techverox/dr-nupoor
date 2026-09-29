@@ -7,6 +7,7 @@ import { InstagramIcon } from "./SocialIcons";
 import { SITE_CONFIG } from "@/config/site";
 import { InstagramPost } from "@/types/instagram";
 import { subscribeLiveSync } from "@/lib/sync/clientSync";
+import { decodeHtmlEntities } from "@/lib/utils/instagram";
 
 const FALLBACK_SEED_POSTS: InstagramPost[] = [
   {
@@ -162,10 +163,18 @@ export default function InstagramAwarenessFeed({ initialPosts }: { initialPosts?
               <div className="relative w-full aspect-[4/3] bg-slate-100 overflow-hidden">
                 <Image
                   src={post.imageUrl || "/images/doctor/assets/insta-1.png"}
-                  alt={post.title}
+                  alt={decodeHtmlEntities(post.title)}
                   fill
+                  unoptimized={Boolean(post.imageUrl?.startsWith("http"))}
+                  referrerPolicy="no-referrer"
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   sizes="(max-width: 640px) 100vw, 240px"
+                  onError={(e) => {
+                    const target = e.currentTarget as HTMLImageElement;
+                    if (!target.src.includes("/images/doctor/assets/")) {
+                      target.src = "/images/doctor/assets/insta-1.png";
+                    }
+                  }}
                 />
 
                 {/* Video Play Badge Overlay */}
@@ -184,7 +193,7 @@ export default function InstagramAwarenessFeed({ initialPosts }: { initialPosts?
               {/* Title & Link */}
               <div className="p-4 flex-1 flex flex-col justify-between">
                 <h3 className="font-serif text-sm font-bold text-slate-900 leading-snug group-hover:text-[#88213B] transition-colors mb-3 line-clamp-2">
-                  {post.title}
+                  {decodeHtmlEntities(post.title)}
                 </h3>
 
                 <div className="flex items-center justify-between pt-2 border-t border-slate-100">
@@ -228,7 +237,7 @@ export default function InstagramAwarenessFeed({ initialPosts }: { initialPosts?
               <div className="flex items-center gap-2 min-w-0 pr-2">
                 <InstagramIcon className="w-4 h-4 text-rose-400 shrink-0" />
                 <span className="text-xs font-bold truncate">
-                  {activeModalPost.title}
+                  {decodeHtmlEntities(activeModalPost.title)}
                 </span>
               </div>
               <button
@@ -246,7 +255,7 @@ export default function InstagramAwarenessFeed({ initialPosts }: { initialPosts?
               {activeModalPost.embedUrl ? (
                 <iframe
                   src={activeModalPost.embedUrl}
-                  title={activeModalPost.title}
+                  title={decodeHtmlEntities(activeModalPost.title)}
                   className="w-full h-full border-0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -255,14 +264,22 @@ export default function InstagramAwarenessFeed({ initialPosts }: { initialPosts?
                 <div className="relative w-full h-full">
                   <Image
                     src={activeModalPost.imageUrl || "/images/doctor/assets/insta-1.png"}
-                    alt={activeModalPost.title}
+                    alt={decodeHtmlEntities(activeModalPost.title)}
                     fill
+                    unoptimized={Boolean(activeModalPost.imageUrl?.startsWith("http"))}
+                    referrerPolicy="no-referrer"
                     className="object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      if (!target.src.includes("/images/doctor/assets/")) {
+                        target.src = "/images/doctor/assets/insta-1.png";
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-slate-950/60 flex flex-col items-center justify-center p-6 text-center text-white">
                     <Play className="w-12 h-12 text-rose-400 mb-3 fill-current" />
                     <p className="font-serif font-bold text-sm sm:text-base mb-2">
-                      {activeModalPost.title}
+                      {decodeHtmlEntities(activeModalPost.title)}
                     </p>
                     <a
                       href={activeModalPost.url}

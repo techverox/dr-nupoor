@@ -33,7 +33,6 @@ import * as h_admin_sync from "@/lib/api/handlers/admin/sync/route";
 import * as h_admin_team from "@/lib/api/handlers/admin/team/route";
 import * as h_admin_testimonials from "@/lib/api/handlers/admin/testimonials/route";
 import * as h_admin_users from "@/lib/api/handlers/admin/users/route";
-import * as h_instagram from "@/lib/api/handlers/instagram/route";
 import * as h_analytics_events from "@/lib/api/handlers/analytics/events/route";
 import * as h_auth_change_password from "@/lib/api/handlers/auth/change-password/route";
 import * as h_auth_forgot_password from "@/lib/api/handlers/auth/forgot-password/route";
@@ -41,10 +40,12 @@ import * as h_auth_login from "@/lib/api/handlers/auth/login/route";
 import * as h_auth_logout from "@/lib/api/handlers/auth/logout/route";
 import * as h_auth_me from "@/lib/api/handlers/auth/me/route";
 import * as h_auth_session from "@/lib/api/handlers/auth/session/route";
+import * as h_instagram_proxy_image from "@/lib/api/handlers/instagram/proxy-image/route";
 import * as h_offers_active from "@/lib/api/handlers/offers/active/route";
 import * as h_redirects_resolve from "@/lib/api/handlers/redirects/resolve/route";
 import * as h_stories_submit from "@/lib/api/handlers/stories/submit/route";
 import * as h_health from "@/lib/api/handlers/health/route";
+import * as h_instagram from "@/lib/api/handlers/instagram/route";
 import * as h_leads from "@/lib/api/handlers/leads/route";
 import * as h_newsletter from "@/lib/api/handlers/newsletter/route";
 import * as h_settings from "@/lib/api/handlers/settings/route";
@@ -315,6 +316,12 @@ const ROUTES: RouteMatch[] = [
     segments: ["auth","session"],
     isDynamic: false,
     handlers: h_auth_session,
+  },
+  {
+    pattern: "instagram/proxy-image",
+    segments: ["instagram","proxy-image"],
+    isDynamic: false,
+    handlers: h_instagram_proxy_image,
   },
   {
     pattern: "offers/active",

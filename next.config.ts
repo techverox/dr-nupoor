@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
     "firebase-admin/storage",
   ],
   allowedDevOrigins: ["192.168.1.34", "localhost:3000"],
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "**.cdninstagram.com" },
+      { protocol: "https", hostname: "**.fbcdn.net" },
+      { protocol: "https", hostname: "**.instagram.com" },
+    ],
+  },
   async redirects() {
     return [
       {

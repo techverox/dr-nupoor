@@ -5,6 +5,7 @@ import Image from "next/image";
 import { InstagramPost, InstagramFetchResult } from "@/types/instagram";
 import { notifyLiveSync, subscribeLiveSync } from "@/lib/sync/clientSync";
 import { InstagramIcon } from "@/components/doctor/SocialIcons";
+import { decodeHtmlEntities, cleanInstagramTitle } from "@/lib/utils/instagram";
 import {
   Plus,
   ArrowUp,
@@ -107,7 +108,8 @@ export default function AdminInstagramPage() {
 
       if (data.success) {
         setFetchedData(data);
-        setCustomTitle(data.title || "Breast Awareness Reel");
+        const cleanTitle = cleanInstagramTitle(data.title || "", data.shortcode);
+        setCustomTitle(cleanTitle);
         setCustomImageUrl(data.imageUrl || "/images/doctor/assets/insta-1.png");
         showToast("Instagram reel details fetched successfully!");
       } else {
@@ -130,12 +132,13 @@ export default function AdminInstagramPage() {
     setIsAdding(true);
     try {
       const newOrder = posts.length + 1;
+      const cleanTitle = cleanInstagramTitle(customTitle.trim() || "Breast Health Awareness", fetchedData?.shortcode);
       const res = await fetch("/api/admin/instagram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           url: inputUrl.trim(),
-          title: customTitle.trim() || "Breast Health Awareness",
+          title: cleanTitle,
           imageUrl: customImageUrl.trim() || "/images/doctor/assets/insta-1.png",
           shortcode: fetchedData?.shortcode || "",
           embedUrl: fetchedData?.embedUrl || "",
@@ -168,12 +171,13 @@ export default function AdminInstagramPage() {
     if (!editingPost) return;
     setIsSavingEdit(true);
     try {
+      const cleanTitle = cleanInstagramTitle(editTitle.trim(), editingPost.shortcode);
       const res = await fetch("/api/admin/instagram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id: editingPost.id,
-          title: editTitle.trim(),
+          title: cleanTitle,
           imageUrl: editImageUrl.trim(),
           url: editUrl.trim(),
         }),
@@ -451,7 +455,15 @@ export default function AdminInstagramPage() {
                       src={customImageUrl || fetchedData.imageUrl || "/images/doctor/assets/insta-1.png"}
                       alt="Cover Preview"
                       fill
+                      unoptimized={Boolean((customImageUrl || fetchedData.imageUrl)?.startsWith("http"))}
+                      referrerPolicy="no-referrer"
                       className="object-cover object-center"
+                      onError={(e) => {
+                        const target = e.currentTarget as HTMLImageElement;
+                        if (!target.src.includes("/images/doctor/assets/")) {
+                          target.src = "/images/doctor/assets/insta-1.png";
+                        }
+                      }}
                     />
                     <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="text-[11px] font-bold text-white bg-slate-950/70 px-2.5 py-1 rounded-md">
@@ -602,16 +614,24 @@ export default function AdminInstagramPage() {
                     <div className="relative w-16 h-12 rounded-xl overflow-hidden bg-slate-100 border border-slate-200 shrink-0">
                       <Image
                         src={post.imageUrl || "/images/doctor/assets/insta-1.png"}
-                        alt={post.title}
+                        alt={decodeHtmlEntities(post.title)}
                         fill
+                        unoptimized={Boolean(post.imageUrl?.startsWith("http"))}
+                        referrerPolicy="no-referrer"
                         className="object-cover object-center"
+                        onError={(e) => {
+                          const target = e.currentTarget as HTMLImageElement;
+                          if (!target.src.includes("/images/doctor/assets/")) {
+                            target.src = "/images/doctor/assets/insta-1.png";
+                          }
+                        }}
                       />
                     </div>
 
                     {/* Title & Details */}
                     <div>
                       <h3 className="font-bold text-slate-900 text-sm leading-snug line-clamp-1">
-                        {post.title}
+                        {decodeHtmlEntities(post.title)}
                       </h3>
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-[11px] text-slate-400 font-mono">
@@ -690,7 +710,7 @@ export default function AdminInstagramPage() {
                       type="button"
                       onClick={() => {
                         setEditingPost(post);
-                        setEditTitle(post.title);
+                        setEditTitle(decodeHtmlEntities(post.title));
                         setEditImageUrl(post.imageUrl);
                         setEditUrl(post.url);
                       }}
@@ -748,9 +768,17 @@ export default function AdminInstagramPage() {
                 <div className="relative w-full aspect-[4/3] bg-slate-100">
                   <Image
                     src={p.imageUrl || "/images/doctor/assets/insta-1.png"}
-                    alt={p.title}
+                    alt={decodeHtmlEntities(p.title)}
                     fill
+                    unoptimized={Boolean(p.imageUrl?.startsWith("http"))}
+                    referrerPolicy="no-referrer"
                     className="object-cover"
+                    onError={(e) => {
+                      const target = e.currentTarget as HTMLImageElement;
+                      if (!target.src.includes("/images/doctor/assets/")) {
+                        target.src = "/images/doctor/assets/insta-1.png";
+                      }
+                    }}
                   />
                   <div className="absolute top-2 left-2 bg-black/60 text-white text-[10px] font-bold px-2 py-0.5 rounded-md backdrop-blur-xs">
                     #{idx + 1}
@@ -758,7 +786,7 @@ export default function AdminInstagramPage() {
                 </div>
                 <div className="p-3 flex-1 flex flex-col justify-between">
                   <h4 className="font-serif text-xs font-bold text-slate-900 line-clamp-2">
-                    {p.title}
+                    {decodeHtmlEntities(p.title)}
                   </h4>
                   <div className="text-[10px] font-bold text-[#88213B] mt-2 pt-2 border-t border-slate-100 flex items-center justify-between">
                     <span>Watch on Instagram</span>
@@ -858,7 +886,7 @@ export default function AdminInstagramPage() {
               <div className="flex items-center gap-2">
                 <InstagramIcon className="w-4 h-4 text-rose-400" />
                 <span className="text-xs font-bold truncate max-w-[280px]">
-                  {previewPost.title}
+                  {decodeHtmlEntities(previewPost.title)}
                 </span>
               </div>
               <button
