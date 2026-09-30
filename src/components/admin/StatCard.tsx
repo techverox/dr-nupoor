@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 export interface StatCardProps {
   title: string;
@@ -40,7 +41,11 @@ export function StatCard({
 
         <div className="flex items-baseline gap-2">
           <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-none tabular-nums">
-            {value}
+            {typeof value === "number" ? (
+              <AnimatedNumber value={value} duration={1600} />
+            ) : (
+              value
+            )}
           </div>
 
           {badge && (

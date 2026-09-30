@@ -4,6 +4,7 @@ import { getFirebaseFirestore } from "@/lib/firebase/client";
 import { COLLECTIONS } from "@/config/firebase";
 import { LeadSubmissionPayload, NewsletterSubscriberPayload } from "@/lib/validation/lead";
 import { LeadItem, UpdateLeadInput, LeadFilterOptions, LeadStatus } from "@/types/lead";
+import { notifyLiveSync } from "@/lib/sync/clientSync";
 
 // Starter fallback leads for local development
 export const SEED_LEADS: LeadItem[] = [
@@ -212,6 +213,7 @@ export async function createLead(
         updatedAt: FieldValue.serverTimestamp(),
       });
 
+      notifyLiveSync(COLLECTIONS.LEADS, docRef.id, "CMS_MUTATION");
       return { success: true, leadId: docRef.id };
     } catch (error) {
       console.error("[Clinical Enquiries Engine] Admin Firestore write error:", error);
@@ -236,6 +238,7 @@ export async function createLead(
         updatedAt: clientServerTimestamp(),
       });
 
+      notifyLiveSync(COLLECTIONS.LEADS, docRef.id, "CMS_MUTATION");
       return { success: true, leadId: docRef.id };
     } catch (error) {
       console.error("[Clinical Enquiries Engine] Client Firestore write error:", error);
@@ -243,16 +246,25 @@ export async function createLead(
   }
 
   // 6. Local Development Fallback (when Firebase credentials are not yet configured in .env.local)
-  console.log("[Clinical Enquiries Engine] Consultation enquiry logged:", {
-    name: payload.name,
-    email: payload.email,
-    phone: payload.phone,
-    service: payload.service,
-    source: payload.source,
-    timestamp: new Date().toISOString(),
-  });
+  const localLeadId = `local-lead-${Date.now()}`;
+  const localLead: LeadItem = {
+    id: localLeadId,
+    name: payload.name || "Anonymous",
+    email: payload.email || "",
+    phone: payload.phone || undefined,
+    serviceInterestedIn: payload.service || undefined,
+    message: payload.message || undefined,
+    source: payload.source || "website_form",
+    sourceUrl: payload.sourceUrl || undefined,
+    status: "new",
+    notes: [],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  memoryLeads = [localLead, ...memoryLeads];
+  notifyLiveSync(COLLECTIONS.LEADS, localLeadId, "CMS_MUTATION");
 
-  return { success: true, leadId: `local-lead-${Date.now()}` };
+  return { success: true, leadId: localLeadId };
 }
 
 /**
@@ -337,6 +349,7 @@ export async function createNewsletterSubscriber(
         createdAt: FieldValue.serverTimestamp(),
       });
 
+      notifyLiveSync(COLLECTIONS.NEWSLETTER_SUBSCRIBERS, docRef.id, "CMS_MUTATION");
       return {
         success: true,
         leadId: docRef.id,
@@ -359,6 +372,7 @@ export async function createNewsletterSubscriber(
         createdAt: clientServerTimestamp(),
       });
 
+      notifyLiveSync(COLLECTIONS.NEWSLETTER_SUBSCRIBERS, docRef.id, "CMS_MUTATION");
       return {
         success: true,
         leadId: docRef.id,
@@ -369,10 +383,11 @@ export async function createNewsletterSubscriber(
     }
   }
 
-  console.log("[Clinical Newsletter] Subscriber logged:", normalizedEmail);
+  const localSubId = `local-sub-${Date.now()}`;
+  notifyLiveSync(COLLECTIONS.NEWSLETTER_SUBSCRIBERS, localSubId, "CMS_MUTATION");
   return {
     success: true,
-    leadId: `local-sub-${Date.now()}`,
+    leadId: localSubId,
     message: "Thank you for subscribing to Dr. Noopur Patel's breast health updates!",
   };
 }
@@ -573,6 +588,7 @@ export async function updateLeadAdmin(id: string, input: UpdateLeadInput): Promi
   } as LeadItem;
 
   memoryLeads = memoryLeads.map((l) => (l.id === id ? updatedItem : l));
+  notifyLiveSync(COLLECTIONS.LEADS, id, "CMS_MUTATION");
   return updatedItem;
 }
 
@@ -589,6 +605,7 @@ export async function deleteLeadAdmin(id: string): Promise<void> {
     }
   }
   memoryLeads = memoryLeads.filter((l) => l.id !== id);
+  notifyLiveSync(COLLECTIONS.LEADS, id, "CMS_MUTATION");
 }
 
 /**
@@ -716,6 +733,7 @@ export async function createManualLeadAdmin(input: {
   if (adminDb) {
     try {
       const docRef = await adminDb.collection(COLLECTIONS.LEADS).add(payload);
+      notifyLiveSync(COLLECTIONS.LEADS, docRef.id, "CMS_MUTATION");
       return { id: docRef.id, ...payload };
     } catch (err) {
       console.warn("[createManualLeadAdmin] Firestore error, saving to memory fallback:", err);
@@ -724,6 +742,7 @@ export async function createManualLeadAdmin(input: {
 
   const newLead: LeadItem = { id: `lead-${Date.now()}`, ...payload };
   memoryLeads = [newLead, ...memoryLeads];
+  notifyLiveSync(COLLECTIONS.LEADS, newLead.id, "CMS_MUTATION");
   return newLead;
 }
 

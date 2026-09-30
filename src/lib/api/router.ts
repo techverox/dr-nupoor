@@ -10,6 +10,7 @@ import * as h_admin_landing_pages_templates from "@/lib/api/handlers/admin/landi
 import * as h_admin_media_check_usage from "@/lib/api/handlers/admin/media/check-usage/route";
 import * as h_auth_2fa_setup from "@/lib/api/handlers/auth/2fa/setup/route";
 import * as h_auth_2fa_verify from "@/lib/api/handlers/auth/2fa/verify/route";
+import * as h_admin_dashboard from "@/lib/api/handlers/admin/dashboard/route";
 import * as h_admin_analytics from "@/lib/api/handlers/admin/analytics/route";
 import * as h_admin_audit_logs from "@/lib/api/handlers/admin/audit-logs/route";
 import * as h_admin_blog from "@/lib/api/handlers/admin/blog/route";
@@ -136,6 +137,12 @@ const ROUTES: RouteMatch[] = [
     segments: ["auth","2fa","verify"],
     isDynamic: false,
     handlers: h_auth_2fa_verify,
+  },
+  {
+    pattern: "admin/dashboard",
+    segments: ["admin","dashboard"],
+    isDynamic: false,
+    handlers: h_admin_dashboard,
   },
   {
     pattern: "admin/analytics",

@@ -1,9 +1,23 @@
 import { initializeApp, getApps, getApp, FirebaseApp } from "firebase/app";
 import { getAuth, Auth } from "firebase/auth";
-import { getFirestore, Firestore } from "firebase/firestore";
+import { getFirestore, initializeFirestore, Firestore } from "firebase/firestore";
 import { getStorage, FirebaseStorage } from "firebase/storage";
 import { getAnalytics, Analytics, isSupported } from "firebase/analytics";
 import { getClientEnv } from "../env";
+
+// Prevent Turbopack dev runtime popup for harmless connection aborts (e.g. during Hot Reload / Fast Refresh)
+if (typeof window !== "undefined") {
+  window.addEventListener("unhandledrejection", (event) => {
+    if (
+      event.reason &&
+      (event.reason.name === "AbortError" ||
+        event.reason.message?.includes("signal is aborted") ||
+        event.reason.message?.includes("The user aborted a request"))
+    ) {
+      event.preventDefault();
+    }
+  });
+}
 
 let app: FirebaseApp | null = null;
 let auth: Auth | null = null;
@@ -54,7 +68,13 @@ export function getFirebaseFirestore(): Firestore | null {
   if (!db) {
     const clientApp = getFirebaseClientApp();
     if (clientApp) {
-      db = getFirestore(clientApp);
+      try {
+        db = initializeFirestore(clientApp, {
+          experimentalForceLongPolling: true,
+        });
+      } catch {
+        db = getFirestore(clientApp);
+      }
     }
   }
   return db;

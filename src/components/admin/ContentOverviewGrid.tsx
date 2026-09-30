@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { DashboardMetrics } from "@/lib/services/dashboardService";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 export interface ContentOverviewGridProps {
   metrics: DashboardMetrics;
@@ -116,7 +117,8 @@ export function ContentOverviewGrid({ metrics }: ContentOverviewGridProps) {
     },
     {
       title: "SEO Health Score",
-      count: `${metrics.seoHealthScore ?? 100}%`,
+      count: metrics.seoHealthScore ?? 100,
+      suffix: "%",
       desc: "Search Indexing & Clinical Visibility",
       href: "/admin/seo",
       color: "#0891b2",
@@ -161,7 +163,11 @@ export function ContentOverviewGrid({ metrics }: ContentOverviewGridProps) {
               </div>
 
               <div className="text-2xl font-extrabold text-slate-900 tracking-tight">
-                {item.count}
+                <AnimatedNumber
+                  value={item.count}
+                  suffix={item.suffix || ""}
+                  duration={1600}
+                />
               </div>
             </div>
 

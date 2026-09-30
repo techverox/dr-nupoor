@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { DashboardLeadItem } from "@/lib/services/dashboardService";
 import { Badge } from "@/components/ui/Badge";
+import { AnimatedNumber } from "@/components/ui/AnimatedNumber";
 
 export interface RecentLeadsTableProps {
   leads: DashboardLeadItem[];
@@ -40,7 +41,7 @@ export function RecentLeadsTable({ leads }: RecentLeadsTableProps) {
 
         <div className="flex items-center gap-2.5">
           <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200">
-            {leads.length} {leads.length === 1 ? "Record" : "Records"}
+            <AnimatedNumber value={leads.length} duration={1500} /> {leads.length === 1 ? "Record" : "Records"}
           </span>
 
           <Link

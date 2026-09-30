@@ -151,6 +151,12 @@ export function setupFirestoreRealtimeListener(
     "pages",
     "portfolio",
     "team",
+    "leads",
+    "newsletterSubscribers",
+    "media",
+    "landingPages",
+    "offers",
+    "redirects",
   ];
 
   const unsubs: Array<() => void> = [];
